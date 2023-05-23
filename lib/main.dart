@@ -78,41 +78,45 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: Image.asset('assets/Logo.png', height: 32),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle, color: Color.fromARGB(255, 0, 0, 0)),
+            ),
+          ),
+          // Image.asset('assets/Logo.png', height: 32),
+        ],
         backgroundColor: Colors.white,
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: SizedBox(
-          child: Row(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            //
-            // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-            // action in the IDE, or press "p" in the console), to see the
-            // wireframe for each widget.
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ],
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          Container(
+            height: 50,
+            color: Colors.amber[600],
+            child: const Center(child: Text('Entry A')),
           ),
-        ),
-      ),
+          Container(
+            height: 50,
+            color: Colors.amber[500],
+            child: const Center(child: Text('Entry B')),
+          ),
+          Container(
+            height: 50,
+            color: Colors.amber[100],
+            child: const Center(child: Text('Entry C')),
+          ),
+        ],
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
