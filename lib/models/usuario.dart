@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Usuario {
   Usuario(
       {required this.id, this.name, required this.email, this.profilePhoto});
@@ -7,21 +9,25 @@ class Usuario {
   String email;
   String? profilePhoto;
 
+  String get displayName => name ?? email;
+
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
-        id: json["id"],
-        name: json["name"],
-        email: json["email"],
-        profilePhoto: json["profilePhoto"],
+        id: json["id_usuario"],
+        name: json["nome"],
+        email: "test@email.com",
+        profilePhoto: json["foto_de_perfil_url"],
       );
 
-  // Map<String, dynamic> toJson() => {
-  //       "id": id == null ? null : id,
-  //       "name": name == null ? null : name,
-  //       "username": username == null ? null : username,
-  //       "email": email == null ? null : email,
-  //       "address": address == null ? null : address.toJson(),
-  //       "phone": phone == null ? null : phone,
-  //       "website": website == null ? null : website,
-  //       "company": company == null ? null : company.toJson(),
-  //     };
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "email": email,
+        "profilePhoto": profilePhoto,
+      };
 }
+
+List<Usuario> usersListModelFromJson(String str) =>
+    List<Usuario>.from(json.decode(str).map((x) => Usuario.fromJson(x)));
+
+String usersListModelToJson(List<Usuario> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

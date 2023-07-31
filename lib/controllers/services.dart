@@ -1,21 +1,22 @@
 import 'dart:io';
 import 'package:role/controllers/api_status.dart';
 import 'package:role/utils/constants.dart';
+import 'package:role/models/usuario.dart';
 import 'package:http/http.dart' as http;
 
 class Services {
   static Future<Object> getUsers() async {
     try {
-      var response = await http
-          .get(Uri.parse("https://jsonplaceholder.typicode.com/users"));
+      var response = await http.get(Uri.parse('${api}usuarios'));
+      print(response.body);
       if (success == response.statusCode) {
-        // return Success(response: usersListModelFromJson(response.body));
+        return Success(
+            code: success, response: usersListModelFromJson(response.body));
       }
       return Failure(
           code: userInvalidResponse, errorResponse: 'Invalid Response');
     } on HttpException {
-      return Failure(
-          code: noInternet, errorResponse: 'No Internet          Connection');
+      return Failure(code: noInternet, errorResponse: 'No Internet Connection');
     } on SocketException {
       return Failure(code: noInternet, errorResponse: 'No Internet Connection');
     } on FormatException {

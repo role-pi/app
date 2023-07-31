@@ -1,7 +1,7 @@
-const String usersList = 'https://localhost:3000/users';
+const String api = 'http://localhost:3000/';
 
 // Success
-const succes = 200;
+const success = 200;
 
 // Errors
 const userInvalidResponse = 100;
