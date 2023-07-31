@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           children: [
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(32.0),
               child: CustomScrollView(
                 slivers: [
                   SliverPersistentHeader(
@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
+            Container(
               padding: const EdgeInsets.all(8.0),
               child: CupertinoButton(
                 onPressed: () async {
