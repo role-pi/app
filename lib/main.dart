@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UsuariosViewModel()),
       ],
       child: CupertinoApp(
-        title: 'MVVM',
+        title: 'Rolê',
         debugShowCheckedModeBanner: false,
         home: HomeScreen(),
       ),
@@ -30,31 +30,73 @@ class HomeScreen extends StatelessWidget {
     UsuariosViewModel usersViewModel = context.watch<UsuariosViewModel>();
 
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Rolê'),
-      ),
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
           children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: usersViewModel.usuarios.length,
-                itemBuilder: (context, index) {
-                  Usuario user = usersViewModel.usuarios[index];
-                  return UsuarioRow(usuario: user);
-                },
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: CustomScrollView(
+                slivers: [
+                  SliverPersistentHeader(
+                    delegate:
+                        _LogoHeaderDelegate(), // Replace with your logo header delegate
+                    pinned: true,
+                  ),
+                  SliverList.separated(
+                    separatorBuilder: (context, index) => SizedBox(height: 8),
+                    itemCount: usersViewModel.usuarios.length,
+                    itemBuilder: (context, index) {
+                      Usuario usuario = usersViewModel.usuarios[index];
+                      return UsuarioRow(
+                        usuario: usuario,
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
-            CupertinoButton(
-              onPressed: () async {
-                usersViewModel.getUsers();
-              },
-              child: const Text('Refresh'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CupertinoButton(
+                onPressed: () async {
+                  usersViewModel.getUsers();
+                },
+                child: const Text('Refresh'),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+class _LogoHeaderDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  double get minExtent => 0; // Hide the header when collapsed
+
+  @override
+  double get maxExtent => 100; // Adjust the max height of the header
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    // Replace this with your app logo widget
+    return Container(
+      // Set the background color of the header
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Image.asset(
+          'assets/Logo.png',
+          height: 50,
+        ), // Replace this with your app logo widget
+      ),
+    );
+  }
+
+  @override
+  bool shouldRebuild(_LogoHeaderDelegate oldDelegate) {
+    return false;
   }
 }
