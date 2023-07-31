@@ -26,8 +26,8 @@ class Usuario {
       };
 }
 
-List<Usuario> usersListModelFromJson(String str) =>
+List<Usuario> usersFromJson(String str) =>
     List<Usuario>.from(json.decode(str).map((x) => Usuario.fromJson(x)));
 
-String usersListModelToJson(List<Usuario> data) =>
+String usersToJson(List<Usuario> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

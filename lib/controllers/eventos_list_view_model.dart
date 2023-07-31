@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/models/usuario.dart';
+import 'package:role/models/evento.dart';
 import 'package:role/controllers/api_status.dart';
 import 'package:role/controllers/services.dart';
 
-class UsuariosViewModel extends ChangeNotifier {
+class EventosListViewModel extends ChangeNotifier {
   bool _loading = false;
-  List<Usuario> _usuarios = [];
+  List<Evento> _usuarios = [];
   // Failure _userError;
 
   bool get loading => _loading;
-  List<Usuario> get usuarios => _usuarios;
+  List<Evento> get eventos => _usuarios;
   // Failure get userError => _userError;
 
-  UsuariosViewModel() {
+  EventosListViewModel() {
     get();
   }
 
@@ -21,7 +21,7 @@ class UsuariosViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  set(List<Usuario> userListModel) {
+  set(List<Evento> userListModel) {
     _usuarios = userListModel;
   }
 
@@ -31,9 +31,9 @@ class UsuariosViewModel extends ChangeNotifier {
 
   get() async {
     setLoading(true);
-    var response = await Services.getUsers();
+    var response = await Services.getEventos();
     if (response is Success) {
-      Set.from(response.response as List<Usuario>);
+      set(response.response as List<Evento>);
     }
     if (response is Failure) {
       print(response.errorResponse);
