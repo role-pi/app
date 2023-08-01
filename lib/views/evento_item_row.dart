@@ -23,9 +23,13 @@ class EventoItemRow extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            gradient: RadialGradient(
-              colors: [CupertinoColors.systemPink, CupertinoColors.systemGrey6],
-              stops: [0.2, 1.0],
+            gradient: LinearGradient(
+              colors: [
+                const Color.fromARGB(255, 255, 249, 250),
+                Color.fromARGB(255, 41, 41, 179)
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
           ),
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),

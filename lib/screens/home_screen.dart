@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () async {
                   usersViewModel.get();
                 },
-                child: const Text('Refresh'),
+                child: const Text('Atualizar'),
               ),
             ),
           ],
