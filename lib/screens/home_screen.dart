@@ -9,43 +9,46 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     EventosListViewModel usersViewModel = context.watch<EventosListViewModel>();
 
-    return CupertinoPageScaffold(
-      child: Center(
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: CustomScrollView(
-                slivers: [
-                  SliverPersistentHeader(
-                    delegate:
-                        _LogoHeaderDelegate(), // Replace with your logo header delegate
-                    pinned: true,
-                  ),
-                  SliverList.separated(
-                    separatorBuilder: (context, index) => SizedBox(height: 8),
-                    itemCount: usersViewModel.eventos.length,
-                    itemBuilder: (context, index) {
-                      Evento evento = usersViewModel.eventos[index];
-                      return EventoItemRow(
-                        evento: evento,
-                      );
-                    },
-                  ),
-                ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: CupertinoPageScaffold(
+        child: Center(
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: CustomScrollView(
+                  slivers: [
+                    SliverPersistentHeader(
+                      delegate:
+                          _LogoHeaderDelegate(), // Replace with your logo header delegate
+                      pinned: true,
+                    ),
+                    SliverList.separated(
+                      separatorBuilder: (context, index) => SizedBox(height: 8),
+                      itemCount: usersViewModel.eventos.length,
+                      itemBuilder: (context, index) {
+                        Evento evento = usersViewModel.eventos[index];
+                        return EventoItemRow(
+                          evento: evento,
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: CupertinoButton(
-                onPressed: () async {
-                  usersViewModel.get();
-                },
-                child: const Text('Atualizar'),
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                child: CupertinoButton(
+                  onPressed: () async {
+                    usersViewModel.get();
+                  },
+                  child: const Text('Atualizar'),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
