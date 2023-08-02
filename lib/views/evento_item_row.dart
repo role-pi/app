@@ -1,11 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/models/evento.dart';
 
-class EventoItemRow extends StatelessWidget {
+class EventoItemRow extends StatefulWidget {
+  const EventoItemRow({super.key});
+
   final Evento evento;
   final Function()? onTap;
+  @override
+  State<EventoItemRow> createState() => EventoItemRowState();
+}
 
-  const EventoItemRow({required this.evento, this.onTap});
+class EventoItemRowState extends State<EventoItemRow>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Alignment> _topAlignmentAnimation;
+  late Animation<Alignment> _bottomAlignmentAnimation;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 20));
+  }
 
   @override
   Widget build(BuildContext context) {
