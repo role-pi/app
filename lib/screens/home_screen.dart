@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/views/evento_item_row.dart';
 
+import '../views/round_button.dart';
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,69 +19,35 @@ class HomeScreen extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             children: [
               Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: CustomScrollView(
-                  slivers: [
-                    SliverPersistentHeader(
-                      delegate:
-                          _LogoHeaderDelegate(), // Replace with your logo header delegate
-                      pinned: true,
-                    ),
-                    SliverList.separated(
-                      separatorBuilder: (context, index) => SizedBox(height: 8),
-                      itemCount: usersViewModel.eventos.length,
-                      itemBuilder: (context, index) {
+                  padding: const EdgeInsets.all(32.0),
+                  child: ListView.builder(
+                    itemCount: usersViewModel.eventos.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        // Align to the left
+                        return Expanded(
+                            child: Container(
+                          child: Image.asset('assets/Logo.png', height: 45),
+                          alignment: Alignment.centerLeft,
+                        ));
+                      } else {
                         Evento evento = usersViewModel.eventos[index];
                         return EventoItemRow(
                           evento: evento,
                         );
-                      },
-                    ),
-                  ],
-                ),
-              ),
+                      }
+                    },
+                  )),
               Container(
-                padding: const EdgeInsets.all(8.0),
-                child: CupertinoButton(
-                  onPressed: () async {
-                    usersViewModel.get();
-                  },
-                  child: const Text('Atualizar'),
-                ),
+                padding: const EdgeInsets.symmetric(vertical: 48),
+                child: RoundButton(onTap: () {
+                  usersViewModel.get();
+                }),
               ),
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class _LogoHeaderDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  double get minExtent => 0; // Hide the header when collapsed
-
-  @override
-  double get maxExtent => 100; // Adjust the max height of the header
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    // Replace this with your app logo widget
-    return Container(
-      // Set the background color of the header
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Image.asset(
-          'assets/Logo.png',
-          height: 50,
-        ), // Replace this with your app logo widget
-      ),
-    );
-  }
-
-  @override
-  bool shouldRebuild(_LogoHeaderDelegate oldDelegate) {
-    return false;
   }
 }
