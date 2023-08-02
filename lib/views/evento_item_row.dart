@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:role/models/evento.dart';
 
 class EventoItemRow extends StatefulWidget {
-  const EventoItemRow({super.key});
+  const EventoItemRow({required this.evento, this.onTap});
 
   final Evento evento;
   final Function()? onTap;
@@ -31,7 +31,8 @@ class EventoItemRowState extends State<EventoItemRow>
         Navigator.push(
           context,
           CupertinoPageRoute(
-            builder: (_) => CupertinoPageScaffold(child: Text(evento.name)),
+            builder: (_) =>
+                CupertinoPageScaffold(child: Text(widget.evento.name)),
           ),
         );
       },
@@ -54,7 +55,7 @@ class EventoItemRowState extends State<EventoItemRow>
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(evento.name),
+              Text(widget.evento.name),
             ],
           ),
         ),
