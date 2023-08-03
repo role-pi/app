@@ -77,6 +77,7 @@ class _RoundButtonState extends State<RoundButton> {
             child: Image.asset(
               'assets/Star.png',
               opacity: const AlwaysStoppedAnimation(.75),
+              colorBlendMode: BlendMode.luminosity,
             ),
           ),
         ),
