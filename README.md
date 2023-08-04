@@ -23,9 +23,10 @@ Para instalar o Flutter SDK em seu sistema, siga os seguintes passos:
 
 3. **Configurar as variáveis de ambiente:** Adicione o diretório do Flutter extraído ao seu PATH para que você possa executar comandos Flutter a partir de qualquer local no terminal.
 
-4. **Verificar a instalação:** Abra um terminal e execute o seguinte comando para verificar se o Flutter foi instalado corretamente:
+4. **Verificar a instalação:** Abra um terminal e execute o seguinte comando para desativar builds nativas para Windows e verificar se o Flutter foi instalado corretamente:
 
    ```
+   flutter config --no-enable-windows-desktop
    flutter doctor
    ```
 
