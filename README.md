@@ -1,4 +1,5 @@
 # rolê
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?logo=Flutter&logoColor=white) ![iOS](https://img.shields.io/badge/iOS-000000?logo=apple&logoColor=white) ![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)
 
 Este repositório contém o código-fonte do aplicativo Rolê, desenvolvido em Flutter. O Rolê é um aplicativo que permite aos usuários organizarem eventos sociais e fazerem controle de gastos
 
