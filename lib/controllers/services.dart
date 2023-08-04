@@ -42,6 +42,7 @@ class Services {
     } on FormatException {
       return Failure(code: invalidFormat, errorResponse: 'Invalid Format');
     } catch (e) {
+      print(e);
       return Failure(code: unknownError, errorResponse: 'Unknown Error');
     }
   }

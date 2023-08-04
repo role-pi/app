@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:role/controllers/eventos_list_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:role/models/evento.dart';
-import 'package:role/views/evento_item_row.dart';
+import 'package:role/views/home/evento_item_row.dart';
 
+import '../views/home/home_header.dart';
 import '../views/round_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -31,30 +31,7 @@ class HomeScreen extends StatelessWidget {
                         // Align to the left
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(38, 38, 38, 12),
-                          child: Expanded(
-                              child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                child:
-                                    Image.asset('assets/Logo.png', height: 50),
-                                alignment: Alignment.centerLeft,
-                              ),
-                              SizedBox(height: 8),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 2.0),
-                                child: Text(
-                                  "próximos eventos",
-                                  style: TextStyle(
-                                      fontSize: 27,
-                                      fontWeight: FontWeight.bold,
-                                      color: CupertinoColors.black
-                                          .withAlpha((255 * 0.2).toInt()),
-                                      letterSpacing: -1.5),
-                                ),
-                              ),
-                            ],
-                          )),
+                          child: HomeHeader(),
                         );
                       } else {
                         Evento evento = usersViewModel.eventos[index - 1];
