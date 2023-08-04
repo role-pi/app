@@ -3,15 +3,17 @@
 
 Este repositório contém o código-fonte do aplicativo Rolê, desenvolvido em Flutter. O Rolê é um aplicativo que permite aos usuários organizarem eventos sociais e fazerem controle de gastos
 
-## Requisitos
+### Requisitos
 
-Antes de executar o projeto, verifique se o seguinte software está instalado em seu sistema:
+Antes de executar o projeto, verifique se o seguinte software está instalado em seu sistema Windows:
 
 - Flutter SDK
 - Android Studio
 - Um emulador de dispositivo Android ou um dispositivo Android físico para testar o aplicativo.
 
-## Instalação do Flutter SDK
+<details>
+<summary>Instalação do Flutter SDK</summary>
+<br>
 
 Para instalar o Flutter SDK em seu sistema, siga os seguintes passos:
 
@@ -29,7 +31,11 @@ Para instalar o Flutter SDK em seu sistema, siga os seguintes passos:
 
    Este comando exibirá um relatório sobre o estado da sua instalação do Flutter e informará se há algum problema ou requisito faltando.
 
-## Instalação do Android Studio
+</details>
+
+<details>
+<summary>Instalação do Android Studio</summary>
+<br>
 
 O Android Studio é uma IDE oficial do Google para desenvolvimento Android e fornece ferramentas necessárias para o desenvolvimento de aplicativos Android. Siga os passos abaixo para instalá-lo:
 
@@ -40,8 +46,9 @@ O Android Studio é uma IDE oficial do Google para desenvolvimento Android e for
 3. **Configurar o Android SDK:** Após a instalação do Android Studio, execute-o e siga o assistente de configuração para configurar o Android SDK e baixar as ferramentas necessárias para desenvolvimento Android.
 
 4. **Configurar um emulador:** No Android Studio, abra o AVD Manager (Android Virtual Device Manager) e crie um emulador de dispositivo Android com a imagem de sistema que deseja usar para testar o aplicativo. Alternativamente, você também pode usar um dispositivo Android físico para testar o aplicativo.
+</details>
 
-## Como executar o projeto
+### Como executar o projeto
 
 Siga os passos abaixo para executar o projeto em sua máquina local:
 
@@ -68,6 +75,6 @@ Siga os passos abaixo para executar o projeto em sua máquina local:
 
 O aplicativo será compilado e instalado no emulador ou dispositivo Android conectado. Aguarde alguns instantes para que o aplicativo seja totalmente carregado. Ao salvar qualquer arquivo de código-fonte, a interface atualizará automaticamente com um hot reload.
 
-## Contribuição
+### Contribuição
 
-Se você deseja contribuir para o projeto, fique à vontade para fazer um fork deste repositório e criar um pull request com suas alterações. Será um prazer revisar e incorporar suas contribuições ao projeto.
+Se você deseja contribuir para o projeto, fique à vontade para fazer um fork deste repositório e criar um pull request com suas alterações.
