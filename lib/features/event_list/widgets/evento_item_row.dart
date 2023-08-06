@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/models/evento.dart';
+import 'package:role/features/event_list/domain/models/evento.dart';
 
 class EventoItemRow extends StatefulWidget {
   const EventoItemRow({required this.evento, this.onTap});
@@ -86,35 +86,33 @@ class EventoItemRowState extends State<EventoItemRow>
           ),
         );
       },
-      child: ClipRRect(        
-        child:AnimatedBuilder( 
-          animation: _controller,
-          builder:(context,_) {
-        return Container(
-          width: 300,
-          height: 300,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                const Color.fromARGB(255, 255, 249, 250),
-                Color.fromARGB(255, 41, 41, 179)
-              ],
-              begin: _topAlignmentAnimation.value,
-              end: _bottomAlignmentAnimation.value,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-        );
-        }
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.evento.name),
-            ],
-          ),
-        ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, _) {
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  gradient: LinearGradient(
+                    colors: const [
+                      Color.fromARGB(255, 218, 41, 71),
+                      Color.fromARGB(255, 41, 41, 179)
+                    ],
+                    begin: _topAlignmentAnimation.value,
+                    end: _bottomAlignmentAnimation.value,
+                  ),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.evento.name),
+                  ],
+                ),
+              );
+            }),
       ),
     );
   }

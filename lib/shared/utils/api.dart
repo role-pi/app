@@ -1,18 +1,30 @@
+import 'dart:convert';
 import 'dart:io';
-import 'package:role/controllers/api_status.dart';
-import 'package:role/models/evento.dart';
-import 'package:role/utils/constants.dart';
-import 'package:role/models/usuario.dart';
+import 'package:role/shared/utils/api_status.dart';
+import 'package:role/shared/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
-class Services {
-  static Future<Object> getUsers() async {
+class API {
+  static const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjYsImlhdCI6MTY5MTM1MDgxNCwiZXhwIjoxNjkxNDM3MjE0fQ.50XUDb5jnIXx3LbcwxJ-QctSrs0Exv_FiOyA2PPXTMc";
+
+  Future<Object> post(endpoint, data) async {
+    var url = '${api}${endpoint}';
+
+    var body = json.encode(data);
+
     try {
-      var response = await http.get(Uri.parse('${api}usuarios'));
-      print(response.body);
+      var response = await http.post(Uri.parse(url),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "JWT ${token}"
+          },
+          body: body);
+
       if (success == response.statusCode) {
-        return Success(code: success, response: usersFromJson(response.body));
+        return Success(code: success, response: response.body);
       }
+
       return Failure(
           code: userInvalidResponse, errorResponse: 'Invalid Response');
     } on HttpException {
@@ -22,17 +34,24 @@ class Services {
     } on FormatException {
       return Failure(code: invalidFormat, errorResponse: 'Invalid Format');
     } catch (e) {
+      print(e);
       return Failure(code: unknownError, errorResponse: 'Unknown Error');
     }
   }
 
-  static Future<Object> getEventos() async {
+  Future<Object> get(endpoint) async {
+    var url = '${api}${endpoint}';
+
     try {
-      var response = await http.get(Uri.parse('${api}eventos'));
-      print(response.body);
+      var response = await http.get(Uri.parse(url), headers: {
+        "Content-Type": "application/json",
+        "Authorization": "JWT ${token}"
+      });
+
       if (success == response.statusCode) {
-        return Success(code: success, response: eventosFromJSON(response.body));
+        return Success(code: success, response: response.body);
       }
+
       return Failure(
           code: userInvalidResponse, errorResponse: 'Invalid Response');
     } on HttpException {

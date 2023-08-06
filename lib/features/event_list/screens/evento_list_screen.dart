@@ -1,20 +1,20 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-import 'package:role/controllers/eventos_list_view_model.dart';
+import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:role/models/evento.dart';
-import 'package:role/views/home/evento_item_row.dart';
+import 'package:role/features/event_list/domain/models/evento.dart';
+import 'package:role/features/event_list/widgets/evento_item_row.dart';
 
-import '../views/home/home_header.dart';
-import '../views/round_button.dart';
+import '../widgets/evento_list_header.dart';
+import '../../../shared/widgets/round_button.dart';
 
-class HomeScreen extends StatefulWidget {
+class EventoListScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _EventoListScreenState createState() => _EventoListScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _EventoListScreenState extends State<EventoListScreen> {
   bool showNewEvent = false;
 
   Duration duration = Duration(milliseconds: 200);
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => EventosListViewModel(),
+      create: (context) => EventoListProvider(),
       child: WillPopScope(
         onWillPop: () async => false,
         child: CupertinoPageScaffold(
@@ -89,7 +89,7 @@ class EventsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    EventosListViewModel usersViewModel = context.watch<EventosListViewModel>();
+    EventoListProvider usersViewModel = context.watch<EventoListProvider>();
 
     return Stack(
       alignment: Alignment.bottomCenter,
