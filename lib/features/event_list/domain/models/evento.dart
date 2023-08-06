@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Evento {
   Evento({required this.id, required this.name, this.dataInicio, this.dataFim});
   // required this.idUsuarios,
@@ -30,9 +28,3 @@ class Evento {
         // "id_insumis": idInsumos
       };
 }
-
-List<Evento> eventosFromJSON(String str) =>
-    List<Evento>.from(json.decode(str).map((x) => Evento.fromJson(x)));
-
-String eventosToJSON(List<Evento> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
