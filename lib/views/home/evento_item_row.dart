@@ -18,10 +18,60 @@ class EventoItemRowState extends State<EventoItemRow>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 20));
+    _topAlignmentAnimation = TweenSequence<Alignment>(
+      [
+        TweenSequenceItem<Alignment>(
+          tween: Tween<Alignment>(
+              begin: Alignment.topLeft, end: Alignment.topRight),
+          weight: 1,
+        ),
+        TweenSequenceItem<Alignment>(
+          tween: Tween<Alignment>(
+              begin: Alignment.topRight, end: Alignment.bottomRight),
+          weight: 1,
+        ),
+        TweenSequenceItem<Alignment>(
+          tween: Tween<Alignment>(
+              begin: Alignment.bottomRight, end: Alignment.bottomLeft),
+          weight: 1,
+        ),
+        TweenSequenceItem<Alignment>(
+          tween: Tween<Alignment>(
+              begin: Alignment.bottomLeft, end: Alignment.topLeft),
+          weight: 1,
+        ),
+      ],
+    ).animate(_controller);
+
+    _bottomAlignmentAnimation = TweenSequence<Alignment>(
+      [
+        TweenSequenceItem<Alignment>(
+          tween: Tween<Alignment>(
+              begin: Alignment.bottomRight, end: Alignment.bottomLeft),
+          weight: 1,
+        ),
+        TweenSequenceItem<Alignment>(
+          tween: Tween<Alignment>(
+              begin: Alignment.bottomLeft, end: Alignment.topLeft),
+          weight: 1,
+        ),
+        TweenSequenceItem<Alignment>(
+          tween: Tween<Alignment>(
+              begin: Alignment.topLeft, end: Alignment.topRight),
+          weight: 1,
+        ),
+        TweenSequenceItem<Alignment>(
+          tween: Tween<Alignment>(
+              begin: Alignment.topRight, end: Alignment.bottomRight),
+          weight: 1,
+        ),
+      ],
+    ).animate(_controller);
+
+    _controller.repeat();
   }
 
   @override
@@ -38,27 +88,31 @@ class EventoItemRowState extends State<EventoItemRow>
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(
-              colors: [
-                const Color.fromARGB(255, 255, 249, 250),
-                Color.fromARGB(255, 41, 41, 179)
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.evento.name),
-            ],
-          ),
-        ),
+        child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, _) {
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  gradient: LinearGradient(
+                    colors: const [
+                      Color.fromARGB(255, 218, 41, 71),
+                      Color.fromARGB(255, 41, 41, 179)
+                    ],
+                    begin: _topAlignmentAnimation.value,
+                    end: _bottomAlignmentAnimation.value,
+                  ),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.evento.name),
+                  ],
+                ),
+              );
+            }),
       ),
     );
   }
