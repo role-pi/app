@@ -1,32 +1,33 @@
+import 'dart:convert';
+
 class Usuario {
   Usuario(
-      {required this.id,
-      this.name,
-      this.fotoDePerfil,
-      required this.email,
-      required this.token});
+      {required this.id, this.name, required this.email, this.profilePhoto});
 
   int id;
   String? name;
-  String? fotoDePerfil;
   String email;
-  String token;
+  String? profilePhoto;
 
-  // factory Evento.fromJson(Map<String, dynamic> json) => Evento(
-  //       id: json["id_evento"],
-  //       name: json["nome"],
-  //       dataInicio: DateTime.parse(json["data_inicio"]),
-  //       dataFim: DateTime.parse(json["data_fim"]),
-  //       // idUsuarios: json["id_usuarios"],
-  //       // idInsumos: json["id_insumos"]
-  //     );
+  String get displayName => name ?? email;
 
-  // Map<String, dynamic> toJson() => {
-  //       "id": id,
-  //       "name": name,
-  //       "dataInicio": dataInicio?.toIso8601String(),
-  //       "dataFim": dataFim?.toIso8601String(),
-  //       // "id_usuarios": idUsuarios,
-  //       // "id_insumis": idInsumos
-  //     };
+  factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
+        id: json["id_usuario"],
+        name: json["nome"],
+        email: json["email"],
+        profilePhoto: json["foto_de_perfil_url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "email": email,
+        "profilePhoto": profilePhoto,
+      };
 }
+
+List<Usuario> usersFromJson(String str) =>
+    List<Usuario>.from(json.decode(str).map((x) => Usuario.fromJson(x)));
+
+String usersToJson(List<Usuario> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

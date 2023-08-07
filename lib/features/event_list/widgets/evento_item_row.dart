@@ -92,16 +92,21 @@ class EventoItemRowState extends State<EventoItemRow>
             animation: _controller,
             builder: (context, _) {
               return Container(
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(20),
+                //   gradient: LinearGradient(
+                //     colors: const [
+                //       Color.fromARGB(255, 218, 41, 71),
+                //       Color.fromARGB(255, 41, 41, 179)
+                //     ],
+                //     begin: _topAlignmentAnimation.value,
+                //     end: _bottomAlignmentAnimation.value,
+                //   ),
+                // ),
+
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(
-                    colors: const [
-                      Color.fromARGB(255, 218, 41, 71),
-                      Color.fromARGB(255, 41, 41, 179)
-                    ],
-                    begin: _topAlignmentAnimation.value,
-                    end: _bottomAlignmentAnimation.value,
-                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  color: CupertinoColors.systemGrey6,
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
                 child: Column(
