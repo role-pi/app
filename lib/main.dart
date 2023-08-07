@@ -13,7 +13,7 @@ class RoleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserLoginProvider())
+        ChangeNotifierProvider(create: (context) => UserLoginProvider.shared)
       ],
       child: CupertinoApp(
           title: 'rolê',

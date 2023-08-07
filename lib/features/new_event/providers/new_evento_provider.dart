@@ -1,22 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/domain/models/evento.dart';
 import 'package:role/features/event_list/domain/repository/evento_repository.dart';
+import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:role/shared/utils/api_status.dart';
 
-class EventoListProvider extends ChangeNotifier {
+class NewEventoProvider extends ChangeNotifier {
   bool _loading = false;
   List<Evento> _eventos = [];
 
-  bool get loading => _loading;
-  List<Evento> get eventos => _eventos;
-
   EventoRepository eventoRepository = EventoRepository();
-
-  static final EventoListProvider shared = EventoListProvider();
-
-  EventoListProvider() {
-    get();
-  }
 
   setLoading(bool loading) async {
     _loading = loading;
@@ -31,10 +23,10 @@ class EventoListProvider extends ChangeNotifier {
     // _userError = userError;
   }
 
-  get() async {
+  add(nome) async {
     setLoading(true);
-    var response = await eventoRepository.getEventos();
-    set(response);
+    await eventoRepository.addEvento(nome);
+    EventoListProvider.shared.get();
     setLoading(false);
   }
 }

@@ -13,8 +13,11 @@ class Evento {
   factory Evento.fromJson(Map<String, dynamic> json) => Evento(
         id: json["id_evento"],
         name: json["nome"],
-        dataInicio: DateTime.parse(json["data_inicio"]),
-        dataFim: DateTime.parse(json["data_fim"]),
+        dataInicio: json["data_inicio"] != null
+            ? DateTime.parse(json["data_inicio"])
+            : null,
+        dataFim:
+            json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
         // idUsuarios: json["id_usuarios"],
         // idInsumos: json["id_insumos"]
       );
