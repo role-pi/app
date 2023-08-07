@@ -5,10 +5,10 @@ import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/features/user_login/screens/user_login_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(RoleApp());
 }
 
-class MyApp extends StatelessWidget {
+class RoleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
