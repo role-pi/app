@@ -25,6 +25,7 @@ class EventoListProvider extends ChangeNotifier {
 
   set(List<Evento> eventosListModel) {
     _eventos = eventosListModel;
+    notifyListeners();
   }
 
   setUserError(Failure userError) {
@@ -32,9 +33,9 @@ class EventoListProvider extends ChangeNotifier {
   }
 
   get() async {
-    setLoading(true);
+    await Future.delayed(const Duration(seconds: 1));
+
     var response = await eventoRepository.getEventos();
     set(response);
-    setLoading(false);
   }
 }
