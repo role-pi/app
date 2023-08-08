@@ -1,3 +1,6 @@
+import 'dart:math';
+import 'dart:ui';
+
 class Evento {
   Evento({required this.id, required this.name, this.dataInicio, this.dataFim});
   // required this.idUsuarios,
@@ -30,4 +33,31 @@ class Evento {
         // "id_usuarios": idUsuarios,
         // "id_insumis": idInsumos
       };
+
+  static List<String> emojiPool = [
+    '🎉',
+    '🎊',
+    '🎈',
+    '🎁',
+    '🎂',
+    '🎄',
+    '🎃',
+    '🎆',
+    '✨',
+    '🪩'
+  ];
+
+  String randomEmoji = emojiPool[Random().nextInt(emojiPool.length)];
+  Color randomColor1 = generateRandomColor();
+  Color randomColor2 = generateRandomColor();
+}
+
+Color generateRandomColor() {
+  Random random = Random();
+  return Color.fromARGB(
+    255, // Set the alpha value to 255 for full opacity
+    random.nextInt(256), // Red value (0-255)
+    random.nextInt(256), // Green value (0-255)
+    random.nextInt(256), // Blue value (0-255)
+  );
 }
