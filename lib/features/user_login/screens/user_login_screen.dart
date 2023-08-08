@@ -43,8 +43,8 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 Spacer(),
-               
-                  Text("bem-vindo ao seu novo aplicativo de evento",
+                Image.asset('assets/Logo.png', height: 50),
+                  Text("bem-vindo ao seu novo aplicativo de eventos",
                     style: TextStyle(
                       color: CupertinoColors.white,
                       fontWeight: FontWeight.bold,
@@ -106,6 +106,9 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
   }
 
   String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+    return 'Campo obrigatório'; // Retorna mensagem de erro se o campo estiver em branco
+  }
     const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
         r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
         r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
@@ -120,3 +123,5 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
         : null;
   }
 }
+
+
