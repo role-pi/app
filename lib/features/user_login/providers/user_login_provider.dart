@@ -28,7 +28,7 @@ class UserLoginProvider extends ChangeNotifier {
   }
 
   Future<void> tryAuthentication(callback) async {
-    if (state != LoginState.loggedIn) {
+    if (state == LoginState.loggedOut) {
       var response = await API().post("usuario/login", {});
 
       if (response is Success) {
@@ -96,6 +96,7 @@ class UserLoginProvider extends ChangeNotifier {
 }
 
 enum LoginState {
+  loggedOut,
   loggingIn,
   loggedIn,
   signUp,
