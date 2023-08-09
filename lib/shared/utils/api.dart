@@ -11,9 +11,9 @@ class API {
   Future<Object> post(endpoint, data) async {
     var url = '${api}${endpoint}';
 
-    if (token.isEmpty) {
-      return Failure(code: userInvalidResponse, errorResponse: 'Logged out');
-    }
+    // if (token.isEmpty) {
+    //   return Failure(code: userInvalidResponse, errorResponse: 'Logged out');
+    // }
 
     var body = json.encode(data);
 
