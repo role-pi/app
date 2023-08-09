@@ -73,6 +73,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/Invertida.png
     - assets/Logo.png
     - assets/Star.png
 
