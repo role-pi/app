@@ -4,7 +4,7 @@ import 'package:role/features/event_list/domain/models/evento.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:role/features/event_list/widgets/evento_item_row.dart';
 import 'package:role/features/event_list/widgets/evento_list_header.dart';
-import 'package:role/shared/widgets/round_button.dart';
+import 'package:role/shared/widgets/circle_button.dart';
 
 class EventsList extends StatelessWidget {
   const EventsList({
@@ -51,7 +51,7 @@ class EventsList extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 48),
-          child: RoundButton(onTap: onTap),
+          child: CircleButton(onTap: onTap),
         ),
       ],
     );

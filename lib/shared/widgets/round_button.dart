@@ -1,83 +1,35 @@
 import 'package:flutter/cupertino.dart';
 
-class RoundButton extends StatefulWidget {
-  final Function() onTap;
+class RoundButton extends StatelessWidget {
+  final String text;
+  final Color textColor;
+  final Color rectangleColor;
+  final VoidCallback onPressed;
 
-  RoundButton({required this.onTap});
-
-  @override
-  _RoundButtonState createState() => _RoundButtonState(onTap: onTap);
-}
-
-class _RoundButtonState extends State<RoundButton> {
-  final Function() onTap;
-
-  _RoundButtonState({required this.onTap});
-
-  bool isPressed = false;
-  double size = 75;
+  RoundButton({
+    required this.text,
+    this.textColor = CupertinoColors.systemGrey5,
+    this.rectangleColor = CupertinoColors.black,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) {
-        setState(() {
-          isPressed = true;
-        });
-      },
-      onTapUp: (_) {
-        setState(() {
-          isPressed = false;
-        });
-      },
-      onTapCancel: () {
-        setState(() {
-          isPressed = false;
-        });
-      },
-      onTap: () {
-        onTap();
-      },
-      child: AnimatedContainer(
-        width: size,
-        height: size,
-        duration: Duration(milliseconds: 300),
-        curve: Curves.easeOutQuart,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          backgroundBlendMode: BlendMode.luminosity,
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              // Lighter to darker gray
-              CupertinoColors.systemGrey6,
-              CupertinoColors.systemGrey5
-            ],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: CupertinoColors.systemGrey.withOpacity(0.15),
-              // spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        transform: (isPressed
-            ? (Matrix4.identity()
-              ..translate(0.025 * size,
-                  0.025 * size) // translate towards right and down
-              ..scale(0.95,
-                  0.95)) // scale with to 95% anchorred at topleft of the AnimatedContainer
-            : Matrix4.identity()),
+    return CupertinoButton(
+      onPressed: onPressed,
+      padding: EdgeInsets.symmetric(vertical: 16),
+      borderRadius: BorderRadius.circular(16),
+      color: rectangleColor.withAlpha(150),
+      child: Container(
+        width: double.infinity, // Expand horizontally
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(22.0),
-            child: Image.asset(
-              'assets/Star.png',
-              opacity: const AlwaysStoppedAnimation(.75),
-              colorBlendMode: BlendMode.luminosity,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: textColor.withAlpha(200),
+              fontSize: 24,
+              letterSpacing: -1.5,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
