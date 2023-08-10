@@ -66,17 +66,25 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                         if (_formKey.currentState!.validate()) {
                           await loginProvider.trySignUp(
                               _emailController.text, () => {});
-                              // Navegar para a tela de lista de eventos
-                     Navigator.push(
-                      context,
-                        CupertinoPageRoute(builder: (context) => EventoListScreen()),
-                       );
+                          // Navegar para a tela de lista de eventos
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => EventoListScreen()),
+                          );
                         }
                       },
                       child: const Text('Entrar'),
                     ),
                     SizedBox(height: 80),
-                    VerificationWidget(codeController: _codeController),
+                    VerificationWidget(
+                        // onTap: () {
+                        //   loginProvider.verify(
+                        //       _emailController.text,
+                        //       _codeController.text,
+                        //       () => {Navigator.pushNamed(context, "/")});
+                        // },
+                        codeController: _codeController),
                     Spacer(),
                   ]),
             ),

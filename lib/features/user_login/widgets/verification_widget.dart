@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 
 class VerificationWidget extends StatelessWidget {
+  Function()? onTap;
+
   final TextEditingController codeController;
 
-  VerificationWidget({required this.codeController});
+  VerificationWidget({required this.codeController, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 80),
         CupertinoTextFormFieldRow(
           placeholder: "Código",
           controller: codeController,
@@ -19,7 +20,7 @@ class VerificationWidget extends StatelessWidget {
         ),
         CupertinoButton(
           onPressed: () async {
-            // Lógica para verificação
+            onTap?.call();
           },
           child: const Text('Verificar'),
         ),
