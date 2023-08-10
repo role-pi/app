@@ -17,6 +17,14 @@ class VerificationWidget extends StatelessWidget {
       child: Column(
         children: [
           Spacer(),
+          Text(
+            "Otimo! agora só precisamos do codigo de verificação que enviamos no seu email",
+            style: TextStyle(
+              color: Color.fromARGB(255, 72, 72, 72),
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            ),
+          ),
           CupertinoTextFormFieldRow(
             placeholder: "Código",
             controller: _codeController,
@@ -24,6 +32,7 @@ class VerificationWidget extends StatelessWidget {
             style: TextStyle(color: CupertinoColors.white),
             keyboardType: TextInputType.number,
           ),
+          SizedBox(height: 25), 
           RoundButton(
             onPressed: () async {
               onTap?.call(_codeController.text);
@@ -31,6 +40,14 @@ class VerificationWidget extends StatelessWidget {
             text: 'verificar',
           ),
           Spacer(),
+          Text(
+            "reenviar codigo",
+            style: TextStyle(
+              color: Color.fromARGB(255, 72, 72, 72),
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
         ],
       ),
     );
