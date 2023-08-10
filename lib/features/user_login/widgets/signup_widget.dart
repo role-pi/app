@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:role/shared/widgets/round_button.dart';
 
 class SignUpWidget extends StatelessWidget {
   Function(String)? onTap;
@@ -37,14 +38,13 @@ class SignUpWidget extends StatelessWidget {
               return validateEmail(value);
             },
           ),
-          CupertinoButton(
+          RoundButton(
             onPressed: () async {
               onTap?.call(_emailController.text);
-              // if (_formKey.currentState!.validate()) {
-              //   await loginProvider.trySignUp(emailController.text, () => {});
-              // }
             },
-            child: const Text('Entrar'),
+            textColor: CupertinoColors.black,
+            rectangleColor: CupertinoColors.white,
+            text: 'continuar',
           ),
           Spacer(),
         ],

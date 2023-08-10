@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:role/shared/widgets/round_button.dart';
 
 class VerificationWidget extends StatelessWidget {
   Function(String)? onTap;
@@ -23,11 +24,11 @@ class VerificationWidget extends StatelessWidget {
             style: TextStyle(color: CupertinoColors.white),
             keyboardType: TextInputType.number,
           ),
-          CupertinoButton(
+          RoundButton(
             onPressed: () async {
               onTap?.call(_codeController.text);
             },
-            child: const Text('Verificar'),
+            text: 'verificar',
           ),
           Spacer(),
         ],
