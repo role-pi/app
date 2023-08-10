@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:role/features/event_list/screens/evento_list_screen.dart';
 import 'package:role/features/event_list/widgets/verification_widget.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 
@@ -65,6 +66,11 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                         if (_formKey.currentState!.validate()) {
                           await loginProvider.trySignUp(
                               _emailController.text, () => {});
+                              // Navegar para a tela de lista de eventos
+                     Navigator.push(
+                      context,
+                        CupertinoPageRoute(builder: (context) => EventoListScreen()),
+                       );
                         }
                       },
                       child: const Text('Entrar'),
