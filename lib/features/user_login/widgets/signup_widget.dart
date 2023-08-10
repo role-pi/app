@@ -28,29 +28,47 @@ class SignUpWidget extends StatelessWidget {
               fontSize: 28,
             ),
           ),
+          SizedBox(height: 25), // Adicione o espaçamento desejado
+          Text(
+            "para prosseguir, crie sua conta!",
+            style: TextStyle(
+              color: const Color.fromARGB(255, 105, 105, 105),
+              fontWeight: FontWeight.bold,
+              fontSize: 21,
+            ),
+          ),
           SizedBox(height: 50),
-          CupertinoTextFormFieldRow(
-            placeholder: "Email",
-            controller: _emailController,
-            padding: EdgeInsets.all(10),
-            style: TextStyle(color: CupertinoColors.white),
-            validator: (value) {
-              return validateEmail(value);
-            },
+          Container(
+         decoration: BoxDecoration(
+        color: Color.fromARGB(255, 62, 62, 62), // Cor de fundo cinza escuro
+        borderRadius: BorderRadius.circular(10), // Raio de borda para arredondamento
+        ),
+         padding: EdgeInsets.all(3),
+         child: CupertinoTextFormFieldRow(
+        placeholder: "Digite seu Email",
+         controller: _emailController,
+         style: TextStyle(color: Color.fromARGB(255, 124, 121, 121)),
+        validator: (value) {
+        return validateEmail(value);
+             },
+           ),
           ),
-          RoundButton(
-            onPressed: () async {
-              onTap?.call(_emailController.text);
-            },
-            textColor: CupertinoColors.black,
-            rectangleColor: CupertinoColors.white,
+          Padding(
+          padding: EdgeInsets.only(top: 16), // Adicione o espaçamento desejado acima
+          child: RoundButton(
+          onPressed: () async {
+          onTap?.call(_emailController.text);
+         },
+           textColor: CupertinoColors.black,
+           rectangleColor: CupertinoColors.white,
             text: 'continuar',
-          ),
-          Spacer(),
-        ],
-      ),
-    );
-  }
+           ),
+         ),
+      Spacer(),
+      ], // Faltava essa vírgula
+       ), // Faltava essa vírgula
+      ); // Faltava essa vírgula
+      }
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
