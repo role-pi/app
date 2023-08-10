@@ -52,6 +52,9 @@ class UserLoginProvider extends ChangeNotifier {
     if (state != LoginState.loggedIn) {
       var response = await API().post("usuario/signin", {"email": email});
 
+      _state = LoginState.verifying;
+      notifyListeners();
+
       if (response is Success) {
         Map decoded = json.decode(response.response as String);
         if (decoded.containsKey("user")) {
@@ -98,6 +101,7 @@ class UserLoginProvider extends ChangeNotifier {
 enum LoginState {
   loggedOut,
   loggingIn,
-  loggedIn,
   signUp,
+  verifying,
+  loggedIn,
 }
