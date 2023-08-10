@@ -8,6 +8,8 @@ class SignUpWidget extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
+  bool showVerification = false;
+
   SignUpWidget({this.onTap});
 
   @override
@@ -37,7 +39,7 @@ class SignUpWidget extends StatelessWidget {
               fontSize: 21,
             ),
           ),
-          SizedBox(height: 50),
+          SizedBox(height: 40),
           Container(
          decoration: BoxDecoration(
         color: Color.fromARGB(255, 62, 62, 62), // Cor de fundo cinza escuro
@@ -54,7 +56,7 @@ class SignUpWidget extends StatelessWidget {
            ),
           ),
           Padding(
-          padding: EdgeInsets.only(top: 16), // Adicione o espaçamento desejado acima
+          padding: EdgeInsets.only(top: 12), // Adicione o espaçamento desejado acima
           child: RoundButton(
           onPressed: () async {
           onTap?.call(_emailController.text);
@@ -65,9 +67,9 @@ class SignUpWidget extends StatelessWidget {
            ),
          ),
       Spacer(),
-      ], // Faltava essa vírgula
-       ), // Faltava essa vírgula
-      ); // Faltava essa vírgula
+      ], // 
+       ), // 
+      ); // 
       }
 
   String? validateEmail(String? value) {
