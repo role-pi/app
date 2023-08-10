@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/new_event/providers/new_evento_provider.dart';
+import 'package:role/shared/widgets/round_button.dart';
 
 class NewEventoScreen extends StatefulWidget {
   final bool showing;
@@ -93,7 +94,7 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
           SizedBox(height: 16.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: CupertinoStyledButton(
+            child: RoundButton(
               text: "criar evento",
               onPressed: () async {
                 _newEventoProvider.add(_nameController.text);
@@ -103,44 +104,6 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
           ),
           Spacer(),
         ],
-      ),
-    );
-  }
-}
-
-class CupertinoStyledButton extends StatelessWidget {
-  final String text;
-  final Color textColor;
-  final Color rectangleColor;
-  final VoidCallback onPressed;
-
-  CupertinoStyledButton({
-    required this.text,
-    this.textColor = CupertinoColors.systemGrey5,
-    this.rectangleColor = CupertinoColors.black,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoButton(
-      onPressed: onPressed,
-      padding: EdgeInsets.symmetric(vertical: 16),
-      borderRadius: BorderRadius.circular(16),
-      color: rectangleColor.withAlpha(150),
-      child: Container(
-        width: double.infinity, // Expand horizontally
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: textColor.withAlpha(200),
-              fontSize: 24,
-              letterSpacing: -1.5,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
       ),
     );
   }
