@@ -50,6 +50,9 @@ class Evento {
   String randomEmoji = emojiPool[Random().nextInt(emojiPool.length)];
   Color randomColor1 = generateRandomColor();
   Color randomColor2 = generateRandomColor();
+
+  // random between 100 and 250
+  int valor = Random().nextInt(150) + 100;
 }
 
 Color generateRandomColor() {
