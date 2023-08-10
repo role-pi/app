@@ -40,13 +40,14 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                       onTap: (email) async {
                         widget.email = email;
                         await loginProvider.trySignUp(email, () {});
+                        Navigator.pushNamed(context, "/");
                       },
                     )
                   : VerificationWidget(
                       onTap: (code) async {
-                        await loginProvider.verify(widget.email, code, () {
-                          Navigator.pushNamed(context, "/");
-                        });
+                        //await loginProvider.verify(widget.email, code, () {
+                          //Navigator.pushNamed(context, "/");
+                      //  });
                       },
                       // onTap: () async {
                       //   await loginProvider.verifyCode(_codeController.text);
