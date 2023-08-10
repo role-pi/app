@@ -26,38 +26,3 @@ class RoleApp extends StatelessWidget {
     );
   }
 }
-
-class User extends ChangeNotifier {
-  String? _token;
-  String? _name;
-  String? _email;
-  String? _id;
-
-  String? get token => _token;
-  String? get name => _name;
-  String? get email => _email;
-  String? get id => _id;
-
-  void setToken(String token) {
-    _token = token;
-
-    // store token on device
-
-    notifyListeners();
-  }
-
-  void setName(String name) {
-    _name = name;
-    notifyListeners();
-  }
-
-  void setEmail(String email) {
-    _email = email;
-    notifyListeners();
-  }
-
-  void setId(String id) {
-    _id = id;
-    notifyListeners();
-  }
-}
