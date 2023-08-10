@@ -6,7 +6,7 @@ import 'package:role/shared/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class API {
-  static String get token => "";
+  static String get token => UserLoginProvider.shared.token ?? "";
 
   Future<Object> post(endpoint, data) async {
     var url = '${api}${endpoint}';
