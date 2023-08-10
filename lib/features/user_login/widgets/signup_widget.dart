@@ -20,57 +20,75 @@ class SignUpWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Spacer(),
-          Image.asset('assets/Invertida.png', height: 50),
-          SizedBox(height: 50),
-          Text(
-            "bem-vindo ao seu novo aplicativo de eventos",
-            style: TextStyle(
-              color: CupertinoColors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 28,
-            ),
-          ),
-          SizedBox(height: 25), // Adicione o espaçamento desejado
-          Text(
-            "para prosseguir, crie sua conta!",
-            style: TextStyle(
-              color: const Color.fromARGB(255, 105, 105, 105),
-              fontWeight: FontWeight.bold,
-              fontSize: 21,
+          Image.asset('assets/Invertida.png', height: 60),
+          SizedBox(height: 25),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text(
+                  "boas-vindas ao seu novo aplicativo de eventos",
+                  style: TextStyle(
+                    color: CupertinoColors.systemGrey5,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 26,
+                    letterSpacing: -1.7,
+                    height: 1.1,
+                  ),
+                ),
+                SizedBox(height: 12),
+                Text(
+                  "para prosseguir, crie sua conta",
+                  style: TextStyle(
+                    color: CupertinoColors.systemGrey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 26,
+                    letterSpacing: -1.7,
+                    height: 1.1,
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(height: 40),
           Container(
-         decoration: BoxDecoration(
-        color: Color.fromARGB(255, 62, 62, 62), // Cor de fundo cinza escuro
-        borderRadius: BorderRadius.circular(10), // Raio de borda para arredondamento
-        ),
-         padding: EdgeInsets.all(3),
-         child: CupertinoTextFormFieldRow(
-        placeholder: "Digite seu Email",
-         controller: _emailController,
-         style: TextStyle(color: Color.fromARGB(255, 124, 121, 121)),
-        validator: (value) {
-        return validateEmail(value);
-             },
-           ),
+            decoration: BoxDecoration(
+              color:
+                  Color.fromARGB(255, 32, 32, 32), // Cor de fundo cinza escuro
+              borderRadius: BorderRadius.circular(
+                  12), // Raio de borda para arredondamento
+            ),
+            padding: EdgeInsets.all(3),
+            child: CupertinoTextFormFieldRow(
+              placeholder: "digite seu e-mail",
+              controller: _emailController,
+              style: TextStyle(
+                  color: CupertinoColors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -1.5),
+              validator: (value) {
+                return validateEmail(value);
+              },
+            ),
           ),
           Padding(
-          padding: EdgeInsets.only(top: 12), // Adicione o espaçamento desejado acima
-          child: RoundButton(
-          onPressed: () async {
-          onTap?.call(_emailController.text);
-         },
-           textColor: CupertinoColors.black,
-           rectangleColor: CupertinoColors.white,
-            text: 'continuar',
-           ),
-         ),
-      Spacer(),
-      ], // 
-       ), // 
-      ); // 
-      }
+            padding: EdgeInsets.only(
+                top: 12), // Adicione o espaçamento desejado acima
+            child: RoundButton(
+              onPressed: () async {
+                onTap?.call(_emailController.text);
+              },
+              textColor: CupertinoColors.black,
+              rectangleColor: CupertinoColors.white,
+              text: 'continuar',
+            ),
+          ),
+          Spacer(),
+        ], //
+      ), //
+    ); //
+  }
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {

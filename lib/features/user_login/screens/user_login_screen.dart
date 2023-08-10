@@ -34,32 +34,20 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
         ),
         child: CupertinoPageScaffold(
           child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.all(42.0),
               child: loginProvider.state == LoginState.signUp
                   ? SignUpWidget(
                       onTap: (email) async {
                         widget.email = email;
                         await loginProvider.trySignUp(email, () {});
-                        Navigator.pushNamed(context, "/");
                       },
                     )
                   : VerificationWidget(
                       onTap: (code) async {
-                        //await loginProvider.verify(widget.email, code, () {
-                          //Navigator.pushNamed(context, "/");
-                      //  });
+                        await loginProvider.verify(widget.email, code, () {
+                          Navigator.pushNamed(context, "/");
+                        });
                       },
-                      // onTap: () async {
-                      //   await loginProvider.verifyCode(_codeController.text);
-                      //   if (loginProvider.state == LoginState.verified) {
-                      //     Navigator.push(
-                      //       context,
-                      //       CupertinoPageRoute(
-                      //         builder: (context) => EventoListScreen(),
-                      //       ),
-                      //     );
-                      //   }
-                      // },
                     )),
           backgroundColor: CupertinoColors.black,
         ),

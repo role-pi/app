@@ -15,53 +15,52 @@ class VerificationWidget extends StatelessWidget {
     return Form(
       key: _formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Spacer(),
           Text(
-            "Otimo! agora só precisamos do codigo de verificação que enviamos no seu email",
+            "ótimo! agora só precisamos do codigo de verificação que enviamos para você",
+            textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color.fromARGB(255, 211, 209, 209),
+              color: CupertinoColors.systemGrey2,
               fontWeight: FontWeight.bold,
-              fontSize: 25,
+              fontSize: 26,
+              letterSpacing: -1.7,
+              height: 1.1,
             ),
           ),
-          SizedBox(height: 22), 
-          Container(
-          decoration: BoxDecoration(
-           color: Color.fromARGB(255, 62, 62, 62), // Cor de fundo cinza escuro
-           borderRadius: BorderRadius.circular(10), // Raio de borda para arredondamento
+          SizedBox(height: 30),
+          CupertinoTextFormFieldRow(
+            placeholder: " ",
+            controller: _codeController,
+            padding: EdgeInsets.all(10),
+            textAlign: TextAlign.center,
+            cursorColor: CupertinoColors.white,
+            style: TextStyle(
+              color: CupertinoColors.systemGrey,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+            keyboardType: TextInputType.number,
           ),
-          padding: EdgeInsets.all(4),
-         child: CupertinoTextFormFieldRow(
-        placeholder: "Código",
-         controller: _codeController,
-         style: TextStyle(color: CupertinoColors.white),
-          keyboardType: TextInputType.number,
-         ),
+          SizedBox(height: 25),
+          RoundButton(
+            onPressed: () async {
+              onTap?.call(_codeController.text);
+            },
+            rectangleColor: CupertinoColors.systemGrey6,
+            text: 'verificar',
           ),
-          SizedBox(height: 25), 
-          Container(
-          decoration: BoxDecoration(
-           color: Color.fromARGB(255, 169, 167, 167), // Cor de fundo cinza escuro
-          borderRadius: BorderRadius.circular(10), // Raio de borda para arredondamento
-          ),
-          child: RoundButton(
-         onPressed: () async {
-          onTap?.call(_codeController.text);
-         },
-         text: 'verificar',
-         textColor: const Color.fromARGB(255, 243, 243, 243),
-          ),
-          ),
-          Spacer(),
+          SizedBox(height: 25),
           Text(
-            "reenviar codigo",
+            "reenviar código",
             style: TextStyle(
-              color: Color.fromARGB(255, 72, 72, 72),
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
-            ),
+                color: Color.fromARGB(255, 72, 72, 72),
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                letterSpacing: -1.6),
           ),
+          Spacer()
         ],
       ),
     );
