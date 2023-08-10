@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/domain/models/evento.dart';
+import 'package:role/shared/widgets/gradient_effect.dart';
 
 class EventoItemRow extends StatefulWidget {
   EventoItemRow({required this.evento, this.onTap});
@@ -94,22 +95,12 @@ class EventoItemRowState extends State<EventoItemRow>
         );
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(18),
-        child: AnimatedBuilder(
-            animation: _controller,
-            builder: (context, _) {
-              return Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      widget.evento.randomColor1,
-                      widget.evento.randomColor2
-                    ],
-                    begin: _topAlignmentAnimation.value,
-                    end: _bottomAlignmentAnimation.value,
-                  ),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 16.0),
+          borderRadius: BorderRadius.circular(18),
+          child: GradientWidget(
+              color1: widget.evento.randomColor1,
+              color2: widget.evento.randomColor2,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,9 +124,7 @@ class EventoItemRowState extends State<EventoItemRow>
                             color: CupertinoColors.white.withAlpha(150))),
                   ],
                 ),
-              );
-            }),
-      ),
+              ))),
     );
   }
 }
