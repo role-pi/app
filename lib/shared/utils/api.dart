@@ -6,14 +6,10 @@ import 'package:role/shared/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class API {
-  static String get token => UserLoginProvider.shared.token ?? "";
+  static String get token => "";
 
   Future<Object> post(endpoint, data) async {
     var url = '${api}${endpoint}';
-
-    // if (token.isEmpty) {
-    //   return Failure(code: userInvalidResponse, errorResponse: 'Logged out');
-    // }
 
     var body = json.encode(data);
 

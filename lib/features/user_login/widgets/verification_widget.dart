@@ -1,30 +1,37 @@
 import 'package:flutter/cupertino.dart';
 
 class VerificationWidget extends StatelessWidget {
-  Function()? onTap;
+  Function(String)? onTap;
 
-  final TextEditingController codeController;
+  final _codeController = TextEditingController();
 
-  VerificationWidget({required this.codeController, this.onTap});
+  final _formKey = GlobalKey<FormState>();
+
+  VerificationWidget({this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CupertinoTextFormFieldRow(
-          placeholder: "Código",
-          controller: codeController,
-          padding: EdgeInsets.all(10),
-          style: TextStyle(color: CupertinoColors.white),
-          keyboardType: TextInputType.number,
-        ),
-        CupertinoButton(
-          onPressed: () async {
-            onTap?.call();
-          },
-          child: const Text('Verificar'),
-        ),
-      ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          Spacer(),
+          CupertinoTextFormFieldRow(
+            placeholder: "Código",
+            controller: _codeController,
+            padding: EdgeInsets.all(10),
+            style: TextStyle(color: CupertinoColors.white),
+            keyboardType: TextInputType.number,
+          ),
+          CupertinoButton(
+            onPressed: () async {
+              onTap?.call(_codeController.text);
+            },
+            child: const Text('Verificar'),
+          ),
+          Spacer(),
+        ],
+      ),
     );
   }
 }
