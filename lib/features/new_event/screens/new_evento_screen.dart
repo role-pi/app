@@ -30,7 +30,7 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
         child: ClipRect(
           child: TweenAnimationBuilder<double>(
             tween: Tween<double>(
-                begin: widget.showing ? 0 : 10, end: widget.showing ? 10 : 0),
+                begin: widget.showing ? 0 : 16, end: widget.showing ? 16 : 0),
             duration: duration,
             curve: curve,
             builder: (_, value, __) {
@@ -39,18 +39,27 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
                   sigmaX: value,
                   sigmaY: value,
                 ),
-                child: AnimatedOpacity(
-                  opacity: widget.showing ? 0.6 : 0.0,
-                  duration: duration,
-                  curve: curve,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: CupertinoColors.systemBackground,
+                child: Stack(
+                  children: [
+                    AnimatedOpacity(
+                      opacity: widget.showing ? 0.6 : 0.0,
+                      duration: duration,
+                      curve: curve,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: CupertinoColors.systemBackground,
+                        ),
+                      ),
                     ),
-                    child: Center(
-                      child: content(),
+                    AnimatedOpacity(
+                      opacity: widget.showing ? 1.0 : 0.0,
+                      duration: duration,
+                      curve: curve,
+                      child: Center(
+                        child: content(),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               );
             },
@@ -60,25 +69,79 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
     );
   }
 
-  Column content() {
-    return Column(
-      children: [
-        Spacer(),
-        CupertinoTextField(
-          controller: _nameController,
-          placeholder: "Nome do evento",
-          padding: EdgeInsets.all(10),
-          style: TextStyle(color: CupertinoColors.black),
+  Widget content() {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        children: [
+          Spacer(),
+          CupertinoTextField(
+            controller: _nameController,
+            placeholder: " ",
+            cursorColor: CupertinoColors.black,
+            padding: EdgeInsets.all(10),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: CupertinoColors.black.withAlpha(200),
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -1.5),
+            decoration: BoxDecoration(
+              color: CupertinoColors.systemGrey5.withAlpha(0),
+            ),
+          ),
+          SizedBox(height: 16.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: CupertinoStyledButton(
+              text: "criar evento",
+              onPressed: () async {
+                _newEventoProvider.add(_nameController.text);
+                widget.dismiss!();
+              },
+            ),
+          ),
+          Spacer(),
+        ],
+      ),
+    );
+  }
+}
+
+class CupertinoStyledButton extends StatelessWidget {
+  final String text;
+  final Color textColor;
+  final Color rectangleColor;
+  final VoidCallback onPressed;
+
+  CupertinoStyledButton({
+    required this.text,
+    this.textColor = CupertinoColors.systemGrey5,
+    this.rectangleColor = CupertinoColors.black,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton(
+      onPressed: onPressed,
+      padding: EdgeInsets.symmetric(vertical: 16),
+      borderRadius: BorderRadius.circular(16),
+      color: rectangleColor.withAlpha(150),
+      child: Container(
+        width: double.infinity, // Expand horizontally
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+              color: textColor.withAlpha(200),
+              fontSize: 24,
+              letterSpacing: -1.5,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
-        CupertinoButton(
-          onPressed: () async {
-            _newEventoProvider.add(_nameController.text);
-            widget.dismiss!();
-          },
-          child: const Text('criar evento'),
-        ),
-        Spacer(),
-      ],
+      ),
     );
   }
 }
