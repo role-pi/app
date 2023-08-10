@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
+import 'verification.dart'; 
 
 class UserLoginScreen extends StatefulWidget {
   @override
@@ -43,7 +44,8 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 Spacer(),
-                Image.asset('assets/Logo.png', height: 50),
+                Image.asset('assets/Invertida.png', height: 50),
+                
                   Text("bem-vindo ao seu novo aplicativo de eventos",
                     style: TextStyle(
                       color: CupertinoColors.white,
@@ -71,21 +73,9 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                   child: const Text('Entrar'),
                 ),
                 SizedBox(height: 80),
-                CupertinoTextFormFieldRow(
-                    placeholder: "Código",
-                    controller: _codeController,
-                    padding: EdgeInsets.all(10),
-                    style: TextStyle(color: CupertinoColors.white),
-                    keyboardType: TextInputType.number),
-                CupertinoButton(
-                  onPressed: () async {
-                    await loginProvider.verify(
-                        _emailController.text,
-                        _codeController.text,
-                        () => {Navigator.pushNamed(context, "/")});
-                  },
-                  child: const Text('Verificar'),
-                ),
+                
+                VerificationWidget(codeController: _codeController),
+                
                 Spacer(),
               ]),
             ),
