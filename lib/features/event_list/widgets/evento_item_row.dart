@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
+import 'package:role/features/event_detail/screens/evento_detail_screen.dart';
 import 'package:role/features/event_list/domain/models/evento.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 
@@ -89,8 +90,7 @@ class EventoItemRowState extends State<EventoItemRow>
         Navigator.push(
           context,
           CupertinoPageRoute(
-            builder: (_) => CupertinoPageScaffold(
-                child: Center(child: Text(widget.evento.name))),
+            builder: (_) => EventoDetailScreen(evento: widget.evento),
           ),
         );
       },
