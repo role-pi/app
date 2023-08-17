@@ -1,10 +1,16 @@
+import 'dart:ffi';
 import 'dart:math';
 import 'dart:ui';
 
 import 'package:role/models/insumo.dart';
 
 class Evento {
-  Evento({required this.id, required this.name, this.dataInicio, this.dataFim});
+  Evento(
+      {required this.id,
+      required this.name,
+      this.dataInicio,
+      this.dataFim,
+      this.valorTotal});
   // required this.idUsuarios,
   // required this.idInsumos});
 
@@ -12,6 +18,7 @@ class Evento {
   String name;
   DateTime? dataInicio;
   DateTime? dataFim;
+  Float? valorTotal;
 
   Insumo insumo = Insumo();
   // List<int> idUsuarios;
@@ -25,6 +32,7 @@ class Evento {
             : null,
         dataFim:
             json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
+        valorTotal: json["valor_total"],
         // idUsuarios: json["id_usuarios"],
         // idInsumos: json["id_insumos"]
       );
@@ -34,6 +42,7 @@ class Evento {
         "name": name,
         "dataInicio": dataInicio?.toIso8601String(),
         "dataFim": dataFim?.toIso8601String(),
+        "valorTotal": valorTotal,
         // "id_usuarios": idUsuarios,
         // "id_insumis": idInsumos
       };
