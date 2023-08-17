@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:role/shared/widgets/big_form_text_field.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class VerificationWidget extends StatelessWidget {
@@ -31,26 +31,9 @@ class VerificationWidget extends StatelessWidget {
             ),
           ),
           SizedBox(height: 30),
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.white, width: 2),
-              ),
-            ),
-            child: CupertinoTextFormFieldRow(
-              placeholder: " ",
-              controller: _codeController,
-              padding: EdgeInsets.all(10),
-              textAlign: TextAlign.center,
-              cursorColor: CupertinoColors.white,
-              style: TextStyle(
-                color: CupertinoColors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                letterSpacing: -1.3,
-              ),
-              keyboardType: TextInputType.number,
-            ),
+          BigFormTextField(
+            controller: _codeController,
+            color: CupertinoColors.white,
           ),
           SizedBox(height: 25),
           RoundButton(
@@ -69,7 +52,6 @@ class VerificationWidget extends StatelessWidget {
                 fontSize: 24,
                 letterSpacing: -1.2),
           ),
-          Divider(),
           Spacer()
         ],
       ),
