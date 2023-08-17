@@ -5,6 +5,7 @@ import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:role/features/event_list/widgets/evento_item_row.dart';
 import 'package:role/features/event_list/widgets/evento_list_header.dart';
 import 'package:role/shared/widgets/circle_button.dart';
+import 'package:role/shared/widgets/gradient_effect.dart';
 
 class EventsList extends StatelessWidget {
   const EventsList({
@@ -52,6 +53,18 @@ class EventsList extends StatelessWidget {
             )
           ]),
         ),
+        SliverToBoxAdapter(
+          child: Container(),
+        ),
+        Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+              CupertinoColors.white.withOpacity(0.6),
+              CupertinoColors.white.withAlpha(0)
+            ]))),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 48),
           child: CircleButton(onTap: onTap),
