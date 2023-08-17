@@ -66,6 +66,7 @@ class SignUpWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   letterSpacing: -1.2),
               validator: (value) {
+                print("teste");
                 return validateEmail(value);
               },
             ),
@@ -75,7 +76,9 @@ class SignUpWidget extends StatelessWidget {
                 top: 12), // Adicione o espaçamento desejado acima
             child: RoundButton(
               onPressed: () async {
-                onTap?.call(_emailController.text);
+                if (_formKey.currentState!.validate()) {
+                  onTap?.call(_emailController.text);
+                }
               },
               textColor: CupertinoColors.black,
               rectangleColor: CupertinoColors.white,
