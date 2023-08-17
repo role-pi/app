@@ -53,7 +53,7 @@ class EventoItemRowState extends State<EventoItemRow> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 16.0, vertical: 8.0),
                           child: Text(
-                            "R\$ " + widget.evento.valor.toString(),
+                            "R\$ " + widget.evento.insumo.valor.toString(),
                             style: TextStyle(
                                 fontSize: 19,
                                 letterSpacing: -1.5,
