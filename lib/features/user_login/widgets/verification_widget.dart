@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class VerificationWidget extends StatelessWidget {
@@ -24,24 +25,32 @@ class VerificationWidget extends StatelessWidget {
             style: TextStyle(
               color: CupertinoColors.systemGrey2,
               fontWeight: FontWeight.bold,
-              fontSize: 26,
-              letterSpacing: -1.7,
+              fontSize: 24,
+              letterSpacing: -1.6,
               height: 1.1,
             ),
           ),
           SizedBox(height: 30),
-          CupertinoTextFormFieldRow(
-            placeholder: " ",
-            controller: _codeController,
-            padding: EdgeInsets.all(10),
-            textAlign: TextAlign.center,
-            cursorColor: CupertinoColors.white,
-            style: TextStyle(
-              color: CupertinoColors.systemGrey,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.white, width: 2),
+              ),
             ),
-            keyboardType: TextInputType.number,
+            child: CupertinoTextFormFieldRow(
+              placeholder: " ",
+              controller: _codeController,
+              padding: EdgeInsets.all(10),
+              textAlign: TextAlign.center,
+              cursorColor: CupertinoColors.white,
+              style: TextStyle(
+                color: CupertinoColors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -1.3,
+              ),
+              keyboardType: TextInputType.number,
+            ),
           ),
           SizedBox(height: 25),
           RoundButton(
@@ -58,8 +67,9 @@ class VerificationWidget extends StatelessWidget {
                 color: Color.fromARGB(255, 72, 72, 72),
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
-                letterSpacing: -1.6),
+                letterSpacing: -1.2),
           ),
+          Divider(),
           Spacer()
         ],
       ),

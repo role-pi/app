@@ -64,7 +64,7 @@ class SignUpWidget extends StatelessWidget {
                   color: CupertinoColors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  letterSpacing: -1.5),
+                  letterSpacing: -1.2),
               validator: (value) {
                 return validateEmail(value);
               },
