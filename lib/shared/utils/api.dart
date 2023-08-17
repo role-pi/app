@@ -20,6 +20,7 @@ class API {
             "Authorization": "JWT ${token}"
           },
           body: body);
+      print(response.body);
 
       if (success == response.statusCode) {
         return Success(code: success, response: response.body);

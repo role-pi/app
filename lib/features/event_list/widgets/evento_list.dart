@@ -27,25 +27,28 @@ class EventsList extends StatelessWidget {
             CupertinoSliverRefreshControl(onRefresh: () async {
               await usersViewModel.get();
             }),
-            SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                if (index == 0) {
-                  // Align to the left
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(38, 38, 38, 12),
-                    child: HomeHeader(),
-                  );
-                } else {
-                  Evento evento = usersViewModel.eventos[index - 1];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0, vertical: 4.0),
-                    child: EventoItemRow(
-                      evento: evento,
-                    ),
-                  );
-                }
-              }, childCount: usersViewModel.eventos.length + 1),
+            SliverPadding(
+              padding: EdgeInsets.only(bottom: 138.0),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  if (index == 0) {
+                    // Align to the left
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(38, 38, 38, 12),
+                      child: HomeHeader(),
+                    );
+                  } else {
+                    Evento evento = usersViewModel.eventos[index - 1];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30.0, vertical: 4.0),
+                      child: EventoItemRow(
+                        evento: evento,
+                      ),
+                    );
+                  }
+                }, childCount: usersViewModel.eventos.length + 1),
+              ),
             )
           ]),
         ),

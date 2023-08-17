@@ -1,0 +1,39 @@
+import 'package:flutter/cupertino.dart';
+import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:role/features/event_list/widgets/evento_list.dart';
+import 'package:role/features/new_event/screens/new_evento_screen.dart';
+import 'package:role/features/user_login/providers/user_login_provider.dart';
+import 'package:role/shared/widgets/round_button.dart';
+
+class UserDetailScreen extends StatefulWidget {
+  @override
+  _UserDetailScreenState createState() => _UserDetailScreenState();
+}
+
+class _UserDetailScreenState extends State<UserDetailScreen> {
+  bool showNewEvent = false;
+
+  Duration duration = Duration(milliseconds: 200);
+  Curve curve = Curves.easeInOutQuad;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      child: Center(
+          child: SizedBox(
+        width: 200,
+        height: 80,
+        child: RoundButton(
+          onPressed: () async {
+            UserLoginProvider.shared.logout();
+          },
+          rectangleColor: CupertinoColors.systemRed,
+          textColor: CupertinoColors.white,
+          text: 'logout',
+        ),
+      )),
+      backgroundColor: CupertinoColors.white,
+    );
+  }
+}
