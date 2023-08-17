@@ -5,10 +5,12 @@ class BigFormTextField extends StatelessWidget {
     super.key,
     this.color = CupertinoColors.black,
     required this.controller,
+    this.validator
   });
 
   final Color color;
   final TextEditingController controller;
+  final Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,13 @@ class BigFormTextField extends StatelessWidget {
           letterSpacing: -1.3,
         ),
         keyboardType: TextInputType.number,
+        validator: (value) {
+          if (validator != null) {
+            return validator!(value);
+          } else {
+            return null;
+          }
+        },
       ),
     );
   }
