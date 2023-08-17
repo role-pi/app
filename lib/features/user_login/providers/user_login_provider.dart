@@ -8,7 +8,7 @@ import 'package:role/shared/utils/api_status.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserLoginProvider extends ChangeNotifier {
-  LoginState _state = LoginState.signUp;
+  LoginState _state = LoginState.loggedOut;
   LoginState get state => _state;
 
   String? _token = "";
@@ -22,13 +22,12 @@ class UserLoginProvider extends ChangeNotifier {
   final storage = new FlutterSecureStorage();
 
   UserLoginProvider() {
-    storage
-        .read(key: "token")
-        .then((value) => null != value ? _token = value : null);
+    storage.read(key: "token").then((value) => {_token = value});
   }
 
   Future<void> tryAuthentication(callback) async {
     if (state == LoginState.loggedOut) {
+      _token = await storage.read(key: "token");
       var response = await API().post("usuario/login", {});
 
       if (response is Success) {
@@ -43,6 +42,7 @@ class UserLoginProvider extends ChangeNotifier {
         }
       } else if (response is Failure) {
         _state = LoginState.signUp;
+        print(response.errorResponse);
         notifyListeners();
       }
     }
@@ -91,6 +91,11 @@ class UserLoginProvider extends ChangeNotifier {
         notifyListeners();
       }
     }
+  }
+
+  void logout() async {
+    await storage.delete(key: "token");
+    _state = LoginState.loggedOut;
   }
 
   void saveToken(token) async {

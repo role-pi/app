@@ -15,7 +15,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<UserLoginProvider>(context);
-    // loginProvider.tryAuthentication(() => Navigator.pushNamed(context, "/"));
+    loginProvider.tryAuthentication(() => Navigator.pushNamed(context, "/"));
 
     if (loginProvider.state == LoginState.loggedOut) {
       return CupertinoPageScaffold(

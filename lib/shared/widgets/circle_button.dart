@@ -45,7 +45,6 @@ class _CircleButtonState extends State<CircleButton> {
         curve: Curves.easeOutQuart,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          backgroundBlendMode: BlendMode.luminosity,
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -77,7 +76,6 @@ class _CircleButtonState extends State<CircleButton> {
             child: Image.asset(
               'assets/Star.png',
               opacity: const AlwaysStoppedAnimation(.75),
-              colorBlendMode: BlendMode.luminosity,
             ),
           ),
         ),
