@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class VerificationWidget extends StatelessWidget {
-  Function(String)? onTap;
+  final Function(String)? onTap;
 
   final _codeController = TextEditingController();
 

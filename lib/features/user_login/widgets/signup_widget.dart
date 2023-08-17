@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class SignUpWidget extends StatelessWidget {
-  Function(String)? onTap;
+  final Function(String)? onTap;
 
   final _emailController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
-  bool showVerification = false;
 
   SignUpWidget({this.onTap});
 
@@ -103,7 +101,7 @@ class SignUpWidget extends StatelessWidget {
         r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
     final regex = RegExp(pattern);
 
-    return value!.isNotEmpty && !regex.hasMatch(value)
+    return value.isNotEmpty && !regex.hasMatch(value)
         ? 'Digite um email válido'
         : null;
   }

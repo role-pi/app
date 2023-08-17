@@ -6,7 +6,7 @@ import 'package:role/shared/widgets/round_button.dart';
 
 class NewEventoScreen extends StatefulWidget {
   final bool showing;
-  Function()? dismiss;
+  final Function()? dismiss;
 
   NewEventoScreen({required this.showing, this.dismiss});
 

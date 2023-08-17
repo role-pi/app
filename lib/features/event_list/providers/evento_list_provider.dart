@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/event_list/domain/models/evento.dart';
-import 'package:role/features/event_list/domain/repository/evento_repository.dart';
+import 'package:role/models/evento.dart';
+import 'package:role/features/event_list/repository/evento_repository.dart';
 import 'package:role/shared/utils/api_status.dart';
 
 class EventoListProvider extends ChangeNotifier {

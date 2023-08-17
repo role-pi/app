@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/event_list/domain/models/evento.dart';
+import 'package:role/models/evento.dart';
 
 class EventoDetailScreen extends StatefulWidget {
   const EventoDetailScreen({

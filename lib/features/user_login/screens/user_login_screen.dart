@@ -5,13 +5,13 @@ import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/features/user_login/widgets/signup_widget.dart';
 
 class UserLoginScreen extends StatefulWidget {
-  String? email;
-
   @override
   State<UserLoginScreen> createState() => _UserLoginScreenState();
 }
 
 class _UserLoginScreenState extends State<UserLoginScreen> {
+  String? email;
+
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<UserLoginProvider>(context);
@@ -38,13 +38,13 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
               child: loginProvider.state == LoginState.signUp
                   ? SignUpWidget(
                       onTap: (email) async {
-                        widget.email = email;
+                        this.email = email;
                         await loginProvider.trySignUp(email, () {});
                       },
                     )
                   : VerificationWidget(
                       onTap: (code) async {
-                        await loginProvider.verify(widget.email, code, () {
+                        await loginProvider.verify(email, code, () {
                           Navigator.pushNamed(context, "/");
                         });
                       },

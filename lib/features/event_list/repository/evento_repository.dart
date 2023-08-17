@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import '../../../../shared/utils/api.dart';
-import '../../../../shared/utils/api_status.dart';
-import '../models/evento.dart';
+import '../../../shared/utils/api.dart';
+import '../../../shared/utils/api_status.dart';
+import '../../../models/evento.dart';
 
 class EventoRepository {
   Future<List<Evento>> getEventos() async {
@@ -24,7 +24,7 @@ class EventoRepository {
     });
 
     if (response is Success) {
-      Map decoded = json.decode(response.response as String);
+      // Map decoded = json.decode(response.response as String);
     }
     return null;
   }
