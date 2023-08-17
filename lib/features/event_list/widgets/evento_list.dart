@@ -5,7 +5,6 @@ import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:role/features/event_list/widgets/evento_item_row.dart';
 import 'package:role/features/event_list/widgets/evento_list_header.dart';
 import 'package:role/shared/widgets/circle_button.dart';
-import 'package:role/shared/widgets/gradient_effect.dart';
 
 class EventsList extends StatelessWidget {
   const EventsList({
