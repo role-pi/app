@@ -52,9 +52,6 @@ class EventsList extends StatelessWidget {
             )
           ]),
         ),
-        SliverToBoxAdapter(
-          child: Container(),
-        ),
         Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
