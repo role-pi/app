@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/screens/user_detail_screen.dart';
-import 'package:role/features/user_login/providers/user_login_provider.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
@@ -11,9 +9,6 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserLoginProvider userLoginProvider =
-        Provider.of<UserLoginProvider>(context);
-
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:role/features/user_login/domain/models/usuario.dart';
+import 'package:role/models/usuario.dart';
 import 'dart:convert';
 
 import 'package:role/shared/utils/api.dart';

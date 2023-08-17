@@ -1,8 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/event_list/providers/evento_list_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:role/features/event_list/widgets/evento_list.dart';
-import 'package:role/features/new_event/screens/new_evento_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/round_button.dart';
 

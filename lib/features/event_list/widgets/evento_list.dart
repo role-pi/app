@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:role/features/event_list/domain/models/evento.dart';
+import 'package:role/models/evento.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:role/features/event_list/widgets/evento_item_row.dart';
 import 'package:role/features/event_list/widgets/evento_list_header.dart';
