@@ -34,11 +34,25 @@ class VerificationWidget extends StatelessWidget {
           BigFormTextField(
             controller: _codeController,
             color: CupertinoColors.white,
+            validator: (value) {
+          
+            if (value != null) {
+            if (value.length == 6 && int.tryParse(value)!= null) {
+                return null;
+            }
+            }
+
+            return "O código é inválido." ;
+            },
+            
           ),
           SizedBox(height: 25),
           RoundButton(
             onPressed: () async {
               onTap?.call(_codeController.text);
+              if (_formKey.currentState!.validate()) {
+                  onTap?.call(_codeController.text);
+                }
             },
             rectangleColor: CupertinoColors.systemGrey6,
             text: 'verificar',
