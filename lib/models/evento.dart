@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:role/models/insumo.dart';
+
 class Evento {
   Evento({required this.id, required this.name, this.dataInicio, this.dataFim});
   // required this.idUsuarios,
@@ -10,6 +12,8 @@ class Evento {
   String name;
   DateTime? dataInicio;
   DateTime? dataFim;
+
+  Insumo insumo = Insumo();
   // List<int> idUsuarios;
   // List<int> idInsumos;
 
@@ -24,8 +28,6 @@ class Evento {
         // idUsuarios: json["id_usuarios"],
         // idInsumos: json["id_insumos"]
       );
-
-  get insumo => null;
 
   Map<String, dynamic> toJson() => {
         "id": id,
