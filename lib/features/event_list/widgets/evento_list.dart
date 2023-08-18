@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
@@ -17,6 +18,10 @@ class EventsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     EventoListProvider usersViewModel = context.watch<EventoListProvider>();
+    Color backgroundColor =
+        MediaQuery.of(context).platformBrightness == Brightness.dark
+            ? Colors.black
+            : Colors.white;
 
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -56,11 +61,13 @@ class EventsList extends StatelessWidget {
           child: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
+                      begin: Alignment.center,
+                      end: Alignment.bottomCenter,
                       colors: [
-                CupertinoColors.white.withOpacity(0.6),
-                CupertinoColors.white.withAlpha(0)
+                backgroundColor.withOpacity(0),
+                backgroundColor.withOpacity(0),
+                backgroundColor.withOpacity(0.2),
+                backgroundColor.withOpacity(0.9)
               ]))),
         ),
         Container(

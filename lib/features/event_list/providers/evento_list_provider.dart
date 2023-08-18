@@ -38,4 +38,9 @@ class EventoListProvider extends ChangeNotifier {
     var response = await eventoRepository.getEventos();
     set(response);
   }
+
+  Evento evento(int) {
+    var evento = _eventos.firstWhere((element) => element.id == int);
+    return evento;
+  }
 }

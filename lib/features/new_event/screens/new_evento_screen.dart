@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/new_event/providers/new_evento_provider.dart';
+import 'package:role/shared/widgets/big_form_text_field.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class NewEventoScreen extends StatefulWidget {
@@ -76,20 +77,14 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
       child: Column(
         children: [
           Spacer(),
-          CupertinoTextField(
+          BigFormTextField(
             controller: _nameController,
-            placeholder: " ",
-            cursorColor: CupertinoColors.black,
-            padding: EdgeInsets.all(10),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: CupertinoColors.black.withAlpha(200),
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                letterSpacing: -1.5),
-            decoration: BoxDecoration(
-              color: CupertinoColors.systemGrey5.withAlpha(0),
-            ),
+            color: CupertinoColors.black,
+            // onChanged: (value) {
+            //   setState(() {
+            //     showBack = value?.isEmpty ?? true;
+            //   });
+            // },
           ),
           SizedBox(height: 16.0),
           Padding(
