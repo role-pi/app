@@ -25,6 +25,16 @@ class UserLoginProvider extends ChangeNotifier {
     storage.read(key: "token").then((value) => {_token = value});
   }
 
+  void setState(state) {
+    _state = state;
+    notifyListeners();
+  }
+
+  void setUser(user) {
+    _user = user;
+    notifyListeners();
+  }
+
   Future<void> tryAuthentication(callback) async {
     if (state == LoginState.loggedOut) {
       _token = await storage.read(key: "token");
@@ -33,15 +43,17 @@ class UserLoginProvider extends ChangeNotifier {
       if (response is Success) {
         Map decoded = json.decode(response.response as String);
         if (decoded.containsKey("user")) {
-          _state = LoginState.loggedIn;
-
-          _user = Usuario.fromJson(decoded["user"]);
+          setState(LoginState.loggedIn);
+          setUser(Usuario.fromJson(decoded["user"]));
 
           callback();
           notifyListeners();
+        } else {
+          setState(LoginState.signUp);
+          notifyListeners();
         }
       } else if (response is Failure) {
-        _state = LoginState.signUp;
+        setState(LoginState.signUp);
         print(response.errorResponse);
         notifyListeners();
       }
@@ -55,17 +67,19 @@ class UserLoginProvider extends ChangeNotifier {
       _state = LoginState.verifying;
       notifyListeners();
 
-      if (response is Success) {
-        Map decoded = json.decode(response.response as String);
-        if (decoded.containsKey("user")) {
-          _state = LoginState.loggedIn;
-          notifyListeners();
-          callback();
-        }
-      } else if (response is Failure) {
-        _state = LoginState.signUp;
-        notifyListeners();
-      }
+      // if (response is Success) {
+      //   Map decoded = json.decode(response.response as String);
+      //   if (decoded.containsKey("user")) {
+      //     _state = LoginState.loggedIn;
+      //     notifyListeners();
+      //     callback();
+      //   }
+      // } else if (response is Failure) {
+      //   _state = LoginState.signUp;
+      //   notifyListeners();
+      // }
+
+      print(_state);
     }
   }
 
@@ -82,12 +96,12 @@ class UserLoginProvider extends ChangeNotifier {
 
           _user = Usuario.fromJson(decoded["user"]);
 
-          _state = LoginState.loggedIn;
+          setState(LoginState.loggingIn);
           callback();
           notifyListeners();
         }
       } else if (response is Failure) {
-        _state = LoginState.signUp;
+        setState(LoginState.signUp);
         notifyListeners();
       }
     }
@@ -95,7 +109,7 @@ class UserLoginProvider extends ChangeNotifier {
 
   void logout() async {
     await storage.delete(key: "token");
-    _state = LoginState.loggedOut;
+    setState(LoginState.loggedOut);
   }
 
   void saveToken(token) async {
