@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 import 'dart:ui';
 
@@ -18,7 +17,7 @@ class Evento {
   String name;
   DateTime? dataInicio;
   DateTime? dataFim;
-  Float? valorTotal;
+  double? valorTotal;
 
   Insumo insumo = Insumo();
   // List<int> idUsuarios;
@@ -32,7 +31,7 @@ class Evento {
             : null,
         dataFim:
             json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
-        valorTotal: json["valor_total"],
+        valorTotal: double.parse(json["valor_total"]),
         // idUsuarios: json["id_usuarios"],
         // idInsumos: json["id_insumos"]
       );

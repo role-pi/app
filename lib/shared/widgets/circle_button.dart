@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 
 class CircleButton extends StatefulWidget {
@@ -43,26 +45,6 @@ class _CircleButtonState extends State<CircleButton> {
         height: size,
         duration: Duration(milliseconds: 300),
         curve: Curves.easeOutQuart,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              // Lighter to darker gray
-              CupertinoColors.systemGrey6,
-              CupertinoColors.systemGrey5
-            ],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: CupertinoColors.systemGrey.withOpacity(0.15),
-              // spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
         transform: (isPressed
             ? (Matrix4.identity()
               ..translate(0.025 * size,
@@ -70,12 +52,43 @@ class _CircleButtonState extends State<CircleButton> {
               ..scale(0.95,
                   0.95)) // scale with to 95% anchorred at topleft of the AnimatedContainer
             : Matrix4.identity()),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(22.0),
-            child: Image.asset(
-              'assets/Star.png',
-              opacity: const AlwaysStoppedAnimation(.75),
+        child: ClipOval(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 10.0,
+              sigmaY: 10.0,
+            ),
+            child: Container(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(22.0),
+                  child: Image.asset(
+                    'assets/Star.png',
+                    color: Color.fromRGBO(50, 50, 50, 1.0),
+                    colorBlendMode: BlendMode.luminosity,
+                    // opacity: const AlwaysStoppedAnimation(.75),
+                  ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                backgroundBlendMode: BlendMode.luminosity,
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    // Lighter to darker gray
+                    CupertinoColors.white.withOpacity(0.6),
+                    CupertinoColors.systemGrey5.withOpacity(0.25)
+                  ],
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: CupertinoColors.systemGrey.withOpacity(0.15),
+                    blurRadius: 7,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

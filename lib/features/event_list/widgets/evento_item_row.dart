@@ -17,11 +17,10 @@ class EventoItemRowState extends State<EventoItemRow> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+        Navigator.pushNamed(
           context,
-          CupertinoPageRoute(
-            builder: (_) => EventoDetailScreen(evento: widget.evento),
-          ),
+          "/evento",
+          arguments: widget.evento.id,
         );
       },
       child: ClipRRect(
