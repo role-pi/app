@@ -52,15 +52,17 @@ class EventsList extends StatelessWidget {
             )
           ]),
         ),
-        Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [
-              CupertinoColors.white.withOpacity(0.6),
-              CupertinoColors.white.withAlpha(0)
-            ]))),
+        IgnorePointer(
+          child: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                CupertinoColors.white.withOpacity(0.6),
+                CupertinoColors.white.withAlpha(0)
+              ]))),
+        ),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 48),
           child: CircleButton(onTap: onTap),
