@@ -77,8 +77,8 @@ class _CircleButtonState extends State<CircleButton> {
                   end: Alignment.bottomCenter,
                   colors: [
                     // Lighter to darker gray
-                    CupertinoColors.white.withOpacity(0.6),
-                    CupertinoColors.systemGrey5.withOpacity(0.25)
+                    CupertinoColors.systemGrey6.withOpacity(0.8),
+                    CupertinoColors.white.withOpacity(0.3)
                   ],
                 ),
                 boxShadow: [
