@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 
 class BigFormTextField extends StatelessWidget {
-  const BigFormTextField({
-    super.key,
-    this.color = CupertinoColors.black,
-    required this.controller,
-    this.validator
-  });
+  const BigFormTextField(
+      {super.key,
+      this.color = CupertinoColors.black,
+      required this.controller,
+      this.validator,
+      this.onChanged});
 
   final Color color;
   final TextEditingController controller;
   final Function(String?)? validator;
+  final Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,7 @@ class BigFormTextField extends StatelessWidget {
             return null;
           }
         },
+        onChanged: onChanged,
       ),
     );
   }
