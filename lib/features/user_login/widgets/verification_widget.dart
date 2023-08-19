@@ -1,18 +1,29 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/big_form_text_field.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
-class VerificationWidget extends StatelessWidget {
+class VerificationWidget extends StatefulWidget {
   final Function(String)? onTap;
-
-  final _codeController = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
 
   VerificationWidget({this.onTap});
 
   @override
+  State<VerificationWidget> createState() => _VerificationWidgetState();
+}
+
+class _VerificationWidgetState extends State<VerificationWidget> {
+  final _codeController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  bool showBack = true;
+
+  @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<UserLoginProvider>(context);
+
     return Form(
       key: _formKey,
       child: Column(
@@ -35,27 +46,34 @@ class VerificationWidget extends StatelessWidget {
             controller: _codeController,
             color: CupertinoColors.white,
             validator: (value) {
-          
-            if (value != null) {
-            if (value.length == 6 && int.tryParse(value)!= null) {
-                return null;
-            }
-            }
+              if (value != null) {
+                if (value.length == 6 && int.tryParse(value) != null) {
+                  return null;
+                }
+              }
 
-            return "O código é inválido." ;
+              return "O código é inválido.";
             },
-            
+            onChanged: (value) {
+              setState(() {
+                showBack = value?.isEmpty ?? true;
+              });
+            },
           ),
           SizedBox(height: 25),
           RoundButton(
             onPressed: () async {
-              onTap?.call(_codeController.text);
-              if (_formKey.currentState!.validate()) {
-                  onTap?.call(_codeController.text);
+              if (showBack) {
+                loginProvider.setState(LoginState.signUp);
+              } else {
+                widget.onTap?.call(_codeController.text);
+                if (_formKey.currentState!.validate()) {
+                  widget.onTap?.call(_codeController.text);
                 }
+              }
             },
             rectangleColor: CupertinoColors.systemGrey6,
-            text: 'verificar',
+            text: showBack ? 'voltar' : 'verificar',
           ),
           SizedBox(height: 25),
           Text(

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/screens/user_detail_screen.dart';
+import 'package:role/features/user_login/providers/user_login_provider.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
@@ -9,6 +11,12 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color textColor =
+        MediaQuery.of(context).platformBrightness == Brightness.dark
+            ? CupertinoColors.white
+            : CupertinoColors.black;
+    final loginProvider = Provider.of<UserLoginProvider>(context);
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -16,7 +24,11 @@ class HomeHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              child: Image.asset('assets/Logo.png', height: 46),
+              child: Image.asset(
+                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                      ? 'assets/Invertida.png'
+                      : 'assets/Logo.png',
+                  height: 46),
               alignment: Alignment.centerLeft,
             ),
             SizedBox(height: 12),
@@ -27,8 +39,8 @@ class HomeHeader extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
-                    color: CupertinoColors.black.withAlpha((255 * 0.2).toInt()),
-                    letterSpacing: -1.5),
+                    letterSpacing: -1.5,
+                    color: textColor.withOpacity(0.5)),
               ),
             ),
           ],
@@ -44,7 +56,8 @@ class HomeHeader extends StatelessWidget {
           },
           child: ClipOval(
             child: Image.network(
-              "https://pbs.twimg.com/profile_images/1685715309615878144/JG6PlTn5_400x400.jpg",
+              loginProvider.user?.profilePhoto ??
+                  "https://pbs.twimg.com/profile_images/1685715309615878144/JG6PlTn5_400x400.jpg",
               fit: BoxFit.cover,
               width: 64,
             ),
