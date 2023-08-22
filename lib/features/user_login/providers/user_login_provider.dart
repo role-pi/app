@@ -62,6 +62,7 @@ class UserLoginProvider extends ChangeNotifier {
 
   Future<void> trySignUp(email, callback) async {
     if (state != LoginState.loggedIn) {
+      // ignore: unused_local_variable
       var response = await API().post("usuario/signin", {"email": email});
 
       _state = LoginState.verifying;
