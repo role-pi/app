@@ -11,12 +11,11 @@ class Insumo {
   List<Transacao> transacoes = [];
 
   Insumo({
-    valor = Random().nextInt(150) + 100;
     required this.idInsumo,
     required this.tipo,
     required this.nome,
     required this.idEvento,
-  });
+  }) : valor = Random().nextInt(150) + 100;
 
   void addTransacao(Transacao transacao) {
     transacoes.add(transacao);
