@@ -2,7 +2,6 @@ class Transacao {
   int _idTransacao;
   double _valor;
   DateTime _data;
-  int _idInsumo;
   int _idUsuario;
 
   Transacao({
@@ -14,7 +13,6 @@ class Transacao {
   })  : _idTransacao = idTransacao,
         _valor = valor,
         _data = data,
-        _idInsumo = idInsumo,
         _idUsuario = idUsuario;
 
   int get idTransacao => _idTransacao;
@@ -25,9 +23,6 @@ class Transacao {
 
   DateTime get data => _data;
   set data(DateTime value) => _data = value;
-
-  int get idInsumo => _idInsumo;
-  set idInsumo(int value) => _idInsumo = value;
 
   int get idUsuario => _idUsuario;
   set idUsuario(int value) => _idUsuario = value;
