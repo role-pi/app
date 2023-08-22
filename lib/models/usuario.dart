@@ -1,6 +1,7 @@
 import 'dart:convert';
+import 'package:role/shared/utils/serializable.dart';
 
-class Usuario {
+class Usuario implements JSONSerializable {
   int _id;
   String? _name;
   String _email;
@@ -38,19 +39,27 @@ class Usuario {
 
   String get displayName => _name ?? _email;
 
-  factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
-        id: json["id_usuario"],
-        name: json["nome"],
-        email: json["email"],
-        profilePhoto: json["foto_de_perfil_url"],
-      );
+  // Usuario.fromJson(Map<String, dynamic> json):
+  //       id = json["id_usuario"],
+  //       name = json["nome"],
+  //       email = json["email"],
+  //       profilePhoto = json["foto_de_perfil_url"]
 
+  @override
   Map<String, dynamic> toJson() => {
         "id": _id,
         "name": _name,
         "email": _email,
         "profilePhoto": _profilePhoto,
       };
+
+  @override
+  factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
+        id: json["id_usuario"],
+        name: json["nome"],
+        email: json["email"],
+        profilePhoto: json["foto_de_perfil_url"],
+      );
 }
 
 List<Usuario> usersFromJson(String str) =>
