@@ -16,7 +16,12 @@ class SignUpWidget extends StatelessWidget {
       key: _formKey,
       child: Stack(
         children: [
-           Image.asset('assets/Background.png', height: 200),
+          Image.asset(
+            'assets/Background.png', // Caminho da sua imagem de fundo
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
           Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
