@@ -1,5 +1,6 @@
 import 'dart:math';
-import 'transacao.dart';
+
+import 'package:role/models/transacao.dart';
 
 class Insumo {
   late double valor;
@@ -9,10 +10,10 @@ class Insumo {
     valor = Random().nextInt(150) + 100;
   }
 
-  int idInsumo;
-  int tipo;
-  String nome;
-  int idEvento;
+  late int idInsumo;
+  late int tipo;
+  late String nome;
+  late int idEvento;
   List<Transacao> transacoes = [];
 
   Insumo({
