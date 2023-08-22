@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:role/shared/utils/serializable.dart';
 
-class Evento {
+class Evento implements JSONSerializable {
   int _id;
   String _name;
   DateTime? _dataInicio;
@@ -45,6 +46,7 @@ class Evento {
     _valorTotal = value;
   }
 
+  @override
   factory Evento.fromJson(Map<String, dynamic> json) => Evento(
         id: json["id_evento"],
         name: json["nome"],
@@ -54,18 +56,15 @@ class Evento {
         dataFim:
             json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
         valorTotal: double.parse(json["valor_total"]),
-        // idUsuarios: json["id_usuarios"],
-        // idInsumos: json["id_insumos"]
       );
 
+  @override
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "dataInicio": dataInicio?.toIso8601String(),
         "dataFim": dataFim?.toIso8601String(),
         "valorTotal": valorTotal,
-        // "id_usuarios": idUsuarios,
-        // "id_insumis": idInsumos
       };
 
   static List<String> emojiPool = [
