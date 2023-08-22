@@ -1,27 +1,49 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:role/models/insumo.dart';
-
 class Evento {
-  Evento(
-      {required this.id,
-      required this.name,
-      this.dataInicio,
-      this.dataFim,
-      this.valorTotal});
-  // required this.idUsuarios,
-  // required this.idInsumos});
+  int _id;
+  String _name;
+  DateTime? _dataInicio;
+  DateTime? _dataFim;
+  double? _valorTotal;
 
-  int id;
-  String name;
-  DateTime? dataInicio;
-  DateTime? dataFim;
-  double? valorTotal;
+  Evento({
+    required int id,
+    required String name,
+    DateTime? dataInicio,
+    DateTime? dataFim,
+    double? valorTotal,
+  })  : _id = id,
+        _name = name,
+        _dataInicio = dataInicio,
+        _dataFim = dataFim,
+        _valorTotal = valorTotal;
 
-  Insumo insumo = Insumo();
-  // List<int> idUsuarios;
-  // List<int> idInsumos;
+  int get id => _id;
+  set id(int value) {
+    _id = value;
+  }
+
+  String get name => _name;
+  set name(String value) {
+    _name = value;
+  }
+
+  DateTime? get dataInicio => _dataInicio;
+  set dataInicio(DateTime? value) {
+    _dataInicio = value;
+  }
+
+  DateTime? get dataFim => _dataFim;
+  set dataFim(DateTime? value) {
+    _dataFim = value;
+  }
+
+  double? get valorTotal => _valorTotal;
+  set valorTotal(double? value) {
+    _valorTotal = value;
+  }
 
   factory Evento.fromJson(Map<String, dynamic> json) => Evento(
         id: json["id_evento"],
