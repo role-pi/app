@@ -1,15 +1,42 @@
 import 'dart:convert';
 
 class Usuario {
-  Usuario(
-      {required this.id, this.name, required this.email, this.profilePhoto});
+  int _id;
+  String? _name;
+  String _email;
+  String? _profilePhoto;
 
-  int id;
-  String? name;
-  String email;
-  String? profilePhoto;
+  Usuario({
+    required int id,
+    String? name,
+    required String email,
+    String? profilePhoto,
+  })  : _id = id,
+        _name = name,
+        _email = email,
+        _profilePhoto = profilePhoto;
 
-  String get displayName => name ?? email;
+  int get id => _id;
+  set id(int value) {
+    _id = value;
+  }
+
+  String? get name => _name;
+  set name(String? value) {
+    _name = value;
+  }
+
+  String get email => _email;
+  set email(String value) {
+    _email = value;
+  }
+
+  String? get profilePhoto => _profilePhoto;
+  set profilePhoto(String? value) {
+    _profilePhoto = value;
+  }
+
+  String get displayName => _name ?? _email;
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
         id: json["id_usuario"],
@@ -19,10 +46,10 @@ class Usuario {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "email": email,
-        "profilePhoto": profilePhoto,
+        "id": _id,
+        "name": _name,
+        "email": _email,
+        "profilePhoto": _profilePhoto,
       };
 }
 
