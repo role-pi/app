@@ -2,13 +2,12 @@ import 'dart:math';
 import 'transacao.dart';
 
 class Insumo {
-  late int valor;
+  late double valor;
 
   Insumo() {
     // random between 100 and 250
     valor = Random().nextInt(150) + 100;
   }
-
 
   int idInsumo;
   int tipo;
@@ -22,7 +21,8 @@ class Insumo {
     required this.nome,
     required this.idEvento,
   });
-}
+
   void addTransacao(Transacao transacao) {
     transacoes.add(transacao);
   }
+}
