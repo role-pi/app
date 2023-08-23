@@ -50,16 +50,19 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                   padding: const EdgeInsets.all(42.0),
                   child: Stack(
                     children: [
-                      LoginSlideComponent(
-                          child: SignUpWidget(
-                            email: email,
-                            onTap: (email) async {
-                              this.email = email;
-                              await loginProvider.trySignUp(email, () {});
-                              // loginProvider.setState(LoginState.verifying);
-                            },
-                          ),
-                          showing: loginProvider.state == LoginState.signUp),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 32),
+                        child: LoginSlideComponent(
+                            child: SignUpWidget(
+                              email: email,
+                              onTap: (email) async {
+                                this.email = email;
+                                await loginProvider.trySignUp(email, () {});
+                                // loginProvider.setState(LoginState.verifying);
+                              },
+                            ),
+                            showing: loginProvider.state == LoginState.signUp),
+                      ),
                       LoginSlideComponent(
                           child: VerificationWidget(
                             onTap: (code) async {
