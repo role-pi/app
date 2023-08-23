@@ -76,6 +76,16 @@ class EventDetailHeader extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Padding(padding: const EdgeInsets.only(top: 60),
+                      child: Text("< eventos",
+                      style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: CupertinoColors.white,
+                                  letterSpacing: -1.8),
+                            
+                        ), 
+                      ),
                       Spacer(),
                       Row(
                         children: [
@@ -87,7 +97,13 @@ class EventDetailHeader extends StatelessWidget {
                                   color: CupertinoColors.white,
                                   letterSpacing: -1.8),
                             ),
-                          Spacer()
+                          Spacer(),
+                          Text(
+                            evento.randomEmoji,
+                              style: TextStyle(
+                                  fontSize: 80,
+                                  fontWeight: FontWeight.bold),
+                          )
                         ],
                       ),
                       ContainerText(text: "24 de Agosto"),
