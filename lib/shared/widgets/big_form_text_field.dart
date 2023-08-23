@@ -33,7 +33,6 @@ class BigFormTextField extends StatelessWidget {
           fontWeight: FontWeight.bold,
           letterSpacing: -1.3,
         ),
-        keyboardType: TextInputType.number,
         validator: (value) {
           if (validator != null) {
             return validator!(value);

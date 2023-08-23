@@ -65,8 +65,7 @@ class _CircleButtonState extends State<CircleButton> {
                   child: Image.asset(
                     'assets/Star.png',
                     color: Color.fromRGBO(50, 50, 50, 1.0),
-                    colorBlendMode: BlendMode.luminosity,
-                    // opacity: const AlwaysStoppedAnimation(.75),
+                    opacity: const AlwaysStoppedAnimation(.90),
                   ),
                 ),
               ),
