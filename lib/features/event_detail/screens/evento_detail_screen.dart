@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:role/models/evento.dart';
+import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 
 class EventoDetailScreen extends StatefulWidget {
@@ -70,26 +71,54 @@ class EventDetailHeader extends StatelessWidget {
             child: GradientWidget(
                 color1: evento.randomColor1,
                 color2: evento.randomColor2,
-                child: Column(
-                  children: [
-                    Spacer(),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(32.0),
-                          child: Text(
-                            evento.name,
+                child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: const EdgeInsets.only(top: 50),
+                      child: Row(
+                        children: [
+                          Text("< eventos",
+                          style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      color: CupertinoColors.white,
+                                      letterSpacing: -1.8),   
+                            ),
+                            Spacer(),
+                            Text("-",
                             style: TextStyle(
-                                fontSize: 42,
-                                fontWeight: FontWeight.bold,
-                                color: CupertinoColors.white,
-                                letterSpacing: -1.8),
-                          ),
-                        ),
-                        Spacer()
-                      ],
-                    ),
-                  ],
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: CupertinoColors.white,
+                            ),)
+                        ],
+                      ), 
+                      ),
+                      Spacer(),
+                      Row(
+                        children: [
+                            Text(
+                              evento.name,
+                              style: TextStyle(
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.bold,
+                                  color: CupertinoColors.white,
+                                  letterSpacing: -1.8),
+                            ),
+                          Spacer(),
+                          Text(
+                            evento.randomEmoji,
+                              style: TextStyle(
+                                  fontSize: 72,
+                                  fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                      ContainerText(text: "24 de Agosto, 22:00 — 05:00"),
+                    ],
+                  ),
                 )),
           ),
           height: 300),
