@@ -4,11 +4,12 @@ import 'package:role/shared/widgets/round_button.dart';
 class SignUpWidget extends StatelessWidget {
   final Function(String)? onTap;
 
-  final _emailController = TextEditingController();
+  final TextEditingController _emailController;
 
   final _formKey = GlobalKey<FormState>();
 
-  SignUpWidget({this.onTap});
+  SignUpWidget({required email, required this.onTap})
+      : _emailController = TextEditingController(text: email);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class SignUpWidget extends StatelessWidget {
               Text(
                 "boas-vindas ao seu novo aplicativo de eventos",
                 style: TextStyle(
-                  color: CupertinoColors.systemGrey5,
+                  color: CupertinoColors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 26,
                   letterSpacing: -1.7,
@@ -49,21 +50,20 @@ class SignUpWidget extends StatelessWidget {
         SizedBox(height: 40),
         Container(
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 32, 32, 32), // Cor de fundo cinza escuro
-            borderRadius:
-                BorderRadius.circular(12), // Raio de borda para arredondamento
+            color: Color.fromARGB(255, 32, 32, 32),
+            borderRadius: BorderRadius.circular(12),
           ),
           padding: EdgeInsets.all(3),
           child: CupertinoTextFormFieldRow(
             placeholder: "digite seu e-mail",
             controller: _emailController,
+            cursorColor: CupertinoColors.white,
             style: TextStyle(
                 color: CupertinoColors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 letterSpacing: -1.2),
             validator: (value) {
-              print("teste");
               return validateEmail(value);
             },
           ),
@@ -88,7 +88,6 @@ class SignUpWidget extends StatelessWidget {
   }
 
   String? validateEmail(String? value) {
-    return null;
     if (value == null || value.isEmpty) {
       return 'Campo obrigatório'; // Retorna mensagem de erro se o campo estiver em branco
     }

@@ -52,10 +52,11 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                     children: [
                       LoginSlideComponent(
                           child: SignUpWidget(
+                            email: email,
                             onTap: (email) async {
-                              // this.email = email;
-                              // await loginProvider.trySignUp(email, () {});
-                              loginProvider.setState(LoginState.verifying);
+                              this.email = email;
+                              await loginProvider.trySignUp(email, () {});
+                              // loginProvider.setState(LoginState.verifying);
                             },
                           ),
                           showing: loginProvider.state == LoginState.signUp),
@@ -106,7 +107,7 @@ class LoginSlideComponent extends StatelessWidget {
         child: AnimatedOpacity(
             opacity: showing ? 1 : 0,
             duration: duration,
-            curve: curve,
+            curve: showing ? curve : Curves.easeOutCirc,
             child: child),
       ),
     );
