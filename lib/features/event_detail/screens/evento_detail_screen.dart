@@ -76,15 +76,25 @@ class EventDetailHeader extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: const EdgeInsets.only(top: 60),
-                      child: Text("< eventos",
-                      style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: CupertinoColors.white,
-                                  letterSpacing: -1.8),
-                            
-                        ), 
+                      Padding(padding: const EdgeInsets.only(top: 50),
+                      child: Row(
+                        children: [
+                          Text("< eventos",
+                          style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      color: CupertinoColors.white,
+                                      letterSpacing: -1.8),   
+                            ),
+                            Spacer(),
+                            Text("canetinha",
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: CupertinoColors.white,
+                            ),)
+                        ],
+                      ), 
                       ),
                       Spacer(),
                       Row(
@@ -92,7 +102,7 @@ class EventDetailHeader extends StatelessWidget {
                             Text(
                               evento.name,
                               style: TextStyle(
-                                  fontSize: 42,
+                                  fontSize: 50,
                                   fontWeight: FontWeight.bold,
                                   color: CupertinoColors.white,
                                   letterSpacing: -1.8),
