@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/screens/evento_detail_screen.dart';
 import 'package:role/features/event_list/screens/evento_list_screen.dart';
@@ -17,6 +18,11 @@ class RoleApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserLoginProvider.shared)
       ],
       child: CupertinoApp(
+        localizationsDelegates: [
+          DefaultMaterialLocalizations.delegate,
+          DefaultCupertinoLocalizations.delegate,
+          DefaultWidgetsLocalizations.delegate,
+        ],
         title: 'rolê',
         debugShowCheckedModeBanner: false,
         initialRoute: "/onboarding",
