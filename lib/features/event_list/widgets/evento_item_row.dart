@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/event_detail/screens/evento_detail_screen.dart';
 import 'package:role/models/evento.dart';
+import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 
 class EventoItemRow extends StatefulWidget {
@@ -45,21 +45,7 @@ class EventoItemRowState extends State<EventoItemRow> {
                                   fontSize: 52, fontWeight: FontWeight.bold)),
                         ),
                         Spacer(),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: CupertinoColors.white.withAlpha(30),
-                              borderRadius: BorderRadius.circular(8)),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 8.0),
-                          child: Text(
-                            "R\$ " + widget.evento.valorTotal.toString(),
-                            style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: -1.5,
-                                color: CupertinoColors.white.withAlpha(180),
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+                        ContainerText(text: "R\$ " + widget.evento.valorTotal.toString()),
                       ],
                     ),
                     Text(widget.evento.name,
