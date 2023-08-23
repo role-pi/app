@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/event_detail/screens/evento_detail_screen.dart';
 import 'package:role/models/evento.dart';
+import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 
 class EventoItemRow extends StatefulWidget {
@@ -67,34 +67,6 @@ class EventoItemRowState extends State<EventoItemRow> {
                   ],
                 )),
           )),
-    );
-  }
-}
-
-class ContainerText extends StatelessWidget {
-  const ContainerText({
-    super.key,
-    required this.text,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: CupertinoColors.white.withAlpha(30),
-          borderRadius: BorderRadius.circular(8)),
-      padding: EdgeInsets.symmetric(
-          horizontal: 16.0, vertical: 8.0),
-      child: Text(
-        text,
-        style: TextStyle(
-            fontSize: 19,
-            letterSpacing: -1.5,
-            color: CupertinoColors.white.withAlpha(180),
-            fontWeight: FontWeight.w500),
-      ),
     );
   }
 }
