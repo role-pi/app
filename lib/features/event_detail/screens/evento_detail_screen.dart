@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
-import 'package:role/features/event_list/widgets/evento_item_row.dart';
 import 'package:role/models/evento.dart';
+import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 
 class EventoDetailScreen extends StatefulWidget {
@@ -87,7 +87,7 @@ class EventDetailHeader extends StatelessWidget {
                                       letterSpacing: -1.8),   
                             ),
                             Spacer(),
-                            Text("canetinha",
+                            Text("-",
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -111,12 +111,12 @@ class EventDetailHeader extends StatelessWidget {
                           Text(
                             evento.randomEmoji,
                               style: TextStyle(
-                                  fontSize: 80,
+                                  fontSize: 72,
                                   fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
-                      ContainerText(text: "24 de Agosto"),
+                      ContainerText(text: "24 de Agosto, 22:00 — 05:00"),
                     ],
                   ),
                 )),
