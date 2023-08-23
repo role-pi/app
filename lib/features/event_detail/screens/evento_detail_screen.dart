@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_list/widgets/evento_item_row.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 
@@ -70,26 +71,28 @@ class EventDetailHeader extends StatelessWidget {
             child: GradientWidget(
                 color1: evento.randomColor1,
                 color2: evento.randomColor2,
-                child: Column(
-                  children: [
-                    Spacer(),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(32.0),
-                          child: Text(
-                            evento.name,
-                            style: TextStyle(
-                                fontSize: 42,
-                                fontWeight: FontWeight.bold,
-                                color: CupertinoColors.white,
-                                letterSpacing: -1.8),
-                          ),
-                        ),
-                        Spacer()
-                      ],
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Spacer(),
+                      Row(
+                        children: [
+                            Text(
+                              evento.name,
+                              style: TextStyle(
+                                  fontSize: 42,
+                                  fontWeight: FontWeight.bold,
+                                  color: CupertinoColors.white,
+                                  letterSpacing: -1.8),
+                            ),
+                          Spacer()
+                        ],
+                      ),
+                      ContainerText(text: "24 de Agosto"),
+                    ],
+                  ),
                 )),
           ),
           height: 300),

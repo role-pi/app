@@ -45,21 +45,7 @@ class EventoItemRowState extends State<EventoItemRow> {
                                   fontSize: 52, fontWeight: FontWeight.bold)),
                         ),
                         Spacer(),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: CupertinoColors.white.withAlpha(30),
-                              borderRadius: BorderRadius.circular(8)),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 8.0),
-                          child: Text(
-                            "R\$ " + widget.evento.valorTotal.toString(),
-                            style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: -1.5,
-                                color: CupertinoColors.white.withAlpha(180),
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+                        ContainerText(text: "R\$ " + widget.evento.valorTotal.toString()),
                       ],
                     ),
                     Text(widget.evento.name,
@@ -81,6 +67,34 @@ class EventoItemRowState extends State<EventoItemRow> {
                   ],
                 )),
           )),
+    );
+  }
+}
+
+class ContainerText extends StatelessWidget {
+  const ContainerText({
+    super.key,
+    required this.text,
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: CupertinoColors.white.withAlpha(30),
+          borderRadius: BorderRadius.circular(8)),
+      padding: EdgeInsets.symmetric(
+          horizontal: 16.0, vertical: 8.0),
+      child: Text(
+        text,
+        style: TextStyle(
+            fontSize: 19,
+            letterSpacing: -1.5,
+            color: CupertinoColors.white.withAlpha(180),
+            fontWeight: FontWeight.w500),
+      ),
     );
   }
 }
