@@ -94,6 +94,7 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
               onPressed: () async {
                 _newEventoProvider.add(_nameController.text);
                 widget.dismiss!();
+                FocusManager.instance.primaryFocus?.unfocus();
               },
             ),
           ),
