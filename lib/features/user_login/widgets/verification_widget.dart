@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/big_form_text_field.dart';
@@ -42,24 +44,38 @@ class _VerificationWidgetState extends State<VerificationWidget> {
             ),
           ),
           SizedBox(height: 30),
-          BigFormTextField(
-            controller: _codeController,
-            color: CupertinoColors.white,
-            validator: (value) {
-              if (value != null) {
-                if (value.length == 6 && int.tryParse(value) != null) {
-                  return null;
-                }
-              }
-
-              return "O código é inválido.";
-            },
-            onChanged: (value) {
-              setState(() {
-                showBack = value?.isEmpty ?? true;
-              });
-            },
-          ),
+          Material(
+              color: CupertinoColors.black,
+              child: Pinput(
+                length: 6,
+                controller: _codeController,
+                pinAnimationType: PinAnimationType.none,
+                defaultPinTheme: PinTheme(
+                  width: 56,
+                  height: 70,
+                  textStyle: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: CupertinoColors.white,
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Color.fromRGBO(255, 255, 255, 0.05)),
+                ),
+                validator: (value) {
+                  if (value != null) {
+                    if (value.length == 6 && int.tryParse(value) != null) {
+                      return null;
+                    }
+                  }
+                  return "O código é inválido.";
+                },
+                onChanged: (value) {
+                  setState(() {
+                    showBack = value.isEmpty;
+                  });
+                },
+              )),
           SizedBox(height: 25),
           RoundButton(
             onPressed: () async {
