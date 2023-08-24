@@ -78,40 +78,45 @@ class EventDetailHeader extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 50),
-                        child: Row(
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  CupertinoIcons.chevron_back,
-                                  color: CupertinoColors.white,
-                                  size: 30,
-                                ),
-                                Text(
-                                  "eventos",
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
+                        child: Opacity(
+                          opacity: 0.6,
+                          child: Row(
+                            children: [
+                              CupertinoButton(
+                                padding: EdgeInsets.zero,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      CupertinoIcons.chevron_back,
                                       color: CupertinoColors.white,
-                                      letterSpacing: -1.8),
+                                      size: 30,
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 5.0),
+                                      child: Text(
+                                        "eventos",
+                                        style: TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold,
+                                            color: CupertinoColors.white,
+                                            letterSpacing: -1.8),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            Spacer(),
-                            // Text(
-                            //   "-",
-                            //   style: TextStyle(
-                            //     fontSize: 30,
-                            //     fontWeight: FontWeight.bold,
-                            //     color: CupertinoColors.white,
-                            //   ),
-                            // )
-                            Icon(
-                              CupertinoIcons.pencil,
-                              color: CupertinoColors.white,
-                              size: 38,
-                            ),
-                          ],
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              Spacer(),
+                              Icon(
+                                CupertinoIcons.pencil,
+                                color: CupertinoColors.white,
+                                size: 38,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Spacer(),
@@ -119,7 +124,8 @@ class EventDetailHeader extends StatelessWidget {
                         children: [
                           Expanded(
                             child: FittedBox(
-                              fit: BoxFit.fitWidth,
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 evento.name,
                                 style: TextStyle(
@@ -132,7 +138,7 @@ class EventDetailHeader extends StatelessWidget {
                               ),
                             ),
                           ),
-                          // Spacer(),
+                          SizedBox(width: 16),
                           FittedBox(
                             fit: BoxFit.fitWidth,
                             child: Text(
