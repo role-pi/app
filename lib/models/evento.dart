@@ -22,6 +22,10 @@ class Evento implements JSONSerializable {
         _valorTotal = valorTotal;
 
   int get id => _id;
+
+  double? get latitude => null;
+
+  double? get longitude => null;
   set id(int value) {
     _id = value;
   }

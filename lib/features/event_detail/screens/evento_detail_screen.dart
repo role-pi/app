@@ -1,21 +1,30 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/models/evento.dart';
+import 'package:role/shared/widgets/container_text.dart';
+import 'package:role/shared/widgets/gradient_effect.dart';
 
-class EventoDetailScreen extends StatelessWidget {
-  final Evento evento;
+class EventoDetailScreen extends StatefulWidget {
+  EventoDetailScreen({required this.id}) {
+    evento = EventoListProvider.shared.evento(id);
+  }
 
-  EventoDetailScreen({required this.evento});
+  final int id;
+  late Evento evento;
 
+  @override
+  State<EventoDetailScreen> createState() => _EventoDetailScreenState();
+}
+
+class _EventoDetailScreenState extends State<EventoDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: [
           SliverPersistentHeader(
-            pinned: false,
-            delegate: EventoDetailHeaderDelegate(evento: evento),
-          ),
+              pinned: false,
+              delegate: EventoDetailHeaderDelegate(evento: widget.evento)),
         ],
       ),
     );
@@ -23,16 +32,13 @@ class EventoDetailScreen extends StatelessWidget {
 }
 
 class EventoDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final Evento evento;
-
   EventoDetailHeaderDelegate({required this.evento});
+
+  final Evento evento;
 
   @override
   Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return EventDetailHeader(evento: evento);
   }
 
@@ -49,20 +55,20 @@ class EventoDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class EventDetailHeader extends StatelessWidget {
-  final Evento evento;
+  const EventDetailHeader({
+    super.key,
+    required this.evento,
+  });
 
-  EventDetailHeader({required this.evento});
+  final Evento evento;
 
   @override
   Widget build(BuildContext context) {
     return ClipPath(
       clipper: _CustomClipper(),
       child: SizedBox(
-        height: 300,
-        child: Stack(
-          children: [
-            Container(
-              child: GradientWidget(
+          child: Container(
+            child: GradientWidget(
                 color1: evento.randomColor1,
                 color2: evento.randomColor2,
                 child: Padding(
@@ -77,11 +83,10 @@ class EventDetailHeader extends StatelessWidget {
                             Text(
                               "< eventos",
                               style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: CupertinoColors.white,
-                                letterSpacing: -1.8,
-                              ),
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: CupertinoColors.white,
+                                  letterSpacing: -1.8),
                             ),
                             Spacer(),
                             Text(
@@ -91,7 +96,7 @@ class EventDetailHeader extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: CupertinoColors.white,
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -101,73 +106,34 @@ class EventDetailHeader extends StatelessWidget {
                           Text(
                             evento.name,
                             style: TextStyle(
-                              fontSize: 50,
-                              fontWeight: FontWeight.bold,
-                              color: CupertinoColors.white,
-                              letterSpacing: -1.8,
-                            ),
+                                fontSize: 50,
+                                fontWeight: FontWeight.bold,
+                                color: CupertinoColors.white,
+                                letterSpacing: -1.8),
                           ),
                           Spacer(),
                           Text(
                             evento.randomEmoji,
                             style: TextStyle(
-                              fontSize: 72,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                                fontSize: 72, fontWeight: FontWeight.bold),
+                          )
                         ],
                       ),
                       ContainerText(text: "24 de Agosto, 22:00 — 05:00"),
                     ],
                   ),
-                ),
-              ),
-              height: 300,
-            ),
-            Positioned.fill(
-              child: FlutterMap(
-                options: MapOptions(
-                  center: LatLng(evento.latitude, evento.longitude),
-                  zoom: 15.0,
-                ),
-                layers: [
-                  TileLayerOptions(
-                    urlTemplate:
-                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                    subdomains: ['a', 'b', 'c'],
-                  ),
-                  MarkerLayerOptions(
-                    markers: [
-                      Marker(
-                        width: 45.0,
-                        height: 45.0,
-                        point: LatLng(evento.latitude, evento.longitude),
-                        builder: (ctx) => Container(),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+                )),
+          ),
+          height: 300),
     );
   }
-
-  _CustomClipper _CustomClipper() => _CustomClipper();
-
-  TileLayerOptions(
-      {required String urlTemplate, required List<String> subdomains}) {}
-
-  MarkerLayerOptions({required List<Marker> markers}) {}
 }
 
 class _CustomClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
-    final cornerRadius = 12.0;
+    final cornerRadius = 12.0; // Adjust this value for the corner radius
 
     path.moveTo(0, 0);
     path.lineTo(size.width, 0);
@@ -190,82 +156,4 @@ class _CustomClipper extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
     return false;
   }
-}
-
-class GradientWidget extends StatelessWidget {
-  final Color color1;
-  final Color color2;
-  final Widget child;
-
-  GradientWidget({
-    required this.color1,
-    required this.color2,
-    required this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [color1, color2],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      child: child,
-    );
-  }
-}
-
-class Evento {
-  final String name;
-  final Color randomColor1;
-  final Color randomColor2;
-  final String randomEmoji;
-  final double latitude;
-  final double longitude;
-
-  Evento({
-    required this.name,
-    required this.randomColor1,
-    required this.randomColor2,
-    required this.randomEmoji,
-    required this.latitude,
-    required this.longitude,
-  });
-}
-
-class ContainerText extends StatelessWidget {
-  final String text;
-
-  ContainerText({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 16.0),
-      ),
-    );
-  }
-}
-
-void main() {
-  runApp(
-    CupertinoApp(
-      home: EventoDetailScreen(
-        evento: Evento(
-          name: "Nome do Evento",
-          randomColor1: Colors.blue,
-          randomColor2: Colors.green,
-          randomEmoji: "🎉",
-          latitude: -23.550520,
-          longitude: -46.633308,
-        ),
-      ),
-    ),
-  );
 }
