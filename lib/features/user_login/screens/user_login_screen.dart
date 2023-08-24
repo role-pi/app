@@ -18,13 +18,16 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
     loginProvider.tryAuthentication(() => Navigator.pushNamed(context, "/"));
 
     if (loginProvider.state == LoginState.loggedOut) {
-      return CupertinoPageScaffold(
+      return WillPopScope(
+        onWillPop: () async => false,
+        child: CupertinoPageScaffold(
         child: Center(
             child: CupertinoActivityIndicator(
           radius: 20,
           color: CupertinoColors.black,
         )),
         backgroundColor: CupertinoColors.white,
+      )
       );
     } else {
       return CupertinoTheme(
@@ -32,6 +35,8 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
           brightness: Brightness.dark,
           primaryColor: CupertinoColors.white,
         ),
+        child: WillPopScope(
+        onWillPop: () async => false,
         child: CupertinoPageScaffold(
           child: Stack(
             alignment: Alignment.center,
@@ -79,6 +84,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
           ),
           backgroundColor: Color.fromARGB(255, 0, 0, 0),
         ),
+      )
       );
     }
   }
