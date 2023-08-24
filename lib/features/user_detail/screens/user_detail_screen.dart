@@ -23,6 +23,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         child: RoundButton(
           onPressed: () async {
             UserLoginProvider.shared.logout();
+            Navigator.pushNamed(context, "user_login_screen.dart");
           },
           rectangleColor: CupertinoColors.systemRed,
           textColor: CupertinoColors.white,
