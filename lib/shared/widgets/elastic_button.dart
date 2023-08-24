@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 
 class ElasticButton extends StatefulWidget {
   Widget child;
@@ -22,6 +23,7 @@ class _ElasticButtonState extends State<ElasticButton> {
         setState(() {
           isPressed = true;
         });
+        HapticFeedback.mediumImpact();
       },
       onTapUp: (_) {
         setState(() {
