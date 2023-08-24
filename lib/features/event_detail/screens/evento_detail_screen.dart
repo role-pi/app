@@ -80,43 +80,67 @@ class EventDetailHeader extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 50),
                         child: Row(
                           children: [
-                            Text(
-                              "< eventos",
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
+                            Row(
+                              children: [
+                                Icon(
+                                  CupertinoIcons.chevron_back,
                                   color: CupertinoColors.white,
-                                  letterSpacing: -1.8),
+                                  size: 30,
+                                ),
+                                Text(
+                                  "eventos",
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      color: CupertinoColors.white,
+                                      letterSpacing: -1.8),
+                                ),
+                              ],
                             ),
                             Spacer(),
-                            Text(
-                              "-",
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: CupertinoColors.white,
-                              ),
-                            )
+                            // Text(
+                            //   "-",
+                            //   style: TextStyle(
+                            //     fontSize: 30,
+                            //     fontWeight: FontWeight.bold,
+                            //     color: CupertinoColors.white,
+                            //   ),
+                            // )
+                            Icon(
+                              CupertinoIcons.pencil,
+                              color: CupertinoColors.white,
+                              size: 38,
+                            ),
                           ],
                         ),
                       ),
                       Spacer(),
                       Row(
                         children: [
-                          Text(
-                            evento.name,
-                            style: TextStyle(
-                                fontSize: 50,
-                                fontWeight: FontWeight.bold,
-                                color: CupertinoColors.white,
-                                letterSpacing: -1.8),
+                          Expanded(
+                            child: FittedBox(
+                              fit: BoxFit.fitWidth,
+                              child: Text(
+                                evento.name,
+                                style: TextStyle(
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.bold,
+                                    color: CupertinoColors.white,
+                                    letterSpacing: -1.8),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ),
-                          Spacer(),
-                          Text(
-                            evento.randomEmoji,
-                            style: TextStyle(
-                                fontSize: 72, fontWeight: FontWeight.bold),
-                          )
+                          // Spacer(),
+                          FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Text(
+                              evento.randomEmoji,
+                              style: TextStyle(
+                                  fontSize: 72, fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ],
                       ),
                       ContainerText(text: "24 de Agosto, 22:00 — 05:00"),
