@@ -28,7 +28,10 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
     return IgnorePointer(
       ignoring: !widget.showing,
       child: GestureDetector(
-        onTap: widget.dismiss,
+        onTap: () {
+          widget.dismiss!();
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
         child: ClipRect(
           child: TweenAnimationBuilder<double>(
             tween: Tween<double>(
@@ -93,6 +96,7 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
               text: "criar evento",
               onPressed: () async {
                 _newEventoProvider.add(_nameController.text);
+                _nameController.clear();
                 widget.dismiss!();
                 FocusManager.instance.primaryFocus?.unfocus();
               },
