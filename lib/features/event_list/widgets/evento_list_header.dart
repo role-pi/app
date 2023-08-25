@@ -3,6 +3,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/screens/user_detail_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
@@ -40,14 +41,14 @@ class HomeHeader extends StatelessWidget {
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
                     letterSpacing: -1.5,
-                    color: textColor.withOpacity(0.5)),
+                    color: textColor.withOpacity(0.25)),
               ),
             ),
           ],
         ),
         Spacer(),
         // Gray circle sized to fit
-        GestureDetector(
+        ElasticButton(
           onTap: () => {
             showCupertinoModalBottomSheet(
               context: context,
@@ -59,7 +60,7 @@ class HomeHeader extends StatelessWidget {
               loginProvider.user?.profilePhoto ??
                   "https://pbs.twimg.com/profile_images/1685715309615878144/JG6PlTn5_400x400.jpg",
               fit: BoxFit.cover,
-              width: 64,
+              width: 58,
             ),
           ),
         )

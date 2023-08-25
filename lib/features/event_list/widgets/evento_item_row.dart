@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/container_text.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 
 class EventoItemRow extends StatefulWidget {
@@ -15,7 +16,7 @@ class EventoItemRow extends StatefulWidget {
 class EventoItemRowState extends State<EventoItemRow> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return ElasticButton(
       onTap: () {
         Navigator.pushNamed(
           context,
@@ -45,7 +46,8 @@ class EventoItemRowState extends State<EventoItemRow> {
                                   fontSize: 52, fontWeight: FontWeight.bold)),
                         ),
                         Spacer(),
-                        ContainerText(text: "R\$ " + widget.evento.valorTotal.toString()),
+                        ContainerText(
+                            text: "R\$ " + widget.evento.valorTotal.toString()),
                       ],
                     ),
                     Text(widget.evento.name,
