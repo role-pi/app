@@ -92,7 +92,7 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
                   fontSize: 27,
                   fontWeight: FontWeight.bold,
                   letterSpacing: -1.5,
-                  color: CupertinoColors.black.withOpacity(0.95),
+                  color: CupertinoColors.black.withOpacity(0.8),
                 ),
               )
             ],
@@ -115,7 +115,7 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: RoundButton(
               text: "criar",
-              rectangleColor: CupertinoColors.black.withOpacity(0.95),
+              rectangleColor: CupertinoColors.black.withOpacity(0.8),
               onPressed: onSubmit,
             ),
           ),

@@ -27,26 +27,26 @@ class EventsList extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 48),
+          padding: const EdgeInsets.only(top: 68),
           child: CustomScrollView(slivers: [
             CupertinoSliverRefreshControl(onRefresh: () async {
               await usersViewModel.get();
             }),
             SliverPadding(
-              padding: EdgeInsets.only(bottom: 138.0),
+              padding: EdgeInsets.only(bottom: 138.0, top: 8.0),
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
                   if (index == 0) {
                     // Align to the left
                     return Padding(
-                      padding: const EdgeInsets.fromLTRB(38, 38, 38, 12),
+                      padding: const EdgeInsets.fromLTRB(36, 36, 38, 16),
                       child: HomeHeader(),
                     );
                   } else {
                     Evento evento = usersViewModel.eventos[index - 1];
                     return Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 4.0),
+                          horizontal: 28.0, vertical: 4.0),
                       child: EventoItemRow(
                         evento: evento,
                       ),
