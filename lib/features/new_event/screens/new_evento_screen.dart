@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -18,7 +19,9 @@ class NewEventoScreen extends StatefulWidget {
 class _NewEventoScreenState extends State<NewEventoScreen> {
   Duration duration = Duration(milliseconds: 200);
   Curve curve = Curves.easeInOutQuad;
+  bool enabled = false;
 
+  final _formKey = GlobalKey<FormState>();
   final _newEventoProvider = NewEventoProvider();
 
   final _nameController = TextEditingController();
@@ -35,33 +38,34 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
         child: ClipRect(
           child: TweenAnimationBuilder<double>(
             tween: Tween<double>(
-                begin: widget.showing ? 0 : 16, end: widget.showing ? 16 : 0),
+                begin: widget.showing ? 0 : 1, end: widget.showing ? 1 : 0),
             duration: duration,
             curve: curve,
             builder: (_, value, __) {
               return BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaX: value,
-                  sigmaY: value,
+                  sigmaX: value * 16,
+                  sigmaY: value * 16,
                 ),
                 child: Stack(
                   children: [
-                    AnimatedOpacity(
-                      opacity: widget.showing ? 0.6 : 0.0,
-                      duration: duration,
-                      curve: curve,
+                    Opacity(
+                      opacity: value * 0.6,
                       child: Container(
                         decoration: BoxDecoration(
                           color: CupertinoColors.systemBackground,
                         ),
                       ),
                     ),
-                    AnimatedOpacity(
-                      opacity: widget.showing ? 1.0 : 0.0,
-                      duration: duration,
-                      curve: curve,
-                      child: Center(
-                        child: content(),
+                    Transform(
+                      transform:
+                          Matrix4.translationValues(0, (1 - value) * 12, 0),
+                      child: Opacity(
+                        opacity: value,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 48),
+                          child: _buildForm(),
+                        ),
                       ),
                     ),
                   ],
@@ -74,37 +78,57 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
     );
   }
 
-  Widget content() {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
+  Widget _buildForm() {
+    return Form(
+      key: _formKey,
       child: Column(
         children: [
           Spacer(),
+          Row(
+            children: [
+              Text(
+                "novo evento",
+                style: TextStyle(
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -1.5,
+                  color: CupertinoColors.black.withOpacity(0.95),
+                ),
+              )
+            ],
+          ),
+          SizedBox(height: 24.0),
           BigFormTextField(
             controller: _nameController,
-            color: CupertinoColors.black,
-            // onChanged: (value) {
-            //   setState(() {
-            //     showBack = value?.isEmpty ?? true;
-            //   });
-            // },
+            color: CupertinoColors.black.withOpacity(0.5),
+            onChanged: (value) {
+              // setState(() {
+              //   enabled = !value?.isEmpty ?? false;
+              // });
+            },
+            onFieldSubmitted: (_) {
+              onSubmit();
+            },
           ),
-          SizedBox(height: 16.0),
+          SizedBox(height: 24.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: RoundButton(
-              text: "criar evento",
-              onPressed: () async {
-                _newEventoProvider.add(_nameController.text);
-                _nameController.clear();
-                widget.dismiss!();
-                FocusManager.instance.primaryFocus?.unfocus();
-              },
+              text: "criar",
+              rectangleColor: CupertinoColors.black.withOpacity(0.95),
+              onPressed: onSubmit,
             ),
           ),
           Spacer(),
         ],
       ),
     );
+  }
+
+  void onSubmit() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    await _newEventoProvider.add(_nameController.text);
+    _nameController.clear();
+    widget.dismiss!();
   }
 }

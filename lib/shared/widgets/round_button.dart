@@ -17,22 +17,20 @@ class RoundButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElasticButton(
-        child: CupertinoButton(
-          onPressed: onPressed,
+        child: Container(
+          width: double.infinity,
           padding: EdgeInsets.symmetric(vertical: 16),
-          borderRadius: BorderRadius.circular(16),
-          color: rectangleColor, //.withAlpha(150),
-          child: Container(
-            width: double.infinity, // Expand horizontally
-            child: Center(
-              child: Text(
-                text,
-                style: TextStyle(
-                  color: textColor, //.withAlpha(200),
-                  fontSize: 24,
-                  letterSpacing: -1.5,
-                  fontWeight: FontWeight.bold,
-                ),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: rectangleColor), // Expand horizontally
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(
+                color: textColor, //.withAlpha(200),
+                fontSize: 24,
+                letterSpacing: -1.5,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
