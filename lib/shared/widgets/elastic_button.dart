@@ -41,7 +41,7 @@ class _ElasticButtonState extends State<ElasticButton> {
       child: AnimatedScale(
           duration: Duration(milliseconds: 300),
           curve: Curves.easeOutQuart,
-          scale: isPressed ? 0.985 : 1.0,
+          scale: isPressed ? 0.925 : 1.0,
           child: widget.child),
     );
   }
