@@ -84,10 +84,13 @@ class OverlayAction extends StatelessWidget {
                 duration: Duration(milliseconds: 200),
                 opacity: value.evento.name.isEmpty ? 1 : 0,
                 child: NewEventoName()),
-            AnimatedOpacity(
-                duration: Duration(milliseconds: 200),
-                opacity: value.evento.name.isEmpty ? 0 : 1,
-                child: NewEventoTheme()),
+            IgnorePointer(
+              ignoring: value.evento.name.isEmpty,
+              child: AnimatedOpacity(
+                  duration: Duration(milliseconds: 200),
+                  opacity: value.evento.name.isEmpty ? 0 : 1,
+                  child: NewEventoTheme()),
+            ),
           ],
         );
       },

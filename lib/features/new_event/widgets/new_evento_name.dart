@@ -57,7 +57,6 @@ class _NewEventoNameState extends State<NewEventoName> {
               text: "continuar",
               rectangleColor: CupertinoColors.black.withOpacity(0.8),
               onPressed: () {
-                print("SETAR NOME" + _nameController.text);
                 _newEventoProvider.setName(_nameController.text);
               },
               // onPressed: onSubmit,
