@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/repository/evento_repository.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
-import 'package:role/features/new_event/widgets/new_evento_theme.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/models/evento_theme.dart';
-import 'package:role/shared/utils/api_status.dart';
 
 class NewEventoProvider extends ChangeNotifier {
   bool _loading = false;
@@ -46,7 +44,7 @@ class NewEventoProvider extends ChangeNotifier {
 
   create() async {
     loading = true;
-    var response = await eventoRepository.addEvento(evento.name);
+    var response = await eventoRepository.addEvento(evento);
 
     if (response != null) {
       showing = false;
