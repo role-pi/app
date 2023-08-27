@@ -40,8 +40,10 @@ class EventoTheme {
   ];
 
   String get emoji => _emoji ?? "";
-  Color get color1 => _color1 ?? CupertinoColors.systemGrey5;
-  Color get color2 => _color2 ?? CupertinoColors.systemGrey5;
+  Color get accentColor =>
+      _color1 == null ? CupertinoColors.systemGrey5 : CupertinoColors.black;
+  Color get color1 => _color1 ?? CupertinoColors.systemGrey5.withOpacity(0.2);
+  Color get color2 => _color2 ?? CupertinoColors.systemGrey5.withOpacity(0.2);
 }
 
 extension HexColor on Color {

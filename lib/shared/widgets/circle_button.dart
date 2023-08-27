@@ -28,8 +28,8 @@ class _CircleButtonState extends State<CircleButton> {
         child: ClipOval(
           child: BackdropFilter(
             filter: ImageFilter.blur(
-              sigmaX: 10.0,
-              sigmaY: 10.0,
+              sigmaX: 6.0,
+              sigmaY: 6.0,
             ),
             child: Container(
               child: Center(

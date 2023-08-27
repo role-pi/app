@@ -88,7 +88,7 @@ class EventDetailHeader extends StatelessWidget {
                                   children: [
                                     Icon(
                                       CupertinoIcons.chevron_back,
-                                      color: CupertinoColors.white,
+                                      color: CupertinoColors.black,
                                       size: 30,
                                     ),
                                     Padding(
@@ -99,7 +99,7 @@ class EventDetailHeader extends StatelessWidget {
                                         style: TextStyle(
                                             fontSize: 30,
                                             fontWeight: FontWeight.bold,
-                                            color: CupertinoColors.white,
+                                            color: CupertinoColors.black,
                                             letterSpacing: -1.8),
                                       ),
                                     ),
@@ -112,7 +112,7 @@ class EventDetailHeader extends StatelessWidget {
                               Spacer(),
                               Icon(
                                 CupertinoIcons.pencil,
-                                color: CupertinoColors.white,
+                                color: CupertinoColors.black,
                                 size: 38,
                               ),
                             ],
@@ -131,7 +131,7 @@ class EventDetailHeader extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 50,
                                     fontWeight: FontWeight.bold,
-                                    color: CupertinoColors.white,
+                                    color: CupertinoColors.black,
                                     letterSpacing: -1.8),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,

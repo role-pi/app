@@ -32,18 +32,6 @@ class HomeHeader extends StatelessWidget {
                   height: 46),
               alignment: Alignment.centerLeft,
             ),
-            // SizedBox(height: 12),
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 2.0),
-            //   child: Text(
-            //     "próximos eventos",
-            //     style: TextStyle(
-            //         fontSize: 26,
-            //         fontWeight: FontWeight.bold,
-            //         letterSpacing: -1.5,
-            //         color: textColor.withOpacity(0.25)),
-            //   ),
-            // ),
           ],
         ),
         Spacer(),
