@@ -15,7 +15,7 @@ class EventoListProvider extends ChangeNotifier {
   static final EventoListProvider shared = EventoListProvider();
 
   EventoListProvider() {
-    get();
+    // get();
   }
 
   setLoading(bool loading) async {

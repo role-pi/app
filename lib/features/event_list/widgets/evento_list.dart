@@ -37,22 +37,50 @@ class EventsList extends StatelessWidget {
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
                   if (index == 0) {
-                    // Align to the left
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(36, 36, 38, 16),
                       child: HomeHeader(),
                     );
                   } else {
-                    Evento evento = usersViewModel.eventos[index - 1];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 28.0, vertical: 4.0),
-                      child: EventoItemRow(
-                        evento: evento,
-                      ),
-                    );
+                    if (usersViewModel.eventos.length == 0) {
+                      return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 28.0, vertical: 4.0),
+                          child: Opacity(
+                              opacity: 0.5,
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: CupertinoColors.systemGrey6,
+                                      border: Border.all(
+                                          color: CupertinoColors.systemGrey5,
+                                          width: 4),
+                                      borderRadius: BorderRadius.circular(18)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 32, horizontal: 48),
+                                    child: Text(
+                                      "crie um evento com o botão de estrela logo abaixo",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ))));
+                    } else {
+                      Evento evento = usersViewModel.eventos[index - 1];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 28.0, vertical: 4.0),
+                        child: EventoItemRow(
+                          evento: evento,
+                        ),
+                      );
+                    }
                   }
-                }, childCount: usersViewModel.eventos.length + 1),
+                },
+                    childCount: (usersViewModel.eventos.length == 0
+                            ? 1
+                            : usersViewModel.eventos.length) +
+                        1),
               ),
             )
           ]),
