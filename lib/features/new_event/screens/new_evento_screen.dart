@@ -6,9 +6,6 @@ import 'package:role/features/new_event/widgets/new_evento_name.dart';
 import 'package:role/features/new_event/widgets/new_evento_theme.dart';
 
 class NewEventoScreen extends StatelessWidget {
-  Duration duration = Duration(milliseconds: 200);
-  Curve curve = Curves.easeInOutQuad;
-
   @override
   Widget build(BuildContext context) {
     return Consumer<NewEventoProvider>(builder: (context, provider, child) {
@@ -23,8 +20,8 @@ class NewEventoScreen extends StatelessWidget {
               tween: Tween<double>(
                   begin: provider.showing ? 0 : 1,
                   end: provider.showing ? 1 : 0),
-              duration: duration,
-              curve: curve,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOutQuad,
               builder: (_, value, __) {
                 return BackdropFilter(
                   filter: ImageFilter.blur(
@@ -53,10 +50,14 @@ class NewEventoScreen extends StatelessWidget {
                                   duration: Duration(milliseconds: 200),
                                   opacity: provider.evento.name.isEmpty ? 1 : 0,
                                   child: NewEventoName()),
-                              AnimatedOpacity(
-                                  duration: Duration(milliseconds: 200),
-                                  opacity: provider.evento.name.isEmpty ? 0 : 1,
-                                  child: NewEventoTheme()),
+                              IgnorePointer(
+                                ignoring: provider.evento.name.isEmpty,
+                                child: AnimatedOpacity(
+                                    duration: Duration(milliseconds: 200),
+                                    opacity:
+                                        provider.evento.name.isEmpty ? 0 : 1,
+                                    child: NewEventoTheme()),
+                              ),
                             ]),
                           ),
                         ),

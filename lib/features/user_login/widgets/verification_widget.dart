@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
-import 'package:role/shared/widgets/big_form_text_field.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class VerificationWidget extends StatefulWidget {

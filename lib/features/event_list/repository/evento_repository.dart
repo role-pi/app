@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:role/models/evento_theme.dart';
+
 import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
 import '../../../models/evento.dart';
@@ -8,7 +10,6 @@ class EventoRepository {
   Future<List<Evento>> getEventos() async {
     var response = await API().get("evento");
     if (response is Success) {
-      print(response.response);
       return eventosFromJSON(response.response as String);
     }
     if (response is Failure) {
@@ -18,9 +19,12 @@ class EventoRepository {
     return [];
   }
 
-  Future<int?> addEvento(String nome) async {
+  Future<int?> addEvento(Evento evento) async {
     var response = await API().post("evento", {
-      "nome": nome,
+      "nome": evento.name,
+      "emoji": evento.theme.emoji,
+      "cor1": evento.theme.color1.toHex(),
+      "cor2": evento.theme.color2.toHex(),
     });
 
     if (response is Success) {

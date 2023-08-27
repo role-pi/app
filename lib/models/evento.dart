@@ -71,7 +71,7 @@ class Evento implements JSONSerializable {
           json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
       valorTotal: double.parse(json["valor_total"]),
       theme: EventoTheme.fromHex(
-          emoji: json["emoji"], hex1: json["cor1"], hex2: json["cor2"]));
+          emoji: json["emoji"], hex1: json["cor_1"], hex2: json["cor_2"]));
 
   @override
   Map<String, dynamic> toJson() => {
@@ -85,14 +85,4 @@ class Evento implements JSONSerializable {
   String get emoji => theme.emoji;
   Color get color1 => theme.color1;
   Color get color2 => theme.color2;
-}
-
-Color generateRandomColor() {
-  Random random = Random();
-  return Color.fromARGB(
-    255, // Set the alpha value to 255 for full opacity
-    random.nextInt(256), // Red value (0-255)
-    random.nextInt(256), // Green value (0-255)
-    random.nextInt(256), // Blue value (0-255)
-  );
 }
