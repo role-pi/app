@@ -75,7 +75,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                                   });
                                 },
                               ),
-                              showing: loginProvider.state != LoginState.signIn,
+                              showing: loginProvider.state == LoginState.verify,
                               reversed: true)
                         ],
                       )),

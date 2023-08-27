@@ -10,7 +10,7 @@ class Evento implements JSONSerializable {
   DateTime? _dataInicio;
   DateTime? _dataFim;
   double? _valorTotal;
-  EventoTheme? _theme;
+  EventoTheme _theme;
 
   Evento({
     required int id,
@@ -24,7 +24,7 @@ class Evento implements JSONSerializable {
         _dataInicio = dataInicio,
         _dataFim = dataFim,
         _valorTotal = valorTotal,
-        _theme = theme;
+        _theme = theme ?? EventoTheme.random();
 
   int get id => _id;
 
@@ -55,22 +55,23 @@ class Evento implements JSONSerializable {
     _valorTotal = value;
   }
 
-  EventoTheme? get theme => _theme;
-  set theme(EventoTheme? value) {
+  EventoTheme get theme => _theme;
+  set theme(EventoTheme value) {
     _theme = value;
   }
 
   @override
   factory Evento.fromJson(Map<String, dynamic> json) => Evento(
-        id: json["id_evento"],
-        name: json["nome"],
-        dataInicio: json["data_inicio"] != null
-            ? DateTime.parse(json["data_inicio"])
-            : null,
-        dataFim:
-            json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
-        valorTotal: double.parse(json["valor_total"]),
-      );
+      id: json["id_evento"],
+      name: json["nome"],
+      dataInicio: json["data_inicio"] != null
+          ? DateTime.parse(json["data_inicio"])
+          : null,
+      dataFim:
+          json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
+      valorTotal: double.parse(json["valor_total"]),
+      theme: EventoTheme.fromHex(
+          emoji: json["emoji"], hex1: json["cor1"], hex2: json["cor2"]));
 
   @override
   Map<String, dynamic> toJson() => {
@@ -81,22 +82,9 @@ class Evento implements JSONSerializable {
         "valorTotal": valorTotal,
       };
 
-  static List<String> emojiPool = [
-    '🎉',
-    '🎊',
-    '🎈',
-    '🎁',
-    '🎂',
-    '🎄',
-    '🎃',
-    '🎆',
-    '✨',
-    '🪩'
-  ];
-
-  String randomEmoji = emojiPool[Random().nextInt(emojiPool.length)];
-  Color randomColor1 = generateRandomColor();
-  Color randomColor2 = generateRandomColor();
+  String get emoji => theme.emoji;
+  Color get color1 => theme.color1;
+  Color get color2 => theme.color2;
 }
 
 Color generateRandomColor() {

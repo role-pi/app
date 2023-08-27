@@ -8,10 +8,7 @@ import 'package:role/shared/utils/api_status.dart';
 
 class NewEventoProvider extends ChangeNotifier {
   bool _loading = false;
-  bool get loading => _loading;
-
   bool _showing = false;
-  bool get showing => _showing;
 
   Evento evento = Evento(id: 0, name: "");
 
@@ -19,17 +16,21 @@ class NewEventoProvider extends ChangeNotifier {
 
   static final NewEventoProvider shared = NewEventoProvider();
 
-  setLoading(bool loading) async {
+  bool get loading => _loading;
+  set loading(bool loading) {
     _loading = loading;
     notifyListeners();
   }
 
-  setUserError(Failure userError) {
-    // _userError = userError;
-  }
-
-  setShowing(bool showing) {
+  bool get showing => _showing;
+  set showing(bool showing) {
     _showing = showing;
+    if (showing) {
+      evento = Evento(id: 0, name: "");
+    } else {
+      EventoListProvider.shared.get();
+      FocusManager.instance.primaryFocus?.unfocus();
+    }
     notifyListeners();
   }
 
@@ -44,14 +45,12 @@ class NewEventoProvider extends ChangeNotifier {
   }
 
   create() async {
-    setLoading(true);
+    loading = true;
     var response = await eventoRepository.addEvento(evento.name);
-    if (response is Success) {
-      await EventoListProvider.shared.get();
-      setShowing(false);
-    } else if (response is Failure) {
-      // setUserError(response);
+
+    if (response != null) {
+      showing = false;
     }
-    setLoading(false);
+    loading = false;
   }
 }

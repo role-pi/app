@@ -57,12 +57,13 @@ class UserLoginProvider extends ChangeNotifier {
         print(response.errorResponse);
         notifyListeners();
       }
+
+      // setState(LoginState.signIn);
     }
   }
 
   Future<void> trySignUp(email, callback) async {
     if (state == LoginState.signIn) {
-      setState(LoginState.signingIn);
       var response = await API().post("usuario/signin", {"email": email});
 
       if (response is Success) {
@@ -119,8 +120,6 @@ enum LoginState {
   loggedOut,
   loggingIn,
   signIn,
-  signingIn,
   verify,
-  verifying,
   loggedIn,
 }

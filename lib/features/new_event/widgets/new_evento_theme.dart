@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/new_event/providers/new_evento_provider.dart';
-import 'package:role/features/new_event/screens/emoji_evento_screen.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/models/evento_theme.dart';
-import 'package:role/shared/widgets/big_form_text_field.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
@@ -20,7 +18,7 @@ class _NewEventoThemeState extends State<NewEventoTheme> {
   @override
   Widget build(BuildContext context) {
     return Consumer<NewEventoProvider>(
-      builder: (context, value, child) {
+      builder: (context, provider, child) {
         return Form(
           key: _formKey,
           child: Column(
@@ -40,13 +38,12 @@ class _NewEventoThemeState extends State<NewEventoTheme> {
                   )
                 ],
               ),
-              SingleChildScrollView(
-                child: SizedBox(
-                  child: SquareGrid(
-                    event: value.evento,
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   height: 400,
+              //   child: SquareGrid(
+              //     event: provider.evento,
+              //   ),
+              // ),
               SizedBox(height: 24.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -54,7 +51,7 @@ class _NewEventoThemeState extends State<NewEventoTheme> {
                   text: "criar",
                   rectangleColor: CupertinoColors.black.withOpacity(0.8),
                   onPressed: () {
-                    value.create();
+                    provider.create();
                   },
                 ),
               ),
@@ -73,7 +70,10 @@ class SquareGrid extends StatelessWidget {
   SquareGrid({Key? key, required this.event}) : super(key: key);
 
   final List<EventoTheme> defaultThemes = [
-    EventoTheme(emoji: "😀", color1: Colors.blue, color2: Colors.lightBlue),
+    EventoTheme(
+        emoji: "😀",
+        color1: CupertinoColors.systemBlue,
+        color2: CupertinoColors.systemBlue),
     EventoTheme(emoji: "🌞", color1: Colors.yellow, color2: Colors.orange),
     EventoTheme(emoji: "🌈", color1: Colors.red, color2: Colors.purple),
     EventoTheme(emoji: "🍀", color1: Colors.green, color2: Colors.teal),
@@ -121,6 +121,8 @@ class ThemeGridItem extends StatelessWidget {
   final Evento event;
   final EventoTheme theme;
 
+  bool get selected => event.theme == theme;
+
   @override
   Widget build(BuildContext context) {
     NewEventoProvider _newEventoProvider =
@@ -133,14 +135,14 @@ class ThemeGridItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            gradient: event.theme == theme
+            gradient: selected
                 ? LinearGradient(
                     colors: [theme.color1, theme.color2],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   )
                 : null,
-            color: CupertinoColors.white.withOpacity(0.25)),
+            color: selected ? null : CupertinoColors.white.withOpacity(0.25)),
         child: Center(
           child: Text(
             theme.emoji,

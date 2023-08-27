@@ -18,13 +18,14 @@ class EventoRepository {
     return [];
   }
 
-  Future<Evento?> addEvento(String nome) async {
+  Future<int?> addEvento(String nome) async {
     var response = await API().post("evento", {
       "nome": nome,
     });
 
     if (response is Success) {
-      // Map decoded = json.decode(response.response as String);
+      Map decoded = json.decode(response.response as String);
+      return decoded["insertId"];
     }
     return null;
   }
