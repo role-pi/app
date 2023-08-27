@@ -4,16 +4,12 @@ import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 
-class EventoItemRow extends StatefulWidget {
+class EventoItemRow extends StatelessWidget {
   EventoItemRow({required this.evento, this.onTap});
 
   final Evento evento;
   final Function()? onTap;
-  @override
-  State<EventoItemRow> createState() => EventoItemRowState();
-}
 
-class EventoItemRowState extends State<EventoItemRow> {
   @override
   Widget build(BuildContext context) {
     return ElasticButton(
@@ -21,14 +17,14 @@ class EventoItemRowState extends State<EventoItemRow> {
         Navigator.pushNamed(
           context,
           "/evento",
-          arguments: widget.evento.id,
+          arguments: evento.id,
         );
       },
       child: ClipRRect(
           borderRadius: BorderRadius.circular(18),
           child: GradientWidget(
-            color1: widget.evento.color1,
-            color2: widget.evento.color2,
+            color1: evento.color1,
+            color2: evento.color2,
             child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -39,33 +35,36 @@ class EventoItemRowState extends State<EventoItemRow> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(widget.evento.emoji,
-                              style: TextStyle(
-                                  fontSize: 52, fontWeight: FontWeight.bold)),
-                        ),
+                        evento.emoji.isNotEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(evento.emoji,
+                                    style: TextStyle(
+                                        fontSize: 52,
+                                        fontWeight: FontWeight.bold)),
+                              )
+                            : SizedBox(height: 60),
                         Spacer(),
                         ContainerText(
-                            text: "R\$ " + widget.evento.valorTotal.toString()),
+                            text: "R\$ " + evento.valorTotal.toString()),
                       ],
                     ),
-                    Text(widget.evento.name,
+                    Text(evento.name,
                         style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
                             letterSpacing: -1.5,
-                            color: CupertinoColors.white.withAlpha(200))),
+                            color: evento.theme.accentColor.withAlpha(200))),
                     Text(
-                        widget.evento.name == "Demonstração do PI"
+                        evento.name == "Demonstração do PI"
                             ? "Hoje"
-                            : widget.evento.name == "Primeira entrega"
+                            : evento.name == "Primeira entrega"
                                 ? "em 14 dias"
                                 : "em 101 dias",
                         style: TextStyle(
                             fontSize: 22,
                             letterSpacing: -1.5,
-                            color: CupertinoColors.white.withAlpha(150))),
+                            color: evento.theme.accentColor.withAlpha(150))),
                   ],
                 )),
           )),
