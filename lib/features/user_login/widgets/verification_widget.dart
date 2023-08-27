@@ -80,7 +80,7 @@ class _VerificationWidgetState extends State<VerificationWidget> {
           RoundButton(
             onPressed: () async {
               if (showBack) {
-                loginProvider.setState(LoginState.signUp);
+                loginProvider.setState(LoginState.signIn);
               } else {
                 widget.onTap?.call(_codeController.text);
                 if (_formKey.currentState!.validate()) {

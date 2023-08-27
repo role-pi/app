@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:role/features/new_event/widgets/new_evento_theme.dart';
 import 'package:role/shared/utils/serializable.dart';
 
 class Evento implements JSONSerializable {
@@ -8,6 +9,7 @@ class Evento implements JSONSerializable {
   DateTime? _dataInicio;
   DateTime? _dataFim;
   double? _valorTotal;
+  ThemeModel? _theme;
 
   Evento({
     required int id,
@@ -15,11 +17,13 @@ class Evento implements JSONSerializable {
     DateTime? dataInicio,
     DateTime? dataFim,
     double? valorTotal,
+    ThemeModel? theme,
   })  : _id = id,
         _name = name,
         _dataInicio = dataInicio,
         _dataFim = dataFim,
-        _valorTotal = valorTotal;
+        _valorTotal = valorTotal,
+        _theme = theme;
 
   int get id => _id;
 
@@ -48,6 +52,11 @@ class Evento implements JSONSerializable {
   double? get valorTotal => _valorTotal;
   set valorTotal(double? value) {
     _valorTotal = value;
+  }
+
+  ThemeModel? get theme => _theme;
+  set theme(ThemeModel? value) {
+    _theme = value;
   }
 
   @override

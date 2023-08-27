@@ -1,13 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/repository/evento_repository.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/new_event/widgets/new_evento_theme.dart';
+import 'package:role/models/evento.dart';
 import 'package:role/shared/utils/api_status.dart';
 
 class NewEventoProvider extends ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
+  bool _showing = false;
+  bool get showing => _showing;
+
+  Evento evento = Evento(id: 0, name: "");
+
   EventoRepository eventoRepository = EventoRepository();
+
+  static final NewEventoProvider shared = NewEventoProvider();
 
   setLoading(bool loading) async {
     _loading = loading;
@@ -18,10 +27,30 @@ class NewEventoProvider extends ChangeNotifier {
     // _userError = userError;
   }
 
-  add(nome) async {
+  setShowing(bool showing) {
+    _showing = showing;
+    notifyListeners();
+  }
+
+  setName(String name) {
+    evento.name = name;
+    notifyListeners();
+  }
+
+  setTheme(ThemeModel theme) {
+    evento.theme = theme;
+    notifyListeners();
+  }
+
+  create() async {
     setLoading(true);
-    await eventoRepository.addEvento(nome);
-    EventoListProvider.shared.get();
+    var response = await eventoRepository.addEvento(evento.name);
+    if (response is Success) {
+      await EventoListProvider.shared.get();
+      setShowing(false);
+    } else if (response is Failure) {
+      // setUserError(response);
+    }
     setLoading(false);
   }
 }

@@ -49,11 +49,11 @@ class UserLoginProvider extends ChangeNotifier {
           callback();
           notifyListeners();
         } else {
-          setState(LoginState.signUp);
+          setState(LoginState.signIn);
           notifyListeners();
         }
       } else if (response is Failure) {
-        setState(LoginState.signUp);
+        setState(LoginState.signIn);
         print(response.errorResponse);
         notifyListeners();
       }
@@ -61,24 +61,21 @@ class UserLoginProvider extends ChangeNotifier {
   }
 
   Future<void> trySignUp(email, callback) async {
-    if (state != LoginState.loggedIn) {
-      // ignore: unused_local_variable
+    if (state == LoginState.signIn) {
+      setState(LoginState.signingIn);
       var response = await API().post("usuario/signin", {"email": email});
 
-      _state = LoginState.verifying;
-      notifyListeners();
-
-      // if (response is Success) {
-      //   Map decoded = json.decode(response.response as String);
-      //   if (decoded.containsKey("user")) {
-      //     _state = LoginState.loggedIn;
-      //     notifyListeners();
-      //     callback();
-      //   }
-      // } else if (response is Failure) {
-      //   _state = LoginState.signUp;
-      //   notifyListeners();
-      // }
+      if (response is Success) {
+        Map decoded = json.decode(response.response as String);
+        if (decoded.containsKey("user")) {
+          setState(LoginState.loggedIn);
+          callback();
+        } else {
+          setState(LoginState.verify);
+        }
+      } else if (response is Failure) {
+        setState(LoginState.signIn);
+      }
 
       print(_state);
     }
@@ -101,8 +98,8 @@ class UserLoginProvider extends ChangeNotifier {
           callback();
           notifyListeners();
         }
-      } else if (response is Failure) {
-        setState(LoginState.signUp);
+      } else {
+        setState(LoginState.signIn);
         notifyListeners();
       }
     }
@@ -121,7 +118,9 @@ class UserLoginProvider extends ChangeNotifier {
 enum LoginState {
   loggedOut,
   loggingIn,
-  signUp,
+  signIn,
+  signingIn,
+  verify,
   verifying,
   loggedIn,
 }

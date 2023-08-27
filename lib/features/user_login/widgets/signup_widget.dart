@@ -58,6 +58,11 @@ class SignUpWidget extends StatelessWidget {
             placeholder: "digite seu e-mail",
             controller: _emailController,
             cursorColor: CupertinoColors.white,
+            placeholderStyle: TextStyle(
+                color: CupertinoColors.systemGrey2,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -1.2),
             style: TextStyle(
                 color: CupertinoColors.white,
                 fontSize: 20,

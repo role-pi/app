@@ -19,73 +19,71 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
 
     if (loginProvider.state == LoginState.loggedOut) {
       return WillPopScope(
-        onWillPop: () async => false,
-        child: CupertinoPageScaffold(
-        child: Center(
-            child: CupertinoActivityIndicator(
-          radius: 20,
-          color: CupertinoColors.black,
-        )),
-        backgroundColor: CupertinoColors.white,
-      )
-      );
+          onWillPop: () async => false,
+          child: CupertinoPageScaffold(
+            child: Center(
+                child: CupertinoActivityIndicator(
+              radius: 20,
+              color: CupertinoColors.black,
+            )),
+            backgroundColor: CupertinoColors.white,
+          ));
     } else {
       return CupertinoTheme(
-        data: CupertinoThemeData(
-          brightness: Brightness.dark,
-          primaryColor: CupertinoColors.white,
-        ),
-        child: WillPopScope(
-        onWillPop: () async => false,
-        child: CupertinoPageScaffold(
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              AnimatedPositioned(
-                top: loginProvider.state == LoginState.signUp ? 450 : -350,
-                left: 0,
-                right: 0,
-                duration: const Duration(milliseconds: 750),
-                curve: Curves.easeInOutExpo,
-                child: Image.asset(
-                  'assets/Background.png', // Caminho da sua imagem de fundo
-                ),
-              ),
-              Padding(
-                  padding: const EdgeInsets.all(42.0),
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 32),
-                        child: LoginSlideComponent(
-                            child: SignUpWidget(
-                              email: email,
-                              onTap: (email) async {
-                                this.email = email;
-                                await loginProvider.trySignUp(email, () {});
-                                // loginProvider.setState(LoginState.verifying);
-                              },
-                            ),
-                            showing: loginProvider.state == LoginState.signUp),
-                      ),
-                      LoginSlideComponent(
-                          child: VerificationWidget(
-                            onTap: (code) async {
-                              await loginProvider.verify(email, code, () {
-                                Navigator.pushNamed(context, "/");
-                              });
-                            },
-                          ),
-                          showing: loginProvider.state != LoginState.signUp,
-                          reversed: true)
-                    ],
-                  )),
-            ],
+          data: CupertinoThemeData(
+            brightness: Brightness.dark,
+            primaryColor: CupertinoColors.white,
           ),
-          backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        ),
-      )
-      );
+          child: WillPopScope(
+            onWillPop: () async => false,
+            child: CupertinoPageScaffold(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  AnimatedPositioned(
+                    top: loginProvider.state == LoginState.signIn ? 450 : -350,
+                    left: 0,
+                    right: 0,
+                    duration: const Duration(milliseconds: 750),
+                    curve: Curves.easeInOutExpo,
+                    child: Image.asset(
+                      'assets/Background.png', // Caminho da sua imagem de fundo
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(42.0),
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 32),
+                            child: LoginSlideComponent(
+                                child: SignUpWidget(
+                                  email: email,
+                                  onTap: (email) async {
+                                    this.email = email;
+                                    await loginProvider.trySignUp(email, () {});
+                                  },
+                                ),
+                                showing:
+                                    loginProvider.state == LoginState.signIn),
+                          ),
+                          LoginSlideComponent(
+                              child: VerificationWidget(
+                                onTap: (code) async {
+                                  await loginProvider.verify(email, code, () {
+                                    Navigator.pushNamed(context, "/");
+                                  });
+                                },
+                              ),
+                              showing: loginProvider.state != LoginState.signIn,
+                              reversed: true)
+                        ],
+                      )),
+                ],
+              ),
+              backgroundColor: Color.fromARGB(255, 0, 0, 0),
+            ),
+          ));
     }
   }
 }
