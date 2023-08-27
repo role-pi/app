@@ -69,8 +69,8 @@ class EventDetailHeader extends StatelessWidget {
       child: SizedBox(
           child: Container(
             child: GradientWidget(
-                color1: evento.randomColor1,
-                color2: evento.randomColor2,
+                color1: evento.color1,
+                color2: evento.color2,
                 child: Padding(
                   padding: const EdgeInsets.all(32.0),
                   child: Column(
@@ -142,7 +142,7 @@ class EventDetailHeader extends StatelessWidget {
                           FittedBox(
                             fit: BoxFit.fitWidth,
                             child: Text(
-                              evento.randomEmoji,
+                              evento.emoji,
                               style: TextStyle(
                                   fontSize: 72, fontWeight: FontWeight.bold),
                             ),

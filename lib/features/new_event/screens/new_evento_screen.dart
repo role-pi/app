@@ -5,29 +5,24 @@ import 'package:role/features/new_event/providers/new_evento_provider.dart';
 import 'package:role/features/new_event/widgets/new_evento_name.dart';
 import 'package:role/features/new_event/widgets/new_evento_theme.dart';
 
-class NewEventoScreen extends StatefulWidget {
-  @override
-  _NewEventoScreenState createState() => _NewEventoScreenState();
-}
-
-class _NewEventoScreenState extends State<NewEventoScreen> {
+class NewEventoScreen extends StatelessWidget {
   Duration duration = Duration(milliseconds: 200);
   Curve curve = Curves.easeInOutQuad;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<NewEventoProvider>(builder: (context, value, child) {
+    return Consumer<NewEventoProvider>(builder: (context, provider, child) {
       return IgnorePointer(
-        ignoring: !value.showing,
+        ignoring: !provider.showing,
         child: GestureDetector(
           onTap: () {
-            value.setShowing(false);
-            FocusManager.instance.primaryFocus?.unfocus();
+            provider.showing = false;
           },
           child: ClipRect(
             child: TweenAnimationBuilder<double>(
               tween: Tween<double>(
-                  begin: value.showing ? 0 : 1, end: value.showing ? 1 : 0),
+                  begin: provider.showing ? 0 : 1,
+                  end: provider.showing ? 1 : 0),
               duration: duration,
               curve: curve,
               builder: (_, value, __) {
@@ -53,7 +48,16 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
                           opacity: value,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 48),
-                            child: OverlayAction(),
+                            child: Stack(children: [
+                              AnimatedOpacity(
+                                  duration: Duration(milliseconds: 200),
+                                  opacity: provider.evento.name.isEmpty ? 1 : 0,
+                                  child: NewEventoName()),
+                              AnimatedOpacity(
+                                  duration: Duration(milliseconds: 200),
+                                  opacity: provider.evento.name.isEmpty ? 0 : 1,
+                                  child: NewEventoTheme()),
+                            ]),
                           ),
                         ),
                       ),
@@ -66,34 +70,5 @@ class _NewEventoScreenState extends State<NewEventoScreen> {
         ),
       );
     });
-  }
-}
-
-class OverlayAction extends StatelessWidget {
-  const OverlayAction({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<NewEventoProvider>(
-      builder: (context, value, child) {
-        return Stack(
-          children: [
-            AnimatedOpacity(
-                duration: Duration(milliseconds: 200),
-                opacity: value.evento.name.isEmpty ? 1 : 0,
-                child: NewEventoName()),
-            IgnorePointer(
-              ignoring: value.evento.name.isEmpty,
-              child: AnimatedOpacity(
-                  duration: Duration(milliseconds: 200),
-                  opacity: value.evento.name.isEmpty ? 0 : 1,
-                  child: NewEventoTheme()),
-            ),
-          ],
-        );
-      },
-    );
   }
 }

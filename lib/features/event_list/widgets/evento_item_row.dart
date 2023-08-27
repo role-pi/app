@@ -27,8 +27,8 @@ class EventoItemRowState extends State<EventoItemRow> {
       child: ClipRRect(
           borderRadius: BorderRadius.circular(18),
           child: GradientWidget(
-            color1: widget.evento.randomColor1,
-            color2: widget.evento.randomColor2,
+            color1: widget.evento.color1,
+            color2: widget.evento.color2,
             child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -41,7 +41,7 @@ class EventoItemRowState extends State<EventoItemRow> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(widget.evento.randomEmoji,
+                          child: Text(widget.evento.emoji,
                               style: TextStyle(
                                   fontSize: 52, fontWeight: FontWeight.bold)),
                         ),

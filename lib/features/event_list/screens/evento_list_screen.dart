@@ -31,16 +31,9 @@ class _EventoListScreenState extends State<EventoListScreen> {
             child: Stack(
               children: [
                 EventsList(
-                  onTap: () => {NewEventoProvider.shared.setShowing(true)},
+                  onTap: () => {NewEventoProvider.shared.showing = true},
                 ),
-                NewEventoScreen(
-                    // showing: showNewEvent,
-                    // dismiss: () => {
-                    //   setState(() {
-                    //     showNewEvent = false;
-                    //   })
-                    // },
-                    )
+                NewEventoScreen()
               ],
             ),
           ),
