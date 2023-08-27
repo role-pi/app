@@ -3,6 +3,7 @@ import 'package:role/features/event_list/repository/evento_repository.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:role/features/new_event/widgets/new_evento_theme.dart';
 import 'package:role/models/evento.dart';
+import 'package:role/models/evento_theme.dart';
 import 'package:role/shared/utils/api_status.dart';
 
 class NewEventoProvider extends ChangeNotifier {
@@ -37,7 +38,7 @@ class NewEventoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  setTheme(ThemeModel theme) {
+  setTheme(EventoTheme theme) {
     evento.theme = theme;
     notifyListeners();
   }

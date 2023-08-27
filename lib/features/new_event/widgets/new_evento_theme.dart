@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:role/features/new_event/providers/new_evento_provider.dart';
 import 'package:role/features/new_event/screens/emoji_evento_screen.dart';
 import 'package:role/models/evento.dart';
+import 'package:role/models/evento_theme.dart';
 import 'package:role/shared/widgets/big_form_text_field.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/round_button.dart';
@@ -41,7 +42,6 @@ class _NewEventoThemeState extends State<NewEventoTheme> {
               ),
               SingleChildScrollView(
                 child: SizedBox(
-                  height: 400,
                   child: SquareGrid(
                     event: value.evento,
                   ),
@@ -70,7 +70,26 @@ class _NewEventoThemeState extends State<NewEventoTheme> {
 class SquareGrid extends StatelessWidget {
   final Evento event;
 
-  const SquareGrid({Key? key, required this.event}) : super(key: key);
+  SquareGrid({Key? key, required this.event}) : super(key: key);
+
+  final List<EventoTheme> defaultThemes = [
+    EventoTheme(emoji: "😀", color1: Colors.blue, color2: Colors.lightBlue),
+    EventoTheme(emoji: "🌞", color1: Colors.yellow, color2: Colors.orange),
+    EventoTheme(emoji: "🌈", color1: Colors.red, color2: Colors.purple),
+    EventoTheme(emoji: "🍀", color1: Colors.green, color2: Colors.teal),
+    EventoTheme(emoji: "🌻", color1: Colors.yellow, color2: Colors.green),
+    EventoTheme(emoji: "🍊", color1: Colors.orange, color2: Colors.red),
+    EventoTheme(emoji: "🌸", color1: Colors.pink, color2: Colors.purple),
+    EventoTheme(emoji: "🌊", color1: Colors.blue, color2: Colors.cyan),
+    EventoTheme(emoji: "🌲", color1: Colors.green, color2: Colors.brown),
+    EventoTheme(emoji: "🍇", color1: Colors.purple, color2: Colors.pink),
+    EventoTheme(emoji: "🍋", color1: Colors.yellow, color2: Colors.green),
+    EventoTheme(emoji: "🍓", color1: Colors.red, color2: Colors.pink),
+    EventoTheme(emoji: "🍉", color1: Colors.red, color2: Colors.green),
+    EventoTheme(emoji: "🌼", color1: Colors.yellow, color2: Colors.orange),
+    EventoTheme(emoji: "🌱", color1: Colors.green, color2: Colors.lightGreen),
+    EventoTheme(emoji: "🌔", color1: Colors.grey, color2: Colors.white),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -82,13 +101,13 @@ class SquareGrid extends StatelessWidget {
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: columns,
-          childAspectRatio: 1, // Square aspect ratio
+          childAspectRatio: 1,
           mainAxisSpacing: spacing,
           crossAxisSpacing: spacing,
         ),
-        itemCount: ThemeModel.defaultThemes.length,
+        itemCount: defaultThemes.length,
         itemBuilder: (context, index) {
-          final theme = ThemeModel.defaultThemes[index];
+          final theme = defaultThemes[index];
           return ThemeGridItem(theme: theme, event: event);
         },
       ),
@@ -100,7 +119,7 @@ class ThemeGridItem extends StatelessWidget {
   const ThemeGridItem({super.key, required this.theme, required this.event});
 
   final Evento event;
-  final ThemeModel theme;
+  final EventoTheme theme;
 
   @override
   Widget build(BuildContext context) {
@@ -131,31 +150,4 @@ class ThemeGridItem extends StatelessWidget {
       ),
     );
   }
-}
-
-class ThemeModel {
-  final String emoji;
-  final Color color1;
-  final Color color2;
-
-  ThemeModel({required this.emoji, required this.color1, required this.color2});
-
-  static List<ThemeModel> defaultThemes = [
-    ThemeModel(emoji: "😀", color1: Colors.blue, color2: Colors.lightBlue),
-    ThemeModel(emoji: "🌞", color1: Colors.yellow, color2: Colors.orange),
-    ThemeModel(emoji: "🌈", color1: Colors.red, color2: Colors.purple),
-    ThemeModel(emoji: "🍀", color1: Colors.green, color2: Colors.teal),
-    ThemeModel(emoji: "🌻", color1: Colors.yellow, color2: Colors.green),
-    ThemeModel(emoji: "🍊", color1: Colors.orange, color2: Colors.red),
-    ThemeModel(emoji: "🌸", color1: Colors.pink, color2: Colors.purple),
-    ThemeModel(emoji: "🌊", color1: Colors.blue, color2: Colors.cyan),
-    ThemeModel(emoji: "🌲", color1: Colors.green, color2: Colors.brown),
-    ThemeModel(emoji: "🍇", color1: Colors.purple, color2: Colors.pink),
-    ThemeModel(emoji: "🍋", color1: Colors.yellow, color2: Colors.green),
-    ThemeModel(emoji: "🍓", color1: Colors.red, color2: Colors.pink),
-    ThemeModel(emoji: "🍉", color1: Colors.red, color2: Colors.green),
-    ThemeModel(emoji: "🌼", color1: Colors.yellow, color2: Colors.orange),
-    ThemeModel(emoji: "🌱", color1: Colors.green, color2: Colors.lightGreen),
-    ThemeModel(emoji: "🌔", color1: Colors.grey, color2: Colors.white),
-  ];
 }
