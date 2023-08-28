@@ -139,14 +139,17 @@ class EventDetailHeader extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 16),
-                          FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: Text(
-                              evento.emoji,
-                              style: TextStyle(
-                                  fontSize: 72, fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                          evento.emoji.isNotEmpty
+                              ? FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: Text(
+                                    evento.emoji,
+                                    style: TextStyle(
+                                        fontSize: 72,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                              : SizedBox(),
                         ],
                       ),
                       ContainerText(text: "24 de Agosto, 22:00 — 05:00"),

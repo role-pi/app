@@ -32,7 +32,6 @@ class _NewEventoNameState extends State<NewEventoName> {
                   fontSize: 27,
                   fontWeight: FontWeight.bold,
                   letterSpacing: -1.5,
-                  color: CupertinoColors.black.withOpacity(0.8),
                 ),
               )
             ],
@@ -40,7 +39,7 @@ class _NewEventoNameState extends State<NewEventoName> {
           SizedBox(height: 24.0),
           BigFormTextField(
             controller: _nameController,
-            color: CupertinoColors.black.withOpacity(0.5),
+            color: CupertinoColors.systemFill.withOpacity(0.5),
             onChanged: (value) {
               // setState(() {
               //   enabled = !value?.isEmpty ?? false;
@@ -55,7 +54,6 @@ class _NewEventoNameState extends State<NewEventoName> {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: RoundButton(
               text: "continuar",
-              rectangleColor: CupertinoColors.black.withOpacity(0.8),
               onPressed: () {
                 _newEventoProvider.setName(_nameController.text);
               },
