@@ -37,7 +37,8 @@ class _CircleButtonState extends State<CircleButton> {
                   padding: const EdgeInsets.all(22.0),
                   child: Image.asset(
                     'assets/Star.png',
-                    color: Color.fromRGBO(50, 50, 50, 1.0),
+                    color: CupertinoDynamicColor.resolve(
+                        CupertinoColors.label, context),
                     opacity: const AlwaysStoppedAnimation(.90),
                   ),
                 ),
@@ -49,8 +50,12 @@ class _CircleButtonState extends State<CircleButton> {
                   end: Alignment.bottomCenter,
                   colors: [
                     // Lighter to darker gray
-                    CupertinoColors.systemGrey6.withOpacity(0.8),
-                    CupertinoColors.white.withOpacity(0.3)
+                    CupertinoDynamicColor.resolve(
+                            CupertinoColors.systemGrey5, context)
+                        .withOpacity(0.8),
+                    CupertinoDynamicColor.resolve(
+                            CupertinoColors.systemGrey6, context)
+                        .withOpacity(0.3)
                   ],
                 ),
                 boxShadow: [

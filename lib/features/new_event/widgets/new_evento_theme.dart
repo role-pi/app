@@ -33,7 +33,6 @@ class _NewEventoThemeState extends State<NewEventoTheme> {
                       fontSize: 27,
                       fontWeight: FontWeight.bold,
                       letterSpacing: -1.5,
-                      color: CupertinoColors.black.withOpacity(0.8),
                     ),
                   )
                 ],
@@ -47,10 +46,10 @@ class _NewEventoThemeState extends State<NewEventoTheme> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: RoundButton(
                   text: "criar",
-                  rectangleColor: CupertinoColors.black.withOpacity(0.8),
                   onPressed: () {
                     provider.create();
                   },
+                  // onPressed: onSubmit,
                 ),
               ),
               Spacer(),
@@ -91,6 +90,8 @@ class SquareGrid extends StatelessWidget {
           mainAxisSpacing: spacing,
           crossAxisSpacing: spacing,
         ),
+        primary: false,
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: defaultThemes.length,
         itemBuilder: (context, index) {
           final theme = defaultThemes[index];
@@ -127,7 +128,9 @@ class ThemeGridItem extends StatelessWidget {
                   : null,
               color: selected
                   ? CupertinoColors.white
-                  : CupertinoColors.white.withOpacity(0.25)),
+                  : CupertinoDynamicColor.resolve(
+                          CupertinoColors.systemGrey5, context)
+                      .withOpacity(0.5)),
           child: Center(
             child: Text(
               theme.emoji,
