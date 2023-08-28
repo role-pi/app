@@ -34,7 +34,8 @@ class NewEventoScreen extends StatelessWidget {
                         opacity: value * 0.6,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: CupertinoColors.systemBackground,
+                            color: CupertinoDynamicColor.resolve(
+                                CupertinoColors.systemBackground, context),
                           ),
                         ),
                       ),

@@ -23,8 +23,8 @@ class EventoItemRow extends StatelessWidget {
       child: ClipRRect(
           borderRadius: BorderRadius.circular(18),
           child: GradientWidget(
-            color1: evento.color1,
-            color2: evento.color2,
+            color1: CupertinoDynamicColor.resolve(evento.color1, context),
+            color2: CupertinoDynamicColor.resolve(evento.color2, context),
             child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -54,7 +54,9 @@ class EventoItemRow extends StatelessWidget {
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
                             letterSpacing: -1.5,
-                            color: evento.theme.accentColor.withAlpha(200))),
+                            color: CupertinoDynamicColor.resolve(
+                                    evento.theme.accentColor, context)
+                                .withAlpha(200))),
                     Text(
                         evento.name == "Demonstração do PI"
                             ? "Hoje"

@@ -41,9 +41,9 @@ class EventoTheme {
 
   String get emoji => _emoji ?? "";
   Color get accentColor =>
-      _color1 == null ? CupertinoColors.systemGrey5 : CupertinoColors.black;
-  Color get color1 => _color1 ?? CupertinoColors.systemGrey5.withOpacity(0.2);
-  Color get color2 => _color2 ?? CupertinoColors.systemGrey5.withOpacity(0.2);
+      _color1 == null ? CupertinoColors.systemGrey : CupertinoColors.black;
+  Color get color1 => _color1 ?? CupertinoColors.systemGrey6;
+  Color get color2 => _color2 ?? CupertinoColors.systemGrey6;
 }
 
 extension HexColor on Color {
