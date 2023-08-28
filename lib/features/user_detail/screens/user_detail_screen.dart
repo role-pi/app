@@ -30,7 +30,6 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           text: 'logout',
         ),
       )),
-      backgroundColor: CupertinoColors.white,
     );
   }
 }
