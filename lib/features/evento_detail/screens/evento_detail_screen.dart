@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_edit/screens/evento_edit_screen.dart';
+import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/features/new_insumo/screens/new_insumo_screen.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/container_text.dart';
@@ -81,16 +82,19 @@ class EventDetailHeader extends StatelessWidget {
             child: Column(
               children: [
                 Opacity(
-                  opacity: 0.6,
-                  child: NavigationBar(
-                    leadingText: "eventos",
-                    trailingIcon: CupertinoIcons.pencil,
-                    onPressedLeading: () {
-                      Navigator.of(context).pop();
-                    },
-                    onPressedTrailing: () {},
-                  ),
-                ),
+                    opacity: 0.6,
+                    child: NavigationBar(
+                        leadingText: "eventos",
+                        trailingIcon: CupertinoIcons.pencil,
+                        onPressedLeading: () {
+                          Navigator.of(context).pop();
+                        },
+                        onPressedTrailing: () {
+                          Navigator.of(context)
+                              .push(CupertinoPageRoute(builder: (context) {
+                            return EventoEditScreen(id: evento.id);
+                          }));
+                        })),
                 Spacer(),
                 Padding(
                     padding: EdgeInsets.fromLTRB(32, 0, 32, 32),

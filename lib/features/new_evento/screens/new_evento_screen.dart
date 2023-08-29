@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:role/features/new_event/providers/new_evento_provider.dart';
-import 'package:role/features/new_event/widgets/new_evento_name.dart';
-import 'package:role/features/new_event/widgets/new_evento_theme.dart';
+import 'package:role/features/new_evento/providers/new_evento_provider.dart';
+import 'package:role/features/new_evento/widgets/new_evento_name.dart';
+import 'package:role/features/new_evento/widgets/new_evento_theme.dart';
 
 class NewEventoScreen extends StatelessWidget {
   @override
