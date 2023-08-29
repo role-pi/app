@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:role/features/new_event/providers/new_evento_provider.dart';
+import 'package:role/features/new_evento/providers/new_evento_provider.dart';
 import 'package:role/shared/widgets/big_form_text_field.dart';
 import 'package:role/shared/widgets/round_button.dart';
 

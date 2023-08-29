@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
-import 'package:role/features/new_event/widgets/new_evento_theme.dart';
+import 'package:role/features/new_evento/widgets/new_evento_theme.dart';
 import 'package:role/models/evento_theme.dart';
 import 'package:role/shared/utils/serializable.dart';
 
