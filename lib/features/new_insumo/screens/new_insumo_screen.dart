@@ -20,6 +20,13 @@ class NewInsumoScreen extends StatefulWidget {
 class _NewInsumoScreenState extends State<NewInsumoScreen> {
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(child: Text("AAAA"));
+    return CupertinoPageScaffold(
+        child: Column(children: [
+      NavigationBar(
+          leadingText: "voltar",
+          trailingIcon: CupertinoIcons.star_fill,
+          onPressedLeading: () {},
+          onPressedTrailing: () {})
+    ]));
   }
 }
