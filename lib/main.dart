@@ -31,16 +31,21 @@ class RoleApp extends StatelessWidget {
           "/onboarding": (p0) => UserLoginScreen()
         },
         onGenerateRoute: (settings) {
-          switch (settings.name) {
-            case "/evento":
-              return CupertinoPageRoute(
-                  builder: (context) => EventoDetailScreen(
-                        id: settings.arguments as int,
-                      ));
-            default:
-              return CupertinoPageRoute(
-                  builder: (context) => EventoListScreen());
+          late Widget page;
+
+          if (settings.name == "/evento") {
+            page = EventoDetailScreen(
+              id: settings.arguments as int,
+            );
+          } else {
+            page = EventoListScreen();
           }
+
+          return CupertinoPageRoute(
+            builder: (context) {
+              return page;
+            },
+          );
         },
       ),
     );
