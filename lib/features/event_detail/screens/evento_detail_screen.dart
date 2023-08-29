@@ -83,29 +83,8 @@ class EventDetailHeader extends StatelessWidget {
                 Opacity(
                   opacity: 0.6,
                   child: NavigationBar(
-                    leading: Row(children: [
-                      Icon(
-                        CupertinoIcons.chevron_back,
-                        color: CupertinoColors.black,
-                        size: 30,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 5.0),
-                        child: Text(
-                          "eventos",
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: CupertinoColors.black,
-                              letterSpacing: -1.8),
-                        ),
-                      ),
-                    ]),
-                    trailing: Icon(
-                      CupertinoIcons.pencil,
-                      color: CupertinoColors.black,
-                      size: 38,
-                    ),
+                    leadingText: "eventos",
+                    trailingIcon: CupertinoIcons.pencil,
                     onPressedLeading: () {
                       Navigator.of(context).pop();
                     },

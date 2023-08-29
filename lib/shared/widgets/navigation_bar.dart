@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
 class NavigationBar extends StatelessWidget {
-  final Widget leading, trailing;
+  final String leadingText;
+  final IconData? trailingIcon;
   final Function() onPressedLeading, onPressedTrailing;
 
   const NavigationBar(
       {super.key,
-      required this.leading,
-      required this.trailing,
+      required this.leadingText,
+      required this.trailingIcon,
       required this.onPressedLeading,
       required this.onPressedTrailing});
 
@@ -19,13 +20,34 @@ class NavigationBar extends StatelessWidget {
         children: [
           CupertinoButton(
             padding: EdgeInsets.zero,
-            child: leading,
+            child: Row(children: [
+              Icon(
+                CupertinoIcons.chevron_back,
+                color: CupertinoColors.black,
+                size: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: Text(
+                  leadingText,
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: CupertinoColors.black,
+                      letterSpacing: -1.8),
+                ),
+              ),
+            ]),
             onPressed: onPressedLeading,
           ),
           Spacer(),
           CupertinoButton(
             padding: EdgeInsets.zero,
-            child: trailing,
+            child: Icon(
+              trailingIcon,
+              color: CupertinoColors.black,
+              size: 38,
+            ),
             onPressed: onPressedTrailing,
           ),
         ],
