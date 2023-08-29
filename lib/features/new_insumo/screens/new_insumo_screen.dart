@@ -23,10 +23,10 @@ class _NewInsumoScreenState extends State<NewInsumoScreen> {
       NavigationBar(
           leadingText: "voltar",
           trailingIcon: CupertinoIcons.star_fill,
-          onPressedLeading: () {},
-          onPressedTrailing: () {
+          onPressedLeading: () {
             Navigator.of(context).pop();
-          })
+          },
+          onPressedTrailing: () {})
     ]));
   }
 }
