@@ -56,6 +56,7 @@ class _NewEventoNameState extends State<NewEventoName> {
               text: "continuar",
               onPressed: () {
                 _newEventoProvider.setName(_nameController.text);
+                _nameController.clear();
               },
               // onPressed: onSubmit,
             ),

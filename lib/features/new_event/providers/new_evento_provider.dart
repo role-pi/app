@@ -28,6 +28,7 @@ class NewEventoProvider extends ChangeNotifier {
     } else {
       EventoListProvider.shared.get();
       FocusManager.instance.primaryFocus?.unfocus();
+      
     }
     notifyListeners();
   }
