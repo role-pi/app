@@ -37,7 +37,7 @@ class BigFormTextField extends StatelessWidget {
           fontWeight: FontWeight.bold,
           letterSpacing: -1.3,
         ),
-        textInputAction: textInputAction,
+        // textInputAction: textInputAction,
         onFieldSubmitted: onFieldSubmitted,
         validator: (value) {
           if (validator != null) {
