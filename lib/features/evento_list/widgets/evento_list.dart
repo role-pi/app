@@ -21,7 +21,7 @@ class EventsList extends StatelessWidget {
     Color backgroundColor =
         MediaQuery.of(context).platformBrightness == Brightness.dark
             ? Colors.black
-            : Colors.white;
+            : Color.fromARGB(255, 196, 180, 180);
 
     return Stack(
       alignment: Alignment.bottomCenter,

@@ -14,7 +14,7 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     Color textColor =
         MediaQuery.of(context).platformBrightness == Brightness.dark
-            ? CupertinoColors.white
+            ? Color.fromARGB(255, 255, 255, 255)
             : CupertinoColors.black;
     final loginProvider = Provider.of<UserLoginProvider>(context);
 

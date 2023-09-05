@@ -19,32 +19,6 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        child: ElasticButton(
-            onTap: () {},
-            child: ClipOval(
-                child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 6.0,
-                      sigmaY: 6.0,
-                    ),
-                    child: Container(
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(22.0),
-                          child: Image.asset(
-                            'assets/Star.png',
-                            color: CupertinoDynamicColor.resolve(
-                                CupertinoColors.label, context),
-                            opacity: const AlwaysStoppedAnimation(.90),
-                          ),
-                        ),
-                      ),
-                    )))));
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: Center(
           child: SizedBox(
