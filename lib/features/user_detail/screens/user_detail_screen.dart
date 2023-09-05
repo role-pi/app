@@ -21,18 +21,37 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: Center(
-          child: SizedBox(
-        width: 200,
-        height: 80,
-        child: RoundButton(
-          onPressed: () async {
-            UserLoginProvider.shared.logout();
-            Navigator.pushNamed(context, "/onboarding");
-          },
-          rectangleColor: CupertinoColors.systemRed,
-          textColor: CupertinoColors.white,
-          text: 'logout',
-        ),
+          child: Column(
+        children: [
+          ElasticButton(
+              onTap: () {},
+              child: ClipOval(
+                child: Container(
+                  child: Center(
+                    child: Padding(
+                        padding: const EdgeInsets.all(22.0),
+                        child: Icon(
+                          CupertinoIcons.person_fill,
+                          color: CupertinoColors.black,
+                          size: 30.0,
+                        )),
+                  ),
+                ),
+              )),
+          SizedBox(
+            width: 200,
+            height: 80,
+            child: RoundButton(
+              onPressed: () async {
+                UserLoginProvider.shared.logout();
+                Navigator.pushNamed(context, "/onboarding");
+              },
+              rectangleColor: CupertinoColors.systemRed,
+              textColor: CupertinoColors.white,
+              text: 'logout',
+            ),
+          ),
+        ],
       )),
     );
   }
