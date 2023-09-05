@@ -81,4 +81,4 @@ O aplicativo será compilado e instalado no emulador ou dispositivo Android cone
 Se você deseja contribuir para o projeto, fique à vontade para fazer um fork deste repositório e criar um pull request com suas alterações.
 
 
-### Lacrou mana!!! 😎
+### Lacrou mana!!! 😎 🎂
