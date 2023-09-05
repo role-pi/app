@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
@@ -32,12 +33,18 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                         padding: const EdgeInsets.all(22.0),
                         child: Icon(
                           CupertinoIcons.person_fill,
-                          color: CupertinoColors.black,
+                          color: CupertinoColor.,
                           size: 30.0,
                         )),
                   ),
                 ),
               )),
+              CupertinoTextFormFieldRow(
+                placeholder: "Nome de Usuário",
+                placeholderStyle: TextStyle(
+                  
+                ),
+              ),
           SizedBox(
             width: 200,
             height: 80,
@@ -46,8 +53,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                 UserLoginProvider.shared.logout();
                 Navigator.pushNamed(context, "/onboarding");
               },
-              rectangleColor: CupertinoColors.systemRed,
-              textColor: CupertinoColors.white,
+              rectangleColor: CupertinoColors.white,
+              textColor: CupertinoColors.systemRed,
               text: 'logout',
             ),
           ),
