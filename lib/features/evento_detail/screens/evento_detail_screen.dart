@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_edit/screens/evento_edit_screen.dart';
+import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/features/new_insumo/screens/new_insumo_screen.dart';
 import 'package:role/models/evento.dart';
@@ -24,7 +25,9 @@ class EventoDetailScreen extends StatelessWidget {
               pinned: false,
               delegate: EventoDetailHeaderDelegate(evento: evento)),
           SliverToBoxAdapter(
-              child: CupertinoButton(
+              child: Column(
+            children: [
+              CupertinoButton(
                   child: Text("Adicionar insumo"),
                   onPressed: () {
                     Navigator.push(
@@ -32,7 +35,10 @@ class EventoDetailScreen extends StatelessWidget {
                         CupertinoPageRoute(
                             builder: (context) => NewInsumoScreen(id: id)));
                     // Navigator.pushNamed(context, "/evento/1/insumo");
-                  }))
+                  }),
+              EventoDetailMap(color: evento.color2)
+            ],
+          ))
         ],
       ),
     );
