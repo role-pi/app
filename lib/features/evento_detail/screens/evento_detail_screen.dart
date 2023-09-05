@@ -7,6 +7,7 @@ import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 import 'package:role/shared/widgets/navigation_bar.dart';
+import 'package:role/shared/widgets/round_button.dart';
 
 class EventoDetailScreen extends StatelessWidget {
   EventoDetailScreen({required this.id}) {
@@ -25,19 +26,26 @@ class EventoDetailScreen extends StatelessWidget {
               pinned: false,
               delegate: EventoDetailHeaderDelegate(evento: evento)),
           SliverToBoxAdapter(
-              child: Column(
-            children: [
-              CupertinoButton(
-                  child: Text("Adicionar insumo"),
+              child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                RoundButton(
+                  text: "adicionar insumo",
                   onPressed: () {
                     Navigator.push(
                         context,
                         CupertinoPageRoute(
                             builder: (context) => NewInsumoScreen(id: id)));
                     // Navigator.pushNamed(context, "/evento/1/insumo");
-                  }),
-              EventoDetailMap(color: evento.color2)
-            ],
+                  },
+                  rectangleColor: CupertinoColors.systemGrey6,
+                  textColor: CupertinoColors.black,
+                ),
+                SizedBox(height: 16),
+                EventoDetailMap(color: evento.color2)
+              ],
+            ),
           ))
         ],
       ),
