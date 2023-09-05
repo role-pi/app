@@ -29,7 +29,8 @@ class EventoEditScreen extends StatelessWidget {
               EdgeInsets.only(top: 12), 
           child: RoundButton(
             onPressed: () async {
-              
+              EventoListProvider.shared.delete(evento);
+               Navigator.pushNamed(context, "/");
               },
             textColor: const Color.fromARGB(255, 255, 255, 255),
             rectangleColor: const Color.fromARGB(255, 245, 0, 0),

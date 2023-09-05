@@ -39,6 +39,13 @@ class EventoListProvider extends ChangeNotifier {
     set(response);
   }
 
+  delete(Evento evento) async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    var response = await eventoRepository.deleteEvento(evento);
+    return true;
+  }
+
   Evento evento(int) {
     var evento = _eventos.firstWhere((element) => element.id == int);
     return evento;

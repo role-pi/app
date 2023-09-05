@@ -40,6 +40,38 @@ class API {
     }
   }
 
+    Future<Object> delete(endpoint, data) async {
+    var url = '${api}${endpoint}';
+
+    var body = json.encode(data);
+
+    try {
+      var response = await http.delete(Uri.parse(url),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "JWT ${token}"
+          },
+          body: body);
+      print(response.body);
+
+      if (success == response.statusCode) {
+        return Success(code: success, response: response.body);
+      }
+
+      return Failure(
+          code: userInvalidResponse, errorResponse: 'Invalid response');
+    } on HttpException {
+      return Failure(code: noInternet, errorResponse: 'No Internet Connection');
+    } on SocketException {
+      return Failure(code: noInternet, errorResponse: 'No Internet Connection');
+    } on FormatException {
+      return Failure(code: invalidFormat, errorResponse: 'Invalid Format');
+    } catch (e) {
+      print(e);
+      return Failure(code: unknownError, errorResponse: 'Unknown Error');
+    }
+  }
+
   Future<Object> get(endpoint) async {
     var url = '${api}${endpoint}';
 

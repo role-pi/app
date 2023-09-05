@@ -34,6 +34,16 @@ class EventoRepository {
     return null;
   }
 
+  Future<bool> deleteEvento(Evento evento) async {
+    var response = await API().delete("evento", {evento.id});
+
+    if (response is Success) {
+      Map decoded = json.decode(response.response as String);
+      return decoded["true"];
+    }
+    return false;
+  }
+
   List<Evento> eventosFromJSON(String str) =>
       List<Evento>.from(json.decode(str).map((x) => Evento.fromJson(x)));
 
