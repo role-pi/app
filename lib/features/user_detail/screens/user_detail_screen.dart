@@ -1,6 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/round_button.dart';
+
+import '../../../shared/widgets/elastic_button.dart';
 
 class UserDetailScreen extends StatefulWidget {
   @override
@@ -12,6 +16,32 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
 
   Duration duration = Duration(milliseconds: 200);
   Curve curve = Curves.easeInOutQuad;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        child: ElasticButton(
+            onTap: () {},
+            child: ClipOval(
+                child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 6.0,
+                      sigmaY: 6.0,
+                    ),
+                    child: Container(
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(22.0),
+                          child: Image.asset(
+                            'assets/Star.png',
+                            color: CupertinoDynamicColor.resolve(
+                                CupertinoColors.label, context),
+                            opacity: const AlwaysStoppedAnimation(.90),
+                          ),
+                        ),
+                      ),
+                    )))));
+  }
 
   @override
   Widget build(BuildContext context) {

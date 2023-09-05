@@ -37,6 +37,8 @@ dependencies:
   modal_bottom_sheet: ^2.1.2
   pin_code_fields: ^8.0.1
   pinput: ^3.0.0
+  image_picker: ^0.8.4+3
+
 
 dev_dependencies:
   flutter_test:
