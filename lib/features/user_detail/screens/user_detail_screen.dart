@@ -33,18 +33,30 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                         padding: const EdgeInsets.all(22.0),
                         child: Icon(
                           CupertinoIcons.person_fill,
-                          color: CupertinoColor.,
+                          color: CupertinoColors.black,
                           size: 30.0,
                         )),
                   ),
                 ),
               )),
-              CupertinoTextFormFieldRow(
-                placeholder: "Nome de Usuário",
-                placeholderStyle: TextStyle(
-                  
-                ),
+          Container(
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 32, 32, 32),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: CupertinoTextFormFieldRow(
+              placeholder: "Nome de Usuário",
+              placeholderStyle: TextStyle(
+                  color: CupertinoColors.systemGrey2,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: CupertinoColors.black,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
               ),
+            ),
+          ),
           SizedBox(
             width: 200,
             height: 80,
