@@ -1,11 +1,15 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:role/models/endereco.dart';
 
 class EventoDetailMap extends StatelessWidget {
   Color color;
+  Endereco endereco;
 
-  EventoDetailMap({required this.color});
+  EventoDetailMap({required this.color, required this.endereco});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +17,7 @@ class EventoDetailMap extends StatelessWidget {
       height: 200,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: Stack(children: [
+        child: Stack(alignment: Alignment.bottomCenter, children: [
           Container(
             decoration: BoxDecoration(
               color: color,
@@ -23,7 +27,7 @@ class EventoDetailMap extends StatelessWidget {
             opacity: 0.97,
             child: FlutterMap(
               options: MapOptions(
-                center: LatLng(-26.905926949896116, -49.07710147997988),
+                center: endereco.coordenadas,
                 zoom: 15.0,
                 interactiveFlags: 0,
               ),
@@ -38,12 +42,12 @@ class EventoDetailMap extends StatelessWidget {
                 MarkerLayer(
                   markers: [
                     Marker(
-                      point: LatLng(-26.905926949896116, -49.07710147997988),
+                      point: endereco.coordenadas,
                       width: 64,
                       height: 64,
                       builder: (context) => Icon(
                         CupertinoIcons.circle_fill,
-                        color: color,
+                        color: CupertinoColors.black,
                         size: 64,
                       ),
                     ),
@@ -54,10 +58,46 @@ class EventoDetailMap extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
+              color:
+                  CupertinoDynamicColor.resolve(CupertinoColors.label, context),
+              backgroundBlendMode: BlendMode.exclusion,
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
               color: color,
               backgroundBlendMode: BlendMode.softLight,
             ),
           ),
+          Container(
+            height: 48,
+            decoration: BoxDecoration(
+              color: CupertinoDynamicColor.resolve(
+                      CupertinoColors.systemBackground, context)
+                  .withOpacity(0.7),
+            ),
+            child: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      Text(endereco.descricao,
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: -0.6,
+                              color: CupertinoDynamicColor.resolve(
+                                      CupertinoColors.label, context)
+                                  .withAlpha(200))),
+                      Spacer()
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )
         ]),
       ),
     );
