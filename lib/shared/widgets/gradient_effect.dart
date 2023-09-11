@@ -89,6 +89,9 @@ class _GradientWidgetState extends State<GradientWidget>
 
   @override
   Widget build(BuildContext context) {
+    Color luminosity =
+        CupertinoDynamicColor.resolve(CupertinoColors.systemGrey3, context);
+
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, _) {
@@ -100,7 +103,11 @@ class _GradientWidgetState extends State<GradientWidget>
                 end: _bottomAlignmentAnimation.value,
               ),
             ),
-            child: widget.child);
+            child: Container(
+              decoration: BoxDecoration(
+                  color: luminosity, backgroundBlendMode: BlendMode.luminosity),
+              child: widget.child,
+            ));
       },
     );
   }
