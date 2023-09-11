@@ -1,34 +1,26 @@
+import 'package:latlong2/latlong.dart';
+
 class Endereco {
-  int _cep;
-  String _logradouro;
-  String _bairro;
-  String _cidade;
-  String _pais;
+  double _latitude;
+  double _longitude;
+  String _descricao;
 
-  int get cep => _cep;
-  set cep(int value) => _cep = value;
+  double get latitude => _latitude;
+  set latitude(double value) => _latitude = value;
 
-  String get logradouro => _logradouro;
-  set logradouro(String value) => _logradouro = value;
+  double get longitude => _longitude;
+  set longitude(double value) => _longitude = value;
 
-  String get bairro => _bairro;
-  set bairro(String value) => _bairro = value;
+  String get descricao => _descricao;
+  set descricao(String value) => _descricao = value;
 
-  String get cidade => _cidade;
-  set cidade(String value) => _cidade = value;
-
-  String get pais => _pais;
-  set pais(String value) => _pais = value;
+  LatLng get coordenadas => LatLng(latitude.toDouble(), longitude.toDouble());
 
   Endereco({
-    required int cep,
-    required String logradouro,
-    required String bairro,
-    required String cidade,
-    required String pais,
-  })  : _cep = cep,
-        _logradouro = logradouro,
-        _bairro = bairro,
-        _cidade = cidade,
-        _pais = pais;
+    required double latitude,
+    required double longitude,
+    required String descricao,
+  })  : _longitude = longitude,
+        _latitude = latitude,
+        _descricao = descricao;
 }

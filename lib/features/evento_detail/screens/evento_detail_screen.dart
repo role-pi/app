@@ -3,8 +3,10 @@ import 'package:role/features/event_edit/screens/evento_edit_screen.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/features/new_insumo/screens/new_insumo_screen.dart';
+import 'package:role/models/endereco.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/container_text.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 import 'package:role/shared/widgets/navigation_bar.dart';
 import 'package:role/shared/widgets/round_button.dart';
@@ -40,10 +42,18 @@ class EventoDetailScreen extends StatelessWidget {
                     // Navigator.pushNamed(context, "/evento/1/insumo");
                   },
                   rectangleColor: CupertinoColors.systemGrey6,
-                  textColor: CupertinoColors.black,
+                  textColor: CupertinoColors.label,
                 ),
                 SizedBox(height: 16),
-                EventoDetailMap(color: evento.color2)
+                ElasticButton(
+                    child: EventoDetailMap(
+                      color: evento.color2,
+                      endereco: Endereco(
+                          latitude: -26.905926949896116,
+                          longitude: -49.07710147997988,
+                          descricao: "Factory Antônio da Veiga"),
+                    ),
+                    onTap: () {})
               ],
             ),
           ))

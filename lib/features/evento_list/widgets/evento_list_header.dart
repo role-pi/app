@@ -49,10 +49,29 @@ class HomeHeader extends StatelessWidget {
                   "https://pbs.twimg.com/profile_images/1685715309615878144/JG6PlTn5_400x400.jpg",
               fit: BoxFit.cover,
               width: 58,
+              loadingBuilder: (context, child, loadingProgress) {
+                return _buildIconContainer();
+              },
+              errorBuilder: (context, error, stackTrace) {
+                return _buildIconContainer();
+              },
             ),
           ),
         )
       ],
+    );
+  }
+
+  Widget _buildIconContainer() {
+    return Container(
+      width: 58,
+      height: 58,
+      color: CupertinoColors.systemGrey6,
+      child: const Icon(
+        CupertinoIcons.person_fill,
+        size: 28.0,
+        color: CupertinoColors.systemGrey,
+      ),
     );
   }
 }
