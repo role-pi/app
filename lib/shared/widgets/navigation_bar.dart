@@ -50,7 +50,7 @@ class NavigationBar extends StatelessWidget {
             child: Icon(
               trailingIcon,
               color: color,
-              size: 38,
+              size: 32,
             ),
             onPressed: onPressedTrailing,
           ),

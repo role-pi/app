@@ -13,62 +13,12 @@ class EventoDetailMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: Stack(alignment: Alignment.bottomCenter, children: [
-          Container(
-            decoration: BoxDecoration(
-              color: color,
-            ),
-          ),
-          Opacity(
-            opacity: 0.97,
-            child: FlutterMap(
-              options: MapOptions(
-                center: endereco.coordenadas,
-                zoom: 15.0,
-                interactiveFlags: 0,
-              ),
-              nonRotatedChildren: [],
-              children: [
-                TileLayer(
-                  urlTemplate:
-                      'https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png',
-                  userAgentPackageName: 'com.joogps.role',
-                  // retinaMode: true,
-                ),
-                MarkerLayer(
-                  markers: [
-                    Marker(
-                      point: endereco.coordenadas,
-                      width: 64,
-                      height: 64,
-                      builder: (context) => Icon(
-                        CupertinoIcons.circle_fill,
-                        color: CupertinoColors.black,
-                        size: 64,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color:
-                  CupertinoDynamicColor.resolve(CupertinoColors.label, context),
-              backgroundBlendMode: BlendMode.exclusion,
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: color,
-              backgroundBlendMode: BlendMode.softLight,
-            ),
-          ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          EventoStyledMap(color: color, endereco: endereco),
           Container(
             height: 48,
             decoration: BoxDecoration(
@@ -91,15 +41,87 @@ class EventoDetailMap extends StatelessWidget {
                               color: CupertinoDynamicColor.resolve(
                                       CupertinoColors.label, context)
                                   .withAlpha(200))),
-                      Spacer()
+                      Spacer(),
+                      Icon(CupertinoIcons.chevron_right,
+                          size: 24,
+                          color: CupertinoDynamicColor.resolve(
+                                  CupertinoColors.label, context)
+                              .withAlpha(200))
                     ],
                   ),
                 ),
               ),
             ),
           )
-        ]),
+        ],
       ),
     );
+  }
+}
+
+class EventoStyledMap extends StatelessWidget {
+  const EventoStyledMap({
+    super.key,
+    required this.color,
+    required this.endereco,
+  });
+
+  final Color color;
+  final Endereco endereco;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(children: [
+      Container(
+        decoration: BoxDecoration(
+          color: color,
+        ),
+      ),
+      Opacity(
+        opacity: 0.97,
+        child: FlutterMap(
+          options: MapOptions(
+            center: endereco.coordenadas,
+            zoom: 15.0,
+            interactiveFlags: 0,
+          ),
+          nonRotatedChildren: [],
+          children: [
+            TileLayer(
+              urlTemplate:
+                  'https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png',
+              userAgentPackageName: 'com.joogps.role',
+              // retinaMode: true,
+            ),
+            MarkerLayer(
+              markers: [
+                Marker(
+                  point: endereco.coordenadas,
+                  width: 64,
+                  height: 64,
+                  builder: (context) => Icon(
+                    CupertinoIcons.circle_fill,
+                    color: CupertinoColors.black,
+                    size: 64,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      Container(
+        decoration: BoxDecoration(
+          color: CupertinoDynamicColor.resolve(CupertinoColors.label, context),
+          backgroundBlendMode: BlendMode.exclusion,
+        ),
+      ),
+      Container(
+        decoration: BoxDecoration(
+          color: color,
+          backgroundBlendMode: BlendMode.softLight,
+        ),
+      ),
+    ]);
   }
 }

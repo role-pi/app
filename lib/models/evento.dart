@@ -1,6 +1,5 @@
-import 'dart:math';
 import 'dart:ui';
-import 'package:role/features/new_evento/widgets/new_evento_theme.dart';
+import 'package:role/models/endereco.dart';
 import 'package:role/models/evento_theme.dart';
 import 'package:role/shared/utils/serializable.dart';
 
@@ -85,4 +84,9 @@ class Evento implements JSONSerializable {
   String get emoji => theme.emoji;
   Color get color1 => theme.color1;
   Color get color2 => theme.color2;
+
+  Endereco get endereco => Endereco(
+      latitude: -26.905926949896116,
+      longitude: -49.07710147997988,
+      descricao: "Factory Antônio da Veiga");
 }

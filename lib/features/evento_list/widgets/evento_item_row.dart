@@ -66,7 +66,9 @@ class EventoItemRow extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 22,
                             letterSpacing: -1.5,
-                            color: evento.theme.accentColor.withAlpha(150))),
+                            color: CupertinoDynamicColor.resolve(
+                                    evento.theme.accentColor, context)
+                                .withAlpha(150))),
                   ],
                 )),
           )),
