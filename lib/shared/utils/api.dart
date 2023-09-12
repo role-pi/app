@@ -40,18 +40,14 @@ class API {
     }
   }
 
-    Future<Object> delete(endpoint, data) async {
+  Future<Object> delete(endpoint) async {
     var url = '${api}${endpoint}';
 
-    var body = json.encode(data);
-
     try {
-      var response = await http.delete(Uri.parse(url),
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "JWT ${token}"
-          },
-          body: body);
+      var response = await http.delete(Uri.parse(url), headers: {
+        "Content-Type": "application/json",
+        "Authorization": "JWT ${token}"
+      });
       print(response.body);
 
       if (success == response.statusCode) {

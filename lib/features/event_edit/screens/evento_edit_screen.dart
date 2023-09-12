@@ -23,24 +23,17 @@ class EventoEditScreen extends StatelessWidget {
             Navigator.of(context).pop();
           },
           onPressedTrailing: () {}),
-          
-          Padding(
-          padding:
-              EdgeInsets.only(top: 12), 
-          child: RoundButton(
-            onPressed: () async {
-              EventoListProvider.shared.delete(evento);
-               Navigator.pushNamed(context, "/");
-              },
-            textColor: const Color.fromARGB(255, 255, 255, 255),
-            rectangleColor: const Color.fromARGB(255, 245, 0, 0),
-            text: 'Excluir evento',
-          ),
-          ),
-        
+      Padding(
+        padding: EdgeInsets.only(top: 12),
+        child: RoundButton(
+          onPressed: () async {
+            EventoListProvider.shared.delete(evento, context);
+          },
+          textColor: const Color.fromARGB(255, 255, 255, 255),
+          rectangleColor: const Color.fromARGB(255, 245, 0, 0),
+          text: 'Excluir evento',
+        ),
+      ),
     ]));
-  
   }
-
-  
 }

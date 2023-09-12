@@ -33,16 +33,15 @@ class EventoListProvider extends ChangeNotifier {
   }
 
   get() async {
-    await Future.delayed(const Duration(seconds: 1));
-
     var response = await eventoRepository.getEventos();
     set(response);
   }
 
-  delete(Evento evento) async {
-    await Future.delayed(const Duration(seconds: 1));
-
+  delete(Evento evento, BuildContext context) async {
     var response = await eventoRepository.deleteEvento(evento);
+    _eventos.remove(evento);
+    Navigator.pushNamed(context, "/");
+    notifyListeners();
     return true;
   }
 

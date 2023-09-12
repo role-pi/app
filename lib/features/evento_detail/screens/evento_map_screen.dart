@@ -4,8 +4,8 @@ import 'package:role/models/endereco.dart';
 import 'package:role/shared/widgets/navigation_bar.dart';
 
 class EventoMapScreen extends StatelessWidget {
-  Color color;
-  Endereco endereco;
+  final Color color;
+  final Endereco endereco;
 
   EventoMapScreen({required this.color, required this.endereco});
 

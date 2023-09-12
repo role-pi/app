@@ -4,7 +4,6 @@ import 'package:role/features/evento_detail/widgets/evento_detail_header.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/features/new_insumo/screens/new_insumo_screen.dart';
-import 'package:role/models/endereco.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/round_button.dart';

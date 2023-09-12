@@ -6,8 +6,8 @@ import 'package:latlong2/latlong.dart';
 import 'package:role/models/endereco.dart';
 
 class EventoDetailMap extends StatelessWidget {
-  Color color;
-  Endereco endereco;
+  final Color color;
+  final Endereco endereco;
 
   EventoDetailMap({required this.color, required this.endereco});
 

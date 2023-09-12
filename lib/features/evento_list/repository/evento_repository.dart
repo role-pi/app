@@ -35,11 +35,10 @@ class EventoRepository {
   }
 
   Future<bool> deleteEvento(Evento evento) async {
-    var response = await API().delete("evento", {evento.id});
+    var response = await API().delete("evento/${evento.id}");
 
     if (response is Success) {
-      Map decoded = json.decode(response.response as String);
-      return decoded["true"];
+      return true;
     }
     return false;
   }
