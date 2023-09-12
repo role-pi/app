@@ -16,53 +16,84 @@ class EventoDetailScreen extends StatelessWidget {
   final int id;
   final Evento evento;
 
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-              pinned: false,
-              delegate: EventoDetailHeaderDelegate(evento: evento)),
-          SliverToBoxAdapter(
-              child: Padding(
+@override
+Widget build(BuildContext context) {
+  return CupertinoPageScaffold(
+    child: CustomScrollView(
+      slivers: [
+        SliverPersistentHeader(
+          pinned: false,
+          delegate: EventoDetailHeaderDelegate(evento: evento),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                RoundButton(
-                  text: "adicionar insumo",
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) => NewInsumoScreen(id: id)));
-                    // Navigator.pushNamed(context, "/evento/1/insumo");
-                  },
-                  rectangleColor: CupertinoColors.systemGrey6,
-                  textColor: CupertinoColors.label,
+            SizedBox(height: 25),     
+           ElasticButton(
+            child: SizedBox(
+              height: 200,
+              child: EventoDetailMap(
+                color: evento.color2,
+                endereco: evento.endereco,
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => EventoMapScreen(
+                    color: evento.color2,
+                    endereco: evento.endereco,
+                  ),
                 ),
-                SizedBox(height: 16),
-                ElasticButton(
-                    child: SizedBox(
-                      height: 200,
-                      child: EventoDetailMap(
-                        color: evento.color2,
-                        endereco: evento.endereco,
+              );
+            },
+          ),
+          SizedBox(height: 25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Insumos",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onTap: () {
-                      Navigator.push(
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (context) => EventoMapScreen(
-                                  color: evento.color2,
-                                  endereco: evento.endereco)));
-                    })
+                            builder: (context) => NewInsumoScreen(id: id),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 100,
+                        height: 45,
+                        decoration: BoxDecoration(
+                          color: CupertinoColors.systemGrey6,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(
+                          CupertinoIcons.add,
+                          color: CupertinoColors.label,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 25),
               ],
             ),
-          ))
-        ],
-      ),
-    );
-  }
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }
