@@ -4,16 +4,20 @@ class NavigationBar extends StatelessWidget {
   final String leadingText;
   final IconData? trailingIcon;
   final Function() onPressedLeading, onPressedTrailing;
+  final Color color;
 
   const NavigationBar(
       {super.key,
       required this.leadingText,
       required this.trailingIcon,
       required this.onPressedLeading,
-      required this.onPressedTrailing});
+      required this.onPressedTrailing,
+      this.color = CupertinoColors.label});
 
   @override
   Widget build(BuildContext context) {
+    Color color = CupertinoDynamicColor.resolve(this.color, context);
+
     return Padding(
       padding: const EdgeInsets.only(left: 28.0, right: 28.0, top: 82.0),
       child: Row(
@@ -23,7 +27,7 @@ class NavigationBar extends StatelessWidget {
             child: Row(children: [
               Icon(
                 CupertinoIcons.chevron_back,
-                color: CupertinoColors.black,
+                color: color,
                 size: 30,
               ),
               Padding(
@@ -33,7 +37,7 @@ class NavigationBar extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: CupertinoColors.black,
+                      color: color,
                       letterSpacing: -1.8),
                 ),
               ),
@@ -45,8 +49,8 @@ class NavigationBar extends StatelessWidget {
             padding: EdgeInsets.zero,
             child: Icon(
               trailingIcon,
-              color: CupertinoColors.black,
-              size: 38,
+              color: color,
+              size: 32,
             ),
             onPressed: onPressedTrailing,
           ),

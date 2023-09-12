@@ -40,8 +40,7 @@ class EventoTheme {
   ];
 
   String get emoji => _emoji ?? "";
-  Color get accentColor =>
-      _color1 == null ? CupertinoColors.systemGrey : CupertinoColors.black;
+  Color get accentColor => CupertinoColors.label;
   Color get color1 => _color1 ?? CupertinoColors.systemGrey6;
   Color get color2 => _color2 ?? CupertinoColors.systemGrey6;
 }
