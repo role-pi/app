@@ -65,10 +65,10 @@ class SquareGrid extends StatelessWidget {
   SquareGrid({Key? key}) : super(key: key);
 
   final List<EventoTheme> defaultThemes = [
-    EventoTheme(emoji: '🎉', color1: Colors.red, color2: Colors.yellow),
-    EventoTheme(emoji: '🎊', color1: Colors.blue, color2: Colors.green),
-    EventoTheme(emoji: '🎈', color1: Colors.purple, color2: Colors.pink),
-    EventoTheme(emoji: '🎁', color1: Colors.green, color2: Colors.orange),
+    EventoTheme(emoji: '🎉', color1: Color.fromRGBO(244, 157, 64, 1), color2: Color.fromRGBO(245, 247, 73, 1)),
+    EventoTheme(emoji: '🎊', color1: Color.fromRGBO(224, 15, 161, 1), color2: Color.fromRGBO(32, 129, 195, 1)),
+    EventoTheme(emoji: '🎈', color1: Color.fromRGBO(137, 6, 32, 1), color2: Color.fromRGBO(252, 191, 183, 1)),
+    EventoTheme(emoji: '🎁', color1: Colors.red, color2: Colors.orange),
     EventoTheme(emoji: '🎂', color1: Colors.pink, color2: Colors.purple),
     EventoTheme(emoji: '🎄', color1: Colors.green, color2: Colors.red),
     EventoTheme(emoji: '🎃', color1: Colors.orange, color2: Colors.black),
