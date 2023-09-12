@@ -40,10 +40,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           actions: [
                             CupertinoActionSheetAction(
                                 onPressed: () {},
-                                child: Text("Selecione a imagem da galeria")),
+                                child: Text("Escolher da biblioteca")),
                             CupertinoActionSheetAction(
-                                onPressed: () {},
-                                child: Text("Selecione a imagem da galeria")),
+                                onPressed: () {}, child: Text("Tirar foto")),
                           ]);
                     }));
               },
@@ -60,6 +59,10 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   ),
                 ),
               )),
+          CupertinoTextFormFieldRow(
+            placeholder: "Nome de Usuário",
+            placeholderStyle: TextStyle(),
+          ),
           SizedBox(
             width: 200,
             height: 80,
