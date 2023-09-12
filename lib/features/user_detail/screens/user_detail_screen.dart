@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
@@ -25,7 +22,31 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           child: Column(
         children: [
           ElasticButton(
-              onTap: () {},
+              onTap: () {
+                showCupertinoModalPopup(
+                    context: context,
+                    builder: ((context) {
+                      return CupertinoActionSheet(
+                          cancelButton: CupertinoActionSheetAction(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              "Cancelar",
+                              style:
+                                  TextStyle(color: CupertinoColors.systemRed),
+                            ),
+                          ),
+                          actions: [
+                            CupertinoActionSheetAction(
+                                onPressed: () {},
+                                child: Text("Selecione a imagem da galeria")),
+                            CupertinoActionSheetAction(
+                                onPressed: () {},
+                                child: Text("Selecione a imagem da galeria")),
+                          ]);
+                    }));
+              },
               child: ClipOval(
                 child: Container(
                   child: Center(
@@ -39,24 +60,6 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   ),
                 ),
               )),
-          Container(
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 32, 32, 32),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: CupertinoTextFormFieldRow(
-              placeholder: "Nome de Usuário",
-              placeholderStyle: TextStyle(
-                  color: CupertinoColors.systemGrey2,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-              style: TextStyle(
-                color: CupertinoColors.black,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           SizedBox(
             width: 200,
             height: 80,
@@ -65,8 +68,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                 UserLoginProvider.shared.logout();
                 Navigator.pushNamed(context, "/onboarding");
               },
-              rectangleColor: CupertinoColors.white,
-              textColor: CupertinoColors.systemRed,
+              rectangleColor: CupertinoColors.systemRed,
+              textColor: CupertinoColors.white,
               text: 'logout',
             ),
           ),
