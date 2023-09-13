@@ -5,17 +5,13 @@ import 'package:role/features/user_detail/screens/user_detail_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
-class HomeHeader extends StatelessWidget {
-  const HomeHeader({
+class EventoListHeader extends StatelessWidget {
+  const EventoListHeader({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    Color textColor =
-        MediaQuery.of(context).platformBrightness == Brightness.dark
-            ? Color.fromARGB(255, 255, 255, 255)
-            : CupertinoColors.black;
     final loginProvider = Provider.of<UserLoginProvider>(context);
 
     return Row(
@@ -50,10 +46,10 @@ class HomeHeader extends StatelessWidget {
               fit: BoxFit.cover,
               width: 58,
               loadingBuilder: (context, child, loadingProgress) {
-                return _buildIconContainer();
+                return _buildIconContainer(context);
               },
               errorBuilder: (context, error, stackTrace) {
-                return _buildIconContainer();
+                return _buildIconContainer(context);
               },
             ),
           ),
@@ -62,11 +58,12 @@ class HomeHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildIconContainer() {
+  Widget _buildIconContainer(BuildContext context) {
     return Container(
       width: 58,
       height: 58,
-      color: CupertinoColors.systemGrey6,
+      color:
+          CupertinoDynamicColor.resolve(CupertinoColors.systemGrey6, context),
       child: const Icon(
         CupertinoIcons.person_fill,
         size: 28.0,

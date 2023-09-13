@@ -1,3 +1,5 @@
+import 'dart:ffi';
+import 'dart:math';
 import 'dart:ui';
 import 'package:role/models/endereco.dart';
 import 'package:role/models/evento_theme.dart';
@@ -39,12 +41,15 @@ class Evento implements JSONSerializable {
     _name = value;
   }
 
-  DateTime? get dataInicio => _dataInicio;
+  DateTime? get dataInicio =>
+      _dataInicio ??
+      DateTime.now().add(Duration(
+          seconds: ((Random().nextDouble() - 0.5) * 60 * 60 * 24 * 5).toInt()));
   set dataInicio(DateTime? value) {
     _dataInicio = value;
   }
 
-  DateTime? get dataFim => _dataFim;
+  DateTime? get dataFim => _dataFim ?? dataInicio!.add(Duration(days: 1));
   set dataFim(DateTime? value) {
     _dataFim = value;
   }
@@ -89,4 +94,64 @@ class Evento implements JSONSerializable {
       latitude: -26.905926949896116,
       longitude: -49.07710147997988,
       descricao: "Factory Antônio da Veiga");
+
+  String get shortDescription {
+    int participantes = 2;
+    final now = DateTime.now();
+    Duration? difference;
+
+    bool ongoing = false;
+
+    if (dataFim != null && now.isAfter(dataFim!)) {
+      return 'Concluído';
+    }
+
+    if (dataInicio != null &&
+        dataFim != null &&
+        now.isAfter(dataInicio!) &&
+        now.isBefore(dataFim!)) {
+      difference = dataFim!.difference(now);
+      ongoing = true;
+    } else if (dataInicio != null) {
+      difference = dataInicio!.difference(now);
+      if (now.isAfter(dataInicio!)) {
+        ongoing = true;
+      }
+    } else if (dataFim != null) {
+      difference = dataFim!.difference(now);
+      ongoing = true;
+    }
+
+    String? time = null;
+    if (difference != null) {
+      difference = difference.abs();
+
+      if (difference.inDays > 0) {
+        time = '${difference.inDays} dia${difference.inDays == 1 ? '' : 's'}';
+      } else if (difference.inHours > 0) {
+        time =
+            '${difference.inHours} hora${difference.inHours == 1 ? '' : 's'}';
+      } else if (difference.inMinutes > 0) {
+        time =
+            '${difference.inMinutes} minuto${difference.inMinutes == 1 ? '' : 's'}';
+      } else if (difference.inSeconds > 0) {
+        time =
+            '${difference.inSeconds} segundo${difference.inSeconds == 1 ? '' : 's'}';
+      }
+    }
+
+    if (time != null) {
+      return ongoing
+          ? (dataFim != null ? 'Termina em $time' : 'Começou há $time')
+          : 'Começa em $time';
+    }
+
+    if (participantes == 0 || participantes == 1) {
+      return 'Um convidado';
+    } else if (participantes == 2) {
+      return '1 convidado';
+    } else {
+      return '${participantes - 1} convidados';
+    }
+  }
 }
