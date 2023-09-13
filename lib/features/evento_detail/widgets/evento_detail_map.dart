@@ -18,12 +18,16 @@ class EventoDetailMap extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          EventoStyledMap(color: color, endereco: endereco),
+          EventoStyledMap(
+            color: color,
+            endereco: endereco,
+            interactiveFlags: 0,
+          ),
           Container(
             height: 48,
             decoration: BoxDecoration(
               color: CupertinoDynamicColor.resolve(
-                      CupertinoColors.systemBackground, context)
+                      CupertinoColors.systemGrey5, context)
                   .withOpacity(0.7),
             ),
             child: ClipRect(
@@ -60,14 +64,15 @@ class EventoDetailMap extends StatelessWidget {
 }
 
 class EventoStyledMap extends StatelessWidget {
-  const EventoStyledMap({
-    super.key,
-    required this.color,
-    required this.endereco,
-  });
+  const EventoStyledMap(
+      {super.key,
+      required this.color,
+      required this.endereco,
+      this.interactiveFlags = InteractiveFlag.all & ~InteractiveFlag.rotate});
 
   final Color color;
   final Endereco endereco;
+  final int interactiveFlags;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +88,7 @@ class EventoStyledMap extends StatelessWidget {
           options: MapOptions(
             center: endereco.coordenadas,
             zoom: 15.0,
-            interactiveFlags: 0,
+            interactiveFlags: interactiveFlags,
           ),
           nonRotatedChildren: [],
           children: [
@@ -110,16 +115,23 @@ class EventoStyledMap extends StatelessWidget {
           ],
         ),
       ),
-      Container(
-        decoration: BoxDecoration(
-          color: CupertinoDynamicColor.resolve(CupertinoColors.label, context),
-          backgroundBlendMode: BlendMode.exclusion,
-        ),
-      ),
-      Container(
-        decoration: BoxDecoration(
-          color: color,
-          backgroundBlendMode: BlendMode.softLight,
+      IgnorePointer(
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: CupertinoDynamicColor.resolve(
+                    CupertinoColors.label, context),
+                backgroundBlendMode: BlendMode.exclusion,
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: color,
+                backgroundBlendMode: BlendMode.softLight,
+              ),
+            ),
+          ],
         ),
       ),
     ]);

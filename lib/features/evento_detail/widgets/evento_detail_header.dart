@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_edit/screens/evento_edit_screen.dart';
 import 'package:role/models/evento.dart';
@@ -20,67 +21,66 @@ class EventDetailHeader extends StatelessWidget {
       child: SizedBox(
           child: Container(
               child: GradientWidget(
-            color1: evento.color1,
-            color2: evento.color2,
-            child: Column(
-              children: [
-                Opacity(
-                    opacity: 0.6,
-                    child: NavigationBar(
-                        leadingText: "eventos",
-                        trailingIcon: CupertinoIcons.pencil,
-                        onPressedLeading: () {
-                          Navigator.of(context).pop();
-                        },
-                        onPressedTrailing: () {
-                          Navigator.of(context)
-                              .push(CupertinoPageRoute(builder: (context) {
-                            return EventoEditScreen(id: evento.id);
-                          }));
-                        })),
-                Spacer(),
-                Padding(
-                    padding: EdgeInsets.fromLTRB(32, 0, 32, 32),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    evento.name,
-                                    style: TextStyle(
-                                        fontSize: 48,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: -1.8),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
+        color1: evento.color1,
+        color2: evento.color2,
+        child: Column(
+          children: [
+            Opacity(
+                opacity: 0.6,
+                child: NavigationBar(
+                    leadingText: "eventos",
+                    trailingIcon: CupertinoIcons.pencil,
+                    onPressedLeading: () {
+                      Navigator.of(context).pop();
+                    },
+                    onPressedTrailing: () {
+                      Navigator.of(context)
+                          .push(CupertinoPageRoute(builder: (context) {
+                        return EventoEditScreen(id: evento.id);
+                      }));
+                    })),
+            Spacer(),
+            Padding(
+                padding: EdgeInsets.fromLTRB(32, 0, 32, 32),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: AutoSizeText(
+                                "Rolê",
+                                style: TextStyle(
+                                    fontSize: 52,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: -2.4,
+                                    height: 1.0),
+                                maxLines: 2,
                               ),
-                              SizedBox(width: 16),
-                              evento.emoji.isNotEmpty
-                                  ? FittedBox(
-                                      fit: BoxFit.fitWidth,
-                                      child: Text(
-                                        evento.emoji,
-                                        style: TextStyle(
-                                            fontSize: 72,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    )
-                                  : SizedBox(),
-                            ],
-                          ),
-                          ContainerText(text: "24 de Agosto, 22:00 — 05:00"),
-                        ]))
-              ],
-            ),
-          )),
-          height: 300),
+                            ),
+                            SizedBox(width: 28),
+                            evento.emoji.isNotEmpty
+                                ? SizedBox(
+                                    // fit: BoxFit.fitWidth,
+                                    width: 72,
+                                    child: Text(
+                                      evento.emoji,
+                                      style: TextStyle(
+                                          fontSize: 72,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )
+                                : SizedBox(),
+                          ],
+                        ),
+                      ),
+                      ContainerText(text: "24 de Agosto, 22:00 — 05:00"),
+                    ]))
+          ],
+        ),
+      ))),
     );
   }
 }
@@ -97,10 +97,10 @@ class EventoDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 300.0;
+  double get minExtent => 300.0;
 
   @override
-  double get minExtent => 300.0;
+  double get maxExtent => 320.0;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {

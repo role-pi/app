@@ -7,8 +7,8 @@ import 'package:role/features/evento_list/widgets/evento_item_row.dart';
 import 'package:role/features/evento_list/widgets/evento_list_header.dart';
 import 'package:role/shared/widgets/circle_button.dart';
 
-class EventsList extends StatelessWidget {
-  const EventsList({
+class EventoList extends StatelessWidget {
+  const EventoList({
     super.key,
     required this.onTap,
   });
@@ -18,10 +18,8 @@ class EventsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     EventoListProvider usersViewModel = context.watch<EventoListProvider>();
-    Color backgroundColor =
-        MediaQuery.of(context).platformBrightness == Brightness.dark
-            ? Colors.black
-            : Color.fromARGB(255, 196, 180, 180);
+    Color backgroundColor = CupertinoDynamicColor.resolve(
+        CupertinoColors.systemBackground, context);
 
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -39,7 +37,7 @@ class EventsList extends StatelessWidget {
                   if (index == 0) {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(36, 36, 38, 16),
-                      child: HomeHeader(),
+                      child: EventoListHeader(),
                     );
                   } else {
                     if (usersViewModel.eventos.length == 0) {
