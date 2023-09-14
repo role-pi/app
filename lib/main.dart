@@ -25,7 +25,7 @@ class RoleApp extends StatelessWidget {
           DefaultCupertinoLocalizations.delegate,
           DefaultWidgetsLocalizations.delegate,
         ],
-        supportedLocales: [const Locale('pt', 'BR')],
+        supportedLocales: [const Locale('en', 'US'), const Locale('pt', 'BR')],
         title: 'rolê',
         debugShowCheckedModeBanner: false,
         initialRoute: "/onboarding",
