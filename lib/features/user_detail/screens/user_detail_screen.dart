@@ -30,6 +30,11 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
     }
   }
 
+  TextStyle style = TextStyle(
+      letterSpacing: -1.0,
+      color: CupertinoColors.black,
+      fontWeight: FontWeight.bold);
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -52,20 +57,20 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               Navigator.pop(context);
                             },
                             child: Text(
-                              "Cancelar",
-                              style: TextStyle(
-                                color: CupertinoColors.systemRed,
-                              ),
+                              "cancelar",
+                              style: style.copyWith(
+                                  color: CupertinoColors.systemRed),
                             ),
                           ),
                           actions: [
                             CupertinoActionSheetAction(
                               onPressed: () => pickImage(ImageSource.gallery),
-                              child: Text("Escolher da biblioteca"),
+                              child:
+                                  Text("escolher da biblioteca", style: style),
                             ),
                             CupertinoActionSheetAction(
                               onPressed: () => pickImage(ImageSource.camera),
-                              child: Text("Tirar foto"),
+                              child: Text("tirar foto", style: style),
                             ),
                           ],
                         );
