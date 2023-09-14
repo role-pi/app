@@ -23,7 +23,10 @@ class Evento implements JSONSerializable {
     EventoTheme? theme,
   })  : _id = id,
         _name = name,
-        _dataInicio = dataInicio,
+        _dataInicio = dataInicio ??
+            DateTime.now().add(Duration(
+                seconds: ((Random().nextDouble() - 0.5) * 60 * 60 * 24 * 5)
+                    .toInt())),
         _dataFim = dataFim,
         _valorTotal = valorTotal,
         _theme = theme ?? EventoTheme.random();
@@ -42,10 +45,7 @@ class Evento implements JSONSerializable {
     _name = value;
   }
 
-  DateTime? get dataInicio =>
-      _dataInicio ??
-      DateTime.now().add(Duration(
-          seconds: ((Random().nextDouble() - 0.5) * 60 * 60 * 24 * 5).toInt()));
+  DateTime? get dataInicio => _dataInicio;
   set dataInicio(DateTime? value) {
     _dataInicio = value;
   }
