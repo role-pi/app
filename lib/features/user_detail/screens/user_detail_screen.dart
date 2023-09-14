@@ -50,46 +50,56 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
+              child: Column(
                 children: [
-                  ElasticButton(
-                      onTap: () {
-                        showCupertinoModalPopup(
-                          context: context,
-                          builder: (context) {
-                            return CupertinoActionSheet(
-                              cancelButton: CupertinoActionSheetAction(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text(
-                                  "cancelar",
-                                  style: style.copyWith(
-                                      color: CupertinoColors.systemRed),
-                                ),
-                              ),
-                              actions: [
-                                CupertinoActionSheetAction(
-                                  onPressed: () =>
-                                      pickImage(ImageSource.gallery),
-                                  child: Text("escolher da biblioteca",
-                                      style: style),
-                                ),
-                                CupertinoActionSheetAction(
-                                  onPressed: () =>
-                                      pickImage(ImageSource.camera),
-                                  child: Text("tirar foto", style: style),
-                                ),
-                              ],
+                  Row(
+                    children: [
+                      ElasticButton(
+                          onTap: () {
+                            showCupertinoModalPopup(
+                              context: context,
+                              builder: (context) {
+                                return CupertinoActionSheet(
+                                  cancelButton: CupertinoActionSheetAction(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "cancelar",
+                                      style: style.copyWith(
+                                          color: CupertinoColors.systemRed),
+                                    ),
+                                  ),
+                                  actions: [
+                                    CupertinoActionSheetAction(
+                                      onPressed: () =>
+                                          pickImage(ImageSource.gallery),
+                                      child: Text("escolher da biblioteca",
+                                          style: style),
+                                    ),
+                                    CupertinoActionSheetAction(
+                                      onPressed: () =>
+                                          pickImage(ImageSource.camera),
+                                      child: Text("tirar foto", style: style),
+                                    ),
+                                  ],
+                                );
+                              },
                             );
                           },
-                        );
-                      },
-                      child: DefaultUserIcon()),
+                          child: DefaultUserIcon()),
+                      SizedBox(width: 20),
+                      Expanded(
+                        child: CupertinoTextField(
+                          placeholder: "Nome de Usuário",
+                        ),
+                      ),
+                    ],
+                  ),
                   SizedBox(width: 20),
                   Expanded(
                     child: CupertinoTextField(
-                      placeholder: "Nome de Usuário",
+                      placeholder: evento.email,
                     ),
                   ),
                 ],
