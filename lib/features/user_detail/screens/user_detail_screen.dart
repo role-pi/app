@@ -43,7 +43,11 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
       child: Center(
         child: Column(
           children: [
-            CustomNavigationBar(leadingText: "opções de conta"),
+            CustomNavigationBar(
+              leadingText: "opções de conta",
+              leadingIcon: null,
+              topPadding: 0,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

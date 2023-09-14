@@ -6,6 +6,7 @@ class CustomNavigationBar extends StatelessWidget {
   final Function()? onPressedLeading, onPressedTrailing;
   final Color color;
   final Color? accentColor;
+  final double topPadding;
 
   const CustomNavigationBar(
       {super.key,
@@ -16,7 +17,8 @@ class CustomNavigationBar extends StatelessWidget {
       this.onPressedLeading,
       this.onPressedTrailing,
       this.color = CupertinoColors.label,
-      this.accentColor});
+      this.accentColor,
+      this.topPadding = 54.0});
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +27,19 @@ class CustomNavigationBar extends StatelessWidget {
         CupertinoDynamicColor.resolve(this.accentColor ?? color, context);
 
     return Padding(
-      padding: const EdgeInsets.only(left: 28.0, right: 28.0, top: 82.0),
+      padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 28.0 + topPadding),
       child: Row(
         children: [
           CupertinoButton(
             padding: EdgeInsets.zero,
             child: Row(children: [
-              Icon(
-                leadingIcon,
-                color: color,
-                size: 30,
-              ),
+              leadingIcon != null
+                  ? Icon(
+                      leadingIcon,
+                      color: color,
+                      size: 30,
+                    )
+                  : SizedBox(),
               Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Text(
@@ -54,11 +58,13 @@ class CustomNavigationBar extends StatelessWidget {
           CupertinoButton(
             padding: EdgeInsets.zero,
             child: Row(children: [
-              Icon(
-                trailingIcon,
-                color: accentColor ?? color,
-                size: 30,
-              ),
+              trailingIcon != null
+                  ? Icon(
+                      trailingIcon,
+                      color: accentColor,
+                      size: 30,
+                    )
+                  : SizedBox(),
               Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Text(
