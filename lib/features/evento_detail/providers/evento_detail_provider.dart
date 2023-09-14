@@ -27,6 +27,6 @@ class EventoDetailProvider extends ChangeNotifier {
   }
 
   delete(Evento evento, BuildContext context) async {
-    await EventoListProvider.shared.delete(evento, context);
+    // await EventoListProvider.shared.delete(evento, context);
   }
 }

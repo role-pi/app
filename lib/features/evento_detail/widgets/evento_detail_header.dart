@@ -51,7 +51,7 @@ class EventDetailHeader extends StatelessWidget {
                           children: [
                             Expanded(
                               child: AutoSizeText(
-                                "Rolê",
+                                evento.name,
                                 style: TextStyle(
                                     fontSize: 52,
                                     fontWeight: FontWeight.bold,

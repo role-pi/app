@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/models/evento.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/navigation_bar.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
-class EventoEditScreen extends StatelessWidget {
+class EventoEditScreen extends StatefulWidget {
   EventoEditScreen({required this.id}) {
     evento = EventoListProvider.shared.evento(id);
   }
@@ -13,33 +15,201 @@ class EventoEditScreen extends StatelessWidget {
   late Evento evento;
 
   @override
+  State<EventoEditScreen> createState() => _EventoEditScreenState();
+}
+
+class _EventoEditScreenState extends State<EventoEditScreen> {
+  TextEditingController textController = TextEditingController();
+
+  DateTime dateTime1 = DateTime(2016, 8, 3, 17, 45);
+  DateTime dateTime2 = DateTime(2016, 8, 3, 17, 45);
+
+  @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        child: Column(children: [
-      NavigationBar(
-          leadingText: "voltar",
-          trailingIcon: CupertinoIcons.star_fill,
-          onPressedLeading: () {
-            Navigator.of(context).pop();
-          },
-          onPressedTrailing: () {}),
-          
-          Padding(
-          padding:
-              EdgeInsets.only(top: 12), 
-          child: RoundButton(
-            onPressed: () async {
-              
-              },
-            textColor: const Color.fromARGB(255, 255, 255, 255),
-            rectangleColor: const Color.fromARGB(255, 245, 0, 0),
-            text: 'Excluir evento',
+        child: SingleChildScrollView(
+      child: Column(children: [
+        NavigationBar(
+            trailingText: "salvar",
+            onPressedLeading: () {
+              Navigator.of(context).pop();
+            },
+            onPressedTrailing: () {},
+            accentColor: widget.evento.color1),
+        Form(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
+            child: Column(
+              children: [
+                FormItemGroupTitle(title: "INFORMAÇÕES"),
+                FormItemTextField(
+                    controller: textController, title: widget.evento.name),
+                SizedBox(height: 12),
+                Row(children: [
+                  FormItemDatePicker(
+                      dateTime: dateTime1,
+                      onDateTimeChanged: (d) {
+                        setState(() {
+                          dateTime1 = d;
+                        });
+                      }),
+                  SizedBox(width: 12),
+                  Icon(CupertinoIcons.arrow_right,
+                      size: 30, color: widget.evento.color1),
+                  SizedBox(width: 12),
+                  FormItemDatePicker(
+                      dateTime: dateTime2,
+                      onDateTimeChanged: (d) {
+                        setState(() {
+                          dateTime2 = d;
+                        });
+                      }),
+                ]),
+                SizedBox(height: 12),
+                SizedBox(
+                    height: 250,
+                    child: EventoDetailMap(
+                        color: widget.evento.color1,
+                        endereco: widget.evento.endereco)),
+                SizedBox(height: 12),
+                FormItemGroupTitle(title: "5 CONVIDADOS"),
+                SizedBox(height: 12),
+                RoundButton(
+                  onPressed: () async {},
+                  textColor: const Color.fromARGB(255, 255, 255, 255),
+                  rectangleColor: const Color.fromARGB(255, 245, 0, 0),
+                  text: 'excluir evento',
+                ),
+              ],
+            ),
           ),
-          ),
-        
-    ]));
-  
+        ),
+      ]),
+    ));
+  }
+}
+
+class FormItemDatePicker extends StatelessWidget {
+  const FormItemDatePicker(
+      {super.key, required this.dateTime, required this.onDateTimeChanged});
+
+  final DateTime dateTime;
+  final Function(DateTime) onDateTimeChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElasticButton(
+      onTap: () => _showDialog(
+        context,
+        CupertinoDatePicker(
+            initialDateTime: dateTime,
+            use24hFormat: true,
+            onDateTimeChanged: onDateTimeChanged),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+            color: CupertinoDynamicColor.resolve(
+                CupertinoColors.systemGrey6, context),
+            borderRadius: BorderRadius.circular(12.0)),
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+            '${dateTime.day}/${dateTime.month} ${dateTime.hour}:${dateTime.minute}',
+            style: const TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -1.0,
+                color: CupertinoColors.secondaryLabel)),
+      ),
+    );
   }
 
-  
+  void _showDialog(BuildContext context, child) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => Container(
+        height: 320,
+        padding: const EdgeInsets.only(top: 6.0),
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: CupertinoColors.systemBackground.resolveFrom(context),
+        ),
+        child: SafeArea(
+          top: false,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Text(
+                  "data de início",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: -1.2,
+                    color: CupertinoDynamicColor.resolve(
+                        CupertinoColors.label, context),
+                  ),
+                )),
+            SizedBox(height: 200, child: child)
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+class FormItemTextField extends StatelessWidget {
+  const FormItemTextField({required this.controller, required this.title});
+
+  final TextEditingController controller;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: CupertinoDynamicColor.resolve(
+              CupertinoColors.systemGrey6, context),
+          borderRadius: BorderRadius.circular(12.0)),
+      child: CupertinoTextFormFieldRow(
+        padding: const EdgeInsets.all(8.0),
+        controller: controller,
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          letterSpacing: -1.0,
+        ),
+      ),
+    );
+  }
+}
+
+class FormItemGroupTitle extends StatelessWidget {
+  const FormItemGroupTitle({required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              letterSpacing: -0.9,
+              color: CupertinoDynamicColor.resolve(
+                  CupertinoColors.systemGrey2, context),
+            ),
+          ),
+          Spacer()
+        ],
+      ),
+    );
+  }
 }

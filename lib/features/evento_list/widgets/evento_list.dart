@@ -48,9 +48,12 @@ class EventoList extends StatelessWidget {
                               opacity: 0.5,
                               child: Container(
                                   decoration: BoxDecoration(
-                                      color: CupertinoColors.systemGrey6,
+                                      color: CupertinoDynamicColor.resolve(
+                                          CupertinoColors.systemGrey6, context),
                                       border: Border.all(
-                                          color: CupertinoColors.systemGrey5,
+                                          color: CupertinoDynamicColor.resolve(
+                                              CupertinoColors.systemGrey5,
+                                              context),
                                           width: 4),
                                       borderRadius: BorderRadius.circular(18)),
                                   child: Padding(
@@ -67,7 +70,7 @@ class EventoList extends StatelessWidget {
                       Evento evento = usersViewModel.eventos[index - 1];
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 28.0, vertical: 4.0),
+                            horizontal: 28.0, vertical: 6.0),
                         child: EventoItemRow(
                           evento: evento,
                         ),

@@ -23,7 +23,7 @@ class ContainerText extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-            fontSize: 18,
+            fontSize: 19,
             letterSpacing: -1.4,
             color: CupertinoDynamicColor.resolve(CupertinoColors.white, context)
                 .withAlpha(200),

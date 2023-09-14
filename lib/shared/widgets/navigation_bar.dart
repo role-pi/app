@@ -1,22 +1,28 @@
 import 'package:flutter/cupertino.dart';
 
 class NavigationBar extends StatelessWidget {
-  final String leadingText;
-  final IconData? trailingIcon;
-  final Function() onPressedLeading, onPressedTrailing;
+  final String? leadingText, trailingText;
+  final IconData? leadingIcon, trailingIcon;
+  final Function()? onPressedLeading, onPressedTrailing;
   final Color color;
+  final Color? accentColor;
 
   const NavigationBar(
       {super.key,
-      required this.leadingText,
-      required this.trailingIcon,
-      required this.onPressedLeading,
-      required this.onPressedTrailing,
-      this.color = CupertinoColors.label});
+      this.leadingText = "voltar",
+      this.leadingIcon = CupertinoIcons.chevron_back,
+      this.trailingText,
+      this.trailingIcon,
+      this.onPressedLeading,
+      this.onPressedTrailing,
+      this.color = CupertinoColors.label,
+      this.accentColor});
 
   @override
   Widget build(BuildContext context) {
     Color color = CupertinoDynamicColor.resolve(this.color, context);
+    Color accentColor =
+        CupertinoDynamicColor.resolve(this.accentColor ?? color, context);
 
     return Padding(
       padding: const EdgeInsets.only(left: 28.0, right: 28.0, top: 82.0),
@@ -26,16 +32,16 @@ class NavigationBar extends StatelessWidget {
             padding: EdgeInsets.zero,
             child: Row(children: [
               Icon(
-                CupertinoIcons.chevron_back,
+                leadingIcon,
                 color: color,
                 size: 30,
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Text(
-                  leadingText,
+                  leadingText ?? "",
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: color,
                       letterSpacing: -1.8),
@@ -47,11 +53,24 @@ class NavigationBar extends StatelessWidget {
           Spacer(),
           CupertinoButton(
             padding: EdgeInsets.zero,
-            child: Icon(
-              trailingIcon,
-              color: color,
-              size: 32,
-            ),
+            child: Row(children: [
+              Icon(
+                trailingIcon,
+                color: accentColor ?? color,
+                size: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: Text(
+                  trailingText ?? "",
+                  style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: accentColor,
+                      letterSpacing: -1.8),
+                ),
+              ),
+            ]),
             onPressed: onPressedTrailing,
           ),
         ],
