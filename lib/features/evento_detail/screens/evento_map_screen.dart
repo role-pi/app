@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/models/endereco.dart';
-import 'package:role/shared/widgets/navigation_bar.dart';
+import 'package:role/shared/widgets/custom_navigation_bar.dart';
 
 class EventoMapScreen extends StatelessWidget {
   Color color;
@@ -14,7 +14,7 @@ class EventoMapScreen extends StatelessWidget {
     return CupertinoPageScaffold(
       child: Column(
         children: [
-          NavigationBar(
+          CustomNavigationBar(
               leadingText: "voltar",
               trailingIcon: CupertinoIcons.pencil,
               onPressedLeading: () {

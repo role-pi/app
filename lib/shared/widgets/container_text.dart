@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 
 class ContainerText extends StatelessWidget {
@@ -20,7 +21,7 @@ class ContainerText extends StatelessWidget {
           backgroundBlendMode: BlendMode.luminosity,
           borderRadius: BorderRadius.circular(8)),
       padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 8.0),
-      child: Text(
+      child: AutoSizeText(
         text,
         style: TextStyle(
             fontSize: 19,

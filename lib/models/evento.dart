@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:role/models/endereco.dart';
 import 'package:role/models/evento_theme.dart';
 import 'package:role/shared/utils/serializable.dart';
+import 'package:intl/intl.dart';
 
 class Evento implements JSONSerializable {
   int _id;
@@ -152,6 +153,34 @@ class Evento implements JSONSerializable {
       return '1 convidado';
     } else {
       return '${participantes - 1} convidados';
+    }
+  }
+
+  String get dateDescription {
+    if (dataInicio == null || dataFim == null) {
+      return '';
+    }
+
+    final DateFormat dayMonthFormat = DateFormat("d 'de' MMMM", 'pt_BR');
+    final DateFormat hourMinuteFormat = DateFormat('HH:mm');
+
+    final String startFormatted = dayMonthFormat.format(dataInicio!);
+    final String endFormatted =
+        dataFim != null ? dayMonthFormat.format(dataFim!) : '';
+    final String startHour = hourMinuteFormat.format(dataInicio!);
+    final String endHour =
+        dataFim != null ? hourMinuteFormat.format(dataFim!) : '';
+
+    if (dataFim != null) {
+      if (dataFim!.day - dataInicio!.day <= 1) {
+        return '$startFormatted, $startHour – $endHour';
+      } else if (dataInicio!.month == dataFim!.month) {
+        return 'de ${dataInicio!.day} a $endFormatted';
+      } else {
+        return 'de $startFormatted a $endFormatted';
+      }
+    } else {
+      return '$startFormatted, às $startHour';
     }
   }
 }
