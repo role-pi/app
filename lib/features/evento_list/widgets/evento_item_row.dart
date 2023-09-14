@@ -57,16 +57,13 @@ class EventoItemRow extends StatelessWidget {
                             color: CupertinoDynamicColor.resolve(
                                     evento.theme.accentColor, context)
                                 .withAlpha(200))),
-                    Text(
-                        evento.name == "Demonstração do PI"
-                            ? "Hoje"
-                            : evento.name == "Primeira entrega"
-                                ? "em 14 dias"
-                                : "em 101 dias",
+                    Text(evento.shortDescription,
                         style: TextStyle(
                             fontSize: 22,
                             letterSpacing: -1.5,
-                            color: evento.theme.accentColor.withAlpha(150))),
+                            color: CupertinoDynamicColor.resolve(
+                                    evento.theme.accentColor, context)
+                                .withAlpha(150))),
                   ],
                 )),
           )),

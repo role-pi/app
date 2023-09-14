@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/models/evento.dart';
-import 'package:role/features/evento_list/repository/evento_repository.dart';
+import 'package:role/features/evento_list/repository/evento_list_repository.dart';
 import 'package:role/shared/utils/api_status.dart';
 
 class EventoListProvider extends ChangeNotifier {
@@ -10,7 +10,7 @@ class EventoListProvider extends ChangeNotifier {
   bool get loading => _loading;
   List<Evento> get eventos => _eventos;
 
-  EventoRepository eventoRepository = EventoRepository();
+  EventoListRepository eventoRepository = EventoListRepository();
 
   static final EventoListProvider shared = EventoListProvider();
 

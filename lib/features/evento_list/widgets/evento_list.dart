@@ -7,8 +7,8 @@ import 'package:role/features/evento_list/widgets/evento_item_row.dart';
 import 'package:role/features/evento_list/widgets/evento_list_header.dart';
 import 'package:role/shared/widgets/circle_button.dart';
 
-class EventsList extends StatelessWidget {
-  const EventsList({
+class EventoList extends StatelessWidget {
+  const EventoList({
     super.key,
     required this.onTap,
   });
@@ -18,10 +18,8 @@ class EventsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     EventoListProvider usersViewModel = context.watch<EventoListProvider>();
-    Color backgroundColor =
-        MediaQuery.of(context).platformBrightness == Brightness.dark
-            ? Colors.black
-            : Color.fromARGB(255, 196, 180, 180);
+    Color backgroundColor = CupertinoDynamicColor.resolve(
+        CupertinoColors.systemBackground, context);
 
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -39,7 +37,7 @@ class EventsList extends StatelessWidget {
                   if (index == 0) {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(36, 36, 38, 16),
-                      child: HomeHeader(),
+                      child: EventoListHeader(),
                     );
                   } else {
                     if (usersViewModel.eventos.length == 0) {
@@ -50,9 +48,12 @@ class EventsList extends StatelessWidget {
                               opacity: 0.5,
                               child: Container(
                                   decoration: BoxDecoration(
-                                      color: CupertinoColors.systemGrey6,
+                                      color: CupertinoDynamicColor.resolve(
+                                          CupertinoColors.systemGrey6, context),
                                       border: Border.all(
-                                          color: CupertinoColors.systemGrey5,
+                                          color: CupertinoDynamicColor.resolve(
+                                              CupertinoColors.systemGrey5,
+                                              context),
                                           width: 4),
                                       borderRadius: BorderRadius.circular(18)),
                                   child: Padding(
@@ -61,7 +62,8 @@ class EventsList extends StatelessWidget {
                                     child: Text(
                                       "crie um evento com o botão de estrela logo abaixo",
                                       style: TextStyle(
-                                          fontWeight: FontWeight.w700),
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: -0.8),
                                       textAlign: TextAlign.center,
                                     ),
                                   ))));
@@ -69,7 +71,7 @@ class EventsList extends StatelessWidget {
                       Evento evento = usersViewModel.eventos[index - 1];
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 28.0, vertical: 4.0),
+                            horizontal: 28.0, vertical: 6.0),
                         child: EventoItemRow(
                           evento: evento,
                         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/models/evento.dart';
-import 'package:role/shared/widgets/navigation_bar.dart';
+import 'package:role/shared/widgets/custom_navigation_bar.dart';
 
 class NewInsumoScreen extends StatefulWidget {
   NewInsumoScreen({required this.id}) {
@@ -20,7 +20,7 @@ class _NewInsumoScreenState extends State<NewInsumoScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         child: Column(children: [
-      NavigationBar(
+      CustomNavigationBar(
           leadingText: "voltar",
           trailingIcon: CupertinoIcons.star_fill,
           onPressedLeading: () {
