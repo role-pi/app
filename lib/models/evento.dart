@@ -81,7 +81,7 @@ class Evento implements JSONSerializable {
   @override
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name": name,
+        "nome": name,
         "dataInicio": dataInicio?.toIso8601String(),
         "dataFim": dataFim?.toIso8601String(),
         "valorTotal": valorTotal,
