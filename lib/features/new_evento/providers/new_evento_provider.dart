@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/evento_list/repository/evento_repository.dart';
+import 'package:role/features/evento_list/repository/evento_list_repository.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/models/evento_theme.dart';
@@ -10,7 +10,7 @@ class NewEventoProvider extends ChangeNotifier {
 
   Evento evento = Evento(id: 0, name: "");
 
-  EventoRepository eventoRepository = EventoRepository();
+  EventoListRepository eventoRepository = EventoListRepository();
 
   static final NewEventoProvider shared = NewEventoProvider();
 

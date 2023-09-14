@@ -21,7 +21,7 @@ class RoundButton extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(12.0),
               color: CupertinoDynamicColor.resolve(
                   rectangleColor, context)), // Expand horizontally
           child: Center(
