@@ -43,11 +43,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
       child: Center(
         child: Column(
           children: [
-            CustomNavigationBar(
-              leadingText: "opções de conta",
-              leadingIcon: null,
-              topPadding: 0,
-            ),
+            CustomNavigationBar(leadingText: "opções de conta"),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -99,10 +95,20 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   SizedBox(width: 20),
                   Expanded(
                     child: CupertinoTextField(
-                      placeholder: evento.email,
+                      placeholder: "usuario@role.com",
                     ),
                   ),
                 ],
+              ),
+            ),
+            SizedBox(
+              width: 200,
+              height: 80,
+              child: RoundButton(
+                onPressed: () async {},
+                rectangleColor: CupertinoColors.systemRed,
+                textColor: CupertinoColors.white,
+                text: 'excluir conta',
               ),
             ),
             SizedBox(
@@ -113,8 +119,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   UserLoginProvider.shared.logout();
                   Navigator.pushNamed(context, "/onboarding");
                 },
-                rectangleColor: CupertinoColors.systemRed,
-                textColor: CupertinoColors.white,
+                rectangleColor: CupertinoColors.white,
+                textColor: CupertinoColors.systemRed,
                 text: 'logout',
               ),
             ),
