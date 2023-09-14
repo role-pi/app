@@ -4,7 +4,7 @@ import 'package:role/features/event_edit/screens/evento_edit_screen.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
-import 'package:role/shared/widgets/navigation_bar.dart';
+import 'package:role/shared/widgets/custom_navigation_bar.dart';
 
 class EventDetailHeader extends StatelessWidget {
   const EventDetailHeader({
@@ -27,7 +27,7 @@ class EventDetailHeader extends StatelessWidget {
           children: [
             Opacity(
                 opacity: 0.6,
-                child: NavigationBar(
+                child: CustomNavigationBar(
                     leadingText: "eventos",
                     trailingIcon: CupertinoIcons.pencil,
                     onPressedLeading: () {
@@ -76,7 +76,7 @@ class EventDetailHeader extends StatelessWidget {
                           ],
                         ),
                       ),
-                      ContainerText(text: "24 de Agosto, 22:00 — 05:00"),
+                      ContainerText(text: evento.dateDescription),
                     ]))
           ],
         ),

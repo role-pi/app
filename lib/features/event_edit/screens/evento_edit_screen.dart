@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
-import 'package:role/shared/widgets/navigation_bar.dart';
+import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class EventoEditScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _EventoEditScreenState extends State<EventoEditScreen> {
     return CupertinoPageScaffold(
         child: SingleChildScrollView(
       child: Column(children: [
-        NavigationBar(
+        CustomNavigationBar(
             trailingText: "salvar",
             onPressedLeading: () {
               Navigator.of(context).pop();
@@ -55,7 +56,8 @@ class _EventoEditScreenState extends State<EventoEditScreen> {
                       }),
                   SizedBox(width: 12),
                   Icon(CupertinoIcons.arrow_right,
-                      size: 30, color: widget.evento.color1),
+                      size: 30,
+                      color: CupertinoColors.systemGrey3.resolveFrom(context)),
                   SizedBox(width: 12),
                   FormItemDatePicker(
                       dateTime: dateTime2,
@@ -76,8 +78,8 @@ class _EventoEditScreenState extends State<EventoEditScreen> {
                 SizedBox(height: 12),
                 RoundButton(
                   onPressed: () async {},
-                  textColor: const Color.fromARGB(255, 255, 255, 255),
-                  rectangleColor: const Color.fromARGB(255, 245, 0, 0),
+                  textColor: CupertinoColors.white,
+                  rectangleColor: CupertinoColors.systemRed,
                   text: 'excluir evento',
                 ),
               ],
@@ -98,27 +100,31 @@ class FormItemDatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElasticButton(
-      onTap: () => _showDialog(
-        context,
-        CupertinoDatePicker(
-            initialDateTime: dateTime,
-            use24hFormat: true,
-            onDateTimeChanged: onDateTimeChanged),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-            color: CupertinoDynamicColor.resolve(
-                CupertinoColors.systemGrey6, context),
-            borderRadius: BorderRadius.circular(12.0)),
-        padding: const EdgeInsets.all(16.0),
-        child: Text(
-            '${dateTime.day}/${dateTime.month} ${dateTime.hour}:${dateTime.minute}',
-            style: const TextStyle(
+    return Expanded(
+      child: ElasticButton(
+        onTap: () => _showDialog(
+          context,
+          CupertinoDatePicker(
+              initialDateTime: dateTime,
+              use24hFormat: true,
+              onDateTimeChanged: onDateTimeChanged),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+              color: CupertinoDynamicColor.resolve(
+                  CupertinoColors.systemGrey6, context),
+              borderRadius: BorderRadius.circular(12.0)),
+          padding: const EdgeInsets.all(16.0),
+          alignment: Alignment.center,
+          child: Text(
+              '${dateTime.day}/${dateTime.month} ${dateTime.hour}:${dateTime.minute}',
+              style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
                 letterSpacing: -1.0,
-                color: CupertinoColors.secondaryLabel)),
+                color: CupertinoColors.secondaryLabel.resolveFrom(context),
+              )),
+        ),
       ),
     );
   }
@@ -148,8 +154,7 @@ class FormItemDatePicker extends StatelessWidget {
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     letterSpacing: -1.2,
-                    color: CupertinoDynamicColor.resolve(
-                        CupertinoColors.label, context),
+                    color: CupertinoColors.label.resolveFrom(context),
                   ),
                 )),
             SizedBox(height: 200, child: child)

@@ -62,7 +62,8 @@ class EventoList extends StatelessWidget {
                                     child: Text(
                                       "crie um evento com o botão de estrela logo abaixo",
                                       style: TextStyle(
-                                          fontWeight: FontWeight.w700),
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: -0.8),
                                       textAlign: TextAlign.center,
                                     ),
                                   ))));

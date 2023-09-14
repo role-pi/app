@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
-class NavigationBar extends StatelessWidget {
+class CustomNavigationBar extends StatelessWidget {
   final String? leadingText, trailingText;
   final IconData? leadingIcon, trailingIcon;
   final Function()? onPressedLeading, onPressedTrailing;
   final Color color;
   final Color? accentColor;
 
-  const NavigationBar(
+  const CustomNavigationBar(
       {super.key,
       this.leadingText = "voltar",
       this.leadingIcon = CupertinoIcons.chevron_back,
