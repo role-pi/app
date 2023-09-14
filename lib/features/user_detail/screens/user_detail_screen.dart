@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
+import 'package:role/shared/widgets/custom_navigation_bar.dart';
+import 'package:role/shared/widgets/default_user_icon.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 import '../../../shared/widgets/elastic_button.dart';
@@ -38,74 +40,56 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text('Detalhes do Usuário'),
-      ),
       child: Center(
         child: Column(
           children: [
-            Row(
-              children: [
-                ElasticButton(
-                  onTap: () {
-                    showCupertinoModalPopup(
-                      context: context,
-                      builder: (context) {
-                        return CupertinoActionSheet(
-                          cancelButton: CupertinoActionSheetAction(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              "cancelar",
-                              style: style.copyWith(
-                                  color: CupertinoColors.systemRed),
-                            ),
-                          ),
-                          actions: [
-                            CupertinoActionSheetAction(
-                              onPressed: () => pickImage(ImageSource.gallery),
-                              child:
-                                  Text("escolher da biblioteca", style: style),
-                            ),
-                            CupertinoActionSheetAction(
-                              onPressed: () => pickImage(ImageSource.camera),
-                              child: Text("tirar foto", style: style),
-                            ),
-                          ],
+            CustomNavigationBar(leadingText: "opções de conta"),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  ElasticButton(
+                      onTap: () {
+                        showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) {
+                            return CupertinoActionSheet(
+                              cancelButton: CupertinoActionSheetAction(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "cancelar",
+                                  style: style.copyWith(
+                                      color: CupertinoColors.systemRed),
+                                ),
+                              ),
+                              actions: [
+                                CupertinoActionSheetAction(
+                                  onPressed: () =>
+                                      pickImage(ImageSource.gallery),
+                                  child: Text("escolher da biblioteca",
+                                      style: style),
+                                ),
+                                CupertinoActionSheetAction(
+                                  onPressed: () =>
+                                      pickImage(ImageSource.camera),
+                                  child: Text("tirar foto", style: style),
+                                ),
+                              ],
+                            );
+                          },
                         );
                       },
-                    );
-                  },
-                  child: ClipOval(
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      color: CupertinoColors.lightBackgroundGray,
-                      child: Center(
-                        child: image != null
-                            ? Image.file(
-                                image!,
-                                width: 90,
-                                height: 90,
-                                fit: BoxFit.cover,
-                              )
-                            : Icon(
-                                CupertinoIcons.person_fill,
-                                color: CupertinoColors.black,
-                                size: 50.0,
-                              ),
-                      ),
+                      child: DefaultUserIcon()),
+                  SizedBox(width: 20),
+                  Expanded(
+                    child: CupertinoTextField(
+                      placeholder: "Nome de Usuário",
                     ),
                   ),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: CupertinoTextField(
-                    placeholder: "Nome de Usuário",
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
             SizedBox(
               width: 200,
