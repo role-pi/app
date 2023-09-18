@@ -65,16 +65,50 @@ class SquareGrid extends StatelessWidget {
   SquareGrid({Key? key}) : super(key: key);
 
   final List<EventoTheme> defaultThemes = [
-    EventoTheme(emoji: '🎉', color1: Color.fromRGBO(244, 157, 64, 1), color2: Color.fromRGBO(245, 247, 73, 1)),
-    EventoTheme(emoji: '🎊', color1: Color.fromRGBO(224, 15, 161, 1), color2: Color.fromRGBO(32, 129, 195, 1)),
-    EventoTheme(emoji: '🎈', color1: Color.fromRGBO(137, 6, 32, 1), color2: Color.fromRGBO(237, 37, 78, 1)),
-    EventoTheme(emoji: '🎁', color1: Color.fromRGBO(255, 20, 12, 1), color2: Color.fromRGBO(255, 183, 80, 1)),
-    EventoTheme(emoji: '🎂', color1: Color.fromRGBO(190, 90, 0, 1), color2: Color.fromRGBO(53, 50, 255, 1)),
-    EventoTheme(emoji: '🎄', color1: Color.fromRGBO(22, 244, 255, 1), color2: Color.fromRGBO(0, 255, 0, 1)),
-    EventoTheme(emoji: '🎃', color1: Color.fromRGBO(0, 0, 255, 1), color2: Color.fromRGBO(56, 2, 59, 1)),
-    EventoTheme(emoji: '🎆', color1: Colors.blue, color2: Colors.purple),
-    EventoTheme(emoji: '✨', color1: Colors.yellow, color2: Colors.white),
-    EventoTheme(emoji: '🪩', color1: Colors.grey, color2: Colors.blue),
+    EventoTheme(
+        emoji: '🎮',
+        color1: Color.fromRGBO(3, 119, 88, 1),
+        color2: Color.fromRGBO(6, 214, 160, 1)),
+    EventoTheme(
+        emoji: '🎉',
+        color1: Color.fromRGBO(255, 31, 68, 1),
+        color2: Color.fromRGBO(255, 74, 98, 1)),
+    EventoTheme(
+        emoji: '🥩',
+        color1: Color.fromRGBO(255, 192, 0, 1),
+        color2: Color.fromRGBO(255, 209, 71, 1)),
+    EventoTheme(
+        emoji: '🏖️',
+        color1: Color.fromRGBO(0, 137, 255, 1),
+        color2: Color.fromRGBO(27, 186, 238, 1)),
+    EventoTheme(
+        emoji: '🎆',
+        color1: Color.fromRGBO(0, 204, 31, 1),
+        color2: Color.fromRGBO(112, 255, 117, 1)),
+    EventoTheme(
+        emoji: '🎂',
+        color1: Color.fromRGBO(255, 2, 155, 1),
+        color2: Color.fromRGBO(255, 115, 188, 1)),
+    EventoTheme(
+        emoji: '🎄',
+        color1: Color.fromRGBO(208, 2, 13, 1),
+        color2: Color.fromRGBO(253, 33, 44, 1)),
+    EventoTheme(
+        emoji: '🎃',
+        color1: Color.fromRGBO(177, 69, 177, 1),
+        color2: Color.fromRGBO(56, 2, 59, 1)),
+    EventoTheme(
+        emoji: '🎁',
+        color1: Color.fromRGBO(51, 132, 80, 1),
+        color2: Color.fromRGBO(69, 176, 106, 1)),
+    EventoTheme(
+        emoji: '✨',
+        color1: Color.fromRGBO(244, 103, 134, 1),
+        color2: Color.fromRGBO(239, 46, 88, 1)),
+    EventoTheme(
+        emoji: '🪩',
+        color1: Color.fromRGBO(120, 161, 187, 1),
+        color2: Color.fromRGBO(75, 121, 149, 1)),
   ];
 
   @override
