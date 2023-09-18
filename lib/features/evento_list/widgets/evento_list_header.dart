@@ -3,6 +3,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/screens/user_detail_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
+import 'package:role/shared/widgets/default_user_icon.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
 class EventoListHeader extends StatelessWidget {
@@ -46,29 +47,15 @@ class EventoListHeader extends StatelessWidget {
               fit: BoxFit.cover,
               width: 58,
               loadingBuilder: (context, child, loadingProgress) {
-                return _buildIconContainer(context);
+                return DefaultUserIcon();
               },
               errorBuilder: (context, error, stackTrace) {
-                return _buildIconContainer(context);
+                return DefaultUserIcon();
               },
             ),
           ),
         )
       ],
-    );
-  }
-
-  Widget _buildIconContainer(BuildContext context) {
-    return Container(
-      width: 58,
-      height: 58,
-      color:
-          CupertinoDynamicColor.resolve(CupertinoColors.systemGrey6, context),
-      child: const Icon(
-        CupertinoIcons.person_fill,
-        size: 28.0,
-        color: CupertinoColors.systemGrey,
-      ),
     );
   }
 }

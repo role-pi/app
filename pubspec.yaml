@@ -38,7 +38,7 @@ dependencies:
   modal_bottom_sheet: ^2.1.2
   pin_code_fields: ^8.0.1
   pinput: ^3.0.0
-  image_picker: ^0.8.4+3
+  image_picker: ^1.0.4
   flutter_map: ^5.0.0
   latlong2: ^0.9.0
   auto_size_text: ^3.0.0
