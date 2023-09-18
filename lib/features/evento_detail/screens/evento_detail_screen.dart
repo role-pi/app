@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
 import 'package:role/features/evento_detail/screens/evento_map_screen.dart';
+import 'package:role/features/evento_detail/widgets/evento_detail_guests.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_header.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/features/new_insumo/screens/new_insumo_screen.dart';
@@ -32,6 +33,8 @@ class EventoDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   children: [
+                    EventDetailGuests(),
+                    SizedBox(height: 25),
                     ElasticButton(
                       child: SizedBox(
                         height: 200,
