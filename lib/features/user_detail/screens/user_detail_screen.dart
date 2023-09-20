@@ -43,48 +43,53 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
       child: Center(
         child: Column(
           children: [
-            CustomNavigationBar(leadingText: "opções de conta"),
+            CustomNavigationBar(
+              leadingIcon: null,
+              leadingText: "opções de conta",
+              topPadding: 0,
+            ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(24.0),
               child: Column(
                 children: [
                   Row(
                     children: [
-                      ElasticButton(
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElasticButton(
                           onTap: () {
-                            showCupertinoModalPopup(
-                              context: context,
-                              builder: (context) {
-                                return CupertinoActionSheet(
-                                  cancelButton: CupertinoActionSheetAction(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      "cancelar",
-                                      style: style.copyWith(
-                                          color: CupertinoColors.systemRed),
+                            showPopup(context);
+                          },
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              DefaultUserIcon(size: 72),
+                              Positioned(
+                                bottom: -4,
+                                right: -4,
+                                child: ClipOval(
+                                  child: Container(
+                                    width: 35.0,
+                                    height: 35.0,
+                                    decoration: ShapeDecoration(
+                                        color: CupertinoColors
+                                            .extraLightBackgroundGray,
+                                        shape: CircleBorder(
+                                            side: BorderSide(
+                                                width: 3,
+                                                color: CupertinoColors.white))),
+                                    child: Icon(
+                                      CupertinoIcons.pencil,
+                                      size: 24.0,
+                                      color: CupertinoColors.systemGrey,
                                     ),
                                   ),
-                                  actions: [
-                                    CupertinoActionSheetAction(
-                                      onPressed: () =>
-                                          pickImage(ImageSource.gallery),
-                                      child: Text("escolher da biblioteca",
-                                          style: style),
-                                    ),
-                                    CupertinoActionSheetAction(
-                                      onPressed: () =>
-                                          pickImage(ImageSource.camera),
-                                      child: Text("tirar foto", style: style),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          child: DefaultUserIcon()),
-                      SizedBox(width: 20),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       Expanded(
                         child: CupertinoTextField(
                           placeholder: "Nome de Usuário",
@@ -92,41 +97,64 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: CupertinoTextField(
-                      placeholder: "usuario@role.com",
+                  SizedBox(
+                    height: 60,
+                    child: RoundButton(
+                      onPressed: () async {},
+                      rectangleColor: CupertinoColors.systemRed,
+                      textColor: CupertinoColors.white,
+                      text: 'excluir conta',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 60,
+                    child: RoundButton(
+                      onPressed: () async {
+                        UserLoginProvider.shared.logout();
+                        Navigator.pushNamed(context, "/onboarding");
+                      },
+                      rectangleColor: CupertinoColors.white,
+                      textColor: CupertinoColors.systemRed,
+                      text: 'logout',
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              width: 200,
-              height: 80,
-              child: RoundButton(
-                onPressed: () async {},
-                rectangleColor: CupertinoColors.systemRed,
-                textColor: CupertinoColors.white,
-                text: 'excluir conta',
-              ),
-            ),
-            SizedBox(
-              width: 200,
-              height: 80,
-              child: RoundButton(
-                onPressed: () async {
-                  UserLoginProvider.shared.logout();
-                  Navigator.pushNamed(context, "/onboarding");
-                },
-                rectangleColor: CupertinoColors.white,
-                textColor: CupertinoColors.systemRed,
-                text: 'logout',
-              ),
-            ),
           ],
         ),
       ),
+    );
+  }
+
+  void showPopup(
+    BuildContext context,
+  ) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) {
+        return CupertinoActionSheet(
+          cancelButton: CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              "cancelar",
+              style: style.copyWith(color: CupertinoColors.systemRed),
+            ),
+          ),
+          actions: [
+            CupertinoActionSheetAction(
+              onPressed: () => pickImage(ImageSource.gallery),
+              child: Text("escolher da biblioteca", style: style),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () => pickImage(ImageSource.camera),
+              child: Text("tirar foto", style: style),
+            ),
+          ],
+        );
+      },
     );
   }
 }

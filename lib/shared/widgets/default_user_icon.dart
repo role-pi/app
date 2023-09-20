@@ -1,21 +1,21 @@
 import 'package:flutter/cupertino.dart';
 
 class DefaultUserIcon extends StatelessWidget {
-  const DefaultUserIcon({
-    super.key,
-  });
+  double size;
+
+  DefaultUserIcon({super.key, this.size = 58});
 
   @override
   Widget build(BuildContext context) {
     return ClipOval(
       child: Container(
-        width: 58,
-        height: 58,
+        width: size,
+        height: size,
         color:
             CupertinoDynamicColor.resolve(CupertinoColors.systemGrey6, context),
-        child: const Icon(
+        child: Icon(
           CupertinoIcons.person_fill,
-          size: 28.0,
+          size: size * 0.5,
           color: CupertinoColors.systemGrey,
         ),
       ),
