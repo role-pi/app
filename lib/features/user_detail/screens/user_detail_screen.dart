@@ -55,7 +55,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(0),
                         child: ElasticButton(
                           onTap: () {
                             showPopup(context);
@@ -63,7 +63,16 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           child: Stack(
                             clipBehavior: Clip.none,
                             children: [
-                              DefaultUserIcon(size: 72),
+                              ClipOval(
+                                child: Image.network(
+                                  "https://pbs.twimg.com/profile_images/1699634404291661824/Zc2OT-q4_400x400.jpg",
+                                  fit: BoxFit.cover,
+                                  width: 72,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return DefaultUserIcon(size: 72);
+                                  },
+                                ),
+                              ),
                               Positioned(
                                 bottom: -4,
                                 right: -4,
@@ -80,8 +89,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                                 color: CupertinoColors.white))),
                                     child: Icon(
                                       CupertinoIcons.pencil,
-                                      size: 24.0,
-                                      color: CupertinoColors.systemGrey,
+                                      size: 23.0,
+                                      color: CupertinoColors.label,
                                     ),
                                   ),
                                 ),
@@ -90,13 +99,31 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           ),
                         ),
                       ),
+                      SizedBox(width: 12),
                       Expanded(
-                        child: CupertinoTextField(
-                          placeholder: "Nome de Usuário",
+                        child: Column(
+                          children: [
+                            CupertinoTextField(
+                              placeholder: "Nome",
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                  color: CupertinoColors.systemGrey6,
+                                  borderRadius: BorderRadius.circular(8.0)),
+                              placeholderStyle: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: -0.8,
+                              ),
+                            ),
+                            CupertinoTextField(
+                              placeholder: "Email",
+                              decoration: BoxDecoration(border: null),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
+                  SizedBox(height: 12),
                   SizedBox(
                     height: 60,
                     child: RoundButton(
