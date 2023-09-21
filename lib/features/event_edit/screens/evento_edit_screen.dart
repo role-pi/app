@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 // import 'package:flutter/material.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
@@ -218,3 +219,42 @@ class FormItemGroupTitle extends StatelessWidget {
     );
   }
 }
+
+class ButtonDate extends StatefulWidget {
+  const ButtonDate({Key? key}) : super(key: key);
+
+  @override
+  State<ButtonDate> createState() => _ButtonDateState();
+}
+
+ class _ButtonDateState extends State<ButtonDate> {
+  DateTime dateTimeRaf = DateTime(2016, 8, 3, 17, 45);
+
+@override
+Widget build(BuildContext context) {
+  return CupertinoPageScaffold(
+    child: Center(
+      child: CupertinoButton(
+        child: const Text('Cupertino Date Picker'),
+        onPressed: (){
+          showCupertinoModalPopup(context: context,
+           builder: (BuildContext context) => SizedBox(
+            height: 250,
+            child: CupertinoDatePicker(
+              backgroundColor: Colors.white,
+              initialDateTime: dateTimeRaf,
+              onDateTimeChanged: (DateTime newTime){
+                setState(() => dateTimeRaf = newTime);
+              },
+              use24hFormat: true,
+              mode: CupertinoDatePickerMode.date,
+            ),
+           ),
+           );
+        },
+      ),
+      ),
+   );
+  }
+}
+ 
