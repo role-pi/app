@@ -53,7 +53,7 @@ class _EventoEditScreenState extends State<EventoEditScreen> {
                         setState(() {
                           dateTime1 = d;
                         });
-                      }),
+                      }, title: 'Data de Início',),
                   SizedBox(width: 12),
                   Icon(CupertinoIcons.arrow_right,
                       size: 30,
@@ -65,7 +65,7 @@ class _EventoEditScreenState extends State<EventoEditScreen> {
                         setState(() {
                           dateTime2 = d;
                         });
-                      }),
+                      }, title: 'Data de Fim',),
                 ]),
                 SizedBox(height: 12),
                 SizedBox(
@@ -116,8 +116,9 @@ class _EventoEditScreenState extends State<EventoEditScreen> {
 
 class FormItemDatePicker extends StatelessWidget {
   const FormItemDatePicker(
-      {super.key, required this.dateTime, required this.onDateTimeChanged});
+      {super.key, required this.title, required this.dateTime, required this.onDateTimeChanged});
 
+  final String title;
   final DateTime dateTime;
   final Function(DateTime) onDateTimeChanged;
 
@@ -172,7 +173,7 @@ class FormItemDatePicker extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Text(
-                  "data de início",
+                  title,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
