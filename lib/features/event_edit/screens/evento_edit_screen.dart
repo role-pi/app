@@ -77,7 +77,30 @@ class _EventoEditScreenState extends State<EventoEditScreen> {
                 FormItemGroupTitle(title: "5 CONVIDADOS"),
                 SizedBox(height: 12),
                 RoundButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    showCupertinoDialog<void>(
+                          context: context,
+                          builder: (BuildContext context) => CupertinoAlertDialog(
+                          title: const Text("Atenção!"),
+                          content: const Text("Certeza que Deseja Excluir esse Evento?"),
+                          actions: <CupertinoDialogAction>[
+                            CupertinoDialogAction(
+                              child: const Text("Não"),
+                              isDestructiveAction: true,
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
+                            ), 
+                            CupertinoDialogAction(
+                              child: const Text("Sim"),
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
+                            )
+                          ], 
+                          ),
+                        );
+                  },
                   textColor: CupertinoColors.white,
                   rectangleColor: CupertinoColors.systemRed,
                   text: 'excluir evento',
