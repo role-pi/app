@@ -127,7 +127,30 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   SizedBox(
                     height: 60,
                     child: RoundButton(
-                      onPressed: () async {},
+                      onPressed: () async {
+                        showCupertinoDialog<void>(
+                          context: context,
+                          builder: (BuildContext context) => CupertinoAlertDialog(
+                          title: const Text("Alerta!"),
+                          content: const Text("Você tem certeza que deseja excluir sua conta?"),
+                          actions: <CupertinoDialogAction>[
+                            CupertinoDialogAction(
+                              child: const Text("Não"),
+                              isDestructiveAction: true,
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
+                            ), 
+                            CupertinoDialogAction(
+                              child: const Text("Sim"),
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
+                            )
+                          ], 
+                          ),
+                        );
+                      },
                       rectangleColor: CupertinoColors.systemRed,
                       textColor: CupertinoColors.white,
                       text: 'excluir conta',
