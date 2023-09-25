@@ -38,10 +38,12 @@ class UserLoginProvider extends ChangeNotifier {
   Future<void> tryAuthentication(callback) async {
     if (state == LoginState.loggedOut) {
       _token = await storage.read(key: "token");
-      var response = await API().post("usuario/login", {});
 
-      if (response is Success) {
-        Map decoded = json.decode(response.response as String);
+      try {
+        final response =
+            await API().request(endpoint: "usuario/login", method: "POST");
+
+        Map decoded = json.decode(response.response);
         if (decoded.containsKey("user")) {
           setState(LoginState.loggedIn);
           setUser(Usuario.fromJson(decoded["user"]));
@@ -52,43 +54,54 @@ class UserLoginProvider extends ChangeNotifier {
           setState(LoginState.signIn);
           notifyListeners();
         }
-      } else if (response is Failure) {
+      } catch (e) {
         setState(LoginState.signIn);
-        print(response.errorResponse);
         notifyListeners();
-      }
 
-      // setState(LoginState.signIn);
+        if (e is ApiError) {
+          print('Error Code: ${e.code}, Message: ${e.message}');
+        } else {
+          print('Unknown error occurred: $e');
+        }
+      }
     }
   }
 
   Future<void> trySignUp(email, callback) async {
     if (state == LoginState.signIn) {
-      var response = await API().post("usuario/signin", {"email": email});
+      try {
+        var response = await API().request(
+            endpoint: "usuario/signin", method: "POST", body: {"email": email});
 
-      if (response is Success) {
-        Map decoded = json.decode(response.response as String);
+        Map decoded = json.decode(response.response);
         if (decoded.containsKey("user")) {
           setState(LoginState.loggedIn);
           callback();
         } else {
           setState(LoginState.verify);
         }
-      } else if (response is Failure) {
+      } catch (e) {
         setState(LoginState.signIn);
-      }
+        notifyListeners();
 
-      print(_state);
+        if (e is ApiError) {
+          print('Error Code: ${e.code}, Message: ${e.message}');
+        } else {
+          print('Unknown error occurred: $e');
+        }
+      }
     }
   }
 
   Future<void> verify(email, code, callback) async {
     if (state != LoginState.loggedIn) {
-      var response =
-          await API().post("usuario/verify", {"email": email, "code": code});
+      try {
+        var response = await API().request(
+            endpoint: "usuario/verify",
+            method: "POST",
+            body: {"email": email, "code": code});
 
-      if (response is Success) {
-        Map decoded = json.decode(response.response as String);
+        Map decoded = json.decode(response.response);
         if (decoded.containsKey("user") && decoded.containsKey("token")) {
           _token = decoded["token"];
           saveToken(_token);
@@ -99,9 +112,15 @@ class UserLoginProvider extends ChangeNotifier {
           callback();
           notifyListeners();
         }
-      } else {
+      } catch (e) {
         setState(LoginState.signIn);
         notifyListeners();
+
+        if (e is ApiError) {
+          print('Error Code: ${e.code}, Message: ${e.message}');
+        } else {
+          print('Unknown error occurred: $e');
+        }
       }
     }
   }
