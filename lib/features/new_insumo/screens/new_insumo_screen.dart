@@ -22,7 +22,8 @@ class _NewInsumoScreenState extends State<NewInsumoScreen> {
         child: Column(children: [
       CustomNavigationBar(
           leadingText: "voltar",
-          trailingIcon: CupertinoIcons.star_fill,
+          trailingText: "adicionar",
+          accentColor: widget.evento.color1,
           onPressedLeading: () {
             Navigator.of(context).pop();
           },
