@@ -11,18 +11,20 @@ import 'package:role/shared/widgets/round_button.dart';
 class EventoEditScreen extends StatefulWidget {
   EventoEditScreen({required this.id}) {
     evento = EventoListProvider.shared.evento(id);
+
+    nameController = TextEditingController(text: evento.name);
   }
 
   final int id;
+
   late Evento evento;
+  late TextEditingController nameController;
 
   @override
   State<EventoEditScreen> createState() => _EventoEditScreenState();
 }
 
 class _EventoEditScreenState extends State<EventoEditScreen> {
-  TextEditingController textController = TextEditingController();
-
   DateTime dateTime1 = DateTime(2016, 8, 3, 17, 45);
   DateTime dateTime2 = DateTime(2016, 8, 3, 17, 45);
 
@@ -45,28 +47,33 @@ class _EventoEditScreenState extends State<EventoEditScreen> {
               children: [
                 FormItemGroupTitle(title: "INFORMAÇÕES"),
                 FormItemTextField(
-                    controller: textController, title: widget.evento.name),
+                    controller: widget.nameController,
+                    title: widget.evento.name),
                 SizedBox(height: 12),
                 Row(children: [
                   FormItemDatePicker(
-                      dateTime: dateTime1,
-                      onDateTimeChanged: (d) {
-                        setState(() {
-                          dateTime1 = d;
-                        });
-                      }),
+                    dateTime: dateTime1,
+                    onDateTimeChanged: (d) {
+                      setState(() {
+                        dateTime1 = d;
+                      });
+                    },
+                    title: 'Data de Início',
+                  ),
                   SizedBox(width: 12),
                   Icon(CupertinoIcons.arrow_right,
                       size: 30,
                       color: CupertinoColors.systemGrey3.resolveFrom(context)),
                   SizedBox(width: 12),
                   FormItemDatePicker(
-                      dateTime: dateTime2,
-                      onDateTimeChanged: (d) {
-                        setState(() {
-                          dateTime2 = d;
-                        });
-                      }),
+                    dateTime: dateTime2,
+                    onDateTimeChanged: (d) {
+                      setState(() {
+                        dateTime2 = d;
+                      });
+                    },
+                    title: 'Data de Fim',
+                  ),
                 ]),
                 SizedBox(height: 12),
                 SizedBox(
@@ -78,7 +85,31 @@ class _EventoEditScreenState extends State<EventoEditScreen> {
                 FormItemGroupTitle(title: "5 CONVIDADOS"),
                 SizedBox(height: 12),
                 RoundButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    showCupertinoDialog<void>(
+                      context: context,
+                      builder: (BuildContext context) => CupertinoAlertDialog(
+                        title: const Text("Atenção!"),
+                        content: const Text(
+                            "Certeza que Deseja Excluir esse Evento?"),
+                        actions: <CupertinoDialogAction>[
+                          CupertinoDialogAction(
+                            child: const Text("Não"),
+                            isDestructiveAction: true,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          CupertinoDialogAction(
+                            child: const Text("Sim"),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          )
+                        ],
+                      ),
+                    );
+                  },
                   textColor: CupertinoColors.white,
                   rectangleColor: CupertinoColors.systemRed,
                   text: 'excluir evento',
@@ -94,8 +125,12 @@ class _EventoEditScreenState extends State<EventoEditScreen> {
 
 class FormItemDatePicker extends StatelessWidget {
   const FormItemDatePicker(
-      {super.key, required this.dateTime, required this.onDateTimeChanged});
+      {super.key,
+      required this.title,
+      required this.dateTime,
+      required this.onDateTimeChanged});
 
+  final String title;
   final DateTime dateTime;
   final Function(DateTime) onDateTimeChanged;
 
@@ -150,7 +185,7 @@ class FormItemDatePicker extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Text(
-                  "data de início",
+                  title,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

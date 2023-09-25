@@ -15,7 +15,7 @@ class EventoListProvider extends ChangeNotifier {
   static final EventoListProvider shared = EventoListProvider();
 
   EventoListProvider() {
-    // get();
+    get();
   }
 
   setLoading(bool loading) async {
@@ -28,15 +28,8 @@ class EventoListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  setUserError(Failure userError) {
-    // _userError = userError;
-  }
-
   get() async {
-    await Future.delayed(const Duration(seconds: 1));
-
-    var response = await eventoRepository.getEventos();
-    set(response);
+    set(await eventoRepository.getEventos());
   }
 
   Evento evento(int) {
