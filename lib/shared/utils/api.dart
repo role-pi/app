@@ -2,68 +2,66 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/utils/api_status.dart';
-import 'package:role/shared/utils/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:role/shared/utils/constants.dart';
 
 class API {
   static String get token => UserLoginProvider.shared.token ?? "";
 
-  Future<Object> post(endpoint, data) async {
-    var url = '${api}${endpoint}';
-
-    var body = json.encode(data);
-
+  Future<ApiResponse> request({
+    required String endpoint,
+    required String method,
+    Map<String, String>? headers,
+    bool auth = true,
+    dynamic body,
+    int success = 200,
+    String customErrorMessage = 'Unknown Error',
+  }) async {
     try {
-      var response = await http.post(Uri.parse(url),
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "JWT ${token}"
-          },
-          body: body);
+      http.Response response;
+
+      headers = headers ?? {"Content-Type": "application/json"};
+
+      if (auth) {
+        headers.addAll({"Authorization": "JWT ${token}"});
+      }
+
+      String url = '${api}${endpoint}';
+
+      switch (method) {
+        case 'GET':
+          response = await http.get(Uri.parse(url), headers: headers);
+          break;
+        case 'POST':
+          response =
+              await http.post(Uri.parse(url), headers: headers, body: body);
+          break;
+        case 'PUT':
+          response =
+              await http.put(Uri.parse(url), headers: headers, body: body);
+          break;
+        case 'DELETE':
+          response = await http.delete(Uri.parse(url), headers: headers);
+          break;
+        default:
+          throw ApiError(code: -1, message: 'Unsupported HTTP method: $method');
+      }
+
       print(response.body);
 
       if (success == response.statusCode) {
-        return Success(code: success, response: response.body);
+        return ApiResponse(code: response.statusCode, response: response.body);
       }
 
-      return Failure(
-          code: userInvalidResponse, errorResponse: 'Invalid response');
-    } on HttpException {
-      return Failure(code: noInternet, errorResponse: 'No Internet Connection');
+      throw ApiError(
+          code: response.statusCode, message: json.decode(response.body).error);
     } on SocketException {
-      return Failure(code: noInternet, errorResponse: 'No Internet Connection');
+      throw ApiError(code: -1, message: 'No Internet Connection');
     } on FormatException {
-      return Failure(code: invalidFormat, errorResponse: 'Invalid Format');
+      throw ApiError(code: -1, message: 'Invalid Format');
     } catch (e) {
       print(e);
-      return Failure(code: unknownError, errorResponse: 'Unknown Error');
-    }
-  }
-
-  Future<Object> get(endpoint) async {
-    var url = '${api}${endpoint}';
-
-    try {
-      var response = await http.get(Uri.parse(url), headers: {
-        "Content-Type": "application/json",
-        "Authorization": "JWT ${token}"
-      });
-
-      if (success == response.statusCode) {
-        return Success(code: success, response: response.body);
-      }
-
-      return Failure(
-          code: userInvalidResponse, errorResponse: 'Invalid Response');
-    } on HttpException {
-      return Failure(code: noInternet, errorResponse: 'No Internet Connection');
-    } on SocketException {
-      return Failure(code: noInternet, errorResponse: 'No Internet Connection');
-    } on FormatException {
-      return Failure(code: invalidFormat, errorResponse: 'Invalid Format');
-    } catch (e) {
-      print(e);
-      return Failure(code: unknownError, errorResponse: 'Unknown Error');
+      throw ApiError(code: -1, message: customErrorMessage);
     }
   }
 }

@@ -1,11 +1,13 @@
-class Success {
-  int code;
-  Object response;
-  Success({required this.code, required this.response});
+class ApiResponse {
+  final int code;
+  final String response;
+
+  ApiResponse({required this.code, required this.response});
 }
 
-class Failure {
-  int code;
-  Object errorResponse;
-  Failure({required this.code, required this.errorResponse});
+class ApiError implements Exception {
+  final int code;
+  final String message;
+
+  ApiError({required this.code, required this.message});
 }
