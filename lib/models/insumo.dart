@@ -61,7 +61,7 @@ class Insumo implements JSONSerializable {
 
   @override
   Map<String, dynamic> toJson() => {
-        "id_insumo": id,
+        "idInsumo": id,
         "tipo": tipo,
         "nome": nome,
         "descricao": descricao,

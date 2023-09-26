@@ -23,8 +23,9 @@ class CustomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color color = CupertinoDynamicColor.resolve(this.color, context);
-    Color accentColor =
-        CupertinoDynamicColor.resolve(this.accentColor ?? color, context);
+    Color accentColor = onPressedTrailing == null
+        ? color.withOpacity(0.2)
+        : CupertinoDynamicColor.resolve(this.accentColor ?? color, context);
 
     return Padding(
       padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 28.0 + topPadding),

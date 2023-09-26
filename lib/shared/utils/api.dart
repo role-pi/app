@@ -54,7 +54,8 @@ class API {
       }
 
       throw ApiError(
-          code: response.statusCode, message: json.decode(response.body).error);
+          code: response.statusCode,
+          message: json.decode(response.body)["error"]);
     } on SocketException {
       throw ApiError(code: -1, message: 'No Internet Connection');
     } on FormatException {

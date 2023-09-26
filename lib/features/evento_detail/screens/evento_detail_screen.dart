@@ -28,12 +28,18 @@ class EventoDetailScreen extends StatelessWidget {
               delegate: EventoDetailHeaderDelegate(
                   evento: eventoDetailProvider.evento),
             ),
+            CupertinoSliverRefreshControl(onRefresh: () async {
+              await eventoDetailProvider.get();
+            }),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   children: [
-                    EventDetailGuests(),
+                    eventoDetailProvider.evento.usuarios != null
+                        ? EventDetailGuests(
+                            convidados: eventoDetailProvider.evento.usuarios!)
+                        : Container(),
                     SizedBox(height: 25),
                     ElasticButton(
                       child: SizedBox(

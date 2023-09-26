@@ -3,6 +3,8 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:role/models/endereco.dart';
 import 'package:role/models/evento_theme.dart';
+import 'package:role/models/insumo.dart';
+import 'package:role/models/usuario.dart';
 import 'package:role/shared/utils/serializable.dart';
 import 'package:intl/intl.dart';
 
@@ -14,6 +16,9 @@ class Evento implements JSONSerializable {
   double? _valorTotal;
   EventoTheme _theme;
 
+  late List<Insumo>? _insumos = null;
+  late List<Usuario>? _usuarios = null;
+
   Evento({
     required int id,
     required String name,
@@ -23,10 +28,7 @@ class Evento implements JSONSerializable {
     EventoTheme? theme,
   })  : _id = id,
         _name = name,
-        _dataInicio = dataInicio ??
-            DateTime.now().add(Duration(
-                seconds: ((Random().nextDouble() - 0.5) * 60 * 60 * 24 * 5)
-                    .toInt())),
+        _dataInicio = dataInicio,
         _dataFim = dataFim,
         _valorTotal = valorTotal,
         _theme = theme ?? EventoTheme.random();
@@ -50,7 +52,7 @@ class Evento implements JSONSerializable {
     _dataInicio = value;
   }
 
-  DateTime? get dataFim => _dataFim ?? dataInicio!.add(Duration(days: 1));
+  DateTime? get dataFim => _dataFim;
   set dataFim(DateTime? value) {
     _dataFim = value;
   }
@@ -63,6 +65,16 @@ class Evento implements JSONSerializable {
   EventoTheme get theme => _theme;
   set theme(EventoTheme value) {
     _theme = value;
+  }
+
+  List<Insumo>? get insumos => _insumos;
+  set insumos(List<Insumo>? value) {
+    _insumos = value;
+  }
+
+  List<Usuario>? get usuarios => _usuarios;
+  set usuarios(List<Usuario>? value) {
+    _usuarios = value;
   }
 
   @override
@@ -80,11 +92,14 @@ class Evento implements JSONSerializable {
 
   @override
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "idEvento": id,
         "nome": name,
         "dataInicio": dataInicio?.toIso8601String(),
         "dataFim": dataFim?.toIso8601String(),
         "valorTotal": valorTotal,
+        "emoji": theme.emoji,
+        "cor1": theme.color1.toHex(),
+        "cor2": theme.color2.toHex(),
       };
 
   String get emoji => theme.emoji;
