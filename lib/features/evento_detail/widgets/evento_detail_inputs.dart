@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EventDetailInputs extends StatelessWidget {
-  final List<String> guestList;
+  
 
   
 
@@ -19,7 +19,6 @@ class EventDetailInputs extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: guestList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
@@ -36,7 +35,7 @@ class EventDetailInputs extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            guestList[index],
+                            "guestList[index],",
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
