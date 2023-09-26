@@ -93,7 +93,7 @@ class EventoDetailScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                       EventDetailInputs(),
+                      // EventDetailInputs(),
                       ],
                     ),
                   ],
