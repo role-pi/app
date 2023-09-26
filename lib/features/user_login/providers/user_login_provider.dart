@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:role/features/user_login/repository/user_repository.dart';
 import 'package:role/models/usuario.dart';
 import 'dart:convert';
 
@@ -16,6 +17,8 @@ class UserLoginProvider extends ChangeNotifier {
 
   Usuario? _user;
   Usuario? get user => _user;
+
+  UserRepository userRepository = UserRepository();
 
   static final UserLoginProvider shared = UserLoginProvider();
 
@@ -39,31 +42,17 @@ class UserLoginProvider extends ChangeNotifier {
     if (state == LoginState.loggedOut) {
       _token = await storage.read(key: "token");
 
-      try {
-        final response =
-            await API().request(endpoint: "usuario/login", method: "POST");
+      Usuario? usuario = await userRepository.authenticate();
 
-        Map decoded = json.decode(response.response);
-        if (decoded.containsKey("user")) {
-          setState(LoginState.loggedIn);
-          setUser(Usuario.fromJson(decoded["user"]));
-
-          callback();
-          notifyListeners();
-        } else {
-          setState(LoginState.signIn);
-          notifyListeners();
-        }
-      } catch (e) {
+      if (usuario != null) {
+        setState(LoginState.loggedIn);
+        setUser(usuario);
+        callback();
+      } else {
         setState(LoginState.signIn);
-        notifyListeners();
-
-        if (e is ApiError) {
-          print('Error Code: ${e.code}, Message: ${e.message}');
-        } else {
-          print('Unknown error occurred: $e');
-        }
       }
+
+      notifyListeners();
     }
   }
 
