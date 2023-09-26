@@ -38,7 +38,7 @@ class UserLoginProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> tryAuthentication(callback) async {
+  Future tryAuthentication(callback) async {
     if (state == LoginState.loggedOut) {
       _token = await storage.read(key: "token");
 
@@ -56,61 +56,37 @@ class UserLoginProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> trySignUp(email, callback) async {
+  Future trySignUp(email, callback) async {
     if (state == LoginState.signIn) {
-      try {
-        var response = await API().request(
-            endpoint: "usuario/signin", method: "POST", body: {"email": email});
+      var existing = await userRepository.signUp(email);
 
-        Map decoded = json.decode(response.response);
-        if (decoded.containsKey("user")) {
-          setState(LoginState.loggedIn);
-          callback();
-        } else {
-          setState(LoginState.verify);
-        }
-      } catch (e) {
+      if (existing != null) {
+        setState(LoginState.verify);
+      } else {
         setState(LoginState.signIn);
-        notifyListeners();
-
-        if (e is ApiError) {
-          print('Error Code: ${e.code}, Message: ${e.message}');
-        } else {
-          print('Unknown error occurred: $e');
-        }
       }
+
+      notifyListeners();
     }
   }
 
-  Future<void> verify(email, code, callback) async {
+  Future verify(email, code, callback) async {
     if (state != LoginState.loggedIn) {
-      try {
-        var response = await API().request(
-            endpoint: "usuario/verify",
-            method: "POST",
-            body: {"email": email, "code": code});
+      var (usuario, token) = await userRepository.verify(email, code);
 
-        Map decoded = json.decode(response.response);
-        if (decoded.containsKey("user") && decoded.containsKey("token")) {
-          _token = decoded["token"];
-          saveToken(_token);
+      if (usuario != null && token != null) {
+        _token = token;
+        saveToken(_token);
 
-          _user = Usuario.fromJson(decoded["user"]);
+        _user = usuario;
 
-          setState(LoginState.loggingIn);
-          callback();
-          notifyListeners();
-        }
-      } catch (e) {
+        setState(LoginState.loggingIn);
+        callback();
+      } else {
         setState(LoginState.signIn);
-        notifyListeners();
-
-        if (e is ApiError) {
-          print('Error Code: ${e.code}, Message: ${e.message}');
-        } else {
-          print('Unknown error occurred: $e');
-        }
       }
+
+      notifyListeners();
     }
   }
 

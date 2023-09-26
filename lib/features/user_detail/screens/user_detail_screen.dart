@@ -23,7 +23,7 @@ class UserDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider.value(
+    return ChangeNotifierProvider.value(
       value: userDetailProvider,
       child: CupertinoPageScaffold(
         child: Center(

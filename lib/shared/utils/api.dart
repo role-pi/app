@@ -21,6 +21,7 @@ class API {
       http.Response response;
 
       headers = headers ?? {"Content-Type": "application/json"};
+      body = jsonEncode(body);
 
       if (auth) {
         headers.addAll({"Authorization": "JWT ${token}"});
