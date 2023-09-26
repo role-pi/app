@@ -39,16 +39,10 @@ class Usuario implements JSONSerializable {
 
   String get displayName => _name ?? _email;
 
-  // Usuario.fromJson(Map<String, dynamic> json):
-  //       id = json["id_usuario"],
-  //       name = json["nome"],
-  //       email = json["email"],
-  //       profilePhoto = json["foto_de_perfil_url"]
-
   @override
   Map<String, dynamic> toJson() => {
-        "id": _id,
-        "name": _name,
+        "idUsuario": _id,
+        "nome": _name,
         "email": _email,
         "profilePhoto": _profilePhoto,
       };

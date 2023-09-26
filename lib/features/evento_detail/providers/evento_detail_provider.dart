@@ -4,15 +4,12 @@ import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/models/insumo.dart';
 import 'package:role/models/usuario.dart';
-import 'package:role/shared/utils/api_status.dart';
 
 class EventoDetailProvider extends ChangeNotifier {
   bool _loading = false;
   late Evento evento;
 
   EventoDetailRepository eventoRepository = EventoDetailRepository();
-
-  late List<Insumo> insumos;
 
   bool get loading => _loading;
 
@@ -27,12 +24,12 @@ class EventoDetailProvider extends ChangeNotifier {
   }
 
   setInsumos(List<Insumo> insumos) {
-    this.insumos = insumos;
+    evento.insumos = insumos;
     notifyListeners();
   }
 
   setUsuarios(List<Usuario> usuarios) {
-    this.insumos = insumos;
+    evento.usuarios = usuarios;
     notifyListeners();
   }
 

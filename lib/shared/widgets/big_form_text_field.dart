@@ -22,7 +22,7 @@ class BigFormTextField extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: color, width: 3),
+          bottom: BorderSide(color: CupertinoColors.systemFill, width: 3),
         ),
       ),
       child: CupertinoTextFormFieldRow(

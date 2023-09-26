@@ -39,7 +39,7 @@ class _NewEventoNameState extends State<NewEventoName> {
           SizedBox(height: 24.0),
           BigFormTextField(
             controller: _nameController,
-            color: CupertinoColors.systemFill.withOpacity(0.5),
+            color: CupertinoColors.label.resolveFrom(context).withOpacity(0.6),
             onChanged: (value) {
               // setState(() {
               //   enabled = !value?.isEmpty ?? false;

@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:role/features/event_edit/providers/evento_edit_provider.dart';
 // import 'package:flutter/material.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
@@ -8,118 +11,115 @@ import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
-class EventoEditScreen extends StatefulWidget {
-  EventoEditScreen({required this.id}) {
-    evento = EventoListProvider.shared.evento(id);
-
-    nameController = TextEditingController(text: evento.name);
-  }
+class EventoEditScreen extends StatelessWidget {
+  EventoEditScreen({required this.id})
+      : eventoEditProvider = EventoEditProvider(id);
 
   final int id;
-
-  late Evento evento;
-  late TextEditingController nameController;
-
-  @override
-  State<EventoEditScreen> createState() => _EventoEditScreenState();
-}
-
-class _EventoEditScreenState extends State<EventoEditScreen> {
-  DateTime dateTime1 = DateTime(2016, 8, 3, 17, 45);
-  DateTime dateTime2 = DateTime(2016, 8, 3, 17, 45);
+  final EventoEditProvider eventoEditProvider;
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        child: SingleChildScrollView(
-      child: Column(children: [
-        CustomNavigationBar(
-            trailingText: "salvar",
-            onPressedLeading: () {
-              Navigator.of(context).pop();
-            },
-            onPressedTrailing: () {},
-            accentColor: widget.evento.color1),
-        Form(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
-            child: Column(
-              children: [
-                FormItemGroupTitle(title: "INFORMAÇÕES"),
-                FormItemTextField(
-                    controller: widget.nameController,
-                    title: widget.evento.name),
-                SizedBox(height: 12),
-                Row(children: [
-                  FormItemDatePicker(
-                    dateTime: dateTime1,
-                    onDateTimeChanged: (d) {
-                      setState(() {
-                        dateTime1 = d;
-                      });
+    return ChangeNotifierProvider.value(
+        value: eventoEditProvider,
+        child: CupertinoPageScaffold(
+          child: SingleChildScrollView(
+            child: Column(children: [
+              Consumer<EventoEditProvider>(builder: (context, provider, child) {
+                return CustomNavigationBar(
+                    trailingText: "salvar",
+                    onPressedLeading: () {
+                      Navigator.of(context).pop();
                     },
-                    title: 'Data de Início',
-                  ),
-                  SizedBox(width: 12),
-                  Icon(CupertinoIcons.arrow_right,
-                      size: 30,
-                      color: CupertinoColors.systemGrey3.resolveFrom(context)),
-                  SizedBox(width: 12),
-                  FormItemDatePicker(
-                    dateTime: dateTime2,
-                    onDateTimeChanged: (d) {
-                      setState(() {
-                        dateTime2 = d;
-                      });
-                    },
-                    title: 'Data de Fim',
-                  ),
-                ]),
-                SizedBox(height: 12),
-                SizedBox(
-                    height: 250,
-                    child: EventoDetailMap(
-                        color: widget.evento.color1,
-                        endereco: widget.evento.endereco)),
-                SizedBox(height: 12),
-                FormItemGroupTitle(title: "5 CONVIDADOS"),
-                SizedBox(height: 12),
-                RoundButton(
-                  onPressed: () async {
-                    showCupertinoDialog<void>(
-                      context: context,
-                      builder: (BuildContext context) => CupertinoAlertDialog(
-                        title: const Text("Atenção!"),
-                        content: const Text(
-                            "Certeza que Deseja Excluir esse Evento?"),
-                        actions: <CupertinoDialogAction>[
-                          CupertinoDialogAction(
-                            child: const Text("Não"),
-                            isDestructiveAction: true,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          CupertinoDialogAction(
-                            child: const Text("Sim"),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          )
-                        ],
+                    onPressedTrailing: provider.changed
+                        ? () {
+                            eventoEditProvider.updateData(context);
+                          }
+                        : null,
+                    accentColor: provider.evento.color1);
+              }),
+              Form(
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
+                  child: Column(
+                    children: [
+                      FormItemGroupTitle(title: "INFORMAÇÕES"),
+                      FormItemTextField(
+                          controller: eventoEditProvider.nameController,
+                          title: eventoEditProvider.evento.name),
+                      SizedBox(height: 12),
+                      Row(children: [
+                        Consumer<EventoEditProvider>(
+                            builder: (context, provider, child) {
+                          return FormItemDatePicker(
+                            dateTime: provider.evento.dataInicio,
+                            onDateTimeChanged: provider.setDataInicio,
+                            title: 'data de início',
+                          );
+                        }),
+                        SizedBox(width: 12),
+                        Icon(CupertinoIcons.arrow_right,
+                            size: 30,
+                            color: CupertinoColors.systemGrey3
+                                .resolveFrom(context)),
+                        SizedBox(width: 12),
+                        Consumer<EventoEditProvider>(
+                            builder: (context, provider, child) {
+                          return FormItemDatePicker(
+                            dateTime: provider.evento.dataFim,
+                            onDateTimeChanged: provider.setDataFim,
+                            title: 'data de fim',
+                          );
+                        }),
+                      ]),
+                      SizedBox(height: 12),
+                      SizedBox(
+                          height: 250,
+                          child: EventoDetailMap(
+                              color: eventoEditProvider.evento.color1,
+                              endereco: eventoEditProvider.evento.endereco)),
+                      SizedBox(height: 12),
+                      FormItemGroupTitle(title: "5 CONVIDADOS"),
+                      SizedBox(height: 12),
+                      RoundButton(
+                        onPressed: () async {
+                          showCupertinoDialog<void>(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                CupertinoAlertDialog(
+                              title: const Text("Atenção!"),
+                              content: const Text(
+                                  "Certeza que Deseja Excluir esse Evento?"),
+                              actions: <CupertinoDialogAction>[
+                                CupertinoDialogAction(
+                                  child: const Text("Não"),
+                                  isDestructiveAction: true,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                CupertinoDialogAction(
+                                  child: const Text("Sim"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                        textColor: CupertinoColors.white,
+                        rectangleColor: CupertinoColors.systemRed,
+                        text: 'excluir evento',
                       ),
-                    );
-                  },
-                  textColor: CupertinoColors.white,
-                  rectangleColor: CupertinoColors.systemRed,
-                  text: 'excluir evento',
+                    ],
+                  ),
                 ),
-              ],
-            ),
+              ),
+            ]),
           ),
-        ),
-      ]),
-    ));
+        ));
   }
 }
 
@@ -131,7 +131,7 @@ class FormItemDatePicker extends StatelessWidget {
       required this.onDateTimeChanged});
 
   final String title;
-  final DateTime dateTime;
+  final DateTime? dateTime;
   final Function(DateTime) onDateTimeChanged;
 
   @override
@@ -153,7 +153,9 @@ class FormItemDatePicker extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           alignment: Alignment.center,
           child: Text(
-              '${dateTime.day}/${dateTime.month} ${dateTime.hour}:${dateTime.minute}',
+              dateTime == null
+                  ? ""
+                  : '${dateTime!.day}/${dateTime!.month} ${dateTime!.hour}:${dateTime!.minute}',
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
@@ -254,42 +256,3 @@ class FormItemGroupTitle extends StatelessWidget {
     );
   }
 }
-
-class ButtonDate extends StatefulWidget {
-  const ButtonDate({Key? key}) : super(key: key);
-
-  @override
-  State<ButtonDate> createState() => _ButtonDateState();
-}
-
- class _ButtonDateState extends State<ButtonDate> {
-  DateTime dateTimeRaf = DateTime(2016, 8, 3, 17, 45);
-
-@override
-Widget build(BuildContext context) {
-  return CupertinoPageScaffold(
-    child: Center(
-      child: CupertinoButton(
-        child: const Text('Cupertino Date Picker'),
-        onPressed: (){
-          showCupertinoModalPopup(context: context,
-           builder: (BuildContext context) => SizedBox(
-            height: 250,
-            child: CupertinoDatePicker(
-              backgroundColor: Colors.white,
-              initialDateTime: dateTimeRaf,
-              onDateTimeChanged: (DateTime newTime){
-                setState(() => dateTimeRaf = newTime);
-              },
-              use24hFormat: true,
-              mode: CupertinoDatePickerMode.date,
-            ),
-           ),
-           );
-        },
-      ),
-      ),
-   );
-  }
-}
- 

@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/new_evento/providers/new_evento_provider.dart';
-import 'package:role/models/evento.dart';
 import 'package:role/models/evento_theme.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/round_button.dart';
@@ -71,8 +69,8 @@ class SquareGrid extends StatelessWidget {
         color2: Color.fromRGBO(253, 33, 44, 1)),
     EventoTheme(
         emoji: '🎉',
-        color1: Color.fromRGBO(255, 31, 68, 1),
-        color2: Color.fromRGBO(255, 74, 98, 1)),
+        color1: Color.fromRGBO(215, 176, 182, 1),
+        color2: Color.fromRGBO(200, 164, 169, 1)),
     EventoTheme(
         emoji: '🍿',
         color1: Color.fromRGBO(244, 143, 42, 1),
@@ -103,12 +101,12 @@ class SquareGrid extends StatelessWidget {
         color2: Color.fromRGBO(199, 126, 58, 1)),
     EventoTheme(
         emoji: '🌱',
-        color1: Color.fromRGBO(180, 116, 56, 1),
-        color2: Color.fromRGBO(190, 151, 99, 1)),
+        color1: Color.fromRGBO(0, 53, 27, 1),
+        color2: Color.fromRGBO(8, 43, 0, 1)),
     EventoTheme(
         emoji: '✨',
-        color1: Color.fromRGBO(120, 161, 187, 1),
-        color2: Color.fromRGBO(75, 121, 149, 1)),
+        color1: Color.fromRGBO(203, 186, 0, 1),
+        color2: Color.fromRGBO(197, 141, 0, 1)),
     EventoTheme(
         emoji: '🏖️',
         color1: Color.fromRGBO(0, 137, 255, 1),
@@ -119,15 +117,15 @@ class SquareGrid extends StatelessWidget {
         color2: Color.fromRGBO(114, 9, 119, 1)),
     EventoTheme(
         emoji: '🪩',
-        color1: Color.fromRGBO(245, 137, 251, 1),
-        color2: Color.fromRGBO(235, 19, 246, 1)),
+        color1: Color.fromRGBO(241, 242, 255, 1),
+        color2: Color.fromRGBO(228, 225, 255, 1)),
     EventoTheme(
         emoji: '🎂',
-        color1: Color.fromRGBO(255, 2, 155, 1),
-        color2: Color.fromRGBO(255, 115, 188, 1)),
+        color1: Color.fromRGBO(255, 241, 250, 1),
+        color2: Color.fromRGBO(239, 214, 221, 1)),
     EventoTheme(
         emoji: '🎁',
-        color1: Color.fromRGBO(244, 103, 134, 1),
+        color1: Color.fromRGBO(244, 126, 103, 1),
         color2: Color.fromRGBO(239, 46, 88, 1)),
   ];
 
@@ -183,12 +181,12 @@ class ThemeGridItem extends StatelessWidget {
               color: selected
                   ? CupertinoColors.white
                   : CupertinoDynamicColor.resolve(
-                          CupertinoColors.systemGrey5, context)
-                      .withOpacity(0.5)),
+                      CupertinoColors.quaternarySystemFill, context)),
           child: Center(
             child: Text(
               theme.emoji,
-              style: TextStyle(color: CupertinoColors.white, fontSize: 32),
+              style: TextStyle(
+                  color: CupertinoColors.white, fontSize: selected ? 36 : 28),
             ),
           ),
         ),
