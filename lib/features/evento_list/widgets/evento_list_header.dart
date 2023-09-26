@@ -5,6 +5,7 @@ import 'package:role/features/user_detail/screens/user_detail_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/default_user_icon.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
+import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventoListHeader extends StatelessWidget {
   const EventoListHeader({
@@ -13,8 +14,6 @@ class EventoListHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<UserLoginProvider>(context);
-
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,7 +31,6 @@ class EventoListHeader extends StatelessWidget {
           ],
         ),
         Spacer(),
-        // Gray circle sized to fit
         ElasticButton(
           onTap: () => {
             showCupertinoModalBottomSheet(
@@ -40,20 +38,11 @@ class EventoListHeader extends StatelessWidget {
               builder: (context) => UserDetailScreen(),
             )
           },
-          child: ClipOval(
-            child: Image.network(
-              loginProvider.user?.profilePhoto ??
-                  "https://pbs.twimg.com/profile_images/1685715309615878144/JG6PlTn5_400x400.jpg",
-              fit: BoxFit.cover,
-              width: 58,
-              loadingBuilder: (context, child, loadingProgress) {
-                return DefaultUserIcon();
-              },
-              errorBuilder: (context, error, stackTrace) {
-                return DefaultUserIcon();
-              },
-            ),
-          ),
+          child:
+              Consumer<UserLoginProvider>(builder: (context, provider, child) {
+            return RemoteProfilePicture(
+                url: provider.user?.profilePhoto, size: 58);
+          }),
         )
       ],
     );

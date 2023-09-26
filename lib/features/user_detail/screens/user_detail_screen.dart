@@ -7,6 +7,7 @@ import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/default_user_icon.dart';
+import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 import '../../../shared/widgets/elastic_button.dart';
@@ -51,16 +52,12 @@ class UserDetailScreen extends StatelessWidget {
                             child: Stack(
                               clipBehavior: Clip.none,
                               children: [
-                                ClipOval(
-                                  child: Image.network(
-                                    "https://pbs.twimg.com/profile_images/1699634404291661824/Zc2OT-q4_400x400.jpg",
-                                    fit: BoxFit.cover,
-                                    width: 72,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return DefaultUserIcon(size: 72);
-                                    },
-                                  ),
-                                ),
+                                Consumer<UserLoginProvider>(
+                                    builder: (context, provider, child) {
+                                  return RemoteProfilePicture(
+                                      url: provider.user?.profilePhoto,
+                                      size: 72);
+                                }),
                                 Positioned(
                                   bottom: -4,
                                   right: -4,
