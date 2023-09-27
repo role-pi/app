@@ -6,12 +6,14 @@ import 'package:role/features/evento_detail/screens/evento_map_screen.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_guests.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_header.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
+import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/features/new_insumo/screens/new_insumo_screen.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
 class EventoDetailScreen extends StatelessWidget {
   EventoDetailScreen({required this.id})
-      : eventoDetailProvider = EventoDetailProvider(id);
+      : eventoDetailProvider =
+            EventoDetailProvider(EventoListProvider.shared, id);
 
   final int id;
   final EventoDetailProvider eventoDetailProvider;
