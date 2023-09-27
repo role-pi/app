@@ -14,8 +14,6 @@ class API {
     Map<String, String>? headers,
     bool auth = true,
     dynamic body,
-    int success = 200,
-    String customErrorMessage = 'Unknown Error',
   }) async {
     try {
       http.Response response;
@@ -25,6 +23,7 @@ class API {
 
       if (auth) {
         headers.addAll({"Authorization": "JWT ${token}"});
+        print(token);
       }
 
       String url = '${api}${endpoint}';
@@ -48,8 +47,6 @@ class API {
           throw ApiError(code: -1, message: 'Unsupported HTTP method: $method');
       }
 
-      print(response.body);
-
       if (success == response.statusCode) {
         return ApiResponse(code: response.statusCode, response: response.body);
       }
@@ -61,9 +58,45 @@ class API {
       throw ApiError(code: -1, message: 'No Internet Connection');
     } on FormatException {
       throw ApiError(code: -1, message: 'Invalid Format');
-    } catch (e) {
-      print(e);
-      throw ApiError(code: -1, message: customErrorMessage);
+    }
+  }
+
+  Future<ApiResponse> uploadFile({
+    required File file,
+    required String field,
+    required String endpoint,
+    bool auth = true,
+  }) async {
+    try {
+      String url = '${api}${endpoint}';
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+
+      if (auth) {
+        request.headers.addAll({"Authorization": "JWT ${token}"});
+      }
+
+      var fileStream = http.ByteStream(file.openRead());
+      var length = await file.length();
+      var multipartFile = http.MultipartFile(field, fileStream, length,
+          filename: file.path.split('/').last);
+
+      request.files.add(multipartFile);
+
+      var response = await request.send();
+
+      response.stream.transform(utf8.decoder).listen((value) {
+        print(value);
+      });
+
+      if (success == response.statusCode) {
+        return ApiResponse(code: response.statusCode, response: "");
+      }
+
+      throw ApiError(code: response.statusCode, message: "Unknown Error");
+    } on SocketException {
+      throw ApiError(code: -1, message: 'No Internet Connection');
+    } on FormatException {
+      throw ApiError(code: -1, message: 'Invalid Format');
     }
   }
 }

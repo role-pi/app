@@ -1,12 +1,10 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
-import 'package:role/shared/widgets/default_user_icon.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
@@ -18,7 +16,7 @@ class UserDetailScreen extends StatelessWidget {
   File? image;
 
   TextStyle style = TextStyle(
-      letterSpacing: -0.5,
+      letterSpacing: -0.8,
       color: CupertinoColors.black,
       fontWeight: FontWeight.bold);
 
@@ -75,7 +73,7 @@ class UserDetailScreen extends StatelessWidget {
                                                       CupertinoColors.white))),
                                       child: Icon(
                                         CupertinoIcons.pencil,
-                                        size: 23.0,
+                                        size: 22.0,
                                         color: CupertinoColors.label,
                                       ),
                                     ),
@@ -192,12 +190,17 @@ class UserDetailScreen extends StatelessWidget {
           ),
           actions: [
             CupertinoActionSheetAction(
-              onPressed: () =>
-                  userDetailProvider.pickImage(ImageSource.gallery),
+              onPressed: () {
+                Navigator.pop(context);
+                userDetailProvider.pickImage(ImageSource.gallery);
+              },
               child: Text("escolher da biblioteca", style: style),
             ),
             CupertinoActionSheetAction(
-              onPressed: () => userDetailProvider.pickImage(ImageSource.camera),
+              onPressed: () {
+                Navigator.pop(context);
+                userDetailProvider.pickImage(ImageSource.camera);
+              },
               child: Text("tirar foto", style: style),
             ),
           ],

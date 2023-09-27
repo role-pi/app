@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:role/models/evento_theme.dart';
 
 import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';

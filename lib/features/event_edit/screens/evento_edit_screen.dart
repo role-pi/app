@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/evento_edit_provider.dart';
 // import 'package:flutter/material.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
-import 'package:role/features/evento_list/providers/evento_list_provider.dart';
-import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/round_button.dart';

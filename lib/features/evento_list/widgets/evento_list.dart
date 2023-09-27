@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
