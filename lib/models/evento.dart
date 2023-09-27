@@ -94,7 +94,6 @@ class Evento implements JSONSerializable {
         "nome": name,
         "dataInicio": dataInicio?.toIso8601String(),
         "dataFim": dataFim?.toIso8601String(),
-        "valorTotal": valorTotal,
         "emoji": theme.emoji,
         "cor1": theme.color1.toHex(),
         "cor2": theme.color2.toHex(),

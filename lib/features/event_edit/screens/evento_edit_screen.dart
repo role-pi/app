@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/evento_edit_provider.dart';
+import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
 // import 'package:flutter/material.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
@@ -8,11 +9,11 @@ import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class EventoEditScreen extends StatelessWidget {
-  EventoEditScreen({required this.id})
-      : eventoEditProvider = EventoEditProvider(id);
+  EventoEditScreen(EventoDetailProvider eventoDetailProvider) {
+    this.eventoEditProvider = EventoEditProvider(eventoDetailProvider);
+  }
 
-  final int id;
-  final EventoEditProvider eventoEditProvider;
+  late EventoEditProvider eventoEditProvider;
 
   @override
   Widget build(BuildContext context) {
