@@ -6,36 +6,29 @@ import 'package:role/models/insumo.dart';
 import 'package:role/models/usuario.dart';
 
 class EventoDetailProvider extends ChangeNotifier {
-  bool _loading = false;
   late Evento evento;
 
   EventoDetailRepository eventoRepository = EventoDetailRepository();
-
-  bool get loading => _loading;
 
   EventoDetailProvider(int id) {
     evento = EventoListProvider.shared.evento(id);
     get();
   }
 
-  setLoading(bool loading) async {
-    _loading = loading;
-    notifyListeners();
-  }
-
   setInsumos(List<Insumo> insumos) {
     evento.insumos = insumos;
-    notifyListeners();
   }
 
   setUsuarios(List<Usuario> usuarios) {
     evento.usuarios = usuarios;
-    notifyListeners();
   }
 
   get() async {
+    evento = await eventoRepository.getEvento(evento) ?? evento;
     setInsumos(await eventoRepository.getInsumos(evento));
     setUsuarios(await eventoRepository.getUsuarios(evento));
+
+    notifyListeners();
   }
 
   delete(Evento evento, BuildContext context) async {

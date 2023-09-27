@@ -19,11 +19,10 @@ class API {
       http.Response response;
 
       headers = headers ?? {"Content-Type": "application/json"};
-      body = jsonEncode(body);
+      body = json.encode(body);
 
       if (auth) {
         headers.addAll({"Authorization": "JWT ${token}"});
-        print(token);
       }
 
       String url = '${api}${endpoint}';
@@ -46,6 +45,8 @@ class API {
         default:
           throw ApiError(code: -1, message: 'Unsupported HTTP method: $method');
       }
+
+      print(response.statusCode);
 
       if (success == response.statusCode) {
         return ApiResponse(code: response.statusCode, response: response.body);

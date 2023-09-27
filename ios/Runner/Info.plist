@@ -26,6 +26,12 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>To take user profile image</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Used to capture audio for image picker plugin</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To choose user profile image</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -47,12 +53,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>To take user profile image</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To choose user profile image</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Used to capture audio for image picker plugin</string>
-
 </dict>
 </plist>
