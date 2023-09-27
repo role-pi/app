@@ -88,12 +88,14 @@ class Evento implements JSONSerializable {
       theme: EventoTheme.fromHex(
           emoji: json["emoji"], hex1: json["cor_1"], hex2: json["cor_2"]));
 
+  DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+
   @override
   Map<String, dynamic> toJson() => {
         "idEvento": id,
         "nome": name,
-        "dataInicio": dataInicio?.toIso8601String(),
-        "dataFim": dataFim?.toIso8601String(),
+        "dataInicio": dataInicio != null ? formatter.format(dataInicio!) : "",
+        "dataFim": dataFim != null ? formatter.format(dataFim!) : "",
         "emoji": theme.emoji,
         "cor1": theme.color1.toHex(),
         "cor2": theme.color2.toHex(),

@@ -6,13 +6,26 @@ import 'package:role/models/insumo.dart';
 import 'package:role/models/usuario.dart';
 
 class EventoDetailProvider extends ChangeNotifier {
-  late Evento evento;
+  late int id;
+  late EventoListProvider eventoListProvider;
+
+  Evento get evento => eventoListProvider.evento(id);
 
   EventoDetailRepository eventoRepository = EventoDetailRepository();
 
-  EventoDetailProvider(int id) {
-    evento = EventoListProvider.shared.evento(id);
+  EventoDetailProvider(EventoListProvider eventoListProvider, int id) {
+    this.eventoListProvider = eventoListProvider;
+    this.id = id;
     get();
+  }
+
+  updateEvento(Evento? evento) {
+    if (evento == null) return;
+    this.evento.name = evento.name;
+    this.evento.dataInicio = evento.dataInicio;
+    this.evento.dataFim = evento.dataFim;
+    this.evento.valorTotal = evento.valorTotal;
+    this.evento.theme = evento.theme;
   }
 
   setInsumos(List<Insumo> insumos) {
@@ -24,7 +37,7 @@ class EventoDetailProvider extends ChangeNotifier {
   }
 
   get() async {
-    evento = await eventoRepository.getEvento(evento) ?? evento;
+    updateEvento(await eventoRepository.getEvento(evento));
     setInsumos(await eventoRepository.getInsumos(evento));
     setUsuarios(await eventoRepository.getUsuarios(evento));
 
