@@ -8,6 +8,7 @@ import 'package:role/features/evento_detail/widgets/evento_detail_header.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/features/new_insumo/screens/new_insumo_screen.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
+import 'package:role/features/evento_detail/widgets/evento_detail_inputs.dart';
 
 class EventoDetailScreen extends StatelessWidget {
   EventoDetailScreen({required this.id})
@@ -98,6 +99,7 @@ class EventoDetailScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                      // EventDetailInputs(),
                       ],
                     ),
                   ],
