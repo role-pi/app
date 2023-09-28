@@ -4,7 +4,6 @@ import 'package:role/models/insumo.dart';
 
 import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
-import '../../../models/evento.dart';
 
 class NewInsumoRepository {
   Future<int?> postInsumo(Insumo insumo) async {

@@ -50,39 +50,41 @@ class UserDetailScreen extends StatelessWidget {
                             onTap: () {
                               showPopup(context);
                             },
-                            child: Stack(
-                              clipBehavior: Clip.none,
-                              children: [
-                                Consumer<UserLoginProvider>(
-                                    builder: (context, provider, child) {
-                                  return RemoteProfilePicture(
-                                      url: provider.user?.profilePhoto,
-                                      size: 72);
-                                }),
-                                Positioned(
-                                  bottom: -4,
-                                  right: -4,
-                                  child: ClipOval(
-                                    child: Container(
-                                      width: 35.0,
-                                      height: 35.0,
-                                      decoration: ShapeDecoration(
-                                          color: CupertinoColors
-                                              .extraLightBackgroundGray,
-                                          shape: CircleBorder(
-                                              side: BorderSide(
-                                                  width: 3,
-                                                  color:
-                                                      CupertinoColors.white))),
-                                      child: Icon(
-                                        CupertinoIcons.pencil,
-                                        size: 22.0,
-                                        color: CupertinoColors.label,
+                            child: SizedBox(
+                              child: Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  Consumer<UserLoginProvider>(
+                                      builder: (context, provider, child) {
+                                    return RemoteProfilePicture(
+                                        url: provider.user?.profilePhoto,
+                                        size: 72);
+                                  }),
+                                  Positioned(
+                                    bottom: -4,
+                                    right: -4,
+                                    child: ClipOval(
+                                      child: Container(
+                                        width: 35.0,
+                                        height: 35.0,
+                                        decoration: ShapeDecoration(
+                                            color: CupertinoColors
+                                                .extraLightBackgroundGray,
+                                            shape: CircleBorder(
+                                                side: BorderSide(
+                                                    width: 3,
+                                                    color: CupertinoColors
+                                                        .white))),
+                                        child: Icon(
+                                          CupertinoIcons.pencil,
+                                          size: 22.0,
+                                          color: CupertinoColors.label,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
