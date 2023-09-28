@@ -9,6 +9,7 @@ class EventoDetailInsumos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: insumos.length,
@@ -39,7 +40,7 @@ class EventoDetailInsumos extends StatelessWidget {
                   letterSpacing: -1.0,
                 ),
               ),
-              SizedBox(width: 12),
+              Spacer(),
               Text(
                 insumos[index].valor.toString(),
                 style: TextStyle(

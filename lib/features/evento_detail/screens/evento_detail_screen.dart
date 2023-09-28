@@ -49,7 +49,7 @@ class EventoDetailScreen extends StatelessWidget {
                         return Container();
                       },
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 24),
                     ElasticButton(
                       child: SizedBox(
                         height: 200,
@@ -70,7 +70,7 @@ class EventoDetailScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -109,6 +109,7 @@ class EventoDetailScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: 24),
                     Consumer<EventoDetailProvider>(
                       builder: (context, provider, child) {
                         if (provider.evento.insumos != null) {

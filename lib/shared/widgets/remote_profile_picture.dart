@@ -14,6 +14,7 @@ class RemoteProfilePicture extends StatelessWidget {
         url ?? "",
         fit: BoxFit.fill,
         width: size,
+        height: size,
         errorBuilder: (context, error, stackTrace) {
           return DefaultUserIcon(
             size: size,
