@@ -42,21 +42,21 @@ class EventoDetailRepository {
     return [];
   }
 
-  Future<bool> updateEvento(Evento evento) async {
-    try {
-      await API().request(endpoint: "insumo/${evento.id}", method: "PUT");
+  // Future<bool> updateEvento(Evento evento) async {
+  //   try {
+  //     await API().request(endpoint: "insumo/${evento.id}", method: "PUT");
 
-      return true;
-    } catch (e) {
-      if (e is ApiError) {
-        print('Error Code: ${e.code}, Message: ${e.message}');
-      } else {
-        print('Unknown error occurred: $e');
-      }
-    }
+  //     return true;
+  //   } catch (e) {
+  //     if (e is ApiError) {
+  //       print('Error Code: ${e.code}, Message: ${e.message}');
+  //     } else {
+  //       print('Unknown error occurred: $e');
+  //     }
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 
   List<Insumo> insumosFromJSON(String str) =>
       List<Insumo>.from(json.decode(str).map((x) => Insumo.fromJson(x)));

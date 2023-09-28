@@ -23,6 +23,18 @@ class EventoDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  updateEvento(Evento? evento) {
+    if (evento == null) return;
+    this.evento.name = evento.name;
+    this.evento.dataInicio = evento.dataInicio;
+    this.evento.dataFim = evento.dataFim;
+    this.evento.valorTotal = evento.valorTotal;
+    this.evento.theme = evento.theme;
+    notifyListeners();
+
+    EventoListProvider.shared.notifyListeners();
+  }
+
   setInsumos(List<Insumo> insumos) {
     evento.insumos = insumos;
     notifyListeners();

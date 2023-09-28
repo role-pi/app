@@ -17,7 +17,7 @@ class RoleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserLoginProvider.shared)
+        ChangeNotifierProvider.value(value: UserLoginProvider.shared)
       ],
       child: CupertinoApp(
         localizationsDelegates: [

@@ -18,8 +18,8 @@ class EventoDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => eventoDetailProvider,
+    return ChangeNotifierProvider.value(
+      value: eventoDetailProvider,
       child: CupertinoPageScaffold(
         child: CustomScrollView(
           slivers: [
@@ -78,8 +78,8 @@ class EventoDetailScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (context) => NewInsumoScreen(id: id),
-                              ),
+                                  builder: (context) =>
+                                      NewInsumoScreen(eventoDetailProvider)),
                             );
                           },
                           child: Container(
@@ -100,6 +100,56 @@ class EventoDetailScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: 25),
+                    eventoDetailProvider.evento.insumos != null
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount:
+                                eventoDetailProvider.evento.insumos!.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: CupertinoDynamicColor.resolve(
+                                        CupertinoColors.systemGrey6, context),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Row(children: [
+                                    Text(
+                                      eventoDetailProvider
+                                          .evento.insumos![index].nome,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: -1.0,
+                                      ),
+                                    ),
+                                    Text(
+                                      eventoDetailProvider
+                                          .evento.insumos![index].descricao,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        letterSpacing: -1.0,
+                                      ),
+                                    ),
+                                    Text(
+                                      eventoDetailProvider
+                                          .evento.insumos![index].valor
+                                          .toString(),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: -1.0,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                              );
+                            },
+                          )
+                        : Container(),
                   ],
                 ),
               ),

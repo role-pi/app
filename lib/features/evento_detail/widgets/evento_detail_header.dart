@@ -49,16 +49,20 @@ class EventDetailHeader extends StatelessWidget {
                         padding: const EdgeInsets.all(2.0),
                         child: Row(
                           children: [
-                            Expanded(
-                              child: AutoSizeText(
-                                evento.name,
-                                style: TextStyle(
-                                    fontSize: 52,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: -2.4,
-                                    height: 1.0),
-                                maxLines: 2,
-                              ),
+                            Consumer<EventoDetailProvider>(
+                              builder: (context, provider, child) {
+                                return Expanded(
+                                  child: AutoSizeText(
+                                    provider.evento.name,
+                                    style: TextStyle(
+                                        fontSize: 52,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: -2.4,
+                                        height: 1.0),
+                                    maxLines: 2,
+                                  ),
+                                );
+                              },
                             ),
                             SizedBox(width: 28),
                             evento.emoji.isNotEmpty
@@ -76,7 +80,12 @@ class EventDetailHeader extends StatelessWidget {
                           ],
                         ),
                       ),
-                      ContainerText(text: evento.dateDescription),
+                      Consumer<EventoDetailProvider>(
+                        builder: (context, provider, child) {
+                          return ContainerText(
+                              text: provider.evento.dateDescription);
+                        },
+                      ),
                     ]))
           ],
         ),
@@ -97,7 +106,7 @@ class EventoDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get minExtent => 300.0;
+  double get minExtent => 320.0;
 
   @override
   double get maxExtent => 320.0;

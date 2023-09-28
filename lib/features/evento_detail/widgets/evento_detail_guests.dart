@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:role/models/usuario.dart';
+import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventDetailGuests extends StatelessWidget {
   List<Usuario> convidados;
@@ -39,13 +40,7 @@ class EventDetailGuests extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      ClipOval(
-                        child: Container(
-                          width: 60,
-                          height: 60,
-                          color: const Color.fromARGB(255, 100, 101, 102),
-                        ),
-                      ),
+                      RemoteProfilePicture(url: convidados[index].profilePhoto),
                       SizedBox(height: 6),
                       AutoSizeText(
                         convidados[index].displayName,
