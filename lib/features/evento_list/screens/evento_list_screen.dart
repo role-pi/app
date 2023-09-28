@@ -21,8 +21,8 @@ class _EventoListScreenState extends State<EventoListScreen> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => EventoListProvider.shared),
-        ChangeNotifierProvider(create: (context) => NewEventoProvider.shared)
+        ChangeNotifierProvider.value(value: EventoListProvider.shared),
+        ChangeNotifierProvider.value(value: NewEventoProvider.shared)
       ],
       child: WillPopScope(
         onWillPop: () async => false,

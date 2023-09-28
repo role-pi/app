@@ -1,33 +1,57 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
+import 'package:role/features/new_insumo/providers/new_insumo_provider.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
+import 'package:role/shared/widgets/form/form_item_text_field.dart';
 
-class NewInsumoScreen extends StatefulWidget {
-  NewInsumoScreen({required this.id}) {
-    evento = EventoListProvider.shared.evento(id);
+class NewInsumoScreen extends StatelessWidget {
+  NewInsumoScreen(EventoDetailProvider eventoDetailProvider) {
+    this.newInsumoProvider = NewInsumoProvider(eventoDetailProvider);
   }
 
-  final int id;
-  late Evento evento;
+  late NewInsumoProvider newInsumoProvider;
 
-  @override
-  State<NewInsumoScreen> createState() => _NewInsumoScreenState();
-}
-
-class _NewInsumoScreenState extends State<NewInsumoScreen> {
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        child: Column(children: [
-      CustomNavigationBar(
-          leadingText: "voltar",
-          trailingText: "adicionar",
-          accentColor: widget.evento.color1,
-          onPressedLeading: () {
-            Navigator.of(context).pop();
-          },
-          onPressedTrailing: () {})
-    ]));
+    return ChangeNotifierProvider.value(
+      value: newInsumoProvider,
+      child: CupertinoPageScaffold(
+          child: Column(children: [
+        Consumer<NewInsumoProvider>(builder: (context, provider, child) {
+          return CustomNavigationBar(
+              trailingText: "adicionar",
+              onPressedLeading: () {
+                Navigator.of(context).pop();
+              },
+              onPressedTrailing: provider.changed
+                  ? () {
+                      provider.addInsumo(context);
+                    }
+                  : null,
+              accentColor: provider.evento.color1);
+        }),
+        Form(
+            child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            children: [
+              FormItemTextField(
+                  controller: newInsumoProvider.nameController, title: "nome"),
+              SizedBox(height: 12),
+              FormItemTextField(
+                  controller: newInsumoProvider.descricaoController,
+                  title: "descrição"),
+              SizedBox(height: 12),
+              FormItemTextField(
+                  controller: newInsumoProvider.valorController,
+                  title: "valor"),
+            ],
+          ),
+        ))
+      ])),
+    );
   }
 }
