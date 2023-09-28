@@ -26,15 +26,6 @@ class EventoDetailProvider extends ChangeNotifier {
     this.evento.dataFim = evento.dataFim;
     this.evento.valorTotal = evento.valorTotal;
     this.evento.theme = evento.theme;
-  }
-
-  updateEvento(Evento? evento) {
-    if (evento == null) return;
-    this.evento.name = evento.name;
-    this.evento.dataInicio = evento.dataInicio;
-    this.evento.dataFim = evento.dataFim;
-    this.evento.valorTotal = evento.valorTotal;
-    this.evento.theme = evento.theme;
     notifyListeners();
 
     EventoListProvider.shared.notifyListeners();
