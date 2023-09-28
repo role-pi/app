@@ -5,9 +5,11 @@ import 'package:role/features/evento_detail/providers/evento_detail_provider.dar
 import 'package:role/features/evento_detail/screens/evento_map_screen.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_guests.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_header.dart';
+import 'package:role/features/evento_detail/widgets/evento_detail_insumos.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/features/new_insumo/screens/new_insumo_screen.dart';
+import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
 class EventoDetailScreen extends StatelessWidget {
@@ -38,10 +40,15 @@ class EventoDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   children: [
-                    eventoDetailProvider.evento.usuarios != null
-                        ? EventDetailGuests(
-                            convidados: eventoDetailProvider.evento.usuarios!)
-                        : Container(),
+                    Consumer<EventoDetailProvider>(
+                      builder: (context, provider, child) {
+                        if (provider.evento.usuarios != null) {
+                          return EventDetailGuests(
+                              convidados: provider.evento.usuarios!);
+                        }
+                        return Container();
+                      },
+                    ),
                     SizedBox(height: 25),
                     ElasticButton(
                       child: SizedBox(
@@ -102,56 +109,15 @@ class EventoDetailScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 25),
-                    eventoDetailProvider.evento.insumos != null
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount:
-                                eventoDetailProvider.evento.insumos!.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: CupertinoDynamicColor.resolve(
-                                        CupertinoColors.systemGrey6, context),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Row(children: [
-                                    Text(
-                                      eventoDetailProvider
-                                          .evento.insumos![index].nome,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: -1.0,
-                                      ),
-                                    ),
-                                    Text(
-                                      eventoDetailProvider
-                                          .evento.insumos![index].descricao,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: -1.0,
-                                      ),
-                                    ),
-                                    Text(
-                                      eventoDetailProvider
-                                          .evento.insumos![index].valor
-                                          .toString(),
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: -1.0,
-                                      ),
-                                    ),
-                                  ]),
-                                ),
-                              );
-                            },
-                          )
-                        : Container(),
+                    Consumer<EventoDetailProvider>(
+                      builder: (context, provider, child) {
+                        if (provider.evento.insumos != null) {
+                          return EventoDetailInsumos(
+                              insumos: provider.evento.insumos!);
+                        }
+                        return Container();
+                      },
+                    ),
                   ],
                 ),
               ),
