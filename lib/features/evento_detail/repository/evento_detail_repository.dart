@@ -8,6 +8,23 @@ import '../../../shared/utils/api_status.dart';
 import '../../../models/evento.dart';
 
 class EventoDetailRepository {
+  Future<Evento?> getEvento(Evento evento) async {
+    try {
+      var response =
+          await API().request(endpoint: "evento/${evento.id}", method: "GET");
+
+      return Evento.fromJson(json.decode(response.response));
+    } catch (e) {
+      if (e is ApiError) {
+        print('Error Code: ${e.code}, Message: ${e.message}');
+      } else {
+        print('Unknown error occurred: $e');
+      }
+    }
+
+    return null;
+  }
+
   Future<List<Insumo>> getInsumos(Evento evento) async {
     try {
       var response =

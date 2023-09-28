@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:role/models/evento_theme.dart';
-
 import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
 import '../../../models/evento.dart';
@@ -9,11 +7,10 @@ import '../../../models/evento.dart';
 class EventoEditRepository {
   Future<int?> putEvento(Evento evento) async {
     try {
-      var response = await API().request(
-          endpoint: "evento", method: "PUT", body: jsonEncode(evento.toJson()));
+      var response = await API()
+          .request(endpoint: "evento", method: "PUT", body: evento.toJson());
 
       Map decoded = json.decode(response.response);
-      print(response.response);
       return decoded["affectedRows"];
     } catch (e) {
       if (e is ApiError) {
