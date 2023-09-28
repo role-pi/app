@@ -84,13 +84,14 @@ class API {
       request.files.add(multipartFile);
 
       var response = await request.send();
+      var value = await response.stream.bytesToString();
 
-      response.stream.transform(utf8.decoder).listen((value) {
-        print(value);
-      });
+      // response.stream.transform(utf8.decoder).listen((value) {
+      //   print(value);
+      // });
 
       if (success == response.statusCode) {
-        return ApiResponse(code: response.statusCode, response: "");
+        return ApiResponse(code: response.statusCode, response: value);
       }
 
       throw ApiError(code: response.statusCode, message: "Unknown Error");

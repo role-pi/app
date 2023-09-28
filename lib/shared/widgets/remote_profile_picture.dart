@@ -12,9 +12,17 @@ class RemoteProfilePicture extends StatelessWidget {
     return ClipOval(
       child: Image.network(
         url ?? "",
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
         width: size,
         errorBuilder: (context, error, stackTrace) {
+          return DefaultUserIcon(
+            size: size,
+          );
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
           return DefaultUserIcon(
             size: size,
           );

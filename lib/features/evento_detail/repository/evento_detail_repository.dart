@@ -59,7 +59,6 @@ class EventoDetailRepository {
     return [];
   }
 
-  //       print('Error Code: ${e.code}, Message: ${e.message}');
   List<Insumo> insumosFromJSON(String str) =>
       List<Insumo>.from(json.decode(str).map((x) => Insumo.fromJson(x)));
 

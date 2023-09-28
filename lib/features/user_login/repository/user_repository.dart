@@ -68,12 +68,28 @@ class UserRepository {
     return (null, null);
   }
 
-  Future<bool> uploadImage(File image) async {
+  Future<int?> putUsuario(Usuario usuario) async {
+    try {
+      final response = await API()
+          .request(endpoint: "usuario", method: "PUT", body: usuario.toJson());
+
+      return json.decode(response.response);
+    } catch (e) {
+      if (e is ApiError) {
+        print('Error Code: ${e.code}, Message: ${e.message}');
+      } else {
+        print('Unknown error occurred: $e');
+      }
+    }
+
+    return null;
+  }
+
+  Future<String?> uploadImage(File image) async {
     try {
       final response = await API()
           .uploadFile(file: image, field: "profile", endpoint: "usuario/image");
-
-      return true;
+      return jsonDecode(response.response)["url"];
       // Map decoded = json.decode(response.response);
       // if (decoded.containsKey("success")) {
       //   return decoded["success"];
@@ -86,6 +102,6 @@ class UserRepository {
       }
     }
 
-    return false;
+    return null;
   }
 }

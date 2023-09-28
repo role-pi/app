@@ -86,21 +86,23 @@ class EventoEditScreen extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) =>
                                 CupertinoAlertDialog(
-                              title: const Text("Atenção!"),
+                              title: const Text("tem certeza?"),
                               content: const Text(
-                                  "Certeza que Deseja Excluir esse Evento?"),
+                                  "essa ação não poderá ser desfeita"),
                               actions: <CupertinoDialogAction>[
                                 CupertinoDialogAction(
-                                  child: const Text("Não"),
-                                  isDestructiveAction: true,
+                                  child: const Text("cancelar"),
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
                                 ),
                                 CupertinoDialogAction(
-                                  child: const Text("Sim"),
+                                  child: const Text("excluir evento"),
+                                  isDestructiveAction: true,
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    Navigator.of(context)
+                                        .popUntil((route) => route.isFirst);
+                                    eventoEditProvider.delete(context);
                                   },
                                 )
                               ],

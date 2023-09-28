@@ -32,7 +32,11 @@ class EventoList extends StatelessWidget {
             SliverPadding(
               padding: EdgeInsets.only(bottom: 138.0, top: 8.0),
               sliver: SliverList(
-                delegate: SliverChildBuilderDelegate((context, index) {
+                delegate: SliverChildBuilderDelegate(
+                    childCount: (usersViewModel.eventos.length == 0
+                            ? 1
+                            : usersViewModel.eventos.length) +
+                        1, (context, index) {
                   if (index == 0) {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(36, 36, 38, 16),
@@ -77,11 +81,7 @@ class EventoList extends StatelessWidget {
                       );
                     }
                   }
-                },
-                    childCount: (usersViewModel.eventos.length == 0
-                            ? 1
-                            : usersViewModel.eventos.length) +
-                        1),
+                }),
               ),
             )
           ]),

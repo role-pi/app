@@ -54,6 +54,30 @@ class EventoEditProvider extends ChangeNotifier {
     eventoDetailProvider.get();
   }
 
+  delete(BuildContext context) {
+    EventoListProvider.shared.delete(evento);
+
+    fToast.init(context);
+    Widget toast;
+    if (true) {
+      toast = CustomToast(
+          title: "evento excluído",
+          icon: CupertinoIcons.checkmark,
+          color: evento.color1);
+    } else {
+      toast = CustomToast(
+          title: "erro ao salvar evento",
+          icon: CupertinoIcons.xmark,
+          color: CupertinoColors.systemRed);
+    }
+
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: Duration(seconds: 3),
+    );
+  }
+
   _textChanged() {
     evento.name = nameController.text;
     changed = true;
