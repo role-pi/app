@@ -33,6 +33,9 @@ class UserDetailScreen extends StatelessWidget {
                 leadingText: "opções de conta",
                 trailingText: "salvar",
                 accentColor: CupertinoColors.activeBlue,
+                onPressedTrailing: () {
+                  userDetailProvider.updateUsuario(context);
+                },
                 topPadding: 0,
               ),
               Padding(
@@ -192,14 +195,14 @@ class UserDetailScreen extends StatelessWidget {
             CupertinoActionSheetAction(
               onPressed: () {
                 Navigator.pop(context);
-                userDetailProvider.pickImage(ImageSource.gallery);
+                userDetailProvider.pickImage(ImageSource.gallery, context);
               },
               child: Text("escolher da biblioteca", style: style),
             ),
             CupertinoActionSheetAction(
               onPressed: () {
                 Navigator.pop(context);
-                userDetailProvider.pickImage(ImageSource.camera);
+                userDetailProvider.pickImage(ImageSource.camera, context);
               },
               child: Text("tirar foto", style: style),
             ),

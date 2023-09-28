@@ -49,7 +49,6 @@ class _CircleButtonState extends State<CircleButton> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    // Lighter to darker gray
                     CupertinoDynamicColor.resolve(
                             CupertinoColors.systemGrey5, context)
                         .withOpacity(0.8),
