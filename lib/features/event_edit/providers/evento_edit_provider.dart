@@ -1,33 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:role/features/event_edit/repository/evento_edit_repository.dart';
+import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class EventoEditProvider extends ChangeNotifier {
-  bool _loading = false;
-  late Evento evento;
+  late EventoDetailProvider eventoDetailProvider;
+  Evento get evento => eventoDetailProvider.evento;
 
   EventoEditRepository eventoRepository = EventoEditRepository();
 
   late TextEditingController nameController;
   late bool changed = false;
 
-  bool get loading => _loading;
-
   late FToast fToast;
 
-  EventoEditProvider(int id) {
-    evento = EventoListProvider.shared.evento(id);
+  EventoEditProvider(EventoDetailProvider eventoDetailProvider) {
+    this.eventoDetailProvider = eventoDetailProvider;
     nameController = TextEditingController(text: evento.name);
     nameController.addListener(_textChanged);
     fToast = FToast();
-  }
-
-  setLoading(bool loading) async {
-    _loading = loading;
-    notifyListeners();
   }
 
   updateData(BuildContext context) async {
@@ -56,6 +50,8 @@ class EventoEditProvider extends ChangeNotifier {
     );
 
     notifyListeners();
+
+    eventoDetailProvider.get();
   }
 
   _textChanged() {
