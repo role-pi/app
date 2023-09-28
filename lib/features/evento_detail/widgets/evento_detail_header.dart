@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/screens/evento_edit_screen.dart';
+import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
@@ -16,6 +18,9 @@ class EventDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EventoDetailProvider _eventoDetailProvider =
+        Provider.of<EventoDetailProvider>(context, listen: false);
+
     return ClipPath(
       clipper: _EventoDetailHeaderClipper(),
       child: SizedBox(
@@ -36,7 +41,7 @@ class EventDetailHeader extends StatelessWidget {
                     onPressedTrailing: () {
                       Navigator.of(context)
                           .push(CupertinoPageRoute(builder: (context) {
-                        return EventoEditScreen(id: evento.id);
+                        return EventoEditScreen(_eventoDetailProvider);
                       }));
                     })),
             Spacer(),
@@ -49,16 +54,20 @@ class EventDetailHeader extends StatelessWidget {
                         padding: const EdgeInsets.all(2.0),
                         child: Row(
                           children: [
-                            Expanded(
-                              child: AutoSizeText(
-                                evento.name,
-                                style: TextStyle(
-                                    fontSize: 52,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: -2.4,
-                                    height: 1.0),
-                                maxLines: 2,
-                              ),
+                            Consumer<EventoDetailProvider>(
+                              builder: (context, provider, child) {
+                                return Expanded(
+                                  child: AutoSizeText(
+                                    provider.evento.name,
+                                    style: TextStyle(
+                                        fontSize: 52,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: -2.4,
+                                        height: 1.0),
+                                    maxLines: 2,
+                                  ),
+                                );
+                              },
                             ),
                             SizedBox(width: 28),
                             evento.emoji.isNotEmpty
@@ -76,7 +85,12 @@ class EventDetailHeader extends StatelessWidget {
                           ],
                         ),
                       ),
-                      ContainerText(text: evento.dateDescription),
+                      Consumer<EventoDetailProvider>(
+                        builder: (context, provider, child) {
+                          return ContainerText(
+                              text: provider.evento.dateDescription);
+                        },
+                      ),
                     ]))
           ],
         ),
@@ -97,7 +111,7 @@ class EventoDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get minExtent => 300.0;
+  double get minExtent => 320.0;
 
   @override
   double get maxExtent => 320.0;
