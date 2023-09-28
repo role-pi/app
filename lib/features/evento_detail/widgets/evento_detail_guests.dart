@@ -1,11 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:role/models/usuario.dart';
+import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventDetailGuests extends StatelessWidget {
   List<Usuario> convidados;
 
   EventDetailGuests({Key? key, required this.convidados}) : super(key: key);
+
+  String get title {
+    if (convidados.length == 1) {
+      return "1 convidado";
+    } else {
+      return "${convidados.length} convidados";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,18 +27,18 @@ class EventDetailGuests extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
+            padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
             child: Text(
-              "${convidados.length} convidados",
+              title,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  letterSpacing: -1.2),
+                  fontSize: 26,
+                  letterSpacing: -1.5),
             ),
           ),
           SizedBox(height: 8.0),
           SizedBox(
-            height: 110,
+            height: 120,
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               scrollDirection: Axis.horizontal,
@@ -39,12 +48,9 @@ class EventDetailGuests extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      ClipOval(
-                        child: Container(
-                          width: 60,
-                          height: 60,
-                          color: const Color.fromARGB(255, 100, 101, 102),
-                        ),
+                      RemoteProfilePicture(
+                        url: convidados[index].profilePhoto,
+                        size: 72,
                       ),
                       SizedBox(height: 6),
                       AutoSizeText(

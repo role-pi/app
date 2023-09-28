@@ -3,7 +3,6 @@ import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/evento_list/widgets/evento_list.dart';
 import 'package:role/features/new_evento/providers/new_evento_provider.dart';
-import 'package:role/features/new_evento/screens/emoji_evento_screen.dart';
 import 'package:role/features/new_evento/screens/new_evento_screen.dart';
 
 class EventoListScreen extends StatefulWidget {
@@ -21,8 +20,8 @@ class _EventoListScreenState extends State<EventoListScreen> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => EventoListProvider.shared),
-        ChangeNotifierProvider(create: (context) => NewEventoProvider.shared)
+        ChangeNotifierProvider.value(value: EventoListProvider.shared),
+        ChangeNotifierProvider.value(value: NewEventoProvider.shared)
       ],
       child: WillPopScope(
         onWillPop: () async => false,

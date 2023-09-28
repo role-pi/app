@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+    import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +17,7 @@ class RoleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserLoginProvider.shared)
+        ChangeNotifierProvider.value(value: UserLoginProvider.shared)
       ],
       child: CupertinoApp(
         localizationsDelegates: [

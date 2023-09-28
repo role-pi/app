@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/features/evento_list/repository/evento_list_repository.dart';
-import 'package:role/shared/utils/api_status.dart';
 
 class EventoListProvider extends ChangeNotifier {
   bool _loading = false;
@@ -30,6 +29,12 @@ class EventoListProvider extends ChangeNotifier {
 
   get() async {
     set(await eventoRepository.getEventos());
+  }
+
+  delete(Evento evento) async {
+    // await eventoRepository.deleteEvento(evento);
+    _eventos.remove(evento);
+    notifyListeners();
   }
 
   Evento evento(int) {

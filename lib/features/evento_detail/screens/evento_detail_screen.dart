@@ -5,22 +5,26 @@ import 'package:role/features/evento_detail/providers/evento_detail_provider.dar
 import 'package:role/features/evento_detail/screens/evento_map_screen.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_guests.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_header.dart';
+import 'package:role/features/evento_detail/widgets/evento_detail_insumos.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
+import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/features/new_insumo/screens/new_insumo_screen.dart';
+import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/features/evento_detail/widgets/evento_detail_inputs.dart';
 
 class EventoDetailScreen extends StatelessWidget {
   EventoDetailScreen({required this.id})
-      : eventoDetailProvider = EventoDetailProvider(id);
+      : eventoDetailProvider =
+            EventoDetailProvider(EventoListProvider.shared, id);
 
   final int id;
   final EventoDetailProvider eventoDetailProvider;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => eventoDetailProvider,
+    return ChangeNotifierProvider.value(
+      value: eventoDetailProvider,
       child: CupertinoPageScaffold(
         child: CustomScrollView(
           slivers: [
@@ -37,11 +41,16 @@ class EventoDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   children: [
-                    eventoDetailProvider.evento.usuarios != null
-                        ? EventDetailGuests(
-                            convidados: eventoDetailProvider.evento.usuarios!)
-                        : Container(),
-                    SizedBox(height: 25),
+                    Consumer<EventoDetailProvider>(
+                      builder: (context, provider, child) {
+                        if (provider.evento.usuarios != null) {
+                          return EventDetailGuests(
+                              convidados: provider.evento.usuarios!);
+                        }
+                        return Container();
+                      },
+                    ),
+                    SizedBox(height: 24),
                     ElasticButton(
                       child: SizedBox(
                         height: 200,
@@ -62,7 +71,7 @@ class EventoDetailScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -79,8 +88,8 @@ class EventoDetailScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (context) => NewInsumoScreen(id: id),
-                              ),
+                                  builder: (context) =>
+                                      NewInsumoScreen(eventoDetailProvider)),
                             );
                           },
                           child: Container(
@@ -101,6 +110,16 @@ class EventoDetailScreen extends StatelessWidget {
                         ),
                       // EventDetailInputs(),
                       ],
+                    ),
+                    SizedBox(height: 24),
+                    Consumer<EventoDetailProvider>(
+                      builder: (context, provider, child) {
+                        if (provider.evento.insumos != null) {
+                          return EventoDetailInsumos(
+                              insumos: provider.evento.insumos!);
+                        }
+                        return Container();
+                      },
                     ),
                   ],
                 ),
