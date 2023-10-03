@@ -86,10 +86,6 @@ class API {
       var response = await request.send();
       var value = await response.stream.bytesToString();
 
-      // response.stream.transform(utf8.decoder).listen((value) {
-      //   print(value);
-      // });
-
       if (success == response.statusCode) {
         return ApiResponse(code: response.statusCode, response: value);
       }
