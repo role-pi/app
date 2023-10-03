@@ -55,27 +55,7 @@ class EventoEditProvider extends ChangeNotifier {
   }
 
   delete(BuildContext context) {
-    EventoListProvider.shared.delete(evento);
-
-    fToast.init(context);
-    Widget toast;
-    if (true) {
-      toast = CustomToast(
-          title: "evento excluído",
-          icon: CupertinoIcons.checkmark,
-          color: evento.color1);
-    } else {
-      toast = CustomToast(
-          title: "erro ao salvar evento",
-          icon: CupertinoIcons.xmark,
-          color: CupertinoColors.systemRed);
-    }
-
-    fToast.showToast(
-      child: toast,
-      gravity: ToastGravity.BOTTOM,
-      toastDuration: Duration(seconds: 3),
-    );
+    EventoListProvider.shared.delete(evento, context);
   }
 
   _textChanged() {
@@ -84,15 +64,19 @@ class EventoEditProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  setDataInicio(DateTime d) {
-    evento.dataInicio = d;
-    changed = true;
-    notifyListeners();
+  setDataInicio(DateTime? d) {
+    if (d != null) {
+      evento.dataInicio = d;
+      changed = true;
+      notifyListeners();
+    }
   }
 
-  setDataFim(DateTime d) {
-    evento.dataFim = d;
-    changed = true;
-    notifyListeners();
+  setDataFim(DateTime? d) {
+    if (d != null) {
+      evento.dataFim = d;
+      changed = true;
+      notifyListeners();
+    }
   }
 }

@@ -16,6 +16,8 @@ class EventoEditScreen extends StatelessWidget {
 
   late EventoEditProvider eventoEditProvider;
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
@@ -31,12 +33,15 @@ class EventoEditScreen extends StatelessWidget {
                     },
                     onPressedTrailing: provider.changed
                         ? () {
-                            provider.updateData(context);
+                            if (_formKey.currentState!.validate()) {
+                              provider.updateData(context);
+                            }
                           }
                         : null,
                     accentColor: provider.evento.color1);
               }),
               Form(
+                key: _formKey,
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
@@ -44,32 +49,33 @@ class EventoEditScreen extends StatelessWidget {
                     children: [
                       FormItemGroupTitle(title: "INFORMAÇÕES"),
                       FormItemTextField(
-                          controller: eventoEditProvider.nameController,
-                          title: eventoEditProvider.evento.name),
+                        controller: eventoEditProvider.nameController,
+                        title: eventoEditProvider.evento.name,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'O nome não pode ser vazio.';
+                          }
+                          return null;
+                        },
+                      ),
                       SizedBox(height: 12),
                       Row(children: [
-                        Consumer<EventoEditProvider>(
-                            builder: (context, provider, child) {
-                          return FormItemDatePicker(
-                            dateTime: provider.evento.dataInicio,
-                            onDateTimeChanged: provider.setDataInicio,
-                            title: 'data de início',
-                          );
-                        }),
+                        FormItemDatePicker(
+                          title: "data de início",
+                          initialValue: eventoEditProvider.evento.dataInicio,
+                          onSaved: eventoEditProvider.setDataInicio,
+                        ),
                         SizedBox(width: 12),
                         Icon(CupertinoIcons.arrow_right,
                             size: 30,
                             color: CupertinoColors.systemGrey3
                                 .resolveFrom(context)),
                         SizedBox(width: 12),
-                        Consumer<EventoEditProvider>(
-                            builder: (context, provider, child) {
-                          return FormItemDatePicker(
-                            dateTime: provider.evento.dataFim,
-                            onDateTimeChanged: provider.setDataFim,
-                            title: 'data de fim',
-                          );
-                        }),
+                        FormItemDatePicker(
+                          title: "data de fim",
+                          initialValue: eventoEditProvider.evento.dataFim,
+                          onSaved: eventoEditProvider.setDataFim,
+                        ),
                       ]),
                       SizedBox(height: 12),
                       SizedBox(
@@ -100,8 +106,6 @@ class EventoEditScreen extends StatelessWidget {
                                   child: const Text("excluir evento"),
                                   isDestructiveAction: true,
                                   onPressed: () {
-                                    Navigator.of(context)
-                                        .popUntil((route) => route.isFirst);
                                     eventoEditProvider.delete(context);
                                   },
                                 )

@@ -23,6 +23,24 @@ class EventoListRepository {
     return [];
   }
 
+  Future<bool> deleteEvento(Evento evento) async {
+    try {
+      var response = await API()
+          .request(endpoint: "evento/${evento.id}", method: "DELETE");
+
+      print(response.response);
+      return true;
+    } catch (e) {
+      if (e is ApiError) {
+        print('Error Code: ${e.code}, Message: ${e.message}');
+      } else {
+        print('Unknown error occurred: $e');
+      }
+    }
+
+    return false;
+  }
+
   Future<int?> addEvento(Evento evento) async {
     try {
       var response =
