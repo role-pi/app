@@ -44,7 +44,6 @@ class _CircleButtonState extends State<CircleButton> {
                 ),
               ),
               decoration: BoxDecoration(
-                backgroundBlendMode: BlendMode.luminosity,
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
