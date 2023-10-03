@@ -88,7 +88,7 @@ class _VerificationWidgetState extends State<VerificationWidget> {
               }
             },
             rectangleColor: CupertinoColors.darkBackgroundGray,
-            text: showBack ? 'voltar' : 'verificar',
+            text: showBack ? "voltar" : "verificar",
           ),
           SizedBox(height: 25),
           Text(
