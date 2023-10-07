@@ -30,13 +30,11 @@ class NewEventoScreen extends StatelessWidget {
                   ),
                   child: Stack(
                     children: [
-                      Opacity(
-                        opacity: value * 0.6,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: CupertinoDynamicColor.resolve(
-                                CupertinoColors.systemBackground, context),
-                          ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: CupertinoDynamicColor.resolve(
+                                  CupertinoColors.systemBackground, context)
+                              .withOpacity(value * 0.6),
                         ),
                       ),
                       Transform(
