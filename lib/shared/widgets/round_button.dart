@@ -10,7 +10,7 @@ class RoundButton extends StatelessWidget {
 
   RoundButton({
     required this.text,
-    this.textColor = CupertinoColors.white,
+    this.textColor = CupertinoColors.systemBackground,
     this.rectangleColor = CupertinoColors.label,
     this.alignment = Alignment.center,
     required this.onPressed,

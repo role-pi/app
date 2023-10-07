@@ -6,7 +6,7 @@ class FormItemTextField extends StatelessWidget {
       required this.title,
       this.padding = const EdgeInsets.all(8.0),
       this.textSize = 20,
-      this.backgroundColor = CupertinoColors.systemGrey6,
+      this.backgroundColor = CupertinoColors.systemGrey5,
       this.validator});
 
   final TextEditingController controller;

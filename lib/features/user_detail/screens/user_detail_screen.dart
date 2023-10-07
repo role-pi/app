@@ -65,24 +65,27 @@ class UserDetailScreen extends StatelessWidget {
                                           size: 72);
                                     }),
                                     Positioned(
-                                      bottom: -4,
-                                      right: -4,
+                                      bottom: -6,
+                                      right: -6,
                                       child: ClipOval(
                                         child: Container(
-                                          width: 35.0,
-                                          height: 35.0,
+                                          width: 36.0,
+                                          height: 36.0,
                                           decoration: ShapeDecoration(
-                                              color: CupertinoColors
-                                                  .extraLightBackgroundGray,
+                                              color: CupertinoColors.systemGrey5
+                                                  .resolveFrom(context),
                                               shape: CircleBorder(
                                                   side: BorderSide(
                                                       width: 3,
                                                       color: CupertinoColors
-                                                          .white))),
+                                                          .systemBackground
+                                                          .resolveFrom(
+                                                              context)))),
                                           child: Icon(
                                             CupertinoIcons.pencil,
                                             size: 22.0,
-                                            color: CupertinoColors.label,
+                                            color: CupertinoColors.label
+                                                .resolveFrom(context),
                                           ),
                                         ),
                                       ),
@@ -92,7 +95,7 @@ class UserDetailScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(width: 12),
+                          SizedBox(width: 16),
                           Expanded(
                             child: Column(
                               children: [
@@ -122,13 +125,13 @@ class UserDetailScreen extends StatelessWidget {
                         height: 60,
                         child: RoundButton(
                           onPressed: () {},
-                          rectangleColor: CupertinoColors.systemGrey6,
-                          textColor: CupertinoColors.black,
+                          rectangleColor: CupertinoColors.systemGrey5,
+                          textColor: CupertinoColors.label,
                           text: 'relatório de uso',
                           alignment: Alignment.centerLeft,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      SizedBox(height: 12),
                       SizedBox(
                         height: 60,
                         child: RoundButton(
@@ -176,7 +179,7 @@ class UserDetailScreen extends StatelessWidget {
                                 UserLoginProvider.shared.logout();
                                 Navigator.pushNamed(context, "/onboarding");
                               },
-                              rectangleColor: CupertinoColors.systemGrey6,
+                              rectangleColor: CupertinoColors.systemGrey5,
                               textColor: CupertinoColors.systemRed,
                               text: 'log out',
                             ),
@@ -185,7 +188,8 @@ class UserDetailScreen extends StatelessWidget {
                           Text(
                             "desenvolvido no ifsc gaspar",
                             style: TextStyle(
-                                color: CupertinoColors.secondaryLabel,
+                                color: CupertinoColors.secondaryLabel
+                                    .resolveFrom(context),
                                 letterSpacing: -1.0,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -193,7 +197,8 @@ class UserDetailScreen extends StatelessWidget {
                           Text(
                             "2023 © rolê",
                             style: TextStyle(
-                                color: CupertinoColors.secondaryLabel,
+                                color: CupertinoColors.secondaryLabel
+                                    .resolveFrom(context),
                                 letterSpacing: -1.0,
                                 fontWeight: FontWeight.bold),
                           )
