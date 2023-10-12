@@ -1,4 +1,4 @@
-package com.example.projeto
+package com.joogps.role
 
 import io.flutter.embedding.android.FlutterActivity
 
