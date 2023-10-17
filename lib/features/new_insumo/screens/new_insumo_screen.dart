@@ -5,6 +5,7 @@ import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/features/new_insumo/providers/new_insumo_provider.dart';
 import 'package:role/models/evento.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 
 class NewInsumoScreen extends StatelessWidget {
@@ -38,8 +39,29 @@ class NewInsumoScreen extends StatelessWidget {
           padding: const EdgeInsets.all(32.0),
           child: Column(
             children: [
-              FormItemTextField(
-                  controller: newInsumoProvider.nameController, title: "nome"),
+              Row(children: [
+                Expanded(
+                  child: FormItemTextField(
+                    controller: newInsumoProvider.nameController, title: "nome"),
+                ),
+              SizedBox(width: 12),
+                ElasticButton(
+                  onTap: () {
+                  
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 221, 221, 224).withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(16)
+                    ),
+                    child: 
+                     Icon(CupertinoIcons.smiley,
+                     ),
+                  ),
+                ),
+              ]),
               SizedBox(height: 12),
               FormItemTextField(
                   controller: newInsumoProvider.descricaoController,
