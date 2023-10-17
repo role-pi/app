@@ -54,6 +54,7 @@ class NewInsumoProvider extends ChangeNotifier {
           title: "insumo adicionado com id $result",
           icon: CupertinoIcons.checkmark,
           color: evento.color1);
+      Navigator.of(context).pop();
     } else {
       toast = CustomToast(
           title: "erro ao adicionar insumo",
