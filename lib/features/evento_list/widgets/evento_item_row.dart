@@ -4,6 +4,8 @@ import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 
+import 'evento_item_row_guests.dart';
+
 class EventoItemRow extends StatelessWidget {
   EventoItemRow({required this.evento, this.onTap});
 
@@ -37,7 +39,7 @@ class EventoItemRow extends StatelessWidget {
                       children: [
                         evento.emoji.isNotEmpty
                             ? Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(4.0),
                                 child: Text(evento.emoji,
                                     style: TextStyle(
                                         fontSize: 52,
@@ -46,24 +48,40 @@ class EventoItemRow extends StatelessWidget {
                             : SizedBox(height: 60),
                         Spacer(),
                         ContainerText(
-                            text: "R\$ " + evento.valorTotal.toString()),
+                            text: "R\$ " + evento.valorTotal.toString(),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 18, vertical: 6),
+                            size: 21),
                       ],
                     ),
-                    Text(evento.name,
-                        style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: -1.5,
-                            color: CupertinoDynamicColor.resolve(
-                                    evento.theme.accentColor, context)
-                                .withAlpha(200))),
-                    Text(evento.shortDescription,
-                        style: TextStyle(
-                            fontSize: 22,
-                            letterSpacing: -1.5,
-                            color: CupertinoDynamicColor.resolve(
-                                    evento.theme.accentColor, context)
-                                .withAlpha(150))),
+                    SizedBox(height: 2),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(evento.name,
+                                style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: -1.5,
+                                    color: CupertinoDynamicColor.resolve(
+                                            evento.theme.accentColor, context)
+                                        .withAlpha(200))),
+                            Text(evento.shortDescription,
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    letterSpacing: -1.5,
+                                    color: CupertinoDynamicColor.resolve(
+                                            evento.theme.accentColor, context)
+                                        .withAlpha(150))),
+                          ],
+                        ),
+                        Spacer(),
+                        EventoItemRowGuests(evento: evento),
+                      ],
+                    ),
                   ],
                 )),
           )),

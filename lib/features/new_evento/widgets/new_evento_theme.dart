@@ -68,7 +68,7 @@ class SquareGrid extends StatelessWidget {
         color1: Color.fromRGBO(208, 2, 13, 1),
         color2: Color.fromRGBO(219, 86, 93, 1)),
     EventoTheme(
-        emoji: '🎉   ',
+        emoji: '🎉',
         color1: Color.fromRGBO(143, 34, 50, 1),
         color2: Color.fromRGBO(209, 137, 147, 1)),
     EventoTheme(
@@ -111,11 +111,11 @@ class SquareGrid extends StatelessWidget {
         emoji: '✨',
         color1: Color.fromRGBO(108, 40, 235, 1),
         color2: Color.fromRGBO(159, 124, 219, 1)),
-   EventoTheme(
+    EventoTheme(
         emoji: '🪩',
         color1: Color.fromRGBO(121, 16, 190, 1),
         color2: Color.fromRGBO(180, 132, 219, 1)),
-    EventoTheme( 
+    EventoTheme(
         emoji: '🎃',
         color1: Color.fromRGBO(185, 120, 223, 1),
         color2: Color.fromRGBO(114, 9, 119, 1)),
