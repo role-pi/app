@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "projeto",
+            "name": "rolê",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "projeto (profile mode)",
+            "name": "rolê (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "projeto (release mode)",
+            "name": "rolê (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
