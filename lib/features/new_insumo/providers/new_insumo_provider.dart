@@ -41,7 +41,7 @@ class NewInsumoProvider extends ChangeNotifier {
         id: 0,
         tipo: 1,
         nome: nameController.text,
-        descricao: descricaoController.text,
+        descricao: descricaoController.text.isEmpty ? " " : descricaoController.text,
         valor: double.parse(valorController.text),
         eventoId: evento.id);
 
