@@ -1,5 +1,6 @@
     import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/evento_detail/screens/evento_detail_screen.dart';
@@ -9,8 +10,14 @@ import 'package:role/features/user_login/screens/user_login_screen.dart';
 
 void main() {
   initializeDateFormatting('pt');
-  runApp(RoleApp());
+  try {
+    runApp(RoleApp());
+  } catch (e, stackTrace) {
+    print('Error: $e');
+    print('Stack trace: $stackTrace');
+  }
 }
+
 
 class RoleApp extends StatelessWidget {
   @override
@@ -21,9 +28,9 @@ class RoleApp extends StatelessWidget {
       ],
       child: CupertinoApp(
         localizationsDelegates: [
-          DefaultMaterialLocalizations.delegate,
-          DefaultCupertinoLocalizations.delegate,
-          DefaultWidgetsLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,  
+          GlobalCupertinoLocalizations.delegate,  
+          GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: [const Locale('en', 'US'), const Locale('pt', 'BR')],
         title: 'rolê',

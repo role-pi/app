@@ -31,6 +31,7 @@ class EventDetailGuests extends StatelessWidget {
             child: Text(
               title,
               style: TextStyle(
+            
                   fontWeight: FontWeight.bold,
                   fontSize: 26,
                   letterSpacing: -1.5),

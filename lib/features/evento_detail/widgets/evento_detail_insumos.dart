@@ -26,6 +26,7 @@ class EventoDetailInsumos extends StatelessWidget {
             child: Row(children: [
               Stack(
                   children: <Widget>[
+                    
                     Container(
                       width: 50,
                       height: 50,
