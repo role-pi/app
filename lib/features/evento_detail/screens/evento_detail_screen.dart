@@ -104,7 +104,7 @@ class EventoDetailScreen extends StatelessWidget {
                               Icons.add,
                               color: CupertinoDynamicColor.resolve(
                                   CupertinoColors.label, context),
-                              size: 30,
+                              size: 40,
                             ),
                           ),
                         ),
