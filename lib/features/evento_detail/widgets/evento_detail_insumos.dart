@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/models/insumo.dart';
+import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventoDetailInsumos extends StatelessWidget {
   List<Insumo> insumos;
@@ -35,12 +38,32 @@ class EventoDetailInsumos extends StatelessWidget {
                           bottomRight: Radius.circular(8),
                         ),
                       ),
-                     
                       child: Center(
-                        child: Icon(
-                          CupertinoIcons.bubble_left_fill,
-                          color: CupertinoColors.secondaryLabel.resolveFrom(context),
-                          size: 40,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Icon(
+                              CupertinoIcons.bubble_left_fill,
+                              color: CupertinoColors.secondaryLabel.resolveFrom(context),
+                              size: 45,
+                            ),
+                            Positioned(
+                              bottom:13,
+                              right:10,
+                               child:Icon(
+                              CupertinoIcons.smiley,
+                            ),),
+                            Positioned(
+                              right: 30,
+                              bottom: 20,
+                              child: Consumer<UserLoginProvider>(
+                                          builder: (context, provider, child) {
+                                        return RemoteProfilePicture(
+                                            url: provider.user?.profilePhoto,
+                                            size: 30);
+                                      }),
+                            ),
+                          ],
                         ),
                       ),
                     ),
