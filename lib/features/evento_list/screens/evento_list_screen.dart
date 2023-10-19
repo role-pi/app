@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:role/features/evento_list/widgets/evento_list.dart';
 import 'package:role/features/new_evento/providers/new_evento_provider.dart';
 import 'package:role/features/new_evento/screens/new_evento_screen.dart';
+import 'package:role/features/user_login/screens/user_first_login_screen.dart';
 
 class EventoListScreen extends StatefulWidget {
   @override
@@ -32,7 +33,8 @@ class _EventoListScreenState extends State<EventoListScreen> {
                 EventoList(
                   onTap: () => {NewEventoProvider.shared.showing = true},
                 ),
-                NewEventoScreen()
+                NewEventoScreen(),
+                UserFirstLoginScreen()
               ],
             ),
           ),
