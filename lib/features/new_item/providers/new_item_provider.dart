@@ -8,9 +8,9 @@ import 'package:role/shared/widgets/custom_toast.dart';
 
 class NewItemProvider extends ChangeNotifier {
   late EventDetailProvider eventoDetailProvider;
-  Event get evento => eventoDetailProvider.evento;
+  Event get event => eventoDetailProvider.event;
 
-  NewItemRepository newInsumoRepository = NewItemRepository();
+  NewItemRepository newItemRepository = NewItemRepository();
 
   late TextEditingController nameController,
       descricaoController,
@@ -41,9 +41,9 @@ class NewItemProvider extends ChangeNotifier {
         nome: nameController.text,
         descricao: descricaoController.text,
         valor: double.parse(valorController.text),
-        eventoId: evento.id);
+        eventoId: event.id);
 
-    int? result = await newInsumoRepository.postItem(item);
+    int? result = await newItemRepository.postItem(item);
 
     fToast.init(context);
     Widget toast;
@@ -51,7 +51,7 @@ class NewItemProvider extends ChangeNotifier {
       toast = CustomToast(
           title: "insumo adicionado com id $result",
           icon: CupertinoIcons.checkmark,
-          color: evento.color1);
+          color: event.color1);
     } else {
       toast = CustomToast(
           title: "erro ao adicionar insumo",

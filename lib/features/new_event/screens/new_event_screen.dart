@@ -47,14 +47,14 @@ class NewEventScreen extends StatelessWidget {
                             child: Stack(children: [
                               AnimatedOpacity(
                                   duration: Duration(milliseconds: 200),
-                                  opacity: provider.evento.name.isEmpty ? 1 : 0,
+                                  opacity: provider.event.name.isEmpty ? 1 : 0,
                                   child: NewEventName()),
                               IgnorePointer(
-                                ignoring: provider.evento.name.isEmpty,
+                                ignoring: provider.event.name.isEmpty,
                                 child: AnimatedOpacity(
                                     duration: Duration(milliseconds: 200),
                                     opacity:
-                                        provider.evento.name.isEmpty ? 0 : 1,
+                                        provider.event.name.isEmpty ? 0 : 1,
                                     child: NewEventTheme()),
                               ),
                             ]),

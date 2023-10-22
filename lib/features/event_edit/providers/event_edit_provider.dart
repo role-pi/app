@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:role/features/event_edit/repository/event_edit_repository.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
-import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class EventEditProvider extends ChangeNotifier {
   late EventDetailProvider eventoDetailProvider;
-  Event get evento => eventoDetailProvider.evento;
+  Event get event => eventoDetailProvider.event;
 
   EventEditRepository eventoRepository = EventEditRepository();
 
@@ -19,7 +19,7 @@ class EventEditProvider extends ChangeNotifier {
 
   EventEditProvider(EventDetailProvider eventoDetailProvider) {
     this.eventoDetailProvider = eventoDetailProvider;
-    nameController = TextEditingController(text: evento.name);
+    nameController = TextEditingController(text: event.name);
     nameController.addListener(_textChanged);
     fToast = FToast();
   }
@@ -27,7 +27,7 @@ class EventEditProvider extends ChangeNotifier {
   updateData(BuildContext context) async {
     changed = false;
 
-    int? result = await eventoRepository.putEvento(evento);
+    int? result = await eventoRepository.putEvento(event);
 
     fToast.init(context);
     Widget toast;
@@ -35,7 +35,7 @@ class EventEditProvider extends ChangeNotifier {
       toast = CustomToast(
           title: "evento salvo",
           icon: CupertinoIcons.checkmark,
-          color: evento.color1);
+          color: event.color1);
     } else {
       toast = CustomToast(
           title: "erro ao salvar evento",
@@ -55,18 +55,18 @@ class EventEditProvider extends ChangeNotifier {
   }
 
   delete(BuildContext context) {
-    EventListProvider.shared.delete(evento, context);
+    EventListProvider.shared.delete(event, context);
   }
 
   _textChanged() {
-    evento.name = nameController.text;
+    event.name = nameController.text;
     changed = true;
     notifyListeners();
   }
 
   setDataInicio(DateTime? d) {
     if (d != null) {
-      evento.startDate = d;
+      event.startDate = d;
       changed = true;
       notifyListeners();
     }
@@ -74,7 +74,7 @@ class EventEditProvider extends ChangeNotifier {
 
   setDataFim(DateTime? d) {
     if (d != null) {
-      evento.endDate = d;
+      event.endDate = d;
       changed = true;
       notifyListeners();
     }

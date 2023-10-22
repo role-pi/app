@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_detail/repository/event_detail_repository.dart';
-import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
 import 'package:role/models/user.dart';
@@ -9,7 +9,7 @@ class EventDetailProvider extends ChangeNotifier {
   late int id;
   late EventListProvider eventoListProvider;
 
-  Event get evento => eventoListProvider.evento(id);
+  Event get event => eventoListProvider.event(id);
 
   EventDetailRepository eventoRepository = EventDetailRepository();
 
@@ -19,30 +19,30 @@ class EventDetailProvider extends ChangeNotifier {
     get();
   }
 
-  updateEvento(Event? evento) {
-    if (evento == null) return;
-    this.evento.name = evento.name;
-    this.evento.startDate = evento.startDate;
-    this.evento.endDate = evento.endDate;
-    this.evento.valorTotal = evento.valorTotal;
-    this.evento.theme = evento.theme;
+  updateEvent(Event? event) {
+    if (event == null) return;
+    this.event.name = event.name;
+    this.event.startDate = event.startDate;
+    this.event.endDate = event.endDate;
+    this.event.valorTotal = event.valorTotal;
+    this.event.theme = event.theme;
     notifyListeners();
 
     EventListProvider.shared.notifyListeners();
   }
 
   setItems(List<Item> items) {
-    evento.items = items;
+    event.items = items;
   }
 
   setUsuarios(List<User> usuarios) {
-    evento.usuarios = usuarios;
+    event.usuarios = usuarios;
   }
 
   get() async {
-    updateEvento(await eventoRepository.getEvento(evento));
-    setItems(await eventoRepository.getItems(evento));
-    setUsuarios(await eventoRepository.getUsuarios(evento));
+    updateEvent(await eventoRepository.getEvento(event));
+    setItems(await eventoRepository.getItems(event));
+    setUsuarios(await eventoRepository.getUsuarios(event));
 
     notifyListeners();
   }

@@ -58,7 +58,7 @@ class EventDetailHeader extends StatelessWidget {
                               builder: (context, provider, child) {
                                 return Expanded(
                                   child: AutoSizeText(
-                                    provider.evento.name,
+                                    provider.event.name,
                                     style: TextStyle(
                                         fontSize: 52,
                                         fontWeight: FontWeight.bold,
@@ -88,7 +88,7 @@ class EventDetailHeader extends StatelessWidget {
                       Consumer<EventDetailProvider>(
                         builder: (context, provider, child) {
                           return ContainerText(
-                              text: provider.evento.dateDescription);
+                              text: provider.event.dateDescription);
                         },
                       ),
                     ]))

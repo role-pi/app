@@ -64,8 +64,8 @@ class EventListProvider extends ChangeNotifier {
     );
   }
 
-  Event evento(int) {
-    var evento = _eventos.firstWhere((element) => element.id == int);
-    return evento;
+  Event event(id) {
+    var event = _eventos.firstWhere((element) => element.id == id);
+    return event;
   }
 }

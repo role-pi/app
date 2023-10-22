@@ -162,7 +162,7 @@ class ThemeGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<NewEventProvider>(builder: (context, provider, child) {
-      bool selected = provider.evento.theme.emoji == theme.emoji;
+      bool selected = provider.event.theme.emoji == theme.emoji;
 
       return ElasticButton(
         onTap: () {

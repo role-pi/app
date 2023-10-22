@@ -5,9 +5,9 @@ import 'package:role/features/event_detail/providers/event_detail_provider.dart'
 import 'package:role/features/event_detail/screens/event_map_screen.dart';
 import 'package:role/features/event_detail/widgets/event_detail_guests.dart';
 import 'package:role/features/event_detail/widgets/event_detail_header.dart';
-import 'package:role/features/event_detail/widgets/event_detail_insumos.dart';
+import 'package:role/features/event_detail/widgets/event_detail_items.dart';
 import 'package:role/features/event_detail/widgets/event_detail_map.dart';
-import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/features/new_item/screens/new_item_screen.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
@@ -29,7 +29,7 @@ class EventDetailScreen extends StatelessWidget {
             SliverPersistentHeader(
               pinned: false,
               delegate: EventoDetailHeaderDelegate(
-                  evento: eventoDetailProvider.evento),
+                  evento: eventoDetailProvider.event),
             ),
             CupertinoSliverRefreshControl(onRefresh: () async {
               await eventoDetailProvider.get();
@@ -41,9 +41,9 @@ class EventDetailScreen extends StatelessWidget {
                   children: [
                     Consumer<EventDetailProvider>(
                       builder: (context, provider, child) {
-                        if (provider.evento.usuarios != null) {
+                        if (provider.event.usuarios != null) {
                           return EventDetailGuests(
-                              convidados: provider.evento.usuarios!);
+                              convidados: provider.event.usuarios!);
                         }
                         return Container();
                       },
@@ -53,8 +53,8 @@ class EventDetailScreen extends StatelessWidget {
                       child: SizedBox(
                         height: 200,
                         child: EventDetailMap(
-                          color: eventoDetailProvider.evento.color2,
-                          endereco: eventoDetailProvider.evento.endereco,
+                          color: eventoDetailProvider.event.color2,
+                          endereco: eventoDetailProvider.event.endereco,
                         ),
                       ),
                       onTap: () {
@@ -62,8 +62,8 @@ class EventDetailScreen extends StatelessWidget {
                           context,
                           CupertinoPageRoute(
                             builder: (context) => EventMapScreen(
-                              color: eventoDetailProvider.evento.color2,
-                              endereco: eventoDetailProvider.evento.endereco,
+                              color: eventoDetailProvider.event.color2,
+                              endereco: eventoDetailProvider.event.endereco,
                             ),
                           ),
                         );
@@ -112,9 +112,8 @@ class EventDetailScreen extends StatelessWidget {
                     SizedBox(height: 24),
                     Consumer<EventDetailProvider>(
                       builder: (context, provider, child) {
-                        if (provider.evento.items != null) {
-                          return EventDetailItems(
-                              items: provider.evento.items!);
+                        if (provider.event.items != null) {
+                          return EventDetailItems(items: provider.event.items!);
                         }
                         return Container();
                       },

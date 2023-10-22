@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:role/features/event_list/widgets/evento_list.dart';
+import 'package:role/features/event_list/widgets/event_list.dart';
 import 'package:role/features/new_event/providers/new_event_provider.dart';
 import 'package:role/features/new_event/screens/new_event_screen.dart';
 

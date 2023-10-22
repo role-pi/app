@@ -38,7 +38,7 @@ class EventEditScreen extends StatelessWidget {
                             }
                           }
                         : null,
-                    accentColor: provider.evento.color1);
+                    accentColor: provider.event.color1);
               }),
               Form(
                 key: _formKey,
@@ -50,7 +50,7 @@ class EventEditScreen extends StatelessWidget {
                       FormItemGroupTitle(title: "INFORMAÇÕES"),
                       FormItemTextField(
                         controller: eventoEditProvider.nameController,
-                        title: eventoEditProvider.evento.name,
+                        title: eventoEditProvider.event.name,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'O nome não pode ser vazio.';
@@ -62,7 +62,7 @@ class EventEditScreen extends StatelessWidget {
                       Row(children: [
                         FormItemDatePicker(
                           title: "data de início",
-                          initialValue: eventoEditProvider.evento.startDate,
+                          initialValue: eventoEditProvider.event.startDate,
                           onSaved: eventoEditProvider.setDataInicio,
                         ),
                         SizedBox(width: 12),
@@ -73,7 +73,7 @@ class EventEditScreen extends StatelessWidget {
                         SizedBox(width: 12),
                         FormItemDatePicker(
                           title: "data de fim",
-                          initialValue: eventoEditProvider.evento.endDate,
+                          initialValue: eventoEditProvider.event.endDate,
                           onSaved: eventoEditProvider.setDataFim,
                         ),
                       ]),
@@ -81,8 +81,8 @@ class EventEditScreen extends StatelessWidget {
                       SizedBox(
                           height: 250,
                           child: EventDetailMap(
-                              color: eventoEditProvider.evento.color1,
-                              endereco: eventoEditProvider.evento.endereco)),
+                              color: eventoEditProvider.event.color1,
+                              endereco: eventoEditProvider.event.endereco)),
                       SizedBox(height: 12),
                       FormItemGroupTitle(title: "5 CONVIDADOS"),
                       SizedBox(height: 12),

@@ -7,15 +7,15 @@ import 'package:role/shared/widgets/form/form_item_text_field.dart';
 
 class NewItemScreen extends StatelessWidget {
   NewItemScreen(EventDetailProvider eventoDetailProvider) {
-    this.newInsumoProvider = NewItemProvider(eventoDetailProvider);
+    this.newItemProvider = NewItemProvider(eventoDetailProvider);
   }
 
-  late final NewItemProvider newInsumoProvider;
+  late final NewItemProvider newItemProvider;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-      value: newInsumoProvider,
+      value: newItemProvider,
       child: CupertinoPageScaffold(
           child: Column(children: [
         Consumer<NewItemProvider>(builder: (context, provider, child) {
@@ -29,7 +29,7 @@ class NewItemScreen extends StatelessWidget {
                       provider.addItem(context);
                     }
                   : null,
-              accentColor: provider.evento.color1);
+              accentColor: provider.event.color1);
         }),
         Form(
             child: Padding(
@@ -37,15 +37,14 @@ class NewItemScreen extends StatelessWidget {
           child: Column(
             children: [
               FormItemTextField(
-                  controller: newInsumoProvider.nameController, title: "nome"),
+                  controller: newItemProvider.nameController, title: "nome"),
               SizedBox(height: 12),
               FormItemTextField(
-                  controller: newInsumoProvider.descricaoController,
+                  controller: newItemProvider.descricaoController,
                   title: "descrição"),
               SizedBox(height: 12),
               FormItemTextField(
-                  controller: newInsumoProvider.valorController,
-                  title: "valor"),
+                  controller: newItemProvider.valorController, title: "valor"),
             ],
           ),
         ))

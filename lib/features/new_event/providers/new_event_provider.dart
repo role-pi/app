@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/repository/evento_list_repository.dart';
-import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/event_theme.dart';
 
@@ -8,7 +8,7 @@ class NewEventProvider extends ChangeNotifier {
   bool _loading = false;
   bool _showing = false;
 
-  Event evento = Event(id: 0, name: "");
+  Event event = Event(id: 0, name: "");
 
   EventListRepository eventoRepository = EventListRepository();
 
@@ -24,7 +24,7 @@ class NewEventProvider extends ChangeNotifier {
   set showing(bool showing) {
     _showing = showing;
     if (showing) {
-      evento = Event(id: 0, name: "");
+      event = Event(id: 0, name: "");
     } else {
       EventListProvider.shared.get();
       FocusManager.instance.primaryFocus?.unfocus();
@@ -33,18 +33,18 @@ class NewEventProvider extends ChangeNotifier {
   }
 
   setName(String name) {
-    evento.name = name;
+    event.name = name;
     notifyListeners();
   }
 
   setTheme(EventTheme theme) {
-    evento.theme = theme;
+    event.theme = theme;
     notifyListeners();
   }
 
   create() async {
     loading = true;
-    var response = await eventoRepository.addEvento(evento);
+    var response = await eventoRepository.addEvento(event);
 
     if (response != null) {
       showing = false;
