@@ -11,14 +11,14 @@ import 'package:role/shared/widgets/custom_navigation_bar.dart';
 class EventDetailHeader extends StatelessWidget {
   const EventDetailHeader({
     super.key,
-    required this.evento,
+    required this.event,
   });
 
-  final Event evento;
+  final Event event;
 
   @override
   Widget build(BuildContext context) {
-    EventDetailProvider _eventoDetailProvider =
+    EventDetailProvider _eventDetailProvider =
         Provider.of<EventDetailProvider>(context, listen: false);
 
     return ClipPath(
@@ -26,8 +26,8 @@ class EventDetailHeader extends StatelessWidget {
       child: SizedBox(
           child: Container(
               child: GradientWidget(
-        color1: evento.color1,
-        color2: evento.color2,
+        color1: event.color1,
+        color2: event.color2,
         child: Column(
           children: [
             Opacity(
@@ -41,7 +41,7 @@ class EventDetailHeader extends StatelessWidget {
                     onPressedTrailing: () {
                       Navigator.of(context)
                           .push(CupertinoPageRoute(builder: (context) {
-                        return EventEditScreen(_eventoDetailProvider);
+                        return EventEditScreen(_eventDetailProvider);
                       }));
                     })),
             Spacer(),
@@ -70,12 +70,12 @@ class EventDetailHeader extends StatelessWidget {
                               },
                             ),
                             SizedBox(width: 28),
-                            evento.emoji.isNotEmpty
+                            event.emoji.isNotEmpty
                                 ? SizedBox(
                                     // fit: BoxFit.fitWidth,
                                     width: 72,
                                     child: Text(
-                                      evento.emoji,
+                                      event.emoji,
                                       style: TextStyle(
                                           fontSize: 72,
                                           fontWeight: FontWeight.bold),
@@ -100,14 +100,14 @@ class EventDetailHeader extends StatelessWidget {
 }
 
 class EventoDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
-  EventoDetailHeaderDelegate({required this.evento});
+  EventoDetailHeaderDelegate({required this.event});
 
-  final Event evento;
+  final Event event;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return EventDetailHeader(evento: evento);
+    return EventDetailHeader(event: event);
   }
 
   @override

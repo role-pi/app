@@ -6,8 +6,8 @@ import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 
 class NewItemScreen extends StatelessWidget {
-  NewItemScreen(EventDetailProvider eventoDetailProvider) {
-    this.newItemProvider = NewItemProvider(eventoDetailProvider);
+  NewItemScreen(EventDetailProvider eventDetailProvider) {
+    this.newItemProvider = NewItemProvider(eventDetailProvider);
   }
 
   late final NewItemProvider newItemProvider;

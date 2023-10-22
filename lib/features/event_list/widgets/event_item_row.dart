@@ -7,9 +7,9 @@ import 'package:role/shared/widgets/gradient_effect.dart';
 import 'event_item_row_guests.dart';
 
 class EventItemRow extends StatelessWidget {
-  EventItemRow({required this.evento, this.onTap});
+  EventItemRow({required this.event, this.onTap});
 
-  final Event evento;
+  final Event event;
   final Function()? onTap;
 
   @override
@@ -19,14 +19,14 @@ class EventItemRow extends StatelessWidget {
         Navigator.pushNamed(
           context,
           "/evento",
-          arguments: evento.id,
+          arguments: event.id,
         );
       },
       child: ClipRRect(
           borderRadius: BorderRadius.circular(18),
           child: GradientWidget(
-            color1: CupertinoDynamicColor.resolve(evento.color1, context),
-            color2: CupertinoDynamicColor.resolve(evento.color2, context),
+            color1: CupertinoDynamicColor.resolve(event.color1, context),
+            color2: CupertinoDynamicColor.resolve(event.color2, context),
             child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -37,10 +37,10 @@ class EventItemRow extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        evento.emoji.isNotEmpty
+                        event.emoji.isNotEmpty
                             ? Padding(
                                 padding: const EdgeInsets.all(4.0),
-                                child: Text(evento.emoji,
+                                child: Text(event.emoji,
                                     style: TextStyle(
                                         fontSize: 52,
                                         fontWeight: FontWeight.bold)),
@@ -48,7 +48,7 @@ class EventItemRow extends StatelessWidget {
                             : SizedBox(height: 60),
                         Spacer(),
                         ContainerText(
-                            text: "R\$ " + evento.valorTotal.toString(),
+                            text: "R\$ " + event.valorTotal.toString(),
                             padding: EdgeInsets.symmetric(
                                 horizontal: 18, vertical: 6),
                             size: 21),
@@ -61,25 +61,25 @@ class EventItemRow extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(evento.name,
+                            Text(event.name,
                                 style: TextStyle(
                                     fontSize: 28,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: -1.5,
                                     color: CupertinoDynamicColor.resolve(
-                                            evento.theme.accentColor, context)
+                                            event.theme.accentColor, context)
                                         .withAlpha(200))),
-                            Text(evento.shortDescription,
+                            Text(event.shortDescription,
                                 style: TextStyle(
                                     fontSize: 22,
                                     letterSpacing: -1.5,
                                     color: CupertinoDynamicColor.resolve(
-                                            evento.theme.accentColor, context)
+                                            event.theme.accentColor, context)
                                         .withAlpha(150))),
                           ],
                         ),
                         Spacer(),
-                        EventItemRowGuests(evento: evento),
+                        EventItemRowGuests(event: event),
                       ],
                     ),
                   ],

@@ -6,9 +6,9 @@ import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventItemRowGuests extends StatelessWidget {
-  EventItemRowGuests({required this.evento});
+  EventItemRowGuests({required this.event});
 
-  final Event evento;
+  final Event event;
   final showMax = 3;
   final double size = 42;
 

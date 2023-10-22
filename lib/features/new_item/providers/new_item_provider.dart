@@ -7,8 +7,8 @@ import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class NewItemProvider extends ChangeNotifier {
-  late EventDetailProvider eventoDetailProvider;
-  Event get event => eventoDetailProvider.event;
+  late EventDetailProvider eventDetailProvider;
+  Event get event => eventDetailProvider.event;
 
   NewItemRepository newItemRepository = NewItemRepository();
 
@@ -19,8 +19,8 @@ class NewItemProvider extends ChangeNotifier {
 
   late FToast fToast;
 
-  NewItemProvider(EventDetailProvider eventoDetailProvider) {
-    this.eventoDetailProvider = eventoDetailProvider;
+  NewItemProvider(EventDetailProvider eventDetailProvider) {
+    this.eventDetailProvider = eventDetailProvider;
     nameController = TextEditingController();
     descricaoController = TextEditingController();
     valorController = TextEditingController();
@@ -67,7 +67,7 @@ class NewItemProvider extends ChangeNotifier {
 
     notifyListeners();
 
-    eventoDetailProvider.get();
+    eventDetailProvider.get();
   }
 
   _textChanged() {

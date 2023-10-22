@@ -30,7 +30,7 @@ class EventDetailRepository {
       var response =
           await API().request(endpoint: "insumo/${evento.id}", method: "GET");
 
-      return insumosFromJSON(response.response);
+      return itemsFromJSON(response.response);
     } catch (e) {
       if (e is ApiError) {
         print('Error Code: ${e.code}, Message: ${e.message}');
@@ -59,7 +59,7 @@ class EventDetailRepository {
     return [];
   }
 
-  List<Item> insumosFromJSON(String str) =>
+  List<Item> itemsFromJSON(String str) =>
       List<Item>.from(json.decode(str).map((x) => Item.fromJson(x)));
 
   List<User> usuariosFromJSON(String str) =>

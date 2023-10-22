@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/event_list/repository/evento_list_repository.dart';
+import 'package:role/features/event_list/repository/event_list_repository.dart';
 import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/event_theme.dart';

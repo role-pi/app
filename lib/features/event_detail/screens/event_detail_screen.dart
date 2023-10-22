@@ -13,26 +13,25 @@ import 'package:role/shared/widgets/elastic_button.dart';
 
 class EventDetailScreen extends StatelessWidget {
   EventDetailScreen({required this.id})
-      : eventoDetailProvider =
-            EventDetailProvider(EventListProvider.shared, id);
+      : eventDetailProvider = EventDetailProvider(EventListProvider.shared, id);
 
   final int id;
-  final EventDetailProvider eventoDetailProvider;
+  final EventDetailProvider eventDetailProvider;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-      value: eventoDetailProvider,
+      value: eventDetailProvider,
       child: CupertinoPageScaffold(
         child: CustomScrollView(
           slivers: [
             SliverPersistentHeader(
               pinned: false,
-              delegate: EventoDetailHeaderDelegate(
-                  evento: eventoDetailProvider.event),
+              delegate:
+                  EventoDetailHeaderDelegate(event: eventDetailProvider.event),
             ),
             CupertinoSliverRefreshControl(onRefresh: () async {
-              await eventoDetailProvider.get();
+              await eventDetailProvider.get();
             }),
             SliverToBoxAdapter(
               child: Padding(
@@ -53,8 +52,8 @@ class EventDetailScreen extends StatelessWidget {
                       child: SizedBox(
                         height: 200,
                         child: EventDetailMap(
-                          color: eventoDetailProvider.event.color2,
-                          endereco: eventoDetailProvider.event.endereco,
+                          color: eventDetailProvider.event.color2,
+                          endereco: eventDetailProvider.event.endereco,
                         ),
                       ),
                       onTap: () {
@@ -62,8 +61,8 @@ class EventDetailScreen extends StatelessWidget {
                           context,
                           CupertinoPageRoute(
                             builder: (context) => EventMapScreen(
-                              color: eventoDetailProvider.event.color2,
-                              endereco: eventoDetailProvider.event.endereco,
+                              color: eventDetailProvider.event.color2,
+                              endereco: eventDetailProvider.event.endereco,
                             ),
                           ),
                         );
@@ -87,7 +86,7 @@ class EventDetailScreen extends StatelessWidget {
                               context,
                               CupertinoPageRoute(
                                   builder: (context) =>
-                                      NewItemScreen(eventoDetailProvider)),
+                                      NewItemScreen(eventDetailProvider)),
                             );
                           },
                           child: Container(

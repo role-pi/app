@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/features/event_list/providers/event_list_provider.dart';
-import 'package:role/features/event_list/widgets/evento_item_row.dart';
-import 'package:role/features/event_list/widgets/evento_list_header.dart';
+import 'package:role/features/event_list/widgets/event_item_row.dart';
+import 'package:role/features/event_list/widgets/event_list_header.dart';
 import 'package:role/shared/widgets/circle_button.dart';
 
 class EventList extends StatelessWidget {
@@ -76,7 +76,7 @@ class EventList extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 28.0, vertical: 6.0),
                         child: EventItemRow(
-                          evento: event,
+                          event: event,
                         ),
                       );
                     }

@@ -10,18 +10,18 @@ import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class EventEditScreen extends StatelessWidget {
-  EventEditScreen(EventDetailProvider eventoDetailProvider) {
-    this.eventoEditProvider = EventEditProvider(eventoDetailProvider);
+  EventEditScreen(EventDetailProvider eventDetailProvider) {
+    this.eventEditProvider = EventEditProvider(eventDetailProvider);
   }
 
-  late final EventEditProvider eventoEditProvider;
+  late final EventEditProvider eventEditProvider;
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-        value: eventoEditProvider,
+        value: eventEditProvider,
         child: CupertinoPageScaffold(
           child: SingleChildScrollView(
             child: Column(children: [
@@ -49,8 +49,8 @@ class EventEditScreen extends StatelessWidget {
                     children: [
                       FormItemGroupTitle(title: "INFORMAÇÕES"),
                       FormItemTextField(
-                        controller: eventoEditProvider.nameController,
-                        title: eventoEditProvider.event.name,
+                        controller: eventEditProvider.nameController,
+                        title: eventEditProvider.event.name,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'O nome não pode ser vazio.';
@@ -62,8 +62,8 @@ class EventEditScreen extends StatelessWidget {
                       Row(children: [
                         FormItemDatePicker(
                           title: "data de início",
-                          initialValue: eventoEditProvider.event.startDate,
-                          onSaved: eventoEditProvider.setDataInicio,
+                          initialValue: eventEditProvider.event.startDate,
+                          onSaved: eventEditProvider.setDataInicio,
                         ),
                         SizedBox(width: 12),
                         Icon(CupertinoIcons.arrow_right,
@@ -73,16 +73,16 @@ class EventEditScreen extends StatelessWidget {
                         SizedBox(width: 12),
                         FormItemDatePicker(
                           title: "data de fim",
-                          initialValue: eventoEditProvider.event.endDate,
-                          onSaved: eventoEditProvider.setDataFim,
+                          initialValue: eventEditProvider.event.endDate,
+                          onSaved: eventEditProvider.setDataFim,
                         ),
                       ]),
                       SizedBox(height: 12),
                       SizedBox(
                           height: 250,
                           child: EventDetailMap(
-                              color: eventoEditProvider.event.color1,
-                              endereco: eventoEditProvider.event.endereco)),
+                              color: eventEditProvider.event.color1,
+                              endereco: eventEditProvider.event.endereco)),
                       SizedBox(height: 12),
                       FormItemGroupTitle(title: "5 CONVIDADOS"),
                       SizedBox(height: 12),
@@ -106,7 +106,7 @@ class EventEditScreen extends StatelessWidget {
                                   child: const Text("excluir evento"),
                                   isDestructiveAction: true,
                                   onPressed: () {
-                                    eventoEditProvider.delete(context);
+                                    eventEditProvider.delete(context);
                                   },
                                 )
                               ],

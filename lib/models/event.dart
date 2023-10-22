@@ -14,7 +14,7 @@ class Event implements JSONSerializable {
   double? _valorTotal;
   EventTheme _theme;
 
-  late List<Item>? _insumos = null;
+  late List<Item>? _items = null;
   late List<User>? _usuarios = null;
 
   Event({
@@ -58,9 +58,9 @@ class Event implements JSONSerializable {
     _theme = value;
   }
 
-  List<Item>? get items => _insumos;
+  List<Item>? get items => _items;
   set items(List<Item>? value) {
-    _insumos = value;
+    _items = value;
   }
 
   List<User>? get usuarios => _usuarios;

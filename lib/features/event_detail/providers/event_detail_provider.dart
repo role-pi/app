@@ -7,14 +7,14 @@ import 'package:role/models/user.dart';
 
 class EventDetailProvider extends ChangeNotifier {
   late int id;
-  late EventListProvider eventoListProvider;
+  late EventListProvider eventListProvider;
 
-  Event get event => eventoListProvider.event(id);
+  Event get event => eventListProvider.event(id);
 
-  EventDetailRepository eventoRepository = EventDetailRepository();
+  EventDetailRepository eventRepository = EventDetailRepository();
 
-  EventDetailProvider(EventListProvider eventoListProvider, int id) {
-    this.eventoListProvider = eventoListProvider;
+  EventDetailProvider(EventListProvider eventListProvider, int id) {
+    this.eventListProvider = eventListProvider;
     this.id = id;
     get();
   }
@@ -40,9 +40,9 @@ class EventDetailProvider extends ChangeNotifier {
   }
 
   get() async {
-    updateEvent(await eventoRepository.getEvento(event));
-    setItems(await eventoRepository.getItems(event));
-    setUsuarios(await eventoRepository.getUsuarios(event));
+    updateEvent(await eventRepository.getEvento(event));
+    setItems(await eventRepository.getItems(event));
+    setUsuarios(await eventRepository.getUsuarios(event));
 
     notifyListeners();
   }
