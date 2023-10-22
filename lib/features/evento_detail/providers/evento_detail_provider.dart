@@ -3,7 +3,7 @@ import 'package:role/features/evento_detail/repository/evento_detail_repository.
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
-import 'package:role/models/usuario.dart';
+import 'package:role/models/user.dart';
 
 class EventoDetailProvider extends ChangeNotifier {
   late int id;
@@ -22,8 +22,8 @@ class EventoDetailProvider extends ChangeNotifier {
   updateEvento(Event? evento) {
     if (evento == null) return;
     this.evento.name = evento.name;
-    this.evento.dataInicio = evento.dataInicio;
-    this.evento.dataFim = evento.dataFim;
+    this.evento.startDate = evento.startDate;
+    this.evento.endDate = evento.endDate;
     this.evento.valorTotal = evento.valorTotal;
     this.evento.theme = evento.theme;
     notifyListeners();

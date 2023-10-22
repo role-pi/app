@@ -62,7 +62,7 @@ class EventoEditScreen extends StatelessWidget {
                       Row(children: [
                         FormItemDatePicker(
                           title: "data de início",
-                          initialValue: eventoEditProvider.evento.dataInicio,
+                          initialValue: eventoEditProvider.evento.startDate,
                           onSaved: eventoEditProvider.setDataInicio,
                         ),
                         SizedBox(width: 12),
@@ -73,7 +73,7 @@ class EventoEditScreen extends StatelessWidget {
                         SizedBox(width: 12),
                         FormItemDatePicker(
                           title: "data de fim",
-                          initialValue: eventoEditProvider.evento.dataFim,
+                          initialValue: eventoEditProvider.evento.endDate,
                           onSaved: eventoEditProvider.setDataFim,
                         ),
                       ]),

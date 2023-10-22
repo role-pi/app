@@ -66,7 +66,7 @@ class EventoEditProvider extends ChangeNotifier {
 
   setDataInicio(DateTime? d) {
     if (d != null) {
-      evento.dataInicio = d;
+      evento.startDate = d;
       changed = true;
       notifyListeners();
     }
@@ -74,7 +74,7 @@ class EventoEditProvider extends ChangeNotifier {
 
   setDataFim(DateTime? d) {
     if (d != null) {
-      evento.dataFim = d;
+      evento.endDate = d;
       changed = true;
       notifyListeners();
     }

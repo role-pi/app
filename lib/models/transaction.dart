@@ -1,22 +1,22 @@
 class Transaction {
-  int _idTransacao;
+  int _id;
   double _valor;
   DateTime _data;
-  int _idUsuario;
+  int _userId;
 
   Transaction({
-    required int idTransacao,
+    required int id,
     required double valor,
     required DateTime data,
-    required int idInsumo,
-    required int idUsuario,
-  })  : _idTransacao = idTransacao,
+    required int itemId,
+    required int userId,
+  })  : _id = id,
         _valor = valor,
         _data = data,
-        _idUsuario = idUsuario;
+        _userId = userId;
 
-  int get idTransacao => _idTransacao;
-  set idTransacao(int value) => _idTransacao = value;
+  int get id => _id;
+  set id(int value) => _id = value;
 
   double get valor => _valor;
   set valor(double value) => _valor = value;
@@ -24,6 +24,6 @@ class Transaction {
   DateTime get data => _data;
   set data(DateTime value) => _data = value;
 
-  int get idUsuario => _idUsuario;
-  set idUsuario(int value) => _idUsuario = value;
+  int get userId => _userId;
+  set userId(int value) => _userId = value;
 }

@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:role/models/endereco.dart';
+import 'package:role/models/location.dart';
 import 'package:role/models/event_theme.dart';
 import 'package:role/models/item.dart';
 import 'package:role/models/user.dart';
@@ -9,8 +9,8 @@ import 'package:intl/intl.dart';
 class Event implements JSONSerializable {
   int _id;
   String _name;
-  DateTime? _dataInicio;
-  DateTime? _dataFim;
+  DateTime? _startDate;
+  DateTime? _endDate;
   double? _valorTotal;
   EventTheme _theme;
 
@@ -20,39 +20,32 @@ class Event implements JSONSerializable {
   Event({
     required int id,
     required String name,
-    DateTime? dataInicio,
-    DateTime? dataFim,
+    DateTime? startDate,
+    DateTime? endDate,
     double? valorTotal,
     EventTheme? theme,
   })  : _id = id,
         _name = name,
-        _dataInicio = dataInicio,
-        _dataFim = dataFim,
+        _startDate = startDate,
+        _endDate = endDate,
         _valorTotal = valorTotal,
         _theme = theme ?? EventTheme.random();
 
   int get id => _id;
-
-  double? get latitude => null;
-
-  double? get longitude => null;
-  set id(int value) {
-    _id = value;
-  }
 
   String get name => _name;
   set name(String value) {
     _name = value;
   }
 
-  DateTime? get dataInicio => _dataInicio;
-  set dataInicio(DateTime? value) {
-    _dataInicio = value;
+  DateTime? get startDate => _startDate;
+  set startDate(DateTime? value) {
+    _startDate = value;
   }
 
-  DateTime? get dataFim => _dataFim;
-  set dataFim(DateTime? value) {
-    _dataFim = value;
+  DateTime? get endDate => _endDate;
+  set endDate(DateTime? value) {
+    _endDate = value;
   }
 
   double? get valorTotal => _valorTotal;
@@ -79,27 +72,28 @@ class Event implements JSONSerializable {
   factory Event.fromJson(Map<String, dynamic> json) => Event(
       id: json["id_evento"],
       name: json["nome"],
-      dataInicio: json["data_inicio"] != null
+      startDate: json["data_inicio"] != null
           ? DateTime.parse(json["data_inicio"])
           : null,
-      dataFim:
+      endDate:
           json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
       valorTotal: double.parse(json["valor_total"]),
       theme: EventTheme.fromHex(
           emoji: json["emoji"], hex1: json["cor_1"], hex2: json["cor_2"]));
 
-  DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
-
   @override
-  Map<String, dynamic> toJson() => {
-        "idEvento": id,
-        "nome": name,
-        "dataInicio": dataInicio != null ? formatter.format(dataInicio!) : "",
-        "dataFim": dataFim != null ? formatter.format(dataFim!) : "",
-        "emoji": theme.emoji,
-        "cor1": theme.color1.toHex(),
-        "cor2": theme.color2.toHex(),
-      };
+  Map<String, dynamic> toJson() {
+    DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+    return {
+      "idEvento": id,
+      "nome": name,
+      "dataInicio": startDate != null ? formatter.format(startDate!) : "",
+      "dataFim": endDate != null ? formatter.format(endDate!) : "",
+      "emoji": theme.emoji,
+      "cor1": theme.color1.toHex(),
+      "cor2": theme.color2.toHex(),
+    };
+  }
 
   String get emoji => theme.emoji;
   Color get color1 => theme.color1;
@@ -117,23 +111,23 @@ class Event implements JSONSerializable {
 
     bool ongoing = false;
 
-    if (dataFim != null && now.isAfter(dataFim!)) {
+    if (endDate != null && now.isAfter(endDate!)) {
       return 'Concluído';
     }
 
-    if (dataInicio != null &&
-        dataFim != null &&
-        now.isAfter(dataInicio!) &&
-        now.isBefore(dataFim!)) {
-      difference = dataFim!.difference(now);
+    if (startDate != null &&
+        endDate != null &&
+        now.isAfter(startDate!) &&
+        now.isBefore(endDate!)) {
+      difference = endDate!.difference(now);
       ongoing = true;
-    } else if (dataInicio != null) {
-      difference = dataInicio!.difference(now);
-      if (now.isAfter(dataInicio!)) {
+    } else if (startDate != null) {
+      difference = startDate!.difference(now);
+      if (now.isAfter(startDate!)) {
         ongoing = true;
       }
-    } else if (dataFim != null) {
-      difference = dataFim!.difference(now);
+    } else if (endDate != null) {
+      difference = endDate!.difference(now);
       ongoing = true;
     }
 
@@ -157,7 +151,7 @@ class Event implements JSONSerializable {
 
     if (time != null) {
       return ongoing
-          ? (dataFim != null ? 'Termina em $time' : 'Começou há $time')
+          ? (endDate != null ? 'Termina em $time' : 'Começou há $time')
           : 'Começa em $time';
     }
 
@@ -171,25 +165,25 @@ class Event implements JSONSerializable {
   }
 
   String get dateDescription {
-    if (dataInicio == null || dataFim == null) {
+    if (startDate == null || endDate == null) {
       return '';
     }
 
     final DateFormat dayMonthFormat = DateFormat("d 'de' MMMM", 'pt_BR');
     final DateFormat hourMinuteFormat = DateFormat('HH:mm');
 
-    final String startFormatted = dayMonthFormat.format(dataInicio!);
+    final String startFormatted = dayMonthFormat.format(startDate!);
     final String endFormatted =
-        dataFim != null ? dayMonthFormat.format(dataFim!) : '';
-    final String startHour = hourMinuteFormat.format(dataInicio!);
+        endDate != null ? dayMonthFormat.format(endDate!) : '';
+    final String startHour = hourMinuteFormat.format(startDate!);
     final String endHour =
-        dataFim != null ? hourMinuteFormat.format(dataFim!) : '';
+        endDate != null ? hourMinuteFormat.format(endDate!) : '';
 
-    if (dataFim != null) {
-      if (dataFim!.day - dataInicio!.day <= 1) {
+    if (endDate != null) {
+      if (endDate!.day - startDate!.day <= 1) {
         return '$startFormatted, $startHour – $endHour';
-      } else if (dataInicio!.month == dataFim!.month) {
-        return 'de ${dataInicio!.day} a $endFormatted';
+      } else if (startDate!.month == endDate!.month) {
+        return 'de ${startDate!.day} a $endFormatted';
       } else {
         return 'de $startFormatted a $endFormatted';
       }
