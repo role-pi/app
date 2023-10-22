@@ -41,7 +41,7 @@ class RoleApp extends StatelessWidget {
         onGenerateRoute: (settings) {
           late Widget page;
 
-          if (settings.name == "/evento") {
+          if (settings.name == "/event") {
             page = EventDetailScreen(
               id: settings.arguments as int,
             );
