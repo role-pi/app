@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/evento_detail/repository/evento_detail_repository.dart';
-import 'package:role/features/evento_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_detail/repository/event_detail_repository.dart';
+import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
 import 'package:role/models/user.dart';
 
-class EventoDetailProvider extends ChangeNotifier {
+class EventDetailProvider extends ChangeNotifier {
   late int id;
   late EventoListProvider eventoListProvider;
 
   Event get evento => eventoListProvider.evento(id);
 
-  EventoDetailRepository eventoRepository = EventoDetailRepository();
+  EventDetailRepository eventoRepository = EventDetailRepository();
 
-  EventoDetailProvider(EventoListProvider eventoListProvider, int id) {
+  EventDetailProvider(EventoListProvider eventoListProvider, int id) {
     this.eventoListProvider = eventoListProvider;
     this.id = id;
     get();

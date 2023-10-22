@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:role/features/event_edit/repository/evento_edit_repository.dart';
-import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
-import 'package:role/features/evento_list/providers/evento_list_provider.dart';
-import 'package:role/features/new_insumo/repository/new_insumo_repository.dart';
+import 'package:role/features/event_edit/repository/event_edit_repository.dart';
+import 'package:role/features/event_detail/providers/evento_detail_provider.dart';
+import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/new_item/repository/new_insumo_repository.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class NewInsumoProvider extends ChangeNotifier {
-  late EventoDetailProvider eventoDetailProvider;
+  late EventDetailProvider eventoDetailProvider;
   Event get evento => eventoDetailProvider.evento;
 
   NewInsumoRepository newInsumoRepository = NewInsumoRepository();
@@ -21,7 +21,7 @@ class NewInsumoProvider extends ChangeNotifier {
 
   late FToast fToast;
 
-  NewInsumoProvider(EventoDetailProvider eventoDetailProvider) {
+  NewInsumoProvider(EventDetailProvider eventoDetailProvider) {
     this.eventoDetailProvider = eventoDetailProvider;
     nameController = TextEditingController();
     descricaoController = TextEditingController();

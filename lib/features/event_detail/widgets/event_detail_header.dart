@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:role/features/event_edit/screens/evento_edit_screen.dart';
-import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
+import 'package:role/features/event_edit/screens/event_edit_screen.dart';
+import 'package:role/features/event_detail/providers/evento_detail_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
@@ -18,8 +18,8 @@ class EventDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    EventoDetailProvider _eventoDetailProvider =
-        Provider.of<EventoDetailProvider>(context, listen: false);
+    EventDetailProvider _eventoDetailProvider =
+        Provider.of<EventDetailProvider>(context, listen: false);
 
     return ClipPath(
       clipper: _EventoDetailHeaderClipper(),
@@ -41,7 +41,7 @@ class EventDetailHeader extends StatelessWidget {
                     onPressedTrailing: () {
                       Navigator.of(context)
                           .push(CupertinoPageRoute(builder: (context) {
-                        return EventoEditScreen(_eventoDetailProvider);
+                        return EventEditScreen(_eventoDetailProvider);
                       }));
                     })),
             Spacer(),
@@ -54,7 +54,7 @@ class EventDetailHeader extends StatelessWidget {
                         padding: const EdgeInsets.all(2.0),
                         child: Row(
                           children: [
-                            Consumer<EventoDetailProvider>(
+                            Consumer<EventDetailProvider>(
                               builder: (context, provider, child) {
                                 return Expanded(
                                   child: AutoSizeText(
@@ -85,7 +85,7 @@ class EventDetailHeader extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Consumer<EventoDetailProvider>(
+                      Consumer<EventDetailProvider>(
                         builder: (context, provider, child) {
                           return ContainerText(
                               text: provider.evento.dateDescription);

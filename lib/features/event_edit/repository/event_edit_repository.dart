@@ -4,7 +4,7 @@ import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
 import '../../../models/event.dart';
 
-class EventoEditRepository {
+class EventEditRepository {
   Future<int?> putEvento(Event evento) async {
     try {
       var response = await API()

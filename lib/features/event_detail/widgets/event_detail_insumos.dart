@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
-class EventoDetailInsumos extends StatelessWidget {
+class EventDetailInsumos extends StatelessWidget {
   List<Item> insumos;
 
-  EventoDetailInsumos({Key? key, required this.insumos}) : super(key: key);
+  EventDetailInsumos({Key? key, required this.insumos}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

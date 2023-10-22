@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:role/models/item.dart';
-import 'package:role/models/usuario.dart';
+import 'package:role/models/user.dart';
 
 import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
 import '../../../models/event.dart';
 
-class EventoDetailRepository {
+class EventDetailRepository {
   Future<Event?> getEvento(Event evento) async {
     try {
       var response =

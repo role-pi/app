@@ -1,10 +1,9 @@
-    import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
-import 'package:role/features/evento_detail/screens/evento_detail_screen.dart';
-import 'package:role/features/evento_list/screens/evento_list_screen.dart';
+import 'package:role/features/event_detail/screens/evento_detail_screen.dart';
+import 'package:role/features/event_list/screens/evento_list_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/features/user_login/screens/user_login_screen.dart';
 
@@ -18,7 +17,6 @@ void main() {
   }
 }
 
-
 class RoleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,8 +26,8 @@ class RoleApp extends StatelessWidget {
       ],
       child: CupertinoApp(
         localizationsDelegates: [
-              GlobalMaterialLocalizations.delegate,  
-          GlobalCupertinoLocalizations.delegate,  
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: [const Locale('en', 'US'), const Locale('pt', 'BR')],
@@ -44,7 +42,7 @@ class RoleApp extends StatelessWidget {
           late Widget page;
 
           if (settings.name == "/evento") {
-            page = EventoDetailScreen(
+            page = EventDetailScreen(
               id: settings.arguments as int,
             );
           } else {

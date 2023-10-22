@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:role/features/event_edit/providers/evento_edit_provider.dart';
-import 'package:role/features/evento_detail/widgets/evento_detail_map.dart';
-import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
+import 'package:role/features/event_edit/providers/event_edit_provider.dart';
+import 'package:role/features/event_detail/widgets/event_detail_map.dart';
+import 'package:role/features/event_detail/providers/evento_detail_provider.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_date_picker.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
-class EventoEditScreen extends StatelessWidget {
-  EventoEditScreen(EventoDetailProvider eventoDetailProvider) {
-    this.eventoEditProvider = EventoEditProvider(eventoDetailProvider);
+class EventEditScreen extends StatelessWidget {
+  EventEditScreen(EventDetailProvider eventoDetailProvider) {
+    this.eventoEditProvider = EventEditProvider(eventoDetailProvider);
   }
 
-  late EventoEditProvider eventoEditProvider;
+  late EventEditProvider eventoEditProvider;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -25,7 +25,7 @@ class EventoEditScreen extends StatelessWidget {
         child: CupertinoPageScaffold(
           child: SingleChildScrollView(
             child: Column(children: [
-              Consumer<EventoEditProvider>(builder: (context, provider, child) {
+              Consumer<EventEditProvider>(builder: (context, provider, child) {
                 return CustomNavigationBar(
                     trailingText: "salvar",
                     onPressedLeading: () {
@@ -80,7 +80,7 @@ class EventoEditScreen extends StatelessWidget {
                       SizedBox(height: 12),
                       SizedBox(
                           height: 250,
-                          child: EventoDetailMap(
+                          child: EventDetailMap(
                               color: eventoEditProvider.evento.color1,
                               endereco: eventoEditProvider.evento.endereco)),
                       SizedBox(height: 12),

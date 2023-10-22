@@ -1,23 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:role/features/event_edit/repository/evento_edit_repository.dart';
-import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
-import 'package:role/features/evento_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_edit/repository/event_edit_repository.dart';
+import 'package:role/features/event_detail/providers/evento_detail_provider.dart';
+import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
-class EventoEditProvider extends ChangeNotifier {
-  late EventoDetailProvider eventoDetailProvider;
+class EventEditProvider extends ChangeNotifier {
+  late EventDetailProvider eventoDetailProvider;
   Event get evento => eventoDetailProvider.evento;
 
-  EventoEditRepository eventoRepository = EventoEditRepository();
+  EventEditRepository eventoRepository = EventEditRepository();
 
   late TextEditingController nameController;
   late bool changed = false;
 
   late FToast fToast;
 
-  EventoEditProvider(EventoDetailProvider eventoDetailProvider) {
+  EventEditProvider(EventDetailProvider eventoDetailProvider) {
     this.eventoDetailProvider = eventoDetailProvider;
     nameController = TextEditingController(text: evento.name);
     nameController.addListener(_textChanged);

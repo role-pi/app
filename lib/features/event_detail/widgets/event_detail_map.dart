@@ -2,13 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:role/models/endereco.dart';
+import 'package:role/models/location.dart';
 
-class EventoDetailMap extends StatelessWidget {
+class EventDetailMap extends StatelessWidget {
   Color color;
   Location endereco;
 
-  EventoDetailMap({required this.color, required this.endereco});
+  EventDetailMap({required this.color, required this.endereco});
 
   @override
   Widget build(BuildContext context) {
