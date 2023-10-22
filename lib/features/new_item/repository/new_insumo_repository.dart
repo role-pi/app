@@ -5,7 +5,7 @@ import 'package:role/models/item.dart';
 import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
 
-class NewInsumoRepository {
+class NewItemRepository {
   Future<int?> postInsumo(Item insumo) async {
     try {
       var response = await API()

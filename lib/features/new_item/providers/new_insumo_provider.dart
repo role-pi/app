@@ -6,11 +6,11 @@ import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
-class NewInsumoProvider extends ChangeNotifier {
+class NewItemProvider extends ChangeNotifier {
   late EventDetailProvider eventoDetailProvider;
   Event get evento => eventoDetailProvider.evento;
 
-  NewInsumoRepository newInsumoRepository = NewInsumoRepository();
+  NewItemRepository newInsumoRepository = NewItemRepository();
 
   late TextEditingController nameController,
       descricaoController,
@@ -19,7 +19,7 @@ class NewInsumoProvider extends ChangeNotifier {
 
   late FToast fToast;
 
-  NewInsumoProvider(EventDetailProvider eventoDetailProvider) {
+  NewItemProvider(EventDetailProvider eventoDetailProvider) {
     this.eventoDetailProvider = eventoDetailProvider;
     nameController = TextEditingController();
     descricaoController = TextEditingController();

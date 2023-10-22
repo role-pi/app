@@ -87,7 +87,7 @@ class EventDetailScreen extends StatelessWidget {
                               context,
                               CupertinoPageRoute(
                                   builder: (context) =>
-                                      NewInsumoScreen(eventoDetailProvider)),
+                                      NewItemScreen(eventoDetailProvider)),
                             );
                           },
                           child: Container(

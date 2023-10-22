@@ -5,12 +5,12 @@ import 'package:role/features/new_item/providers/new_insumo_provider.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 
-class NewInsumoScreen extends StatelessWidget {
-  NewInsumoScreen(EventDetailProvider eventoDetailProvider) {
-    this.newInsumoProvider = NewInsumoProvider(eventoDetailProvider);
+class NewItemScreen extends StatelessWidget {
+  NewItemScreen(EventDetailProvider eventoDetailProvider) {
+    this.newInsumoProvider = NewItemProvider(eventoDetailProvider);
   }
 
-  late final NewInsumoProvider newInsumoProvider;
+  late final NewItemProvider newInsumoProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class NewInsumoScreen extends StatelessWidget {
       value: newInsumoProvider,
       child: CupertinoPageScaffold(
           child: Column(children: [
-        Consumer<NewInsumoProvider>(builder: (context, provider, child) {
+        Consumer<NewItemProvider>(builder: (context, provider, child) {
           return CustomNavigationBar(
               trailingText: "adicionar",
               onPressedLeading: () {
