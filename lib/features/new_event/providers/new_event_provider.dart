@@ -10,7 +10,7 @@ class NewEventProvider extends ChangeNotifier {
 
   Event event = Event(id: 0, name: "");
 
-  EventListRepository eventoRepository = EventListRepository();
+  EventListRepository eventRepository = EventListRepository();
 
   static final NewEventProvider shared = NewEventProvider();
 
@@ -44,7 +44,7 @@ class NewEventProvider extends ChangeNotifier {
 
   create() async {
     loading = true;
-    var response = await eventoRepository.addEvento(event);
+    var response = await eventRepository.addEvent(event);
 
     if (response != null) {
       showing = false;

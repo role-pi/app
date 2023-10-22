@@ -7,7 +7,7 @@ import '../../../shared/utils/api_status.dart';
 import '../../../models/event.dart';
 
 class EventListRepository {
-  Future<List<Event>> getEventos() async {
+  Future<List<Event>> getEvents() async {
     try {
       var response = await API().request(endpoint: "evento", method: "GET");
 
@@ -23,7 +23,7 @@ class EventListRepository {
     return [];
   }
 
-  Future<bool> deleteEvento(Event evento) async {
+  Future<bool> deleteEvent(Event event) async {
     try {
       var response = await API()
           .request(endpoint: "evento/${evento.id}", method: "DELETE");
@@ -41,14 +41,14 @@ class EventListRepository {
     return false;
   }
 
-  Future<int?> addEvento(Event evento) async {
+  Future<int?> addEvent(Event event) async {
     try {
       var response =
           await API().request(endpoint: "evento", method: "POST", body: {
-        "nome": evento.name,
-        "emoji": evento.theme.emoji,
-        "cor1": evento.theme.color1.toHex(),
-        "cor2": evento.theme.color2.toHex(),
+        "nome": event.name,
+        "emoji": event.theme.emoji,
+        "cor1": event.theme.color1.toHex(),
+        "cor2": event.theme.color2.toHex(),
       });
 
       Map decoded = json.decode(response.response);

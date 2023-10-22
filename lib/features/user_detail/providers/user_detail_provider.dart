@@ -98,7 +98,5 @@ class UserDetailProvider extends ChangeNotifier {
     );
   }
 
-  delete(Event evento, BuildContext context) async {
-    // await EventoListProvider.shared.delete(evento, context);
-  }
+  delete(Event event, BuildContext context) async {}
 }

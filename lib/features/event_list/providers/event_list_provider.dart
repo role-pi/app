@@ -11,7 +11,7 @@ class EventListProvider extends ChangeNotifier {
   bool get loading => _loading;
   List<Event> get events => _events;
 
-  EventListRepository eventoRepository = EventListRepository();
+  EventListRepository eventRepository = EventListRepository();
 
   static final EventListProvider shared = EventListProvider();
 
@@ -33,11 +33,11 @@ class EventListProvider extends ChangeNotifier {
   }
 
   get() async {
-    set(await eventoRepository.getEventos());
+    set(await eventRepository.getEvents());
   }
 
-  delete(Event evento, BuildContext context) async {
-    bool result = await eventoRepository.deleteEvento(evento);
+  delete(Event event, BuildContext context) async {
+    bool result = await eventRepository.deleteEvent(event);
 
     fToast.init(context);
     Widget toast;
@@ -45,9 +45,9 @@ class EventListProvider extends ChangeNotifier {
       toast = CustomToast(
           title: "evento excluído",
           icon: CupertinoIcons.checkmark,
-          color: evento.color1);
+          color: event.color1);
 
-      _events.remove(evento);
+      _events.remove(event);
       notifyListeners();
       Navigator.of(context).popUntil((route) => route.isFirst);
     } else {

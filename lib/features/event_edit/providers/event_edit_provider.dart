@@ -10,7 +10,7 @@ class EventEditProvider extends ChangeNotifier {
   late EventDetailProvider eventDetailProvider;
   Event get event => eventDetailProvider.event;
 
-  EventEditRepository eventoRepository = EventEditRepository();
+  EventEditRepository eventRepository = EventEditRepository();
 
   late TextEditingController nameController;
   late bool changed = false;
@@ -27,7 +27,7 @@ class EventEditProvider extends ChangeNotifier {
   updateData(BuildContext context) async {
     changed = false;
 
-    int? result = await eventoRepository.putEvento(event);
+    int? result = await eventRepository.putEvent(event);
 
     fToast.init(context);
     Widget toast;

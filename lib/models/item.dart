@@ -7,7 +7,7 @@ class Item implements JSONSerializable {
   late int _tipo;
   late String _nome;
   late String _descricao;
-  late int _eventoId;
+  late int _eventId;
   List<Transaction> transacoes = [];
 
   Item({
@@ -16,13 +16,13 @@ class Item implements JSONSerializable {
     required int tipo,
     required String nome,
     required String descricao,
-    required int eventoId,
+    required int eventId,
   })  : _id = id,
         _valor = valor,
         _tipo = tipo,
         _nome = nome,
         _descricao = descricao,
-        _eventoId = eventoId;
+        _eventId = eventId;
 
   int get id => _id;
   set id(int value) {
@@ -49,9 +49,9 @@ class Item implements JSONSerializable {
     _descricao = value;
   }
 
-  int get eventoId => _eventoId;
-  set eventoId(int value) {
-    _eventoId = value;
+  int get eventId => _eventId;
+  set eventId(int value) {
+    _eventId = value;
   }
 
   void addTransacao(Transaction transacao) {
@@ -65,7 +65,7 @@ class Item implements JSONSerializable {
       tipo: json["tipo"],
       descricao: json["descricao"],
       valor: 0,
-      eventoId: 0);
+      eventId: 0);
 
   @override
   Map<String, dynamic> toJson() => {
@@ -74,6 +74,6 @@ class Item implements JSONSerializable {
         "nome": nome,
         "descricao": descricao,
         "valor": valor,
-        "idEvento": eventoId,
+        "idEvento": eventId,
       };
 }

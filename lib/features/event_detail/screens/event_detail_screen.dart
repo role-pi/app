@@ -40,9 +40,9 @@ class EventDetailScreen extends StatelessWidget {
                   children: [
                     Consumer<EventDetailProvider>(
                       builder: (context, provider, child) {
-                        if (provider.event.usuarios != null) {
+                        if (provider.event.users != null) {
                           return EventDetailGuests(
-                              convidados: provider.event.usuarios!);
+                              convidados: provider.event.users!);
                         }
                         return Container();
                       },

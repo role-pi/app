@@ -41,7 +41,7 @@ class NewItemProvider extends ChangeNotifier {
         nome: nameController.text,
         descricao: descricaoController.text,
         valor: double.parse(valorController.text),
-        eventoId: event.id);
+        eventId: event.id);
 
     int? result = await newItemRepository.postItem(item);
 

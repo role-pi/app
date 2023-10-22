@@ -5,10 +5,10 @@ import '../../../shared/utils/api_status.dart';
 import '../../../models/event.dart';
 
 class EventEditRepository {
-  Future<int?> putEvento(Event evento) async {
+  Future<int?> putEvent(Event event) async {
     try {
       var response = await API()
-          .request(endpoint: "evento", method: "PUT", body: evento.toJson());
+          .request(endpoint: "evento", method: "PUT", body: event.toJson());
 
       Map decoded = json.decode(response.response);
       return decoded["affectedRows"];

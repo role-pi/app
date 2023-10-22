@@ -16,7 +16,7 @@ class _NewEventNameState extends State<NewEventName> {
 
   @override
   Widget build(BuildContext context) {
-    NewEventProvider _newEventoProvider =
+    NewEventProvider _newEventProvider =
         Provider.of<NewEventProvider>(context, listen: false);
 
     return Form(
@@ -55,7 +55,7 @@ class _NewEventNameState extends State<NewEventName> {
             child: RoundButton(
               text: "continuar",
               onPressed: () {
-                _newEventoProvider.setName(_nameController.text);
+                _newEventProvider.setName(_nameController.text);
                 _nameController.clear();
               },
               // onPressed: onSubmit,

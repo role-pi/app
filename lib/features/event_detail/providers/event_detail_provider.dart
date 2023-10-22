@@ -35,14 +35,14 @@ class EventDetailProvider extends ChangeNotifier {
     event.items = items;
   }
 
-  setUsuarios(List<User> usuarios) {
-    event.usuarios = usuarios;
+  setUsers(List<User> users) {
+    event.users = users;
   }
 
   get() async {
-    updateEvent(await eventRepository.getEvento(event));
+    updateEvent(await eventRepository.getEvent(event));
     setItems(await eventRepository.getItems(event));
-    setUsuarios(await eventRepository.getUsuarios(event));
+    setUsers(await eventRepository.getUsers(event));
 
     notifyListeners();
   }
