@@ -5,8 +5,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:role/models/location.dart';
 
 class EventDetailMap extends StatelessWidget {
-  Color color;
-  Location endereco;
+  final Color color;
+  final Location endereco;
 
   EventDetailMap({required this.color, required this.endereco});
 

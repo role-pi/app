@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/models/event.dart';
-import 'package:role/features/evento_list/providers/evento_list_provider.dart';
-import 'package:role/features/evento_list/widgets/evento_item_row.dart';
-import 'package:role/features/evento_list/widgets/evento_list_header.dart';
+import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_list/widgets/evento_item_row.dart';
+import 'package:role/features/event_list/widgets/evento_list_header.dart';
 import 'package:role/shared/widgets/circle_button.dart';
 
 class EventoList extends StatelessWidget {

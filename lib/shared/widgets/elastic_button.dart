@@ -1,9 +1,8 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class ElasticButton extends StatefulWidget {
-  Widget child;
+  final Widget child;
   final Function() onTap;
 
   ElasticButton({required this.child, required this.onTap});

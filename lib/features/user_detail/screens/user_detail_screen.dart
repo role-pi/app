@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,11 +12,9 @@ import 'package:role/shared/widgets/round_button.dart';
 import '../../../shared/widgets/elastic_button.dart';
 
 class UserDetailScreen extends StatelessWidget {
-  UserDetailProvider userDetailProvider = UserDetailProvider.shared;
+  UserDetailProvider get userDetailProvider => UserDetailProvider.shared;
 
-  File? image;
-
-  TextStyle style = TextStyle(
+  TextStyle get style => TextStyle(
       letterSpacing: -0.8,
       color: CupertinoColors.black,
       fontWeight: FontWeight.bold);

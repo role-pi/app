@@ -1,4 +1,4 @@
-import 'package:role/models/transacao.dart';
+import 'package:role/models/transaction.dart';
 import 'package:role/shared/utils/serializable.dart';
 
 class Item implements JSONSerializable {

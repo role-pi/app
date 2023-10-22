@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:role/models/usuario.dart';
+import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventDetailGuests extends StatelessWidget {
-  List<User> convidados;
+  final List<User> convidados;
 
   EventDetailGuests({Key? key, required this.convidados}) : super(key: key);
 
@@ -31,7 +31,6 @@ class EventDetailGuests extends StatelessWidget {
             child: Text(
               title,
               style: TextStyle(
-            
                   fontWeight: FontWeight.bold,
                   fontSize: 26,
                   letterSpacing: -1.5),

@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/screens/event_edit_screen.dart';
-import 'package:role/features/event_detail/providers/evento_detail_provider.dart';
+import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/user_login/repository/user_repository.dart';
-import 'package:role/models/usuario.dart';
+import 'package:role/models/user.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 

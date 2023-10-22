@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class DefaultUserIcon extends StatelessWidget {
-  double size;
+  final double size;
 
   DefaultUserIcon({super.key, this.size = 58});
 

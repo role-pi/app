@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/features/event_detail/widgets/event_detail_map.dart';
-import 'package:role/features/event_detail/providers/evento_detail_provider.dart';
+import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_date_picker.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
@@ -14,7 +14,7 @@ class EventEditScreen extends StatelessWidget {
     this.eventoEditProvider = EventEditProvider(eventoDetailProvider);
   }
 
-  late EventEditProvider eventoEditProvider;
+  late final EventEditProvider eventoEditProvider;
 
   final _formKey = GlobalKey<FormState>();
 

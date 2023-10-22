@@ -5,7 +5,7 @@ import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventDetailInsumos extends StatelessWidget {
-  List<Item> insumos;
+  final List<Item> insumos;
 
   EventDetailInsumos({Key? key, required this.insumos}) : super(key: key);
 

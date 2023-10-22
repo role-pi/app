@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:role/features/event_detail/providers/evento_detail_provider.dart';
-import 'package:role/features/event_list/providers/evento_list_provider.dart';
+import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/new_item/providers/new_insumo_provider.dart';
-import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 
@@ -12,7 +10,7 @@ class NewInsumoScreen extends StatelessWidget {
     this.newInsumoProvider = NewInsumoProvider(eventoDetailProvider);
   }
 
-  late NewInsumoProvider newInsumoProvider;
+  late final NewInsumoProvider newInsumoProvider;
 
   @override
   Widget build(BuildContext context) {
