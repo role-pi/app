@@ -18,7 +18,7 @@ class EventItemRow extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          "/evento",
+          "/event",
           arguments: event.id,
         );
       },
