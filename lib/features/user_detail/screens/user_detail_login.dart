@@ -26,7 +26,7 @@ class _UserDetailLoginState extends State<UserDetailLogin> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.center, // Alinha os elementos horizontalmente
+          mainAxisAlignment: MainAxisAlignment.center, 
           children: [
             Text(
               "Tudo pronto!",
