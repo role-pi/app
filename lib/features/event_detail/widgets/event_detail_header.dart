@@ -22,7 +22,7 @@ class EventDetailHeader extends StatelessWidget {
         Provider.of<EventDetailProvider>(context, listen: false);
 
     return ClipPath(
-      clipper: _EventoDetailHeaderClipper(),
+      clipper: _EventDetailHeaderClipper(),
       child: SizedBox(
           child: Container(
               child: GradientWidget(
@@ -99,8 +99,8 @@ class EventDetailHeader extends StatelessWidget {
   }
 }
 
-class EventoDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
-  EventoDetailHeaderDelegate({required this.event});
+class EventDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
+  EventDetailHeaderDelegate({required this.event});
 
   final Event event;
 
@@ -122,7 +122,7 @@ class EventoDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 }
 
-class _EventoDetailHeaderClipper extends CustomClipper<Path> {
+class _EventDetailHeaderClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();

@@ -38,11 +38,11 @@ class UserLoginProvider extends ChangeNotifier {
     if (state == LoginState.loggedOut) {
       _token = await storage.read(key: "token");
 
-      User? usuario = await userRepository.authenticate();
+      User? user = await userRepository.authenticate();
 
-      if (usuario != null) {
+      if (user != null) {
         setState(LoginState.loggedIn);
-        setUser(usuario);
+        setUser(user);
         callback();
       } else {
         setState(LoginState.signIn);
@@ -68,13 +68,13 @@ class UserLoginProvider extends ChangeNotifier {
 
   Future verify(email, code, callback) async {
     if (state != LoginState.loggedIn) {
-      var (usuario, token) = await userRepository.verify(email, code);
+      var (user, token) = await userRepository.verify(email, code);
 
-      if (usuario != null && token != null) {
+      if (user != null && token != null) {
         _token = token;
         saveToken(_token);
 
-        _user = usuario;
+        _user = user;
 
         setState(LoginState.loggingIn);
         callback();

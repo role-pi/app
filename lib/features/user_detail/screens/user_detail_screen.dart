@@ -33,7 +33,7 @@ class UserDetailScreen extends StatelessWidget {
                 trailingText: "salvar",
                 accentColor: CupertinoColors.activeBlue,
                 onPressedTrailing: () {
-                  userDetailProvider.updateUsuario(context);
+                  userDetailProvider.updateUser(context);
                 },
                 topPadding: 0,
               ),

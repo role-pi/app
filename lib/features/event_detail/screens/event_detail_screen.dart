@@ -28,7 +28,7 @@ class EventDetailScreen extends StatelessWidget {
             SliverPersistentHeader(
               pinned: false,
               delegate:
-                  EventoDetailHeaderDelegate(event: eventDetailProvider.event),
+                  EventDetailHeaderDelegate(event: eventDetailProvider.event),
             ),
             CupertinoSliverRefreshControl(onRefresh: () async {
               await eventDetailProvider.get();

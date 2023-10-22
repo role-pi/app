@@ -17,7 +17,7 @@ class EventDetailMap extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          EventoStyledMap(
+          EventStyledMap(
             color: color,
             endereco: endereco,
             interactiveFlags: 0,
@@ -62,8 +62,8 @@ class EventDetailMap extends StatelessWidget {
   }
 }
 
-class EventoStyledMap extends StatelessWidget {
-  const EventoStyledMap(
+class EventStyledMap extends StatelessWidget {
+  const EventStyledMap(
       {super.key,
       required this.color,
       required this.endereco,

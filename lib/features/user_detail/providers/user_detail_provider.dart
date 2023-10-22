@@ -44,11 +44,10 @@ class UserDetailProvider extends ChangeNotifier {
     }
   }
 
-  Future updateUsuario(BuildContext context) async {
+  Future updateUser(BuildContext context) async {
     UserLoginProvider.shared.user!.name = nameController.text;
     UserLoginProvider.shared.user!.email = emailController.text;
-    int? result =
-        await userRepository.putUsuario(UserLoginProvider.shared.user!);
+    int? result = await userRepository.putUser(UserLoginProvider.shared.user!);
 
     fToast.init(context);
     Widget toast;

@@ -25,8 +25,8 @@ class EventListRepository {
 
   Future<bool> deleteEvent(Event event) async {
     try {
-      var response = await API()
-          .request(endpoint: "evento/${evento.id}", method: "DELETE");
+      var response =
+          await API().request(endpoint: "evento/${event.id}", method: "DELETE");
 
       print(response.response);
       return true;

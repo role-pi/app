@@ -68,10 +68,10 @@ class UserRepository {
     return (null, null);
   }
 
-  Future<int?> putUsuario(User usuario) async {
+  Future<int?> putUser(User user) async {
     try {
       final response = await API()
-          .request(endpoint: "usuario", method: "PUT", body: usuario.toJson());
+          .request(endpoint: "usuario", method: "PUT", body: user.toJson());
 
       return json.decode(response.response);
     } catch (e) {

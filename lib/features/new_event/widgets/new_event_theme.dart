@@ -7,10 +7,10 @@ import 'package:role/shared/widgets/round_button.dart';
 
 class NewEventTheme extends StatefulWidget {
   @override
-  _NewEventoThemeState createState() => _NewEventoThemeState();
+  _NewEventThemeState createState() => _NewEventThemeState();
 }
 
-class _NewEventoThemeState extends State<NewEventTheme> {
+class _NewEventThemeState extends State<NewEventTheme> {
   final _formKey = GlobalKey<FormState>();
 
   @override

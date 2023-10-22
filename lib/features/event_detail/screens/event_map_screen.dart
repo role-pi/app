@@ -21,7 +21,7 @@ class EventMapScreen extends StatelessWidget {
                 Navigator.of(context).pop();
               },
               onPressedTrailing: () {}),
-          Expanded(child: EventoStyledMap(color: color, endereco: endereco)),
+          Expanded(child: EventStyledMap(color: color, endereco: endereco)),
         ],
       ),
     );
