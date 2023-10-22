@@ -5,8 +5,8 @@ import 'package:role/models/event.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
-class EventoItemRowGuests extends StatelessWidget {
-  EventoItemRowGuests({required this.evento});
+class EventItemRowGuests extends StatelessWidget {
+  EventItemRowGuests({required this.evento});
 
   final Event evento;
   final showMax = 3;

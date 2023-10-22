@@ -6,7 +6,7 @@ import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
 import '../../../models/event.dart';
 
-class EventoListRepository {
+class EventListRepository {
   Future<List<Event>> getEventos() async {
     try {
       var response = await API().request(endpoint: "evento", method: "GET");

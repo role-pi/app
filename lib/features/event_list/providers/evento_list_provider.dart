@@ -4,20 +4,20 @@ import 'package:role/models/event.dart';
 import 'package:role/features/event_list/repository/evento_list_repository.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
-class EventoListProvider extends ChangeNotifier {
+class EventListProvider extends ChangeNotifier {
   bool _loading = false;
   List<Event> _eventos = [];
 
   bool get loading => _loading;
   List<Event> get eventos => _eventos;
 
-  EventoListRepository eventoRepository = EventoListRepository();
+  EventListRepository eventoRepository = EventListRepository();
 
-  static final EventoListProvider shared = EventoListProvider();
+  static final EventListProvider shared = EventListProvider();
 
   late FToast fToast;
 
-  EventoListProvider() {
+  EventListProvider() {
     get();
     fToast = FToast();
   }

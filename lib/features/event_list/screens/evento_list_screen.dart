@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_list/widgets/evento_list.dart';
-import 'package:role/features/new_event/providers/new_evento_provider.dart';
-import 'package:role/features/new_event/screens/new_evento_screen.dart';
+import 'package:role/features/new_event/providers/new_event_provider.dart';
+import 'package:role/features/new_event/screens/new_event_screen.dart';
 
-class EventoListScreen extends StatefulWidget {
+class EventListScreen extends StatefulWidget {
   @override
-  _EventoListScreenState createState() => _EventoListScreenState();
+  _EventListScreenState createState() => _EventListScreenState();
 }
 
-class _EventoListScreenState extends State<EventoListScreen> {
+class _EventListScreenState extends State<EventListScreen> {
   // bool showNewEvent = false;
 
   Duration duration = Duration(milliseconds: 200);
@@ -20,7 +20,7 @@ class _EventoListScreenState extends State<EventoListScreen> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: EventoListProvider.shared),
+        ChangeNotifierProvider.value(value: EventListProvider.shared),
         ChangeNotifierProvider.value(value: NewEventProvider.shared)
       ],
       child: WillPopScope(
@@ -29,7 +29,7 @@ class _EventoListScreenState extends State<EventoListScreen> {
           child: Center(
             child: Stack(
               children: [
-                EventoList(
+                EventList(
                   onTap: () => {NewEventProvider.shared.showing = true},
                 ),
                 NewEventScreen()

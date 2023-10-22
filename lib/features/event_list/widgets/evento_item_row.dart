@@ -6,8 +6,8 @@ import 'package:role/shared/widgets/gradient_effect.dart';
 
 import 'evento_item_row_guests.dart';
 
-class EventoItemRow extends StatelessWidget {
-  EventoItemRow({required this.evento, this.onTap});
+class EventItemRow extends StatelessWidget {
+  EventItemRow({required this.evento, this.onTap});
 
   final Event evento;
   final Function()? onTap;
@@ -79,7 +79,7 @@ class EventoItemRow extends StatelessWidget {
                           ],
                         ),
                         Spacer(),
-                        EventoItemRowGuests(evento: evento),
+                        EventItemRowGuests(evento: evento),
                       ],
                     ),
                   ],

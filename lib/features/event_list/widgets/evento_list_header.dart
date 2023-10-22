@@ -6,8 +6,8 @@ import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
-class EventoListHeader extends StatelessWidget {
-  const EventoListHeader({
+class EventListHeader extends StatelessWidget {
+  const EventListHeader({
     super.key,
   });
 

@@ -10,7 +10,7 @@ class NewEventProvider extends ChangeNotifier {
 
   Event evento = Event(id: 0, name: "");
 
-  EventoListRepository eventoRepository = EventoListRepository();
+  EventListRepository eventoRepository = EventListRepository();
 
   static final NewEventProvider shared = NewEventProvider();
 
@@ -26,7 +26,7 @@ class NewEventProvider extends ChangeNotifier {
     if (showing) {
       evento = Event(id: 0, name: "");
     } else {
-      EventoListProvider.shared.get();
+      EventListProvider.shared.get();
       FocusManager.instance.primaryFocus?.unfocus();
     }
     notifyListeners();

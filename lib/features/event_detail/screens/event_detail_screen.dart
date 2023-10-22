@@ -14,7 +14,7 @@ import 'package:role/shared/widgets/elastic_button.dart';
 class EventDetailScreen extends StatelessWidget {
   EventDetailScreen({required this.id})
       : eventoDetailProvider =
-            EventDetailProvider(EventoListProvider.shared, id);
+            EventDetailProvider(EventListProvider.shared, id);
 
   final int id;
   final EventDetailProvider eventoDetailProvider;

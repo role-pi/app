@@ -7,13 +7,13 @@ import 'package:role/models/user.dart';
 
 class EventDetailProvider extends ChangeNotifier {
   late int id;
-  late EventoListProvider eventoListProvider;
+  late EventListProvider eventoListProvider;
 
   Event get evento => eventoListProvider.evento(id);
 
   EventDetailRepository eventoRepository = EventDetailRepository();
 
-  EventDetailProvider(EventoListProvider eventoListProvider, int id) {
+  EventDetailProvider(EventListProvider eventoListProvider, int id) {
     this.eventoListProvider = eventoListProvider;
     this.id = id;
     get();
@@ -28,7 +28,7 @@ class EventDetailProvider extends ChangeNotifier {
     this.evento.theme = evento.theme;
     notifyListeners();
 
-    EventoListProvider.shared.notifyListeners();
+    EventListProvider.shared.notifyListeners();
   }
 
   setInsumos(List<Item> insumos) {

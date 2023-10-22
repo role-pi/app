@@ -35,7 +35,7 @@ class RoleApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: "/onboarding",
         routes: {
-          "/": (p0) => EventoListScreen(),
+          "/": (p0) => EventListScreen(),
           "/onboarding": (p0) => UserLoginScreen()
         },
         onGenerateRoute: (settings) {
@@ -46,7 +46,7 @@ class RoleApp extends StatelessWidget {
               id: settings.arguments as int,
             );
           } else {
-            page = EventoListScreen();
+            page = EventListScreen();
           }
 
           return CupertinoPageRoute(

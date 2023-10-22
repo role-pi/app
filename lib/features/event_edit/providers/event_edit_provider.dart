@@ -55,7 +55,7 @@ class EventEditProvider extends ChangeNotifier {
   }
 
   delete(BuildContext context) {
-    EventoListProvider.shared.delete(evento, context);
+    EventListProvider.shared.delete(evento, context);
   }
 
   _textChanged() {
