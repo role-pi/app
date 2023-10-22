@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:role/models/event_theme.dart';
 
-import '../../../shared/utils/api.dart';
-import '../../../shared/utils/api_status.dart';
-import '../../../models/event.dart';
+import 'package:role/shared/utils/api.dart';
+import 'package:role/shared/utils/api_status.dart';
+import 'package:role/models/event.dart';
 
 class EventListRepository {
   Future<List<Event>> getEvents() async {

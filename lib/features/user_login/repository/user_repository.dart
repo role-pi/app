@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:role/models/user.dart';
 
-import '../../../shared/utils/api.dart';
-import '../../../shared/utils/api_status.dart';
+import 'package:role/shared/utils/api.dart';
+import 'package:role/shared/utils/api_status.dart';
 
 class UserRepository {
   Future<User?> authenticate() async {

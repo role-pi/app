@@ -9,7 +9,7 @@ import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
-import '../../../shared/widgets/elastic_button.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 
 class UserDetailScreen extends StatelessWidget {
   UserDetailProvider get userDetailProvider => UserDetailProvider.shared;
