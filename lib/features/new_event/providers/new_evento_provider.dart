@@ -4,7 +4,7 @@ import 'package:role/features/event_list/providers/evento_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/event_theme.dart';
 
-class NewEventoProvider extends ChangeNotifier {
+class NewEventProvider extends ChangeNotifier {
   bool _loading = false;
   bool _showing = false;
 
@@ -12,7 +12,7 @@ class NewEventoProvider extends ChangeNotifier {
 
   EventoListRepository eventoRepository = EventoListRepository();
 
-  static final NewEventoProvider shared = NewEventoProvider();
+  static final NewEventProvider shared = NewEventProvider();
 
   bool get loading => _loading;
   set loading(bool loading) {

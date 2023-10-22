@@ -4,20 +4,20 @@ import 'package:role/features/new_event/providers/new_evento_provider.dart';
 import 'package:role/shared/widgets/big_form_text_field.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
-class NewEventoName extends StatefulWidget {
+class NewEventName extends StatefulWidget {
   @override
-  _NewEventoNameState createState() => _NewEventoNameState();
+  _NewEventNameState createState() => _NewEventNameState();
 }
 
-class _NewEventoNameState extends State<NewEventoName> {
+class _NewEventNameState extends State<NewEventName> {
   final _formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    NewEventoProvider _newEventoProvider =
-        Provider.of<NewEventoProvider>(context, listen: false);
+    NewEventProvider _newEventoProvider =
+        Provider.of<NewEventProvider>(context, listen: false);
 
     return Form(
       key: _formKey,

@@ -5,17 +5,17 @@ import 'package:role/models/event_theme.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
-class NewEventoTheme extends StatefulWidget {
+class NewEventTheme extends StatefulWidget {
   @override
   _NewEventoThemeState createState() => _NewEventoThemeState();
 }
 
-class _NewEventoThemeState extends State<NewEventoTheme> {
+class _NewEventoThemeState extends State<NewEventTheme> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<NewEventoProvider>(
+    return Consumer<NewEventProvider>(
       builder: (context, provider, child) {
         return Form(
           key: _formKey,
@@ -161,7 +161,7 @@ class ThemeGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<NewEventoProvider>(builder: (context, provider, child) {
+    return Consumer<NewEventProvider>(builder: (context, provider, child) {
       bool selected = provider.evento.theme.emoji == theme.emoji;
 
       return ElasticButton(

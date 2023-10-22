@@ -5,10 +5,10 @@ import 'package:role/features/new_event/providers/new_evento_provider.dart';
 import 'package:role/features/new_event/widgets/new_evento_name.dart';
 import 'package:role/features/new_event/widgets/new_evento_theme.dart';
 
-class NewEventoScreen extends StatelessWidget {
+class NewEventScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<NewEventoProvider>(builder: (context, provider, child) {
+    return Consumer<NewEventProvider>(builder: (context, provider, child) {
       return IgnorePointer(
         ignoring: !provider.showing,
         child: GestureDetector(
@@ -48,14 +48,14 @@ class NewEventoScreen extends StatelessWidget {
                               AnimatedOpacity(
                                   duration: Duration(milliseconds: 200),
                                   opacity: provider.evento.name.isEmpty ? 1 : 0,
-                                  child: NewEventoName()),
+                                  child: NewEventName()),
                               IgnorePointer(
                                 ignoring: provider.evento.name.isEmpty,
                                 child: AnimatedOpacity(
                                     duration: Duration(milliseconds: 200),
                                     opacity:
                                         provider.evento.name.isEmpty ? 0 : 1,
-                                    child: NewEventoTheme()),
+                                    child: NewEventTheme()),
                               ),
                             ]),
                           ),

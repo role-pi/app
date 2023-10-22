@@ -21,7 +21,7 @@ class _EventoListScreenState extends State<EventoListScreen> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: EventoListProvider.shared),
-        ChangeNotifierProvider.value(value: NewEventoProvider.shared)
+        ChangeNotifierProvider.value(value: NewEventProvider.shared)
       ],
       child: WillPopScope(
         onWillPop: () async => false,
@@ -30,9 +30,9 @@ class _EventoListScreenState extends State<EventoListScreen> {
             child: Stack(
               children: [
                 EventoList(
-                  onTap: () => {NewEventoProvider.shared.showing = true},
+                  onTap: () => {NewEventProvider.shared.showing = true},
                 ),
-                NewEventoScreen()
+                NewEventScreen()
               ],
             ),
           ),
