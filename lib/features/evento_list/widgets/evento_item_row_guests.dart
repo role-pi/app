@@ -1,14 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-import 'package:role/models/evento.dart';
+import 'package:role/models/event.dart';
 import 'package:role/models/usuario.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventoItemRowGuests extends StatelessWidget {
   EventoItemRowGuests({required this.evento});
 
-  final Evento evento;
+  final Event evento;
   final showMax = 3;
   double size = 42;
 
@@ -16,18 +16,18 @@ class EventoItemRowGuests extends StatelessWidget {
     List<Widget> list = [];
     int count = 0;
 
-    List<Usuario> users = [
-      Usuario(
+    List<User> users = [
+      User(
           id: 0,
           email: "",
           profilePhoto:
               "https://pbs.twimg.com/profile_images/1699634404291661824/Zc2OT-q4_400x400.jpg"),
-      Usuario(
+      User(
           id: 0,
           email: "",
           profilePhoto:
               "https://pbs.twimg.com/profile_images/1699634404291661824/Zc2OT-q4_400x400.jpg"),
-      Usuario(
+      User(
           id: 0,
           email: "",
           profilePhoto:

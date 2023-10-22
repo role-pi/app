@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:role/models/evento_theme.dart';
+import 'package:role/models/event_theme.dart';
 
 import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
-import '../../../models/evento.dart';
+import '../../../models/event.dart';
 
 class EventoListRepository {
-  Future<List<Evento>> getEventos() async {
+  Future<List<Event>> getEventos() async {
     try {
       var response = await API().request(endpoint: "evento", method: "GET");
 
@@ -23,7 +23,7 @@ class EventoListRepository {
     return [];
   }
 
-  Future<bool> deleteEvento(Evento evento) async {
+  Future<bool> deleteEvento(Event evento) async {
     try {
       var response = await API()
           .request(endpoint: "evento/${evento.id}", method: "DELETE");
@@ -41,7 +41,7 @@ class EventoListRepository {
     return false;
   }
 
-  Future<int?> addEvento(Evento evento) async {
+  Future<int?> addEvento(Event evento) async {
     try {
       var response =
           await API().request(endpoint: "evento", method: "POST", body: {
@@ -64,9 +64,9 @@ class EventoListRepository {
     return null;
   }
 
-  List<Evento> eventosFromJSON(String str) =>
-      List<Evento>.from(json.decode(str).map((x) => Evento.fromJson(x)));
+  List<Event> eventosFromJSON(String str) =>
+      List<Event>.from(json.decode(str).map((x) => Event.fromJson(x)));
 
-  String eventosToJSON(List<Evento> data) =>
+  String eventosToJSON(List<Event> data) =>
       json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 }

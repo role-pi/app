@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:role/models/insumo.dart';
+import 'package:role/models/item.dart';
 
 import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
 
 class NewInsumoRepository {
-  Future<int?> postInsumo(Insumo insumo) async {
+  Future<int?> postInsumo(Item insumo) async {
     try {
       var response = await API()
           .request(endpoint: "insumo", method: "POST", body: insumo.toJson());

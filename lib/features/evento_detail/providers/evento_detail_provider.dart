@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/evento_detail/repository/evento_detail_repository.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
-import 'package:role/models/evento.dart';
-import 'package:role/models/insumo.dart';
+import 'package:role/models/event.dart';
+import 'package:role/models/item.dart';
 import 'package:role/models/usuario.dart';
 
 class EventoDetailProvider extends ChangeNotifier {
   late int id;
   late EventoListProvider eventoListProvider;
 
-  Evento get evento => eventoListProvider.evento(id);
+  Event get evento => eventoListProvider.evento(id);
 
   EventoDetailRepository eventoRepository = EventoDetailRepository();
 
@@ -19,7 +19,7 @@ class EventoDetailProvider extends ChangeNotifier {
     get();
   }
 
-  updateEvento(Evento? evento) {
+  updateEvento(Event? evento) {
     if (evento == null) return;
     this.evento.name = evento.name;
     this.evento.dataInicio = evento.dataInicio;
@@ -31,11 +31,11 @@ class EventoDetailProvider extends ChangeNotifier {
     EventoListProvider.shared.notifyListeners();
   }
 
-  setInsumos(List<Insumo> insumos) {
+  setInsumos(List<Item> insumos) {
     evento.insumos = insumos;
   }
 
-  setUsuarios(List<Usuario> usuarios) {
+  setUsuarios(List<User> usuarios) {
     evento.usuarios = usuarios;
   }
 

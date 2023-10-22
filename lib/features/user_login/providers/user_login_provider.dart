@@ -11,8 +11,8 @@ class UserLoginProvider extends ChangeNotifier {
   String? _token = "";
   String? get token => _token;
 
-  Usuario? _user;
-  Usuario? get user => _user;
+  User? _user;
+  User? get user => _user;
 
   UserRepository userRepository = UserRepository();
 
@@ -38,7 +38,7 @@ class UserLoginProvider extends ChangeNotifier {
     if (state == LoginState.loggedOut) {
       _token = await storage.read(key: "token");
 
-      Usuario? usuario = await userRepository.authenticate();
+      User? usuario = await userRepository.authenticate();
 
       if (usuario != null) {
         setState(LoginState.loggedIn);

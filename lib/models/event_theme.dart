@@ -2,26 +2,26 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 
-class EventoTheme {
+class EventTheme {
   final String? _emoji;
 
   final Color? _color1;
   final Color? _color2;
 
-  EventoTheme({String? emoji, Color? color1, Color? color2})
+  EventTheme({String? emoji, Color? color1, Color? color2})
       : _emoji = emoji,
         _color1 = color1,
         _color2 = color2;
 
-  factory EventoTheme.fromHex({String? emoji, String? hex1, String? hex2}) =>
-      EventoTheme(
+  factory EventTheme.fromHex({String? emoji, String? hex1, String? hex2}) =>
+      EventTheme(
           emoji: emoji,
           color1: hex1 == null ? null : HexColor.fromHex(hex1),
           color2: hex2 == null ? null : HexColor.fromHex(hex2));
 
-  factory EventoTheme.random() => EventoTheme(
-        emoji: EventoTheme
-            .emojiPool[Random().nextInt(EventoTheme.emojiPool.length)],
+  factory EventTheme.random() => EventTheme(
+        emoji:
+            EventTheme.emojiPool[Random().nextInt(EventTheme.emojiPool.length)],
         color1: RandomColor.generate(),
         color2: RandomColor.generate(),
       );

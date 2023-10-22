@@ -1,16 +1,16 @@
 import 'package:role/models/transacao.dart';
 import 'package:role/shared/utils/serializable.dart';
 
-class Insumo implements JSONSerializable {
+class Item implements JSONSerializable {
   late int _id;
   late double _valor;
   late int _tipo;
   late String _nome;
   late String _descricao;
   late int _eventoId;
-  List<Transacao> transacoes = [];
+  List<Transaction> transacoes = [];
 
-  Insumo({
+  Item({
     required int id,
     required double valor,
     required int tipo,
@@ -54,12 +54,12 @@ class Insumo implements JSONSerializable {
     _eventoId = value;
   }
 
-  void addTransacao(Transacao transacao) {
+  void addTransacao(Transaction transacao) {
     transacoes.add(transacao);
   }
 
   @override
-  factory Insumo.fromJson(Map<String, dynamic> json) => Insumo(
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
       id: json["id_insumo"],
       nome: json["nome"],
       tipo: json["tipo"],

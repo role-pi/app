@@ -62,68 +62,68 @@ class _NewEventoThemeState extends State<NewEventoTheme> {
 class SquareGrid extends StatelessWidget {
   SquareGrid({Key? key}) : super(key: key);
 
-  final List<EventoTheme> defaultThemes = [
-    EventoTheme(
+  final List<EventTheme> defaultThemes = [
+    EventTheme(
         emoji: '🎄',
         color1: Color.fromRGBO(208, 2, 13, 1),
         color2: Color.fromRGBO(219, 86, 93, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🎉',
         color1: Color.fromRGBO(143, 34, 50, 1),
         color2: Color.fromRGBO(209, 137, 147, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🍿',
         color1: Color.fromRGBO(248, 124, 0, 1),
         color2: Color.fromRGBO(255, 194, 128, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🏕️',
         color1: Color.fromRGBO(175, 126, 95, 1),
         color2: Color.fromRGBO(94, 43, 11, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🎡',
         color1: Color.fromRGBO(255, 230, 0, 1),
         color2: Color.fromRGBO(243, 239, 183, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🏟️',
         color1: Color.fromRGBO(240, 220, 162, 1),
         color2: Color.fromRGBO(255, 191, 0, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🎮',
         color1: Color.fromRGBO(22, 68, 1, 1),
         color2: Color.fromRGBO(132, 241, 150, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🎆',
         color1: Color.fromRGBO(25, 204, 2, 1),
         color2: Color.fromRGBO(113, 179, 129, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🌱',
         color1: Color.fromRGBO(0, 119, 255, 1),
         color2: Color.fromRGBO(119, 178, 255, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🥩',
         color1: Color.fromRGBO(132, 171, 230, 1),
         color2: Color.fromRGBO(11, 19, 129, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🏖️',
         color1: Color.fromRGBO(0, 136, 255, 1),
         color2: Color.fromRGBO(152, 215, 236, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '✨',
         color1: Color.fromRGBO(108, 40, 235, 1),
         color2: Color.fromRGBO(159, 124, 219, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🪩',
         color1: Color.fromRGBO(121, 16, 190, 1),
         color2: Color.fromRGBO(180, 132, 219, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🎃',
         color1: Color.fromRGBO(185, 120, 223, 1),
         color2: Color.fromRGBO(114, 9, 119, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🎂',
         color1: Color.fromRGBO(255, 1, 166, 1),
         color2: Color.fromRGBO(248, 160, 185, 1)),
-    EventoTheme(
+    EventTheme(
         emoji: '🎁',
         color1: Color.fromRGBO(177, 107, 136, 1),
         color2: Color.fromRGBO(255, 4, 58, 1)),
@@ -157,7 +157,7 @@ class SquareGrid extends StatelessWidget {
 class ThemeGridItem extends StatelessWidget {
   const ThemeGridItem({super.key, required this.theme});
 
-  final EventoTheme theme;
+  final EventTheme theme;
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'package:latlong2/latlong.dart';
 
-class Endereco {
+class Location {
   double _latitude;
   double _longitude;
   String _descricao;
@@ -16,7 +16,7 @@ class Endereco {
 
   LatLng get coordenadas => LatLng(latitude.toDouble(), longitude.toDouble());
 
-  Endereco({
+  Location({
     required double latitude,
     required double longitude,
     required String descricao,

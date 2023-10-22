@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:role/models/evento.dart';
+import 'package:role/models/event.dart';
 import 'package:role/features/evento_list/repository/evento_list_repository.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class EventoListProvider extends ChangeNotifier {
   bool _loading = false;
-  List<Evento> _eventos = [];
+  List<Event> _eventos = [];
 
   bool get loading => _loading;
-  List<Evento> get eventos => _eventos;
+  List<Event> get eventos => _eventos;
 
   EventoListRepository eventoRepository = EventoListRepository();
 
@@ -27,7 +27,7 @@ class EventoListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  set(List<Evento> eventosListModel) {
+  set(List<Event> eventosListModel) {
     _eventos = eventosListModel;
     notifyListeners();
   }
@@ -36,7 +36,7 @@ class EventoListProvider extends ChangeNotifier {
     set(await eventoRepository.getEventos());
   }
 
-  delete(Evento evento, BuildContext context) async {
+  delete(Event evento, BuildContext context) async {
     bool result = await eventoRepository.deleteEvento(evento);
 
     fToast.init(context);
@@ -64,7 +64,7 @@ class EventoListProvider extends ChangeNotifier {
     );
   }
 
-  Evento evento(int) {
+  Event evento(int) {
     var evento = _eventos.firstWhere((element) => element.id == int);
     return evento;
   }

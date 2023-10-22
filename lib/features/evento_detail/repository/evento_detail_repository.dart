@@ -1,19 +1,19 @@
 import 'dart:convert';
 
-import 'package:role/models/insumo.dart';
+import 'package:role/models/item.dart';
 import 'package:role/models/usuario.dart';
 
 import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
-import '../../../models/evento.dart';
+import '../../../models/event.dart';
 
 class EventoDetailRepository {
-  Future<Evento?> getEvento(Evento evento) async {
+  Future<Event?> getEvento(Event evento) async {
     try {
       var response =
           await API().request(endpoint: "evento/${evento.id}", method: "GET");
 
-      return Evento.fromJson(json.decode(response.response));
+      return Event.fromJson(json.decode(response.response));
     } catch (e) {
       if (e is ApiError) {
         print('Error Code: ${e.code}, Message: ${e.message}');
@@ -25,7 +25,7 @@ class EventoDetailRepository {
     return null;
   }
 
-  Future<List<Insumo>> getInsumos(Evento evento) async {
+  Future<List<Item>> getInsumos(Event evento) async {
     try {
       var response =
           await API().request(endpoint: "insumo/${evento.id}", method: "GET");
@@ -42,7 +42,7 @@ class EventoDetailRepository {
     return [];
   }
 
-  Future<List<Usuario>> getUsuarios(Evento evento) async {
+  Future<List<User>> getUsuarios(Event evento) async {
     try {
       var response =
           await API().request(endpoint: "usuario/${evento.id}", method: "GET");
@@ -59,9 +59,9 @@ class EventoDetailRepository {
     return [];
   }
 
-  List<Insumo> insumosFromJSON(String str) =>
-      List<Insumo>.from(json.decode(str).map((x) => Insumo.fromJson(x)));
+  List<Item> insumosFromJSON(String str) =>
+      List<Item>.from(json.decode(str).map((x) => Item.fromJson(x)));
 
-  List<Usuario> usuariosFromJSON(String str) =>
-      List<Usuario>.from(json.decode(str).map((x) => Usuario.fromJson(x)));
+  List<User> usuariosFromJSON(String str) =>
+      List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
 }

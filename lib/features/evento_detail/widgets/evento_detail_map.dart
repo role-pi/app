@@ -6,7 +6,7 @@ import 'package:role/models/endereco.dart';
 
 class EventoDetailMap extends StatelessWidget {
   Color color;
-  Endereco endereco;
+  Location endereco;
 
   EventoDetailMap({required this.color, required this.endereco});
 
@@ -70,7 +70,7 @@ class EventoStyledMap extends StatelessWidget {
       this.interactiveFlags = InteractiveFlag.all & ~InteractiveFlag.rotate});
 
   final Color color;
-  final Endereco endereco;
+  final Location endereco;
   final int interactiveFlags;
 
   @override

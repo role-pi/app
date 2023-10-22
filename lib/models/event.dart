@@ -1,35 +1,35 @@
 import 'dart:ui';
 import 'package:role/models/endereco.dart';
-import 'package:role/models/evento_theme.dart';
-import 'package:role/models/insumo.dart';
-import 'package:role/models/usuario.dart';
+import 'package:role/models/event_theme.dart';
+import 'package:role/models/item.dart';
+import 'package:role/models/user.dart';
 import 'package:role/shared/utils/serializable.dart';
 import 'package:intl/intl.dart';
 
-class Evento implements JSONSerializable {
+class Event implements JSONSerializable {
   int _id;
   String _name;
   DateTime? _dataInicio;
   DateTime? _dataFim;
   double? _valorTotal;
-  EventoTheme _theme;
+  EventTheme _theme;
 
-  late List<Insumo>? _insumos = null;
-  late List<Usuario>? _usuarios = null;
+  late List<Item>? _insumos = null;
+  late List<User>? _usuarios = null;
 
-  Evento({
+  Event({
     required int id,
     required String name,
     DateTime? dataInicio,
     DateTime? dataFim,
     double? valorTotal,
-    EventoTheme? theme,
+    EventTheme? theme,
   })  : _id = id,
         _name = name,
         _dataInicio = dataInicio,
         _dataFim = dataFim,
         _valorTotal = valorTotal,
-        _theme = theme ?? EventoTheme.random();
+        _theme = theme ?? EventTheme.random();
 
   int get id => _id;
 
@@ -60,23 +60,23 @@ class Evento implements JSONSerializable {
     _valorTotal = value;
   }
 
-  EventoTheme get theme => _theme;
-  set theme(EventoTheme value) {
+  EventTheme get theme => _theme;
+  set theme(EventTheme value) {
     _theme = value;
   }
 
-  List<Insumo>? get insumos => _insumos;
-  set insumos(List<Insumo>? value) {
+  List<Item>? get insumos => _insumos;
+  set insumos(List<Item>? value) {
     _insumos = value;
   }
 
-  List<Usuario>? get usuarios => _usuarios;
-  set usuarios(List<Usuario>? value) {
+  List<User>? get usuarios => _usuarios;
+  set usuarios(List<User>? value) {
     _usuarios = value;
   }
 
   @override
-  factory Evento.fromJson(Map<String, dynamic> json) => Evento(
+  factory Event.fromJson(Map<String, dynamic> json) => Event(
       id: json["id_evento"],
       name: json["nome"],
       dataInicio: json["data_inicio"] != null
@@ -85,7 +85,7 @@ class Evento implements JSONSerializable {
       dataFim:
           json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
       valorTotal: double.parse(json["valor_total"]),
-      theme: EventoTheme.fromHex(
+      theme: EventTheme.fromHex(
           emoji: json["emoji"], hex1: json["cor_1"], hex2: json["cor_2"]));
 
   DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
@@ -105,7 +105,7 @@ class Evento implements JSONSerializable {
   Color get color1 => theme.color1;
   Color get color2 => theme.color2;
 
-  Endereco get endereco => Endereco(
+  Location get endereco => Location(
       latitude: -26.905926949896116,
       longitude: -49.07710147997988,
       descricao: "Factory Antônio da Veiga");

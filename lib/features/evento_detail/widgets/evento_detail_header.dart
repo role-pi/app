@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/screens/evento_edit_screen.dart';
 import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
-import 'package:role/models/evento.dart';
+import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
@@ -14,7 +14,7 @@ class EventDetailHeader extends StatelessWidget {
     required this.evento,
   });
 
-  final Evento evento;
+  final Event evento;
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +102,7 @@ class EventDetailHeader extends StatelessWidget {
 class EventoDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   EventoDetailHeaderDelegate({required this.evento});
 
-  final Evento evento;
+  final Event evento;
 
   @override
   Widget build(

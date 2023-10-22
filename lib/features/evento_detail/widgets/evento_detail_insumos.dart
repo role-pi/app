@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/models/insumo.dart';
+import 'package:role/models/item.dart';
 
 class EventoDetailInsumos extends StatelessWidget {
-  List<Insumo> insumos;
+  List<Item> insumos;
 
   EventoDetailInsumos({Key? key, required this.insumos}) : super(key: key);
 

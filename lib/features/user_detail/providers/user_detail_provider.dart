@@ -7,7 +7,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/features/user_login/repository/user_repository.dart';
-import 'package:role/models/evento.dart';
+import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class UserDetailProvider extends ChangeNotifier {
@@ -98,7 +98,7 @@ class UserDetailProvider extends ChangeNotifier {
     );
   }
 
-  delete(Evento evento, BuildContext context) async {
+  delete(Event evento, BuildContext context) async {
     // await EventoListProvider.shared.delete(evento, context);
   }
 }

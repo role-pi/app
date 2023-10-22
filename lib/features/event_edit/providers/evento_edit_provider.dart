@@ -3,12 +3,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:role/features/event_edit/repository/evento_edit_repository.dart';
 import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
-import 'package:role/models/evento.dart';
+import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class EventoEditProvider extends ChangeNotifier {
   late EventoDetailProvider eventoDetailProvider;
-  Evento get evento => eventoDetailProvider.evento;
+  Event get evento => eventoDetailProvider.evento;
 
   EventoEditRepository eventoRepository = EventoEditRepository();
 

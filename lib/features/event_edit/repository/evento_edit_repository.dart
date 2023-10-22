@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
-import '../../../models/evento.dart';
+import '../../../models/event.dart';
 
 class EventoEditRepository {
-  Future<int?> putEvento(Evento evento) async {
+  Future<int?> putEvento(Event evento) async {
     try {
       var response = await API()
           .request(endpoint: "evento", method: "PUT", body: evento.toJson());

@@ -7,13 +7,13 @@ import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
 
 class UserRepository {
-  Future<Usuario?> authenticate() async {
+  Future<User?> authenticate() async {
     try {
       final response = await API().request(endpoint: "usuario", method: "GET");
 
       Map decoded = json.decode(response.response);
       if (decoded.containsKey("user")) {
-        return Usuario.fromJson(decoded["user"]);
+        return User.fromJson(decoded["user"]);
       }
     } catch (e) {
       if (e is ApiError) {
@@ -46,7 +46,7 @@ class UserRepository {
     return null;
   }
 
-  Future<(Usuario?, String?)> verify(String email, String code) async {
+  Future<(User?, String?)> verify(String email, String code) async {
     try {
       final response = await API().request(
           endpoint: "usuario/verify",
@@ -55,7 +55,7 @@ class UserRepository {
 
       Map decoded = json.decode(response.response);
       if (decoded.containsKey("user") && decoded.containsKey("token")) {
-        return (Usuario.fromJson(decoded["user"]), decoded["token"].toString());
+        return (User.fromJson(decoded["user"]), decoded["token"].toString());
       }
     } catch (e) {
       if (e is ApiError) {
@@ -68,7 +68,7 @@ class UserRepository {
     return (null, null);
   }
 
-  Future<int?> putUsuario(Usuario usuario) async {
+  Future<int?> putUsuario(User usuario) async {
     try {
       final response = await API()
           .request(endpoint: "usuario", method: "PUT", body: usuario.toJson());

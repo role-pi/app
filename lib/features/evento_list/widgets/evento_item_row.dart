@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/models/evento.dart';
+import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
@@ -9,7 +9,7 @@ import 'evento_item_row_guests.dart';
 class EventoItemRow extends StatelessWidget {
   EventoItemRow({required this.evento, this.onTap});
 
-  final Evento evento;
+  final Event evento;
   final Function()? onTap;
 
   @override

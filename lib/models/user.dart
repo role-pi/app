@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:role/shared/utils/serializable.dart';
 
-class Usuario implements JSONSerializable {
+class User implements JSONSerializable {
   int _id;
   String? _name;
   String _email;
   String? _profilePhoto;
 
-  Usuario({
+  User({
     required int id,
     String? name,
     required String email,
@@ -48,7 +48,7 @@ class Usuario implements JSONSerializable {
       };
 
   @override
-  factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
+  factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id_usuario"],
         name: json["nome"],
         email: json["email"],
@@ -56,8 +56,8 @@ class Usuario implements JSONSerializable {
       );
 }
 
-List<Usuario> usersFromJson(String str) =>
-    List<Usuario>.from(json.decode(str).map((x) => Usuario.fromJson(x)));
+List<User> usersFromJson(String str) =>
+    List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
 
-String usersToJson(List<Usuario> data) =>
+String usersToJson(List<User> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

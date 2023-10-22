@@ -4,13 +4,13 @@ import 'package:role/features/event_edit/repository/evento_edit_repository.dart'
 import 'package:role/features/evento_detail/providers/evento_detail_provider.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/features/new_insumo/repository/new_insumo_repository.dart';
-import 'package:role/models/evento.dart';
-import 'package:role/models/insumo.dart';
+import 'package:role/models/event.dart';
+import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class NewInsumoProvider extends ChangeNotifier {
   late EventoDetailProvider eventoDetailProvider;
-  Evento get evento => eventoDetailProvider.evento;
+  Event get evento => eventoDetailProvider.evento;
 
   NewInsumoRepository newInsumoRepository = NewInsumoRepository();
 
@@ -37,7 +37,7 @@ class NewInsumoProvider extends ChangeNotifier {
   addInsumo(BuildContext context) async {
     changed = false;
 
-    Insumo insumo = Insumo(
+    Item insumo = Item(
         id: 0,
         tipo: 1,
         nome: nameController.text,

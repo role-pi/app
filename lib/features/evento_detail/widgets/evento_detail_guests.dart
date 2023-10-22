@@ -4,7 +4,7 @@ import 'package:role/models/usuario.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventDetailGuests extends StatelessWidget {
-  List<Usuario> convidados;
+  List<User> convidados;
 
   EventDetailGuests({Key? key, required this.convidados}) : super(key: key);
 

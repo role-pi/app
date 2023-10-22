@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:role/models/evento.dart';
+import 'package:role/models/event.dart';
 import 'package:role/features/evento_list/providers/evento_list_provider.dart';
 import 'package:role/features/evento_list/widgets/evento_item_row.dart';
 import 'package:role/features/evento_list/widgets/evento_list_header.dart';
@@ -71,7 +71,7 @@ class EventoList extends StatelessWidget {
                                     ),
                                   ))));
                     } else {
-                      Evento evento = usersViewModel.eventos[index - 1];
+                      Event evento = usersViewModel.eventos[index - 1];
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 28.0, vertical: 6.0),

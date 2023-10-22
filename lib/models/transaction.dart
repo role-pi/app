@@ -1,10 +1,10 @@
-class Transacao {
+class Transaction {
   int _idTransacao;
   double _valor;
   DateTime _data;
   int _idUsuario;
 
-  Transacao({
+  Transaction({
     required int idTransacao,
     required double valor,
     required DateTime data,
