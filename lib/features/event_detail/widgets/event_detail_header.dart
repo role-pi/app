@@ -65,6 +65,7 @@ class EventDetailHeader extends StatelessWidget {
                                         letterSpacing: -2.4,
                                         height: 1.0),
                                     maxLines: 2,
+                                    wrapWords: false,
                                   ),
                                 );
                               },
