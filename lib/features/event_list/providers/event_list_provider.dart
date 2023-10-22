@@ -6,10 +6,10 @@ import 'package:role/shared/widgets/custom_toast.dart';
 
 class EventListProvider extends ChangeNotifier {
   bool _loading = false;
-  List<Event> _eventos = [];
+  List<Event> _events = [];
 
   bool get loading => _loading;
-  List<Event> get eventos => _eventos;
+  List<Event> get events => _events;
 
   EventListRepository eventoRepository = EventListRepository();
 
@@ -27,8 +27,8 @@ class EventListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  set(List<Event> eventosListModel) {
-    _eventos = eventosListModel;
+  set(List<Event> events) {
+    _events = events;
     notifyListeners();
   }
 
@@ -47,7 +47,7 @@ class EventListProvider extends ChangeNotifier {
           icon: CupertinoIcons.checkmark,
           color: evento.color1);
 
-      _eventos.remove(evento);
+      _events.remove(evento);
       notifyListeners();
       Navigator.of(context).popUntil((route) => route.isFirst);
     } else {
@@ -65,7 +65,7 @@ class EventListProvider extends ChangeNotifier {
   }
 
   Event event(id) {
-    var event = _eventos.firstWhere((element) => element.id == id);
+    var event = _events.firstWhere((element) => element.id == id);
     return event;
   }
 }

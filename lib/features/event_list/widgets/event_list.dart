@@ -33,9 +33,9 @@ class EventList extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 138.0, top: 8.0),
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
-                    childCount: (usersViewModel.eventos.length == 0
+                    childCount: (usersViewModel.events.length == 0
                             ? 1
-                            : usersViewModel.eventos.length) +
+                            : usersViewModel.events.length) +
                         1, (context, index) {
                   if (index == 0) {
                     return Padding(
@@ -43,7 +43,7 @@ class EventList extends StatelessWidget {
                       child: EventListHeader(),
                     );
                   } else {
-                    if (usersViewModel.eventos.length == 0) {
+                    if (usersViewModel.events.length == 0) {
                       return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 28.0, vertical: 4.0),
@@ -71,7 +71,7 @@ class EventList extends StatelessWidget {
                                     ),
                                   ))));
                     } else {
-                      Event event = usersViewModel.eventos[index - 1];
+                      Event event = usersViewModel.events[index - 1];
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 28.0, vertical: 6.0),

@@ -11,7 +11,7 @@ class EventListRepository {
     try {
       var response = await API().request(endpoint: "evento", method: "GET");
 
-      return eventosFromJSON(response.response);
+      return eventsFromJSON(response.response);
     } catch (e) {
       if (e is ApiError) {
         print('Error Code: ${e.code}, Message: ${e.message}');
@@ -64,9 +64,9 @@ class EventListRepository {
     return null;
   }
 
-  List<Event> eventosFromJSON(String str) =>
+  List<Event> eventsFromJSON(String str) =>
       List<Event>.from(json.decode(str).map((x) => Event.fromJson(x)));
 
-  String eventosToJSON(List<Event> data) =>
+  String eventsToJSON(List<Event> data) =>
       json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 }
