@@ -8,7 +8,7 @@ import 'package:role/features/event_detail/widgets/event_detail_header.dart';
 import 'package:role/features/event_detail/widgets/event_detail_insumos.dart';
 import 'package:role/features/event_detail/widgets/event_detail_map.dart';
 import 'package:role/features/event_list/providers/evento_list_provider.dart';
-import 'package:role/features/new_item/screens/new_insumo_screen.dart';
+import 'package:role/features/new_item/screens/new_item_screen.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
 class EventDetailScreen extends StatelessWidget {
@@ -112,9 +112,9 @@ class EventDetailScreen extends StatelessWidget {
                     SizedBox(height: 24),
                     Consumer<EventDetailProvider>(
                       builder: (context, provider, child) {
-                        if (provider.evento.insumos != null) {
-                          return EventDetailInsumos(
-                              insumos: provider.evento.insumos!);
+                        if (provider.evento.items != null) {
+                          return EventDetailItems(
+                              items: provider.evento.items!);
                         }
                         return Container();
                       },

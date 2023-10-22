@@ -25,7 +25,7 @@ class EventDetailRepository {
     return null;
   }
 
-  Future<List<Item>> getInsumos(Event evento) async {
+  Future<List<Item>> getItems(Event evento) async {
     try {
       var response =
           await API().request(endpoint: "insumo/${evento.id}", method: "GET");

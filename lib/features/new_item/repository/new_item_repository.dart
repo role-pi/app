@@ -6,7 +6,7 @@ import '../../../shared/utils/api.dart';
 import '../../../shared/utils/api_status.dart';
 
 class NewItemRepository {
-  Future<int?> postInsumo(Item insumo) async {
+  Future<int?> postItem(Item insumo) async {
     try {
       var response = await API()
           .request(endpoint: "insumo", method: "POST", body: insumo.toJson());

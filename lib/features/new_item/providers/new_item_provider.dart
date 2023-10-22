@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
-import 'package:role/features/new_item/repository/new_insumo_repository.dart';
+import 'package:role/features/new_item/repository/new_item_repository.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
@@ -32,10 +32,10 @@ class NewItemProvider extends ChangeNotifier {
     fToast = FToast();
   }
 
-  addInsumo(BuildContext context) async {
+  addItem(BuildContext context) async {
     changed = false;
 
-    Item insumo = Item(
+    Item item = Item(
         id: 0,
         tipo: 1,
         nome: nameController.text,
@@ -43,7 +43,7 @@ class NewItemProvider extends ChangeNotifier {
         valor: double.parse(valorController.text),
         eventoId: evento.id);
 
-    int? result = await newInsumoRepository.postInsumo(insumo);
+    int? result = await newInsumoRepository.postItem(item);
 
     fToast.init(context);
     Widget toast;

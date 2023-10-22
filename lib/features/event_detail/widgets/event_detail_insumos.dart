@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
-class EventDetailInsumos extends StatelessWidget {
-  final List<Item> insumos;
+class EventDetailItems extends StatelessWidget {
+  final List<Item> items;
 
-  EventDetailInsumos({Key? key, required this.insumos}) : super(key: key);
+  EventDetailItems({Key? key, required this.items}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class EventDetailInsumos extends StatelessWidget {
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      itemCount: insumos.length,
+      itemCount: items.length,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
@@ -74,7 +74,7 @@ class EventDetailInsumos extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    insumos[index].nome,
+                    items[index].nome,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class EventDetailInsumos extends StatelessWidget {
                 ),
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  insumos[index].valor.toString(),
+                  items[index].valor.toString(),
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

@@ -58,8 +58,8 @@ class Event implements JSONSerializable {
     _theme = value;
   }
 
-  List<Item>? get insumos => _insumos;
-  set insumos(List<Item>? value) {
+  List<Item>? get items => _insumos;
+  set items(List<Item>? value) {
     _insumos = value;
   }
 
