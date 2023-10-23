@@ -68,9 +68,10 @@ class EventDetailScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(height: 24),
+                    SizedBox(height: 32),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           "Insumos",
@@ -103,7 +104,21 @@ class EventDetailScreen extends StatelessWidget {
                         // EventDetailInputs(),
                       ],
                     ),
-                    SizedBox(height: 24),
+                    SizedBox(height: 6),
+                    Row(
+                      children: [
+                        Text(
+                          "HOJE",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: -0.8,
+                              color: CupertinoColors.secondaryLabel
+                                  .resolveFrom(context)),
+                        ),
+                        Spacer(),
+                      ],
+                    ),
+                    SizedBox(height: 16),
                     Consumer<EventDetailProvider>(
                       builder: (context, provider, child) {
                         if (provider.event.items != null) {

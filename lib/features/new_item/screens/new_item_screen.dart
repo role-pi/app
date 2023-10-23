@@ -86,17 +86,17 @@ class NewItemScreen extends StatelessWidget {
               ),
               SizedBox(height: 12),
               FormItemTextField(
-                  controller: newItemProvider.descricaoController,
-                  title: "descrição"),
-              SizedBox(height: 12),
-              FormItemTextField(
                   controller: newItemProvider.valorController, title: "valor"),
               SizedBox(height: 12),
               RoundButton(
-                  text: "adicionar",
-                  onPressed: () {
-                    newItemProvider.addItem(context);
-                  })
+                text: "adicionar",
+                onPressed: () {
+                  newItemProvider.addItem(context);
+                  Navigator.of(context).pop();
+                },
+                rectangleColor: newItemProvider.event.color2,
+                textColor: CupertinoColors.white,
+              )
             ],
           ),
         ))

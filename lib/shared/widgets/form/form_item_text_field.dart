@@ -18,7 +18,7 @@ class FormItemTextField extends StatelessWidget {
 
   TextStyle get style => TextStyle(
         fontSize: textSize,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
         letterSpacing: -1.0,
       );
 
