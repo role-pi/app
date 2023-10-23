@@ -63,7 +63,8 @@ class EventDetailItems extends StatelessWidget {
                             child: Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: CupertinoColors.white,
+                                    color: CupertinoColors.systemBackground
+                                        .resolveFrom(context),
                                     width: 2.5,
                                   ),
                                   borderRadius: BorderRadius.circular(32),

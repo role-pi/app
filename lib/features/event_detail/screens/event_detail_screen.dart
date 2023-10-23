@@ -82,12 +82,7 @@ class EventDetailScreen extends StatelessWidget {
                         ),
                         ElasticButton(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) =>
-                                      NewItemScreen(eventDetailProvider)),
-                            );
+                            NewItemScreen(eventDetailProvider).show(context);
                           },
                           child: Container(
                             width: 45,
