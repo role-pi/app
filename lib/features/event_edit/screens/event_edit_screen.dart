@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/features/event_detail/widgets/event_detail_map.dart';
@@ -51,22 +52,15 @@ class EventEditScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       FormItemGroupTitle(title: "INFORMAÇÕES"),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: FormItemTextField(
-                              controller: eventEditProvider.nameController,
-                              title: eventEditProvider.event.name,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'O nome não pode ser vazio.';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Text("emoji")
-                        ]
+                      FormItemTextField(
+                        controller: eventEditProvider.nameController,
+                        title: eventEditProvider.event.name,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'O nome não pode ser vazio.';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 12),
                       Row(children: [
@@ -138,18 +132,78 @@ class EventEditScreen extends StatelessWidget {
                                     CupertinoIcons.bars,
                                      color: CupertinoDynamicColor.resolve(
                                         CupertinoColors.label, context),
-
-                                  )
+                                  ),
                                 ],
                               ), onPressed:() {
                                 ModalPopup(
                                   context: context, 
                                   title: "adicionar participante:", 
-                                   height: 260,
-                                   padding: EdgeInsets.only(top: 16),
-                                   child: SizedBox(height: 26,
-                                   )
-                                   );
+                                   height: 320,
+                                   child: Column(
+                                     children: [
+                                       Row(
+                                         children: [
+                                           Container(
+                                            width: 80,
+                                            height: 80,
+                                            decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  color: CupertinoColors.extraLightBackgroundGray.withOpacity(0.8),
+                                                ),
+                                            child: Icon(
+                                              CupertinoIcons.envelope,
+                                              color: CupertinoDynamicColor.resolve(
+                                                CupertinoColors.label, context),
+                                            ),
+                                           ),
+                                           Text(
+                                            " Convidar por e-mail"
+                                           ),
+                                         ],
+                                       ),
+                                       Row(
+                                         children: [
+                                           Container(
+                                                width: 80,
+                                                height: 80,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  color: CupertinoColors.extraLightBackgroundGray.withOpacity(0.8),
+                                                ),
+                                                child: Icon(
+                                                  CupertinoIcons.qrcode,
+                                                  color: CupertinoDynamicColor.resolve(
+                                                    CupertinoColors.label, context),
+                                                ),
+                                               ),
+                                           Text(
+                                            "QR CODE"
+                                           ),
+                                         ],
+                                       ),
+                                       Row(
+                                         children: [
+                                           Container(
+                                                width: 80,
+                                                height: 80,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  color: CupertinoColors.extraLightBackgroundGray.withOpacity(0.8),
+                                                ),
+                                                child: Icon(
+                                                  CupertinoIcons.square_arrow_up,
+                                                  color: CupertinoDynamicColor.resolve(
+                                                    CupertinoColors.label, context),
+                                                ),
+                                               ),
+                                           Text(
+                                            "Encaminhar"
+                                           ),
+                                         ],
+                                       )
+                                     ],
+                                   ),
+                                   ).show();
                               },), 
                             ],
                           ),
