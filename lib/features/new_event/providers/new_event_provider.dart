@@ -23,12 +23,6 @@ class NewEventProvider extends ChangeNotifier {
   bool get showing => _showing;
   set showing(bool showing) {
     _showing = showing;
-    if (showing) {
-      event = Event(id: 0, name: "");
-    } else {
-      EventListProvider.shared.get();
-      FocusManager.instance.primaryFocus?.unfocus();
-    }
     notifyListeners();
   }
 
@@ -42,13 +36,29 @@ class NewEventProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  create() async {
+  create(BuildContext context) async {
     loading = true;
-    var response = await eventRepository.addEvent(event);
+    int? response = await eventRepository.addEvent(event);
 
     if (response != null) {
       showing = false;
     }
+
+    if (showing) {
+      event = Event(id: 0, name: "");
+    } else {
+      await EventListProvider.shared.get();
+
+      if (response != null) {
+        Navigator.pushNamed(
+          context,
+          "/event",
+          arguments: response,
+        );
+      }
+      FocusManager.instance.primaryFocus?.unfocus();
+    }
+
     loading = false;
   }
 }
