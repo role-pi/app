@@ -14,25 +14,29 @@ class RemoteProfilePicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipOval(
-      child: Image.network(
-        url ?? "",
-        fit: BoxFit.fill,
+      child: SizedBox(
         width: size,
         height: size,
-        colorBlendMode: colorBlendMode,
-        errorBuilder: (context, error, stackTrace) {
-          return DefaultUserIcon(
-            size: size,
-          );
-        },
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) {
-            return child;
-          }
-          return DefaultUserIcon(
-            size: size,
-          );
-        },
+        child: Image.network(
+          url ?? "",
+          fit: BoxFit.fill,
+          width: size,
+          height: size,
+          colorBlendMode: colorBlendMode,
+          errorBuilder: (context, error, stackTrace) {
+            return DefaultUserIcon(
+              size: size,
+            );
+          },
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            }
+            return DefaultUserIcon(
+              size: size,
+            );
+          },
+        ),
       ),
     );
   }

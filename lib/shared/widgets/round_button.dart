@@ -6,14 +6,16 @@ class RoundButton extends StatelessWidget {
   final Color textColor;
   final Color rectangleColor;
   final Alignment alignment;
-  final VoidCallback onPressed;
+  final Function? onPressed;
+  final bool loading;
 
   RoundButton({
     required this.text,
     this.textColor = CupertinoColors.systemBackground,
     this.rectangleColor = CupertinoColors.label,
     this.alignment = Alignment.center,
-    required this.onPressed,
+    this.onPressed,
+    this.loading = true,
   });
 
   @override
@@ -24,7 +26,9 @@ class RoundButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-              color: CupertinoDynamicColor.resolve(rectangleColor, context)),
+              color: CupertinoDynamicColor.resolve(rectangleColor, context),
+              backgroundBlendMode:
+                  onPressed != null ? BlendMode.srcIn : BlendMode.luminosity),
           child: Align(
             alignment: alignment,
             child: Text(

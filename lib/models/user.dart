@@ -37,7 +37,7 @@ class User implements JSONSerializable {
     _profilePhoto = value;
   }
 
-  String get displayName => _name ?? _email;
+  String get displayName => _name ?? _email.split("@").firstOrNull ?? _email;
 
   @override
   Map<String, dynamic> toJson() => {

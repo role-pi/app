@@ -7,7 +7,7 @@ class ContainerText extends StatelessWidget {
       required this.text,
       this.size = 19,
       this.padding =
-          const EdgeInsets.symmetric(horizontal: 22.0, vertical: 8.0)});
+          const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0)});
 
   final String text;
   final double size;
@@ -16,7 +16,7 @@ class ContainerText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = MediaQuery.of(context).platformBrightness == Brightness.dark
-        ? Color.fromRGBO(100, 100, 100, 1)
+        ? Color.fromRGBO(40, 40, 40, 1)
         : Color.fromRGBO(80, 80, 80, 1);
 
     return Container(

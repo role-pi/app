@@ -12,36 +12,36 @@ class NewItemProvider extends ChangeNotifier {
 
   NewItemRepository newItemRepository = NewItemRepository();
 
-  late TextEditingController nameController,
-      descricaoController,
-      valorController;
-  late bool changed = false;
+  late TextEditingController nameController, valueController;
+  late bool _changed = false;
+  late bool _loading = false;
+
+  late Item item;
 
   late FToast fToast;
 
   NewItemProvider(EventDetailProvider eventDetailProvider) {
     this.eventDetailProvider = eventDetailProvider;
     nameController = TextEditingController();
-    descricaoController = TextEditingController();
-    valorController = TextEditingController();
+    valueController = TextEditingController();
 
-    nameController.addListener(_textChanged);
-    descricaoController.addListener(_textChanged);
-    valorController.addListener(_textChanged);
+    nameController.addListener(_nameChanged);
+    valueController.addListener(_valueChanged);
+
+    item = Item(
+        id: 0,
+        valor: 10,
+        tipo: ItemCategory.other,
+        nome: " ",
+        descricao: " ",
+        eventId: event.id);
 
     fToast = FToast();
   }
 
   addItem(BuildContext context) async {
     changed = false;
-
-    Item item = Item(
-        id: 0,
-        tipo: 1,
-        nome: nameController.text,
-        descricao: descricaoController.text,
-        valor: double.parse(valorController.text),
-        eventId: event.id);
+    loading = true;
 
     int? result = await newItemRepository.postItem(item);
 
@@ -52,11 +52,14 @@ class NewItemProvider extends ChangeNotifier {
           title: "insumo adicionado com id $result",
           icon: CupertinoIcons.checkmark,
           color: event.color1);
+      Navigator.of(context).pop();
     } else {
       toast = CustomToast(
           title: "erro ao adicionar insumo",
           icon: CupertinoIcons.xmark,
           color: CupertinoColors.systemRed);
+      loading = false;
+      changed = true;
     }
 
     fToast.showToast(
@@ -70,8 +73,38 @@ class NewItemProvider extends ChangeNotifier {
     eventDetailProvider.get();
   }
 
-  _textChanged() {
-    changed = true;
+  bool get loading => _loading;
+  set loading(loading) {
+    _loading = loading;
     notifyListeners();
+  }
+
+  bool get changed => _changed;
+  set changed(changed) {
+    _changed = changed;
+    notifyListeners();
+  }
+
+  set category(ItemCategory category) {
+    item.tipo = category;
+    notifyListeners();
+  }
+
+  _nameChanged() {
+    item.nome = nameController.text;
+    updateChanged();
+  }
+
+  _valueChanged() {
+    double? value = double.tryParse(valueController.text);
+    if (value != null) {
+      item.valor = value;
+    }
+    updateChanged();
+    notifyListeners();
+  }
+
+  updateChanged() {
+    changed = !item.nome.isEmpty && item.valor != null;
   }
 }

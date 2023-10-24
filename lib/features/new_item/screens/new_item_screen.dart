@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/new_item/providers/new_item_provider.dart';
-import 'package:role/shared/widgets/custom_navigation_bar.dart';
+import 'package:role/models/item.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
+import 'package:role/shared/widgets/modal_popup.dart';
+import 'package:role/shared/widgets/round_button.dart';
 
 class NewItemScreen extends StatelessWidget {
   NewItemScreen(EventDetailProvider eventDetailProvider) {
@@ -12,43 +15,119 @@ class NewItemScreen extends StatelessWidget {
 
   late final NewItemProvider newItemProvider;
 
+  void show(BuildContext context) {
+    ModalPopup(
+            context: context,
+            title: "adicionar insumo",
+            height: 400,
+            child: build(context))
+        .show();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
       value: newItemProvider,
-      child: CupertinoPageScaffold(
-          child: Column(children: [
-        Consumer<NewItemProvider>(builder: (context, provider, child) {
-          return CustomNavigationBar(
-              trailingText: "adicionar",
-              onPressedLeading: () {
-                Navigator.of(context).pop();
-              },
-              onPressedTrailing: provider.changed
-                  ? () {
-                      provider.addItem(context);
-                    }
-                  : null,
-              accentColor: provider.event.color1);
-        }),
+      child: Column(children: [
         Form(
             child: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             children: [
-              FormItemTextField(
-                  controller: newItemProvider.nameController, title: "nome"),
+              Row(
+                children: [
+                  Expanded(
+                    child: Consumer<NewItemProvider>(
+                      builder: (context, value, child) {
+                        return FormItemTextField(
+                          controller: newItemProvider.nameController,
+                          title: "nome",
+                          enabled: !value.loading,
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(width: 12),
+                  ElasticButton(
+                    onTap: () {
+                      ModalPopup(
+                          context: context,
+                          title: "categoria",
+                          height: 260,
+                          padding: EdgeInsets.only(top: 16),
+                          child: SizedBox(
+                            height: 200,
+                            child: CupertinoPicker(
+                              scrollController: FixedExtentScrollController(
+                                  initialItem: newItemProvider.item.tipo.index),
+                              itemExtent: 40,
+                              onSelectedItemChanged: (int index) {
+                                newItemProvider.category =
+                                    ItemCategory.values[index];
+                              },
+                              children: List<Widget>.generate(
+                                  ItemCategory.values.length, (index) {
+                                ItemCategory category =
+                                    ItemCategory.values[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                      category.emoji + " " + category.name),
+                                );
+                              }),
+                            ),
+                          )).show();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: CupertinoColors.tertiarySystemBackground
+                            .resolveFrom(context),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      padding: EdgeInsets.all(14.0),
+                      child: Consumer<NewItemProvider>(
+                        builder: (context, value, child) {
+                          return Text(
+                            value.item.tipo.emoji,
+                            style: TextStyle(fontSize: 24),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: 12),
-              FormItemTextField(
-                  controller: newItemProvider.descricaoController,
-                  title: "descrição"),
+              Consumer<NewItemProvider>(
+                builder: (context, value, child) {
+                  return FormItemTextField(
+                    controller: newItemProvider.valueController,
+                    title: "valor",
+                    enabled: !value.loading,
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                  );
+                },
+              ),
               SizedBox(height: 12),
-              FormItemTextField(
-                  controller: newItemProvider.valorController, title: "valor"),
+              Consumer<NewItemProvider>(
+                builder: (context, value, child) {
+                  return RoundButton(
+                    text: "adicionar",
+                    onPressed: value.changed
+                        ? () {
+                            newItemProvider.addItem(context);
+                          }
+                        : null,
+                    rectangleColor: newItemProvider.event.color2,
+                    textColor: CupertinoColors.white,
+                  );
+                },
+              )
             ],
           ),
         ))
-      ])),
+      ]),
     );
   }
 }

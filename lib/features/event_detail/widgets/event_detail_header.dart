@@ -53,6 +53,7 @@ class EventDetailHeader extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Consumer<EventDetailProvider>(
                               builder: (context, provider, child) {
@@ -65,6 +66,7 @@ class EventDetailHeader extends StatelessWidget {
                                         letterSpacing: -2.4,
                                         height: 1.0),
                                     maxLines: 2,
+                                    wrapWords: false,
                                   ),
                                 );
                               },
@@ -85,6 +87,7 @@ class EventDetailHeader extends StatelessWidget {
                           ],
                         ),
                       ),
+                      SizedBox(height: 12),
                       Consumer<EventDetailProvider>(
                         builder: (context, provider, child) {
                           return ContainerText(
@@ -111,10 +114,10 @@ class EventDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get minExtent => 320.0;
+  double get minExtent => 330.0;
 
   @override
-  double get maxExtent => 320.0;
+  double get maxExtent => 330.0;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
