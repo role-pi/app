@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/new_item/providers/new_item_provider.dart';
+import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
@@ -52,21 +53,28 @@ class NewItemScreen extends StatelessWidget {
                       ModalPopup(
                           context: context,
                           title: "categoria",
-                          height: 300,
+                          height: 260,
+                          padding: EdgeInsets.only(top: 16),
                           child: SizedBox(
-                            height: 150,
+                            height: 200,
                             child: CupertinoPicker(
-                              itemExtent: 32,
-                              onSelectedItemChanged: (int index) {},
-                              children: <Widget>[
-                                Text('🎟️ Ingresso'),
-                                Text('🍺 Bebidas'),
-                                Text('🎁 Presentes'),
-                                Text('🛒 Compras'),
-                                Text('🚕 Transporte'),
-                                Text('🥩 Alimentação'),
-                                // ...
-                              ],
+                              scrollController: FixedExtentScrollController(
+                                  initialItem: newItemProvider.item.tipo.index),
+                              itemExtent: 40,
+                              onSelectedItemChanged: (int index) {
+                                newItemProvider.category =
+                                    ItemCategory.values[index];
+                              },
+                              children: List<Widget>.generate(
+                                  ItemCategory.values.length, (index) {
+                                ItemCategory category =
+                                    ItemCategory.values[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                      category.emoji + " " + category.name),
+                                );
+                              }),
                             ),
                           )).show();
                     },
@@ -77,19 +85,29 @@ class NewItemScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       padding: EdgeInsets.all(14.0),
-                      child: Text(
-                        "🎟️",
-                        style: TextStyle(fontSize: 24),
+                      child: Consumer<NewItemProvider>(
+                        builder: (context, value, child) {
+                          return Text(
+                            value.item.tipo.emoji,
+                            style: TextStyle(fontSize: 24),
+                          );
+                        },
                       ),
                     ),
                   ),
                 ],
               ),
               SizedBox(height: 12),
-              FormItemTextField(
-                controller: newItemProvider.valueController,
-                title: "valor",
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+              Consumer<NewItemProvider>(
+                builder: (context, value, child) {
+                  return FormItemTextField(
+                    controller: newItemProvider.valueController,
+                    title: "valor",
+                    enabled: !value.loading,
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                  );
+                },
               ),
               SizedBox(height: 12),
               Consumer<NewItemProvider>(
@@ -98,8 +116,7 @@ class NewItemScreen extends StatelessWidget {
                     text: "adicionar",
                     onPressed: value.changed
                         ? () {
-                            newItemProvider.setLoading(true);
-                            // Navigator.of(context).pop();
+                            newItemProvider.addItem(context);
                           }
                         : null,
                     rectangleColor: newItemProvider.event.color2,

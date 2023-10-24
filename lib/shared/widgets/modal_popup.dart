@@ -7,12 +7,14 @@ class ModalPopup {
   final String title;
   final double height;
   final Widget child;
+  final EdgeInsets padding;
 
   const ModalPopup(
       {required this.context,
       required this.title,
       required this.height,
-      required this.child});
+      required this.child,
+      this.padding = const EdgeInsets.only(top: 64)});
 
   void show() {
     showCupertinoModalPopup<void>(
@@ -36,9 +38,13 @@ class ModalPopup {
             ),
             child: SafeArea(
               top: false,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Stack(
+                alignment: Alignment.topLeft,
                 children: [
+                  Padding(
+                    padding: padding,
+                    child: child,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: Text(
@@ -51,9 +57,6 @@ class ModalPopup {
                       ),
                     ),
                   ),
-                  Spacer(),
-                  child,
-                  Spacer()
                 ],
               ),
             )),

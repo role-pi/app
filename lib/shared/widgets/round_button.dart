@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
-class RoundButton extends StatefulWidget {
+class RoundButton extends StatelessWidget {
   final String text;
   final Color textColor;
   final Color rectangleColor;
@@ -19,11 +19,6 @@ class RoundButton extends StatefulWidget {
   });
 
   @override
-  State<RoundButton> createState() => _RoundButtonState();
-}
-
-class _RoundButtonState extends State<RoundButton> {
-  @override
   Widget build(BuildContext context) {
     return ElasticButton(
         child: Container(
@@ -31,17 +26,15 @@ class _RoundButtonState extends State<RoundButton> {
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-              color:
-                  CupertinoDynamicColor.resolve(widget.rectangleColor, context),
-              backgroundBlendMode: widget.onPressed != null
-                  ? BlendMode.srcIn
-                  : BlendMode.luminosity),
+              color: CupertinoDynamicColor.resolve(rectangleColor, context),
+              backgroundBlendMode:
+                  onPressed != null ? BlendMode.srcIn : BlendMode.luminosity),
           child: Align(
-            alignment: widget.alignment,
+            alignment: alignment,
             child: Text(
-              widget.text,
+              text,
               style: TextStyle(
-                color: CupertinoDynamicColor.resolve(widget.textColor, context),
+                color: CupertinoDynamicColor.resolve(textColor, context),
                 fontSize: 23,
                 letterSpacing: -1.5,
                 fontWeight: FontWeight.bold,
@@ -49,6 +42,6 @@ class _RoundButtonState extends State<RoundButton> {
             ),
           ),
         ),
-        onTap: widget.onPressed);
+        onTap: onPressed);
   }
 }
