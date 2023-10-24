@@ -45,7 +45,7 @@ class _NewEventThemeState extends State<NewEventTheme> {
                 child: RoundButton(
                   text: "criar",
                   onPressed: () {
-                    provider.create();
+                    provider.create(context);
                   },
                   // onPressed: onSubmit,
                 ),

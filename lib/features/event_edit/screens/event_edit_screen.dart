@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/features/event_detail/widgets/event_detail_map.dart';
@@ -50,15 +51,17 @@ class EventEditScreen extends StatelessWidget {
                       FormItemGroupTitle(title: "INFORMAÇÕES"),
                       Row(
                         children: [
-                          FormItemTextField(
-                            controller: eventEditProvider.nameController,
-                            title: eventEditProvider.event.name,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'O nome não pode ser vazio.';
-                              }
-                              return null;
-                            },
+                          Expanded(
+                            child: FormItemTextField(
+                              controller: eventEditProvider.nameController,
+                              title: eventEditProvider.event.name,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'O nome não pode ser vazio.';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
                           Text("emoji")
                         ]
