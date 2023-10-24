@@ -48,15 +48,20 @@ class EventEditScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       FormItemGroupTitle(title: "INFORMAÇÕES"),
-                      FormItemTextField(
-                        controller: eventEditProvider.nameController,
-                        title: eventEditProvider.event.name,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'O nome não pode ser vazio.';
-                          }
-                          return null;
-                        },
+                      Row(
+                        children: [
+                          FormItemTextField(
+                            controller: eventEditProvider.nameController,
+                            title: eventEditProvider.event.name,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'O nome não pode ser vazio.';
+                              }
+                              return null;
+                            },
+                          ),
+                          Text("emoji")
+                        ]
                       ),
                       SizedBox(height: 12),
                       Row(children: [
