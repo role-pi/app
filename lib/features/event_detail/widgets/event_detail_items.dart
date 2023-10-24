@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:role/features/item_detail/screens/item_detail_screen.dart';
 import 'package:role/models/item.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
@@ -26,7 +27,12 @@ class EventDetailItems extends StatelessWidget {
         return Container(
           padding: EdgeInsets.only(left: 16, right: 8, bottom: 16),
           child: ElasticButton(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  builder: (context) => ItemsDetail())
+              );
+            },
             child: Row(children: [
               Stack(
                 children: <Widget>[
