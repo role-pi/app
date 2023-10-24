@@ -12,7 +12,7 @@ class DefaultUserIcon extends StatelessWidget {
         width: size,
         height: size,
         color:
-            CupertinoDynamicColor.resolve(CupertinoColors.systemGrey6, context),
+            CupertinoDynamicColor.resolve(CupertinoColors.systemGrey5, context),
         child: Icon(
           CupertinoIcons.person_fill,
           size: size * 0.5,

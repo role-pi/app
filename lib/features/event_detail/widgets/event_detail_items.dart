@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:role/models/item.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
+import 'package:role/shared/widgets/container_text.dart';
 
 class EventDetailItems extends StatelessWidget {
   final List<Item> items;
@@ -11,21 +13,20 @@ class EventDetailItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = MediaQuery.of(context).platformBrightness == Brightness.dark
+        ? Color.fromRGBO(100, 100, 100, 1)
+        : Color.fromRGBO(80, 80, 80, 1);
+
     return ListView.builder(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: CupertinoDynamicColor.resolve(
-                  CupertinoColors.systemGrey6, context),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            padding: EdgeInsets.all(16.0),
+        return Container(
+          padding: EdgeInsets.only(left: 16, right: 8, bottom: 16),
+          child: ElasticButton(
+            onTap: () {},
             child: Row(children: [
               Stack(
                 children: <Widget>[
@@ -44,25 +45,36 @@ class EventDetailItems extends StatelessWidget {
                         children: [
                           Icon(
                             CupertinoIcons.bubble_left_fill,
-                            color: CupertinoColors.secondaryLabel
-                                .resolveFrom(context),
-                            size: 45,
+                            color: color,
+                            size: 58,
                           ),
                           Positioned(
-                            bottom: 13,
-                            right: 10,
-                            child: Icon(
-                              CupertinoIcons.smiley,
-                            ),
-                          ),
+                              bottom: 11,
+                              right: 8,
+                              child: Text(
+                                "🎫",
+                                style: TextStyle(
+                                  fontSize: 26,
+                                ),
+                              )),
                           Positioned(
-                            right: 30,
-                            bottom: 20,
-                            child: Consumer<UserLoginProvider>(
-                                builder: (context, provider, child) {
-                              return RemoteProfilePicture(
-                                  url: provider.user?.profilePhoto, size: 30);
-                            }),
+                            right: 32,
+                            bottom: 6,
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: CupertinoColors.systemBackground
+                                        .resolveFrom(context),
+                                    width: 2.5,
+                                  ),
+                                  borderRadius: BorderRadius.circular(32),
+                                ),
+                                child: Consumer<UserLoginProvider>(
+                                    builder: (context, provider, child) {
+                                  return RemoteProfilePicture(
+                                      url: provider.user?.profilePhoto,
+                                      size: 32);
+                                })),
                           ),
                         ],
                       ),
@@ -70,44 +82,34 @@ class EventDetailItems extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(width: 16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     items[index].nome,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 23,
                       fontWeight: FontWeight.bold,
                       letterSpacing: -1.0,
                     ),
                   ),
+                  SizedBox(height: 2),
                   Text(
                     "há 2 horas",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 17,
                       letterSpacing: -1.0,
+                      fontWeight: FontWeight.w600,
+                      color:
+                          CupertinoColors.secondaryLabel.resolveFrom(context),
                     ),
                   ),
                 ],
               ),
               SizedBox(width: 12),
               Spacer(),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 136, 136, 141),
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  items[index].valor.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: -1.0,
-                    color: CupertinoColors.white,
-                  ),
-                ),
-              ),
+              ContainerText(text: "R\$ 60"),
             ]),
           ),
         );

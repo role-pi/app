@@ -56,7 +56,9 @@ class EventDetailGuests extends StatelessWidget {
                       AutoSizeText(
                         convidados[index].displayName,
                         style: TextStyle(
-                            fontSize: 14, color: CupertinoColors.systemGrey),
+                            fontSize: 14,
+                            color: CupertinoColors.systemGrey,
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),

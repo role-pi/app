@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
+import 'package:role/shared/widgets/modal_popup.dart';
 
 class FormItemDatePicker extends FormField<DateTime> {
   FormItemDatePicker({
@@ -45,14 +46,19 @@ class _DatePickerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ElasticButton(
-        onTap: () => _showDialog(
-          context,
-          CupertinoDatePicker(
-            initialDateTime: dateTime,
-            use24hFormat: true,
-            onDateTimeChanged: onDateTimeChanged,
+        onTap: () => ModalPopup(
+          context: context,
+          title: title,
+          height: 320,
+          child: SizedBox(
+            height: 200,
+            child: CupertinoDatePicker(
+              initialDateTime: dateTime,
+              use24hFormat: true,
+              onDateTimeChanged: onDateTimeChanged,
+            ),
           ),
-        ),
+        ).show(),
         child: Container(
           decoration: BoxDecoration(
             color: CupertinoDynamicColor.resolve(
@@ -73,44 +79,6 @@ class _DatePickerButton extends StatelessWidget {
               letterSpacing: -1.0,
               color: CupertinoColors.secondaryLabel.resolveFrom(context),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  void _showDialog(BuildContext context, child) {
-    showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) => Container(
-        height: 320,
-        padding: const EdgeInsets.only(top: 6.0),
-        margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.0),
-          color: CupertinoColors.systemBackground.resolveFrom(context),
-        ),
-        child: SafeArea(
-          top: false,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: -1.2,
-                    color: CupertinoColors.label.resolveFrom(context),
-                  ),
-                ),
-              ),
-              SizedBox(height: 200, child: child)
-            ],
           ),
         ),
       ),
