@@ -1,21 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
-class RoundButton extends StatelessWidget {
+class RoundButton extends StatefulWidget {
   final String text;
   final Color textColor;
   final Color rectangleColor;
   final Alignment alignment;
-  final VoidCallback onPressed;
+  final Function? onPressed;
+  final bool loading;
 
   RoundButton({
     required this.text,
     this.textColor = CupertinoColors.systemBackground,
     this.rectangleColor = CupertinoColors.label,
     this.alignment = Alignment.center,
-    required this.onPressed,
+    this.onPressed,
+    this.loading = true,
   });
 
+  @override
+  State<RoundButton> createState() => _RoundButtonState();
+}
+
+class _RoundButtonState extends State<RoundButton> {
   @override
   Widget build(BuildContext context) {
     return ElasticButton(
@@ -24,13 +31,17 @@ class RoundButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-              color: CupertinoDynamicColor.resolve(rectangleColor, context)),
+              color:
+                  CupertinoDynamicColor.resolve(widget.rectangleColor, context),
+              backgroundBlendMode: widget.onPressed != null
+                  ? BlendMode.srcIn
+                  : BlendMode.luminosity),
           child: Align(
-            alignment: alignment,
+            alignment: widget.alignment,
             child: Text(
-              text,
+              widget.text,
               style: TextStyle(
-                color: CupertinoDynamicColor.resolve(textColor, context),
+                color: CupertinoDynamicColor.resolve(widget.textColor, context),
                 fontSize: 23,
                 letterSpacing: -1.5,
                 fontWeight: FontWeight.bold,
@@ -38,6 +49,6 @@ class RoundButton extends StatelessWidget {
             ),
           ),
         ),
-        onTap: onPressed);
+        onTap: widget.onPressed);
   }
 }

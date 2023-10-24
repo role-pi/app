@@ -14,8 +14,9 @@ class NewItemProvider extends ChangeNotifier {
 
   late TextEditingController nameController,
       descricaoController,
-      valorController;
+      valueController;
   late bool changed = false;
+  late bool loading = false;
 
   late FToast fToast;
 
@@ -23,11 +24,11 @@ class NewItemProvider extends ChangeNotifier {
     this.eventDetailProvider = eventDetailProvider;
     nameController = TextEditingController();
     descricaoController = TextEditingController();
-    valorController = TextEditingController();
+    valueController = TextEditingController();
 
     nameController.addListener(_textChanged);
     descricaoController.addListener(_textChanged);
-    valorController.addListener(_textChanged);
+    valueController.addListener(_textChanged);
 
     fToast = FToast();
   }
@@ -40,7 +41,7 @@ class NewItemProvider extends ChangeNotifier {
         tipo: 1,
         nome: nameController.text,
         descricao: descricaoController.text,
-        valor: double.parse(valorController.text),
+        valor: double.parse(valueController.text),
         eventId: event.id);
 
     int? result = await newItemRepository.postItem(item);
@@ -70,8 +71,13 @@ class NewItemProvider extends ChangeNotifier {
     eventDetailProvider.get();
   }
 
+  setLoading(loading) {
+    this.loading = loading;
+    notifyListeners();
+  }
+
   _textChanged() {
-    changed = true;
+    changed = !nameController.text.isEmpty && !valueController.text.isEmpty;
     notifyListeners();
   }
 }

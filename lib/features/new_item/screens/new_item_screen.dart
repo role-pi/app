@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/new_item/providers/new_item_provider.dart';
-import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
@@ -37,36 +36,39 @@ class NewItemScreen extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: FormItemTextField(
-                      controller: newItemProvider.nameController,
-                      title: "nome",
+                    child: Consumer<NewItemProvider>(
+                      builder: (context, value, child) {
+                        return FormItemTextField(
+                          controller: newItemProvider.nameController,
+                          title: "nome",
+                          enabled: !value.loading,
+                        );
+                      },
                     ),
                   ),
                   SizedBox(width: 12),
                   ElasticButton(
                     onTap: () {
-                      showCupertinoModalPopup(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            height: 200,
+                      ModalPopup(
+                          context: context,
+                          title: "categoria",
+                          height: 300,
+                          child: SizedBox(
+                            height: 150,
                             child: CupertinoPicker(
                               itemExtent: 32,
                               onSelectedItemChanged: (int index) {},
                               children: <Widget>[
-                                Text('🎟️'),
-                                Text('🍺'),
-                                Text('🎁'),
-                                Text('🛒'),
-                                Text('🛍️'),
-                                Text('🚕'),
-                                Text('🥩'),
+                                Text('🎟️ Ingresso'),
+                                Text('🍺 Bebidas'),
+                                Text('🎁 Presentes'),
+                                Text('🛒 Compras'),
+                                Text('🚕 Transporte'),
+                                Text('🥩 Alimentação'),
                                 // ...
                               ],
                             ),
-                          );
-                        },
-                      );
+                          )).show();
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -75,10 +77,9 @@ class NewItemScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       padding: EdgeInsets.all(14.0),
-                      child: Icon(
-                        CupertinoIcons.smiley_fill,
-                        color: CupertinoColors.white,
-                        size: 24,
+                      child: Text(
+                        "🎟️",
+                        style: TextStyle(fontSize: 24),
                       ),
                     ),
                   ),
@@ -86,16 +87,25 @@ class NewItemScreen extends StatelessWidget {
               ),
               SizedBox(height: 12),
               FormItemTextField(
-                  controller: newItemProvider.valorController, title: "valor"),
+                controller: newItemProvider.valueController,
+                title: "valor",
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+              ),
               SizedBox(height: 12),
-              RoundButton(
-                text: "adicionar",
-                onPressed: () {
-                  newItemProvider.addItem(context);
-                  Navigator.of(context).pop();
+              Consumer<NewItemProvider>(
+                builder: (context, value, child) {
+                  return RoundButton(
+                    text: "adicionar",
+                    onPressed: value.changed
+                        ? () {
+                            newItemProvider.setLoading(true);
+                            // Navigator.of(context).pop();
+                          }
+                        : null,
+                    rectangleColor: newItemProvider.event.color2,
+                    textColor: CupertinoColors.white,
+                  );
                 },
-                rectangleColor: newItemProvider.event.color2,
-                textColor: CupertinoColors.white,
               )
             ],
           ),
