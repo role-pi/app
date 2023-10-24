@@ -34,7 +34,7 @@ class _EventListScreenState extends State<EventListScreen> {
                   onTap: () => {NewEventProvider.shared.showing = true},
                 ),
                 NewEventScreen(),
-                // UserFirstLoginScreen()
+                UserFirstLoginScreen()
               ],
             ),
           ),
