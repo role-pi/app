@@ -26,12 +26,12 @@ class EventItemRowGuests extends StatelessWidget {
           id: 0,
           email: "",
           profilePhoto:
-              "https://pbs.twimg.com/profile_images/1699634404291661824/Zc2OT-q4_400x400.jpg"),
+              "https://instagram.ffln5-1.fna.fbcdn.net/v/t51.2885-15/393972972_1344245906177057_3405207999322580450_n.webp?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEwODAuc2RyIn0&_nc_ht=instagram.ffln5-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=f808q_Z1_gkAX-JjhkA&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzIxODk3MjEzNzYxMTMwMjk0Nw%3D%3D.2-ccb7-5&oh=00_AfChBkIkoD13n30pE8COAjCoQIir90V0zpRHT-zVFJGLZg&oe=653D621D&_nc_sid=ee9879"),
       User(
           id: 0,
           email: "",
           profilePhoto:
-              "https://pbs.twimg.com/profile_images/1699634404291661824/Zc2OT-q4_400x400.jpg")
+              "https://instagram.ffln5-1.fna.fbcdn.net/v/t51.2885-15/281377054_724590295241843_7109525927776894461_n.jpg?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDE4MDAuc2RyIn0&_nc_ht=instagram.ffln5-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=axJ7ytpjKicAX8beyMK&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MjgzOTc1MTE2NjM4MjIyNDE0OQ%3D%3D.2-ccb7-5&oh=00_AfD-QpL6EneuJcC23QjN6DjgFZO0w4zoYQqRelc8VLw6cw&oe=653C54EC&_nc_sid=ee9879")
     ];
 
     int total = min(showMax, users.length);

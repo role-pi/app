@@ -13,7 +13,7 @@ class UserFirstLoginScreen extends StatefulWidget {
 
 class _UserLoginScreenState extends State<UserFirstLoginScreen> {
   String? email;
-  var controller= TextEditingController()
+  var controller= TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +24,15 @@ class _UserLoginScreenState extends State<UserFirstLoginScreen> {
         ),
         Column(
           children: [
-            FormItemTextField (
-              controller: controller,
-              title: "Textinho",
-              padding: EdgeInsets.all(4.0),
-              textSize: 16.0,
-              backgroundColor:
-              CupertinoColors.systemBackground, decoration: null),
+            Container(
+              padding: EdgeInsets.only(left: 35),
+                  width: 80,
+                  height: 80,
+                  
+            )
           ]
-             )
-          ],
         )
+      ],
+    );
   }
 }
