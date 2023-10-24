@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/features/event_detail/widgets/event_detail_map.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
+import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_date_picker.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
+import 'package:role/shared/widgets/modal_popup.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class EventEditScreen extends StatelessWidget {
@@ -48,20 +52,15 @@ class EventEditScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       FormItemGroupTitle(title: "INFORMAÇÕES"),
-                      Row(
-                        children: [
-                          FormItemTextField(
-                            controller: eventEditProvider.nameController,
-                            title: eventEditProvider.event.name,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'O nome não pode ser vazio.';
-                              }
-                              return null;
-                            },
-                          ),
-                          Text("emoji")
-                        ]
+                      FormItemTextField(
+                        controller: eventEditProvider.nameController,
+                        title: eventEditProvider.event.name,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'O nome não pode ser vazio.';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 12),
                       Row(children: [
@@ -90,6 +89,66 @@ class EventEditScreen extends StatelessWidget {
                               endereco: eventEditProvider.event.endereco)),
                       SizedBox(height: 12),
                       FormItemGroupTitle(title: "5 CONVIDADOS"),
+                      SizedBox(height: 12),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: CupertinoColors.systemGrey6,
+                         borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: Expanded(
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: 5,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text('Participante $index'),
+                                  );
+                                },),
+                              CupertinoButton(child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.add,
+                                    color: CupertinoDynamicColor.resolve(
+                                        CupertinoColors.label, context),
+                                    size: 30,
+                                  ), 
+                                   SizedBox(width: 12),
+                                  Text(
+                                    "adicionar participante",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: CupertinoDynamicColor.resolve(
+                                        CupertinoColors.label, context),
+                                    ),
+                                  ),
+                                  SizedBox(width: 40),
+                                  Icon(
+                                    CupertinoIcons.bars,
+                                     color: CupertinoDynamicColor.resolve(
+                                        CupertinoColors.label, context),
+
+                                  )
+                                ],
+                              ), onPressed:() {
+                                ModalPopup(
+                                  context: context, 
+                                  title: "adicionar participante:", 
+                                   height: 260,
+                                   padding: EdgeInsets.only(top: 16),
+                                   child: SizedBox(height: 26,
+                                   )
+                                   );
+                              },), 
+                            ],
+                          ),
+                        ),
+                      ),
                       SizedBox(height: 12),
                       RoundButton(
                         onPressed: () async {
