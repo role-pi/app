@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:role/features/item_detail/screens/item_detail_screen.dart';
 import 'package:role/models/item.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
@@ -13,10 +14,6 @@ class EventDetailItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = MediaQuery.of(context).platformBrightness == Brightness.dark
-        ? Color.fromRGBO(100, 100, 100, 1)
-        : Color.fromRGBO(80, 80, 80, 1);
-
     return ListView.builder(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
@@ -26,7 +23,12 @@ class EventDetailItems extends StatelessWidget {
         return Container(
           padding: EdgeInsets.only(left: 16, right: 8, bottom: 16),
           child: ElasticButton(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (context) => ItemsDetail(
+                        item: items[index],
+                      )));
+            },
             child: Row(children: [
               Stack(
                 children: <Widget>[
@@ -45,14 +47,15 @@ class EventDetailItems extends StatelessWidget {
                         children: [
                           Icon(
                             CupertinoIcons.bubble_left_fill,
-                            color: color,
+                            color: CupertinoColors.systemGrey5
+                                .resolveFrom(context),
                             size: 58,
                           ),
                           Positioned(
-                              bottom: 11,
+                              bottom: 9,
                               right: 8,
                               child: Text(
-                                "🎫",
+                                items[index].tipo.emoji,
                                 style: TextStyle(
                                   fontSize: 26,
                                 ),
@@ -65,7 +68,7 @@ class EventDetailItems extends StatelessWidget {
                                   border: Border.all(
                                     color: CupertinoColors.systemBackground
                                         .resolveFrom(context),
-                                    width: 2.5,
+                                    width: 3,
                                   ),
                                   borderRadius: BorderRadius.circular(32),
                                 ),

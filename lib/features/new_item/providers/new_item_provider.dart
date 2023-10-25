@@ -30,10 +30,10 @@ class NewItemProvider extends ChangeNotifier {
 
     item = Item(
         id: 0,
-        valor: 10,
+        valor: null,
         tipo: ItemCategory.other,
         nome: " ",
-        descricao: " ",
+        descricao: "Descrição de teste",
         eventId: event.id);
 
     fToast = FToast();
@@ -97,9 +97,7 @@ class NewItemProvider extends ChangeNotifier {
 
   _valueChanged() {
     double? value = double.tryParse(valueController.text);
-    if (value != null) {
-      item.valor = value;
-    }
+    item.valor = value;
     updateChanged();
     notifyListeners();
   }

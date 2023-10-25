@@ -19,7 +19,7 @@ class NewItemScreen extends StatelessWidget {
     ModalPopup(
             context: context,
             title: "adicionar insumo",
-            height: 400,
+            height: 330,
             child: build(context))
         .show();
   }
@@ -80,11 +80,11 @@ class NewItemScreen extends StatelessWidget {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: CupertinoColors.tertiarySystemBackground
-                            .resolveFrom(context),
+                        color: CupertinoColors.systemGrey6.resolveFrom(context),
                         borderRadius: BorderRadius.circular(12.0),
                       ),
-                      padding: EdgeInsets.all(14.0),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 11.0, horizontal: 13),
                       child: Consumer<NewItemProvider>(
                         builder: (context, value, child) {
                           return Text(
