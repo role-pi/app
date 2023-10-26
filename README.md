@@ -1,7 +1,7 @@
-# flutter
+# app
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?logo=Flutter&logoColor=white) ![iOS](https://img.shields.io/badge/iOS-000000?logo=apple&logoColor=white) ![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)
 
-Este repositório contém o código-fonte do aplicativo rolê, desenvolvido em Flutter. O rolê é um aplicativo que permite aos usuários organizarem eventos sociais e fazerem controle de gastos
+Este repositório contém o código-fonte do aplicativo rolê, desenvolvido em Flutter. O rolê é um aplicativo que permite aos usuários organizarem eventos sociais e fazerem controle de gastos de forma prática, intuitiva e eficiente.
 
 ### Requisitos
 
@@ -75,10 +75,3 @@ Siga os passos abaixo para executar o projeto em sua máquina local:
    ```
 
 O aplicativo será compilado e instalado no emulador ou dispositivo Android conectado. Aguarde alguns instantes para que o aplicativo seja totalmente carregado. Ao salvar qualquer arquivo de código-fonte, a interface atualizará automaticamente com um hot reload.
-
-### Contribuição
-
-Se você deseja contribuir para o projeto, fique à vontade para fazer um fork deste repositório e criar um pull request com suas alterações.
-
-
-### Lacrou mana!!! 😎 🎂
