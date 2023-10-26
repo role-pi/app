@@ -76,8 +76,10 @@ class EventList extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 28.0, vertical: 6.0),
                         child: Dismissible(
-                          key: Key(event.id.toString()),
+                          key: Key(event.id.toString()), 
+                          background: Container(color: CupertinoColors.destructiveRed),
                           onDismissed: (direction) {
+          
                             // implementar remoção do evento
                           },
                           child: EventItemRow(
