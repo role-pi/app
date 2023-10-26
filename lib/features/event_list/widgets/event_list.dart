@@ -75,8 +75,14 @@ class EventList extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 28.0, vertical: 6.0),
-                        child: EventItemRow(
-                          event: event,
+                        child: Dismissible(
+                          key: Key(event.id.toString()),
+                          onDismissed: (direction) {
+                            // implementar remoção do evento
+                          },
+                          child: EventItemRow(
+                            event: event,
+                          ),
                         ),
                       );
                     }
