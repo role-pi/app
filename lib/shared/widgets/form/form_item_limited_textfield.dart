@@ -11,7 +11,8 @@ class LimitedTextField extends StatefulWidget {
     required this.hintText,
     this.containerDecoration = const BoxDecoration(
       color: CupertinoColors.systemGrey6,
-      borderRadius: BorderRadius.all(Radius.circular(10.0)), // Adiciona bordas arredondadas
+      borderRadius: BorderRadius.all(
+          Radius.circular(10.0)), // Adiciona bordas arredondadas
     ),
     this.containerHeight = 200.0,
   });
@@ -22,10 +23,10 @@ class LimitedTextField extends StatefulWidget {
 
 class _LimitedTextFieldState extends State<LimitedTextField> {
   final TextEditingController _controller = TextEditingController();
-  
- int remainingCharacters = 0;
 
- @override
+  int remainingCharacters = 0;
+
+  @override
   Widget build(BuildContext context) {
     remainingCharacters = widget.maxLength - _controller.text.length;
 
