@@ -5,22 +5,20 @@ import 'package:flutter/cupertino.dart';
 class ModalPopup {
   final BuildContext context;
   final String title;
-  final double height;
   final Widget child;
   final EdgeInsets padding;
 
   const ModalPopup(
       {required this.context,
       required this.title,
-      required this.height,
       required this.child,
       this.padding = const EdgeInsets.only(top: 72)});
 
   void show() {
     showCupertinoModalPopup<void>(
       context: context,
-      builder: (BuildContext context) => ModalPopupWidget(
-          height: height, padding: padding, child: child, title: title),
+      builder: (BuildContext context) =>
+          ModalPopupWidget(padding: padding, child: child, title: title),
     );
   }
 }
@@ -28,13 +26,11 @@ class ModalPopup {
 class ModalPopupWidget extends StatefulWidget {
   const ModalPopupWidget({
     super.key,
-    required this.height,
     required this.padding,
     required this.child,
     required this.title,
   });
 
-  final double height;
   final EdgeInsets padding;
   final Widget child;
   final String title;
@@ -66,7 +62,6 @@ class _ModalPopupWidgetState extends State<ModalPopupWidget> {
                   sigmaY: 16 * value,
                 ),
                 child: Container(
-                    height: widget.height,
                     padding: const EdgeInsets.only(top: 6.0),
                     margin: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewInsets.bottom,

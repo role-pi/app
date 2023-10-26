@@ -17,10 +17,7 @@ class NewItemScreen extends StatelessWidget {
 
   void show(BuildContext context) {
     ModalPopup(
-            context: context,
-            title: "adicionar insumo",
-            height: 330,
-            child: build(context))
+            context: context, title: "adicionar insumo", child: build(context))
         .show();
   }
 
@@ -28,106 +25,102 @@ class NewItemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
       value: newItemProvider,
-      child: Column(children: [
-        Form(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Consumer<NewItemProvider>(
+                    builder: (context, value, child) {
+                      return FormItemTextField(
+                        controller: newItemProvider.nameController,
+                        title: "nome",
+                        enabled: !value.loading,
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(width: 12),
+                ElasticButton(
+                  onTap: () {
+                    ModalPopup(
+                        context: context,
+                        title: "categoria",
+                        padding: EdgeInsets.only(top: 32),
+                        child: SizedBox(
+                          height: 200,
+                          child: CupertinoPicker(
+                            scrollController: FixedExtentScrollController(
+                                initialItem: newItemProvider.item.tipo.index),
+                            itemExtent: 40,
+                            onSelectedItemChanged: (int index) {
+                              newItemProvider.category =
+                                  ItemCategory.values[index];
+                            },
+                            children: List<Widget>.generate(
+                                ItemCategory.values.length, (index) {
+                              ItemCategory category =
+                                  ItemCategory.values[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 4.0),
+                                child:
+                                    Text(category.emoji + " " + category.name),
+                              );
+                            }),
+                          ),
+                        )).show();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: CupertinoColors.systemGrey6.resolveFrom(context),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 11.0, horizontal: 13),
                     child: Consumer<NewItemProvider>(
                       builder: (context, value, child) {
-                        return FormItemTextField(
-                          controller: newItemProvider.nameController,
-                          title: "nome",
-                          enabled: !value.loading,
+                        return Text(
+                          value.item.tipo.emoji,
+                          style: TextStyle(fontSize: 24),
                         );
                       },
                     ),
                   ),
-                  SizedBox(width: 12),
-                  ElasticButton(
-                    onTap: () {
-                      ModalPopup(
-                          context: context,
-                          title: "categoria",
-                          height: 260,
-                          padding: EdgeInsets.only(top: 16),
-                          child: SizedBox(
-                            height: 200,
-                            child: CupertinoPicker(
-                              scrollController: FixedExtentScrollController(
-                                  initialItem: newItemProvider.item.tipo.index),
-                              itemExtent: 40,
-                              onSelectedItemChanged: (int index) {
-                                newItemProvider.category =
-                                    ItemCategory.values[index];
-                              },
-                              children: List<Widget>.generate(
-                                  ItemCategory.values.length, (index) {
-                                ItemCategory category =
-                                    ItemCategory.values[index];
-                                return Padding(
-                                  padding: const EdgeInsets.only(top: 4.0),
-                                  child: Text(
-                                      category.emoji + " " + category.name),
-                                );
-                              }),
-                            ),
-                          )).show();
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: CupertinoColors.systemGrey6.resolveFrom(context),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 11.0, horizontal: 13),
-                      child: Consumer<NewItemProvider>(
-                        builder: (context, value, child) {
-                          return Text(
-                            value.item.tipo.emoji,
-                            style: TextStyle(fontSize: 24),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 12),
-              Consumer<NewItemProvider>(
-                builder: (context, value, child) {
-                  return FormItemTextField(
-                    controller: newItemProvider.valueController,
-                    title: "valor",
-                    enabled: !value.loading,
-                    keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
-                  );
-                },
-              ),
-              SizedBox(height: 12),
-              Consumer<NewItemProvider>(
-                builder: (context, value, child) {
-                  return RoundButton(
-                    text: "adicionar",
-                    onPressed: value.changed
-                        ? () {
-                            newItemProvider.addItem(context);
-                          }
-                        : null,
-                    rectangleColor: newItemProvider.event.color2,
-                    textColor: CupertinoColors.white,
-                  );
-                },
-              )
-            ],
-          ),
-        ))
-      ]),
+                ),
+              ],
+            ),
+            SizedBox(height: 12),
+            Consumer<NewItemProvider>(
+              builder: (context, value, child) {
+                return FormItemTextField(
+                  controller: newItemProvider.valueController,
+                  title: "valor",
+                  enabled: !value.loading,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                );
+              },
+            ),
+            SizedBox(height: 12),
+            Consumer<NewItemProvider>(
+              builder: (context, value, child) {
+                return RoundButton(
+                  text: "adicionar",
+                  onPressed: value.changed
+                      ? () {
+                          newItemProvider.addItem(context);
+                        }
+                      : null,
+                  rectangleColor: newItemProvider.event.color2,
+                  textColor: CupertinoColors.white,
+                );
+              },
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
@@ -48,8 +49,8 @@ class _DatePickerButton extends StatelessWidget {
       child: ElasticButton(
         onTap: () => ModalPopup(
           context: context,
+          padding: EdgeInsets.only(top: 48),
           title: title,
-          height: 320,
           child: SizedBox(
             height: 200,
             child: CupertinoDatePicker(
@@ -69,7 +70,7 @@ class _DatePickerButton extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(16.0),
           alignment: Alignment.center,
-          child: Text(
+          child: AutoSizeText(
             dateTime == null
                 ? ""
                 : '${dateTime!.day}/${dateTime!.month} ${dateTime!.hour}:${dateTime!.minute}',
