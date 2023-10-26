@@ -91,6 +91,7 @@ class EventItemRowGuests extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: size * 3,
       height: size,
       child: Row(
         children: makeWidgets(),

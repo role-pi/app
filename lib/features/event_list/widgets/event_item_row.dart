@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/container_text.dart';
@@ -58,27 +59,31 @@ class EventItemRow extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(event.name,
-                                style: TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: -1.5,
-                                    color: CupertinoDynamicColor.resolve(
-                                            event.theme.accentColor, context)
-                                        .withAlpha(200))),
-                            Text(event.shortDescription,
-                                style: TextStyle(
-                                    fontSize: 22,
-                                    letterSpacing: -1.5,
-                                    color: CupertinoDynamicColor.resolve(
-                                            event.theme.accentColor, context)
-                                        .withAlpha(150))),
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AutoSizeText(event.name,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: -1.5,
+                                      color: CupertinoDynamicColor.resolve(
+                                              event.theme.accentColor, context)
+                                          .withAlpha(200))),
+                              AutoSizeText(event.shortDescription,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      letterSpacing: -1.5,
+                                      color: CupertinoDynamicColor.resolve(
+                                              event.theme.accentColor, context)
+                                          .withAlpha(150))),
+                            ],
+                          ),
                         ),
-                        Spacer(),
+                        SizedBox(width: 16),
                         EventItemRowGuests(event: event),
                       ],
                     ),
