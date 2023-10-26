@@ -6,6 +6,7 @@ import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
+import 'package:role/features/item_detail/widgets/Limited_textfield.dart';
 
 class ItemsDetail extends StatelessWidget {
   final Item item;
@@ -15,11 +16,12 @@ class ItemsDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+       child: SingleChildScrollView(
       child: Column(
         children: [
           CustomNavigationBar(
             leadingText: "voltar",
-            trailingText: "editar",
+            trailingText: "salvar",
             onPressedLeading: () {
               Navigator.of(context).pop();
             },
@@ -130,11 +132,10 @@ class ItemsDetail extends StatelessWidget {
                 SizedBox(height: 24),
                 FormItemGroupTitle(title: "NOTAS"),
                 SizedBox(height: 12),
-                Container(
-                    decoration: BoxDecoration(
-                        color: CupertinoColors.systemGrey6.resolveFrom(context),
-                        borderRadius: BorderRadius.circular(12.0)),
-                    height: 200),
+                LimitedTextField(
+                  maxLength: 300,
+                  hintText: 'Adicione suas notas aqui...',
+                ),
                 SizedBox(height: 24),
                 RoundButton(text: "distribuir gastos")
               ],
@@ -142,6 +143,7 @@ class ItemsDetail extends StatelessWidget {
           ),
         ],
       ),
+    )
     );
   }
 }
