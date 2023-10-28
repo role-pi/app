@@ -28,7 +28,7 @@ class EventItemRow extends StatelessWidget {
       child: ClipRRect(
           borderRadius: BorderRadius.circular(18),
           child: Dismissible(
-            key: Key(event.id.toString()),
+            key: UniqueKey(),
             direction: DismissDirection.endToStart,
             background: DismissibleExclusionBackground(),
             onDismissed: (direction) {

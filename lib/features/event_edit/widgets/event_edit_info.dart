@@ -35,11 +35,11 @@ class EventEditInfo extends StatelessWidget {
             initialValue: provider.event.startDate,
             onSaved: provider.setDataInicio,
           ),
-          SizedBox(width: 12),
+          SizedBox(width: 6),
           Icon(CupertinoIcons.arrow_right,
               size: 30,
               color: CupertinoColors.systemGrey3.resolveFrom(context)),
-          SizedBox(width: 12),
+          SizedBox(width: 6),
           FormItemDatePicker(
             title: "data de fim",
             initialValue: provider.event.endDate,

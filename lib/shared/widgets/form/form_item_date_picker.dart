@@ -41,7 +41,7 @@ class _DatePickerButton extends StatelessWidget {
 
   final String title;
   final DateTime? dateTime;
-  final Function(DateTime) onDateTimeChanged;
+  final Function(DateTime?) onDateTimeChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -68,19 +68,35 @@ class _DatePickerButton extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(12.0),
           ),
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(12.0),
           alignment: Alignment.center,
-          child: AutoSizeText(
-            dateTime == null
-                ? "selecione"
-                : '${dateTime!.day}/${dateTime!.month} ${dateTime!.hour}:${dateTime!.minute}',
-            maxLines: 1,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: -1.0,
-              color: CupertinoColors.secondaryLabel.resolveFrom(context),
-            ),
+          child: Row(
+            children: [
+              if (dateTime != null)
+                GestureDetector(
+                  onTap: () {
+                    onDateTimeChanged(null);
+                  },
+                  child: Icon(
+                    CupertinoIcons.xmark_circle_fill,
+                    color: CupertinoColors.secondaryLabel.resolveFrom(context),
+                  ),
+                ),
+              Expanded(
+                child: AutoSizeText(
+                  dateTime == null
+                      ? ""
+                      : '${dateTime!.day}/${dateTime!.month} ${dateTime!.hour}:${dateTime!.minute}',
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: -1.0,
+                    color: CupertinoColors.secondaryLabel.resolveFrom(context),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -22,7 +22,7 @@ class EventDetailItemRow extends StatelessWidget {
         Provider.of<EventDetailProvider>(context, listen: false);
 
     return Dismissible(
-      key: Key(item.id.toString()),
+      key: UniqueKey(),
       direction: DismissDirection.endToStart,
       background: Stack(
         alignment: Alignment.centerRight,
