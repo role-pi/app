@@ -34,6 +34,7 @@ class NewItemProvider extends ChangeNotifier {
         tipo: ItemCategory.other,
         nome: " ",
         descricao: "Descrição de teste",
+        data: DateTime.now(),
         eventId: event.id);
 
     fToast = FToast();

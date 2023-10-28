@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:role/features/event_detail/repository/event_detail_repository.dart';
 import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
 import 'package:role/models/user.dart';
+import 'package:role/shared/widgets/custom_toast.dart';
 
 class EventDetailProvider extends ChangeNotifier {
   late int id;
@@ -12,6 +14,8 @@ class EventDetailProvider extends ChangeNotifier {
   Event get event => eventListProvider.event(id);
 
   EventDetailRepository eventRepository = EventDetailRepository();
+
+  FToast fToast = FToast();
 
   EventDetailProvider(EventListProvider eventListProvider, int id) {
     this.eventListProvider = eventListProvider;
@@ -29,6 +33,33 @@ class EventDetailProvider extends ChangeNotifier {
     notifyListeners();
 
     EventListProvider.shared.notifyListeners();
+  }
+
+  deleteItem(Item item, BuildContext context) async {
+    bool result = await eventRepository.deleteItem(item);
+
+    fToast.init(context);
+    Widget toast;
+    if (result) {
+      toast = CustomToast(
+          title: "insumo excluído",
+          icon: CupertinoIcons.checkmark,
+          color: event.color1);
+
+      event.items?.remove(item);
+      notifyListeners();
+    } else {
+      toast = CustomToast(
+          title: "erro ao excluir insumo",
+          icon: CupertinoIcons.xmark,
+          color: CupertinoColors.systemRed);
+    }
+
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: Duration(seconds: 3),
+    );
   }
 
   setItems(List<Item> items) {

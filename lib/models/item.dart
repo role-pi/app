@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:intl/intl.dart';
 import 'package:role/models/transaction.dart';
 import 'package:role/shared/utils/serializable.dart';
 
@@ -7,6 +10,7 @@ class Item implements JSONSerializable {
   late ItemCategory _tipo;
   late String _nome;
   late String _descricao;
+  late DateTime _data;
   late int _eventId;
   List<Transaction> transacoes = [];
 
@@ -16,12 +20,14 @@ class Item implements JSONSerializable {
     required ItemCategory tipo,
     required String nome,
     required String descricao,
+    required DateTime data,
     required int eventId,
   })  : _id = id,
         _valor = valor,
         _tipo = tipo,
         _nome = nome,
         _descricao = descricao,
+        _data = data,
         _eventId = eventId;
 
   int get id => _id;
@@ -49,6 +55,11 @@ class Item implements JSONSerializable {
     _descricao = value;
   }
 
+  DateTime get data => _data;
+  set data(DateTime value) {
+    _data = value;
+  }
+
   int get eventId => _eventId;
   set eventId(int value) {
     _eventId = value;
@@ -64,6 +75,7 @@ class Item implements JSONSerializable {
       nome: json["nome"],
       tipo: ItemCategory.fromValue(json["tipo"]),
       descricao: json["descricao"],
+      data: DateTime.now().add(Duration(hours: -Random().nextInt(24 * 5))),
       valor: 0,
       eventId: 0);
 
@@ -76,6 +88,17 @@ class Item implements JSONSerializable {
         "valor": valor,
         "idEvento": eventId,
       };
+
+  String get dayDescription {
+    if (data.day == DateTime.now().day) {
+      return "hoje";
+    } else if (data.day == DateTime.now().add(Duration(days: -1)).day) {
+      return "ontem";
+    } else {
+      final formatador = DateFormat("dd 'de' MMMM", 'pt_BR');
+      return formatador.format(data);
+    }
+  }
 }
 
 enum ItemCategory {

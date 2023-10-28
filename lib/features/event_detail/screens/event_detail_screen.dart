@@ -35,7 +35,8 @@ class EventDetailScreen extends StatelessWidget {
             }),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.only(
+                    left: 24.0, right: 24.0, top: 32.0, bottom: 64.0),
                 child: Column(
                   children: [
                     Consumer<EventDetailProvider>(
@@ -104,21 +105,7 @@ class EventDetailScreen extends StatelessWidget {
                         // EventDetailInputs(),
                       ],
                     ),
-                    SizedBox(height: 6),
-                    Row(
-                      children: [
-                        Text(
-                          "HOJE",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: -0.8,
-                              color: CupertinoColors.secondaryLabel
-                                  .resolveFrom(context)),
-                        ),
-                        Spacer(),
-                      ],
-                    ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 4),
                     Consumer<EventDetailProvider>(
                       builder: (context, provider, child) {
                         if (provider.event.items != null) {

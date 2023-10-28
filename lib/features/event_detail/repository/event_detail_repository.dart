@@ -42,6 +42,24 @@ class EventDetailRepository {
     return [];
   }
 
+  Future<bool> deleteItem(Item item) async {
+    try {
+      var response =
+          await API().request(endpoint: "insumo/${item.id}", method: "DELETE");
+
+      print(response.response);
+      return true;
+    } catch (e) {
+      if (e is ApiError) {
+        print('Error Code: ${e.code}, Message: ${e.message}');
+      } else {
+        print('Unknown error occurred: $e');
+      }
+    }
+
+    return false;
+  }
+
   Future<List<User>> getUsers(Event event) async {
     try {
       var response =
