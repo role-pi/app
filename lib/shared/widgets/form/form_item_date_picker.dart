@@ -72,8 +72,9 @@ class _DatePickerButton extends StatelessWidget {
           alignment: Alignment.center,
           child: AutoSizeText(
             dateTime == null
-                ? ""
+                ? "selecione"
                 : '${dateTime!.day}/${dateTime!.month} ${dateTime!.hour}:${dateTime!.minute}',
+            maxLines: 1,
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,

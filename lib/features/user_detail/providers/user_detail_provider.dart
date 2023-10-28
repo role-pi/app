@@ -13,6 +13,12 @@ import 'package:role/shared/widgets/custom_toast.dart';
 class UserDetailProvider extends ChangeNotifier {
   static final UserDetailProvider shared = UserDetailProvider();
 
+  bool _changed = false;
+  bool get changed => _changed;
+
+  bool _loading = false;
+  bool get loading => _loading;
+
   UserRepository userRepository = UserRepository();
 
   late TextEditingController nameController, emailController;
@@ -22,8 +28,11 @@ class UserDetailProvider extends ChangeNotifier {
   UserDetailProvider() {
     nameController =
         TextEditingController(text: UserLoginProvider.shared.user?.name);
+    nameController.addListener(textChanged);
+
     emailController =
         TextEditingController(text: UserLoginProvider.shared.user?.email);
+
     fToast = FToast();
   }
 
@@ -47,21 +56,31 @@ class UserDetailProvider extends ChangeNotifier {
   Future updateUser(BuildContext context) async {
     UserLoginProvider.shared.user!.name = nameController.text;
     UserLoginProvider.shared.user!.email = emailController.text;
-    int? result = await userRepository.putUser(UserLoginProvider.shared.user!);
+    FocusScope.of(context).unfocus();
 
+    _loading = true;
+    notifyListeners();
+
+    int? result = await userRepository.putUser(UserLoginProvider.shared.user!);
     fToast.init(context);
+
     Widget toast;
     if (result != null) {
       toast = CustomToast(
-          title: "usuario salvo",
+          title: "usuário salvo",
           icon: CupertinoIcons.checkmark,
           color: CupertinoColors.systemGreen);
+
+      _changed = false;
     } else {
       toast = CustomToast(
-          title: "erro ao salvar usuario",
+          title: "erro ao salvar usuário",
           icon: CupertinoIcons.xmark,
           color: CupertinoColors.systemRed);
     }
+
+    _loading = false;
+    notifyListeners();
 
     fToast.showToast(
       child: toast,
@@ -98,4 +117,13 @@ class UserDetailProvider extends ChangeNotifier {
   }
 
   delete(Event event, BuildContext context) async {}
+
+  textChanged() {
+    if (nameController.text != UserLoginProvider.shared.user?.name) {
+      _changed = true;
+    } else {
+      _changed = false;
+    }
+    notifyListeners();
+  }
 }

@@ -12,6 +12,7 @@ class Event implements JSONSerializable {
   DateTime? _startDate;
   DateTime? _endDate;
   double? _valorTotal;
+  List<String>? _profilePictures;
   EventTheme _theme;
 
   late List<Item>? _items = null;
@@ -23,12 +24,14 @@ class Event implements JSONSerializable {
     DateTime? startDate,
     DateTime? endDate,
     double? valorTotal,
+    List<String>? profilePictures,
     EventTheme? theme,
   })  : _id = id,
         _name = name,
         _startDate = startDate,
         _endDate = endDate,
         _valorTotal = valorTotal,
+        _profilePictures = profilePictures,
         _theme = theme ?? EventTheme.random();
 
   int get id => _id;
@@ -51,6 +54,11 @@ class Event implements JSONSerializable {
   double? get valorTotal => _valorTotal;
   set valorTotal(double? value) {
     _valorTotal = value;
+  }
+
+  List<String>? get profilePictures => _profilePictures;
+  set profilePictures(List<String>? value) {
+    _profilePictures = value;
   }
 
   EventTheme get theme => _theme;
@@ -78,6 +86,9 @@ class Event implements JSONSerializable {
       endDate:
           json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
       valorTotal: double.parse(json["valor_total"]),
+      profilePictures: json["fotos_de_perfil"] != null
+          ? json["fotos_de_perfil"].toString().split(', ')
+          : [],
       theme: EventTheme.fromHex(
           emoji: json["emoji"], hex1: json["cor_1"], hex2: json["cor_2"]));
 

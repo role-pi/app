@@ -18,7 +18,7 @@ class EventDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    EventDetailProvider _eventDetailProvider =
+    EventDetailProvider provider =
         Provider.of<EventDetailProvider>(context, listen: false);
 
     return ClipPath(
@@ -41,7 +41,7 @@ class EventDetailHeader extends StatelessWidget {
                     onPressedTrailing: () {
                       Navigator.of(context)
                           .push(CupertinoPageRoute(builder: (context) {
-                        return EventEditScreen(_eventDetailProvider);
+                        return EventEditScreen(provider);
                       }));
                     })),
             Spacer(),
@@ -53,7 +53,10 @@ class EventDetailHeader extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment:
+                              provider.event.dateDescription.isEmpty
+                                  ? CrossAxisAlignment.center
+                                  : CrossAxisAlignment.end,
                           children: [
                             Consumer<EventDetailProvider>(
                               builder: (context, provider, child) {
@@ -87,11 +90,15 @@ class EventDetailHeader extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 12),
                       Consumer<EventDetailProvider>(
                         builder: (context, provider, child) {
-                          return ContainerText(
-                              text: provider.event.dateDescription);
+                          if (provider.event.dateDescription.isEmpty)
+                            return SizedBox();
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 12),
+                            child: ContainerText(
+                                text: provider.event.dateDescription),
+                          );
                         },
                       ),
                     ]))

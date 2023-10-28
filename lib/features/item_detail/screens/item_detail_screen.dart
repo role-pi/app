@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:role/features/item_detail/widgets/Limited_textfield.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/container_text.dart';
@@ -6,7 +7,6 @@ import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
-import 'package:role/features/item_detail/widgets/Limited_textfield.dart';
 
 class ItemsDetail extends StatelessWidget {
   final Item item;
@@ -16,7 +16,7 @@ class ItemsDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-       child: SingleChildScrollView(
+        child: SingleChildScrollView(
       child: Column(
         children: [
           CustomNavigationBar(
@@ -143,8 +143,7 @@ class ItemsDetail extends StatelessWidget {
           ),
         ],
       ),
-    )
-    );
+    ));
   }
 }
 

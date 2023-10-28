@@ -10,7 +10,7 @@ class EventListRepository {
   Future<List<Event>> getEvents() async {
     try {
       var response = await API().request(endpoint: "evento", method: "GET");
-
+      print(response.response);
       return eventsFromJSON(response.response);
     } catch (e) {
       if (e is ApiError) {
