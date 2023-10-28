@@ -5,6 +5,7 @@ import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/features/event_list/widgets/event_item_row.dart';
 import 'package:role/features/event_list/widgets/event_list_header.dart';
 import 'package:role/shared/widgets/circle_button.dart';
+import 'package:role/shared/widgets/empty_list_indicator.dart';
 
 class EventList extends StatelessWidget {
   const EventList({
@@ -47,29 +48,10 @@ class EventList extends StatelessWidget {
                       return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 28.0, vertical: 4.0),
-                          child: Opacity(
-                              opacity: 0.5,
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      color: CupertinoDynamicColor.resolve(
-                                          CupertinoColors.systemGrey6, context),
-                                      border: Border.all(
-                                          color: CupertinoDynamicColor.resolve(
-                                              CupertinoColors.systemGrey5,
-                                              context),
-                                          width: 4),
-                                      borderRadius: BorderRadius.circular(18)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 32, horizontal: 48),
-                                    child: Text(
-                                      "crie um evento com o botão de estrela logo abaixo",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: -0.8),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ))));
+                          child: EmtpyListIndicator(
+                            text:
+                                "crie um evento com o botão de estrela logo abaixo",
+                          ));
                     } else {
                       Event event = usersViewModel.events[index - 1];
                       return Padding(

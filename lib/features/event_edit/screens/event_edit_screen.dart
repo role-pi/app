@@ -1,18 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
-import 'package:role/features/event_detail/widgets/event_detail_map.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/event_edit/widgets/event_edit_guests.dart';
 import 'package:role/features/event_edit/widgets/event_edit_info.dart';
-import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
-import 'package:role/shared/widgets/form/form_item_date_picker.dart';
-import 'package:role/shared/widgets/form/form_item_group_title.dart';
-import 'package:role/shared/widgets/form/form_item_text_field.dart';
-import 'package:role/shared/widgets/modal_popup.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class EventEditScreen extends StatelessWidget {

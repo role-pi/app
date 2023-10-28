@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/shared/widgets/container_text.dart';
+import 'package:role/shared/widgets/dismissible_exclusion_background.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/gradient_effect.dart';
 
@@ -29,23 +30,7 @@ class EventItemRow extends StatelessWidget {
           child: Dismissible(
             key: Key(event.id.toString()),
             direction: DismissDirection.endToStart,
-            background: Stack(
-              alignment: Alignment.centerRight,
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                        color: CupertinoColors.destructiveRed,
-                        borderRadius: BorderRadius.circular(16))),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(
-                    CupertinoIcons.trash,
-                    color: CupertinoColors.white,
-                    size: 48,
-                  ),
-                ),
-              ],
-            ),
+            background: DismissibleExclusionBackground(),
             onDismissed: (direction) {
               EventListProvider.shared.delete(event, context);
             },
