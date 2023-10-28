@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class EventDetailInputs extends StatelessWidget {
-  
-
-  
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,8 +25,8 @@ class EventDetailInputs extends StatelessWidget {
                           child: CircleAvatar(
                             radius: 30,
                             backgroundImage: AssetImage("assets/Star.png"),
-                            backgroundColor: const Color.fromARGB(
-                                255, 100, 101, 102),
+                            backgroundColor:
+                                const Color.fromARGB(255, 100, 101, 102),
                           ),
                         ),
                         Expanded(

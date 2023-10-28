@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pinput/pinput.dart';
 import 'package:role/features/user_login/repository/user_repository.dart';
 import 'package:role/models/user.dart';
 
@@ -13,6 +14,12 @@ class UserLoginProvider extends ChangeNotifier {
 
   User? _user;
   User? get user => _user;
+
+  bool _failed = false;
+  bool get failed => _failed;
+
+  final _codeController = TextEditingController();
+  TextEditingController get codeController => _codeController;
 
   UserRepository userRepository = UserRepository();
 
@@ -79,7 +86,8 @@ class UserLoginProvider extends ChangeNotifier {
         setState(LoginState.loggingIn);
         callback();
       } else {
-        setState(LoginState.signIn);
+        codeController.clear();
+        _failed = true;
       }
 
       notifyListeners();

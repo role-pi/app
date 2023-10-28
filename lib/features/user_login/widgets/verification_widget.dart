@@ -15,8 +15,6 @@ class VerificationWidget extends StatefulWidget {
 }
 
 class _VerificationWidgetState extends State<VerificationWidget> {
-  final _codeController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
 
   bool showBack = true;
@@ -31,15 +29,23 @@ class _VerificationWidgetState extends State<VerificationWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Spacer(),
-          Text(
-            "ótimo! agora só precisamos do codigo de verificação que enviamos para você",
+          RichText(
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: CupertinoColors.systemGrey2,
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-              letterSpacing: -1.6,
-              height: 1.1,
+            text: TextSpan(
+              text: "ótimo! ",
+              style: TextStyle(
+                color: CupertinoColors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                letterSpacing: -1.6,
+                height: 1.1,
+              ),
+              children: const <TextSpan>[
+                TextSpan(
+                    text:
+                        "agora só precisamos do codigo de verificação que enviamos para você",
+                    style: TextStyle(color: CupertinoColors.systemGrey)),
+              ],
             ),
           ),
           SizedBox(height: 30),
@@ -47,7 +53,7 @@ class _VerificationWidgetState extends State<VerificationWidget> {
               color: CupertinoColors.black,
               child: Pinput(
                 length: 6,
-                controller: _codeController,
+                controller: loginProvider.codeController,
                 pinAnimationType: PinAnimationType.none,
                 defaultPinTheme: PinTheme(
                   width: 56,
@@ -81,23 +87,29 @@ class _VerificationWidgetState extends State<VerificationWidget> {
               if (showBack) {
                 loginProvider.setState(LoginState.signIn);
               } else {
-                widget.onTap?.call(_codeController.text);
-                if (_formKey.currentState!.validate()) {
-                  widget.onTap?.call(_codeController.text);
-                }
+                widget.onTap?.call(loginProvider.codeController.text);
               }
             },
             rectangleColor: CupertinoColors.darkBackgroundGray,
+            textColor: CupertinoColors.white,
             text: showBack ? "voltar" : "verificar",
           ),
           SizedBox(height: 25),
-          Text(
-            "reenviar código",
-            style: TextStyle(
-                color: Color.fromARGB(255, 72, 72, 72),
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                letterSpacing: -1.2),
+          Consumer<UserLoginProvider>(
+            builder: (context, value, child) {
+              return AnimatedOpacity(
+                opacity: value.failed ? 1 : 0,
+                duration: Duration(milliseconds: 100),
+                child: child,
+              );
+            },
+            child: Text("opa! parece que o código informado é inválido.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: CupertinoColors.systemRed,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    letterSpacing: -1.1)),
           ),
           Spacer()
         ],
