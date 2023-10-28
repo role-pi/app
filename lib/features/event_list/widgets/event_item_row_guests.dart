@@ -1,14 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:role/models/event.dart';
-import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventItemRowGuests extends StatelessWidget {
   EventItemRowGuests({required this.event});
 
   final Event event;
+
   final showMax = 3;
   final double size = 42;
 
@@ -16,50 +17,47 @@ class EventItemRowGuests extends StatelessWidget {
     List<Widget> list = [];
     int count = 0;
 
-    List<User> users = [
-      User(
-          id: 0,
-          email: "",
-          profilePhoto:
-              "https://pbs.twimg.com/profile_images/1699634404291661824/Zc2OT-q4_400x400.jpg"),
-      User(
-          id: 0,
-          email: "",
-          profilePhoto:
-              "https://pbs.twimg.com/profile_images/1699634404291661824/Zc2OT-q4_400x400.jpg"),
-      User(
-          id: 0,
-          email: "",
-          profilePhoto:
-              "https://pbs.twimg.com/profile_images/1699634404291661824/Zc2OT-q4_400x400.jpg")
-    ];
+    List<String>? profilePictures = event.profilePictures;
 
-    int total = min(showMax, users.length);
-    bool showMore = users.length > showMax;
+    if (profilePictures == null || profilePictures.isEmpty) {
+      return list;
+    }
 
-    for (var user in users) {
+    int total = min(showMax, profilePictures.length);
+    bool showMore = profilePictures.length > showMax;
+
+    for (var url in profilePictures) {
       if (count >= total) {
         break;
       }
 
       var picture = RemoteProfilePicture(
-        url: user.profilePhoto,
+        url: url,
         size: size,
         colorBlendMode: BlendMode.luminosity,
       );
 
-      var offset = Offset(3.0 * (total - count - 1), 0.0);
+      var offset = Offset(2.0 * (total - count - 1), 0.0);
 
       if (count == showMax - 1 && showMore) {
         list.add(SizedBox(
-          width: size * 40 / 42,
+          width: size * 38 / 42,
           height: size,
           child: ClipPath(
             clipper: UserListClipPath(),
             clipBehavior: Clip.antiAlias,
             child: Container(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.only(right: 3),
+                child: Icon(
+                  Icons.add,
+                  size: 24,
+                  color: event.color1,
+                ),
+              ),
               decoration: BoxDecoration(
-                  color: CupertinoColors.systemGrey5,
+                  color: event.color2,
                   backgroundBlendMode: BlendMode.luminosity),
             ),
           ),
@@ -94,6 +92,7 @@ class EventItemRowGuests extends StatelessWidget {
       width: size * 3,
       height: size,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: makeWidgets(),
       ),
     );

@@ -14,10 +14,10 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<UserLoginProvider>(context);
-    loginProvider.tryAuthentication(() => Navigator.pushNamed(context, "/"));
+    final provider = Provider.of<UserLoginProvider>(context);
+    provider.tryAuthentication(() => Navigator.pushNamed(context, "/"));
 
-    if (loginProvider.state == LoginState.loggedOut) {
+    if (provider.state == LoginState.loggedOut) {
       return WillPopScope(
           onWillPop: () async => false,
           child: CupertinoPageScaffold(
@@ -41,7 +41,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                 alignment: Alignment.center,
                 children: [
                   AnimatedPositioned(
-                    top: loginProvider.state == LoginState.signIn ? 450 : -350,
+                    top: provider.state == LoginState.signIn ? 450 : -350,
                     left: 0,
                     right: 0,
                     duration: const Duration(milliseconds: 750),
@@ -61,21 +61,20 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                                   email: email,
                                   onTap: (email) async {
                                     this.email = email;
-                                    await loginProvider.trySignUp(email, () {});
+                                    await provider.trySignUp(email, () {});
                                   },
                                 ),
-                                showing:
-                                    loginProvider.state == LoginState.signIn),
+                                showing: provider.state == LoginState.signIn),
                           ),
                           LoginSlideComponent(
                               child: VerificationWidget(
                                 onTap: (code) async {
-                                  await loginProvider.verify(email, code, () {
+                                  await provider.verify(email, code, () {
                                     Navigator.pushNamed(context, "/");
                                   });
                                 },
                               ),
-                              showing: loginProvider.state == LoginState.verify,
+                              showing: provider.state == LoginState.verify,
                               reversed: true)
                         ],
                       )),

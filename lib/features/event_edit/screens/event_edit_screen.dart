@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/features/event_detail/widgets/event_detail_map.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
+import 'package:role/features/event_edit/widgets/event_edit_guests.dart';
+import 'package:role/features/event_edit/widgets/event_edit_info.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_date_picker.dart';
@@ -51,176 +53,9 @@ class EventEditScreen extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
                   child: Column(
                     children: [
-                      FormItemGroupTitle(title: "INFORMAÇÕES"),
-                      FormItemTextField(
-                        controller: eventEditProvider.nameController,
-                        title: eventEditProvider.event.name,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'O nome não pode ser vazio.';
-                          }
-                          return null;
-                        },
-                      ),
+                      EventEditInfo(),
                       SizedBox(height: 12),
-                      Row(children: [
-                        FormItemDatePicker(
-                          title: "data de início",
-                          initialValue: eventEditProvider.event.startDate,
-                          onSaved: eventEditProvider.setDataInicio,
-                        ),
-                        SizedBox(width: 12),
-                        Icon(CupertinoIcons.arrow_right,
-                            size: 30,
-                            color: CupertinoColors.systemGrey3
-                                .resolveFrom(context)),
-                        SizedBox(width: 12),
-                        FormItemDatePicker(
-                          title: "data de fim",
-                          initialValue: eventEditProvider.event.endDate,
-                          onSaved: eventEditProvider.setDataFim,
-                        ),
-                      ]),
-                      SizedBox(height: 12),
-                      SizedBox(
-                          height: 250,
-                          child: EventDetailMap(
-                              color: eventEditProvider.event.color1,
-                              endereco: eventEditProvider.event.endereco)),
-                      SizedBox(height: 12),
-                      FormItemGroupTitle(title: "5 CONVIDADOS"),
-                      SizedBox(height: 12),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: CupertinoColors.systemGrey6,
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: Expanded(
-                          child: Column(
-                            children: [
-                              ListView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: 5,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Text('Participante $index'),
-                                  );
-                                },
-                              ),
-                              CupertinoButton(
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.add,
-                                      color: CupertinoDynamicColor.resolve(
-                                          CupertinoColors.label, context),
-                                      size: 30,
-                                    ),
-                                    SizedBox(width: 12),
-                                    Text(
-                                      "adicionar participante",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: CupertinoDynamicColor.resolve(
-                                            CupertinoColors.label, context),
-                                      ),
-                                    ),
-                                    SizedBox(width: 40),
-                                    Icon(
-                                      CupertinoIcons.bars,
-                                      color: CupertinoDynamicColor.resolve(
-                                          CupertinoColors.label, context),
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {
-                                  ModalPopup(
-                                    context: context,
-                                    title: "adicionar participante:",
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                              width: 80,
-                                              height: 80,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                color: CupertinoColors
-                                                    .extraLightBackgroundGray
-                                                    .withOpacity(0.8),
-                                              ),
-                                              child: Icon(
-                                                CupertinoIcons.envelope,
-                                                color: CupertinoDynamicColor
-                                                    .resolve(
-                                                        CupertinoColors.label,
-                                                        context),
-                                              ),
-                                            ),
-                                            Text(" Convidar por e-mail"),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              width: 80,
-                                              height: 80,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                color: CupertinoColors
-                                                    .extraLightBackgroundGray
-                                                    .withOpacity(0.8),
-                                              ),
-                                              child: Icon(
-                                                CupertinoIcons.qrcode,
-                                                color: CupertinoDynamicColor
-                                                    .resolve(
-                                                        CupertinoColors.label,
-                                                        context),
-                                              ),
-                                            ),
-                                            Text("QR CODE"),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              width: 80,
-                                              height: 80,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                color: CupertinoColors
-                                                    .extraLightBackgroundGray
-                                                    .withOpacity(0.8),
-                                              ),
-                                              child: Icon(
-                                                CupertinoIcons.square_arrow_up,
-                                                color: CupertinoDynamicColor
-                                                    .resolve(
-                                                        CupertinoColors.label,
-                                                        context),
-                                              ),
-                                            ),
-                                            Text("Encaminhar"),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ).show();
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      EventEditGuests(),
                       SizedBox(height: 12),
                       RoundButton(
                         onPressed: () async {

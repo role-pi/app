@@ -21,7 +21,7 @@ class _VerificationWidgetState extends State<VerificationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<UserLoginProvider>(context);
+    final provider = Provider.of<UserLoginProvider>(context);
 
     return Form(
       key: _formKey,
@@ -53,7 +53,7 @@ class _VerificationWidgetState extends State<VerificationWidget> {
               color: CupertinoColors.black,
               child: Pinput(
                 length: 6,
-                controller: loginProvider.codeController,
+                controller: provider.codeController,
                 pinAnimationType: PinAnimationType.none,
                 defaultPinTheme: PinTheme(
                   width: 56,
@@ -85,9 +85,9 @@ class _VerificationWidgetState extends State<VerificationWidget> {
           RoundButton(
             onPressed: () async {
               if (showBack) {
-                loginProvider.setState(LoginState.signIn);
+                provider.setState(LoginState.signIn);
               } else {
-                widget.onTap?.call(loginProvider.codeController.text);
+                widget.onTap?.call(provider.codeController.text);
               }
             },
             rectangleColor: CupertinoColors.darkBackgroundGray,

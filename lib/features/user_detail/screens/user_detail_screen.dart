@@ -14,13 +14,13 @@ import 'package:role/shared/widgets/elastic_button.dart';
 class UserDetailScreen extends StatelessWidget {
   UserDetailProvider get userDetailProvider => UserDetailProvider.shared;
 
-  TextStyle get style => TextStyle(
-      letterSpacing: -0.8,
-      color: CupertinoColors.black,
-      fontWeight: FontWeight.bold);
-
   @override
   Widget build(BuildContext context) {
+    TextStyle style = TextStyle(
+        letterSpacing: -0.9,
+        color: CupertinoColors.label.resolveFrom(context),
+        fontWeight: FontWeight.bold);
+
     return ChangeNotifierProvider.value(
       value: userDetailProvider,
       child: CupertinoPageScaffold(
@@ -49,7 +49,7 @@ class UserDetailScreen extends StatelessWidget {
                             padding: const EdgeInsets.all(0),
                             child: ElasticButton(
                               onTap: () {
-                                showPopup(context);
+                                showPopup(context, style);
                               },
                               child: SizedBox(
                                 child: Stack(
@@ -212,9 +212,7 @@ class UserDetailScreen extends StatelessWidget {
     );
   }
 
-  void showPopup(
-    BuildContext context,
-  ) {
+  void showPopup(BuildContext context, TextStyle style) {
     showCupertinoModalPopup(
       context: context,
       builder: (context) {
