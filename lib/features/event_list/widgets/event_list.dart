@@ -75,26 +75,8 @@ class EventList extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 28.0, vertical: 6.0),
-                        child: Dismissible(
-                          key: Key(event.id.toString()),
-                          direction: DismissDirection.endToStart,
-                          background: Stack(
-                            alignment:Alignment.centerRight,
-                            children: [
-                              Container(decoration: BoxDecoration(color: CupertinoColors.destructiveRed, borderRadius: BorderRadius.circular(16))),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Icon(CupertinoIcons.trash, color: CupertinoColors.white, size: 48,),
-                              ),
-            
-                            ],
-                          ),
-                          onDismissed: (direction) {
-                            EventListProvider.shared.delete(event, context);
-                          },
-                          child: EventItemRow(
-                            event: event,
-                          ),
+                        child: EventItemRow(
+                          event: event,
                         ),
                       );
                     }
