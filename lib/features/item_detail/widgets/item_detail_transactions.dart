@@ -1,52 +1,53 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:role/features/item_detail/providers/item_detail_provider.dart';
+import 'package:role/features/item_detail/widgets/item_detail_transaction_row.dart';
 import 'package:role/models/transaction.dart';
-import 'package:role/shared/widgets/container_text.dart';
-import 'package:role/shared/widgets/remote_profile_picture.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 
 class ItemDetailTransactions extends StatelessWidget {
-  final List<Transaction> transactions;
-
-  ItemDetailTransactions({Key? key, required this.transactions})
-      : super(key: key);
+  ItemDetailTransactions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: transactions.length,
-      itemBuilder: (context, index) {
-        Transaction transaction = transactions[index];
-
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
           children: [
-            RemoteProfilePicture(
-              url: transaction.userProfilePicture,
-              size: 48,
+            Text(
+              "PAGO POR",
+              style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: CupertinoColors.secondaryLabel.resolveFrom(context)),
             ),
-            SizedBox(width: 12),
-            Expanded(
-              child: AutoSizeText(transaction.userName,
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    letterSpacing: -1.1,
-                  )),
-            ),
-            SizedBox(width: 12),
-            ContainerText(
-              text:
-                  "R\$ ${transaction.valor.toStringAsFixed(2).replaceAll(".", ",")}",
-              size: 18,
+            Spacer(),
+            ElasticButton(
+              onTap: () {},
+              child: Icon(Icons.add,
+                  color: CupertinoColors.label.resolveFrom(context), size: 28),
             )
           ],
-        );
-      },
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Consumer<ItemDetailProvider>(
+          builder: (context, value, child) {
+            return ListView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: value.item.transacoes.length,
+              itemBuilder: (context, index) {
+                Transaction transaction = value.item.transacoes[index];
+                return ItemDetailTransactionRow(transaction: transaction);
+              },
+            );
+          },
+        )
+      ],
     );
   }
 }

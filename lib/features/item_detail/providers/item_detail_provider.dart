@@ -43,7 +43,7 @@ class ItemDetailProvider extends ChangeNotifier {
   get() async {
     updateItem(await itemRepository.getItem(item));
     setTransactions(await itemRepository.getTransactions(item));
-    print(item.transacoes.length);
+
     notifyListeners();
   }
 }

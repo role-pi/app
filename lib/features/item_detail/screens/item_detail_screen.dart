@@ -33,6 +33,7 @@ class ItemDetailScreen extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
                 onPressedTrailing: () {},
+                accentColor: CupertinoColors.activeBlue,
               ),
               Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -89,33 +90,12 @@ class ItemDetailScreen extends StatelessWidget {
                           ClipPath(
                             clipper: TicketClipper(invert: true),
                             child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 24.0, vertical: 16.0),
-                              decoration: BoxDecoration(
-                                  color: CupertinoColors.systemGrey5
-                                      .resolveFrom(context)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "PAGO POR",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        color: CupertinoColors.secondaryLabel
-                                            .resolveFrom(context)),
-                                  ),
-                                  SizedBox(
-                                    height: 12,
-                                  ),
-                                  Consumer<ItemDetailProvider>(
-                                    builder: (context, value, child) {
-                                      return ItemDetailTransactions(
-                                          transactions: value.item.transacoes);
-                                    },
-                                  )
-                                ],
-                              ),
-                            ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 24.0, vertical: 16.0),
+                                decoration: BoxDecoration(
+                                    color: CupertinoColors.systemGrey5
+                                        .resolveFrom(context)),
+                                child: ItemDetailTransactions()),
                           ),
                         ],
                       ),
