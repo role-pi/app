@@ -58,7 +58,7 @@ class EventItemRow extends StatelessWidget {
                               : SizedBox(height: 60),
                           Spacer(),
                           ContainerText(
-                              text: "R\$ " + event.valorTotal.toString(),
+                              text: "R\$ " + event.totalAmount.toString(),
                               padding: EdgeInsets.symmetric(
                                   horizontal: 18, vertical: 6),
                               size: 21),

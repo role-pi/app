@@ -1,149 +1,142 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/user_login/providers/user_login_provider.dart';
-import 'package:role/models/item.dart';
-import 'package:role/shared/widgets/container_text.dart';
+import 'package:provider/provider.dart';
+import 'package:role/features/item_detail/providers/item_detail_provider.dart';
+import 'package:role/features/item_detail/widgets/item_detail_transactions.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 import 'package:role/shared/widgets/form/form_item_limited_textfield.dart';
-import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
-class ItemsDetail extends StatelessWidget {
-  final Item item;
+class ItemDetailScreen extends StatelessWidget {
+  ItemDetailScreen(eventId, {required this.id})
+      : itemDetailProvider = ItemDetailProvider(id, eventId);
 
-  const ItemsDetail({Key? key, required this.item}) : super(key: key);
+  final int id;
+  final ItemDetailProvider itemDetailProvider;
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        child: SingleChildScrollView(
-      child: Column(
-        children: [
-          CustomNavigationBar(
-            leadingText: "voltar",
-            trailingText: "salvar",
-            onPressedLeading: () {
-              Navigator.of(context).pop();
-            },
-            onPressedTrailing: () {},
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12.0),
-                  child: Column(
-                    children: [
-                      ClipPath(
-                        clipper: TicketClipper(),
-                        child: Container(
-                          padding: EdgeInsets.all(24.0),
-                          decoration: BoxDecoration(
-                              color: CupertinoColors.systemGrey6
-                                  .resolveFrom(context)),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
+    return ChangeNotifierProvider.value(
+      value: itemDetailProvider,
+      child: CupertinoPageScaffold(
+          child: CustomScrollView(slivers: [
+        CupertinoSliverRefreshControl(onRefresh: () async {
+          await itemDetailProvider.get();
+        }),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              CustomNavigationBar(
+                leadingText: "voltar",
+                trailingText: "salvar",
+                onPressedLeading: () {
+                  Navigator.of(context).pop();
+                },
+                onPressedTrailing: () {},
+              ),
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Column(
+                        children: [
+                          ClipPath(
+                            clipper: TicketClipper(),
+                            child: Container(
+                              padding: EdgeInsets.all(24.0),
+                              decoration: BoxDecoration(
+                                  color: CupertinoColors.systemGrey6
+                                      .resolveFrom(context)),
+                              child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    item.nome,
-                                    style: TextStyle(
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: -1.2),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        itemDetailProvider.item.nome,
+                                        style: TextStyle(
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: -1.2),
+                                      ),
+                                      Text(
+                                        "adicionado por você",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                          letterSpacing: -1.1,
+                                          color: CupertinoColors.secondaryLabel
+                                              .resolveFrom(context),
+                                        ),
+                                      ),
+                                    ],
                                   ),
+                                  Spacer(),
                                   Text(
-                                    "adicionado por você",
+                                    itemDetailProvider.item.tipo.emoji,
                                     style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: -1.1,
-                                      color: CupertinoColors.secondaryLabel
-                                          .resolveFrom(context),
+                                      fontSize: 72,
                                     ),
                                   ),
                                 ],
                               ),
-                              Spacer(),
-                              Text(
-                                item.tipo.emoji,
-                                style: TextStyle(
-                                  fontSize: 72,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                      ClipPath(
-                        clipper: TicketClipper(invert: true),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 24.0, vertical: 16.0),
-                          decoration: BoxDecoration(
-                              color: CupertinoColors.systemGrey5
-                                  .resolveFrom(context)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "PAGO POR",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    color: CupertinoColors.secondaryLabel
-                                        .resolveFrom(context)),
-                              ),
-                              SizedBox(
-                                height: 12,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                          ClipPath(
+                            clipper: TicketClipper(invert: true),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 24.0, vertical: 16.0),
+                              decoration: BoxDecoration(
+                                  color: CupertinoColors.systemGrey5
+                                      .resolveFrom(context)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  RemoteProfilePicture(
-                                    url: UserLoginProvider
-                                            .shared.user?.profilePhoto ??
-                                        "",
-                                    size: 48,
+                                  Text(
+                                    "PAGO POR",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        color: CupertinoColors.secondaryLabel
+                                            .resolveFrom(context)),
                                   ),
-                                  SizedBox(width: 12),
-                                  Text("Você",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20,
-                                        letterSpacing: -1.1,
-                                      )),
-                                  Spacer(),
-                                  ContainerText(
-                                    text: "RS 60",
-                                    size: 18,
+                                  SizedBox(
+                                    height: 12,
+                                  ),
+                                  Consumer<ItemDetailProvider>(
+                                    builder: (context, value, child) {
+                                      return ItemDetailTransactions(
+                                          transactions: value.item.transacoes);
+                                    },
                                   )
                                 ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 24),
+                    FormItemGroupTitle(title: "NOTAS"),
+                    SizedBox(height: 12),
+                    LimitedTextField(
+                      maxLength: 300,
+                      hintText: 'Adicione suas notas aqui...',
+                    ),
+                    SizedBox(height: 24),
+                    RoundButton(text: "distribuir gastos")
+                  ],
                 ),
-                SizedBox(height: 24),
-                FormItemGroupTitle(title: "NOTAS"),
-                SizedBox(height: 12),
-                LimitedTextField(
-                  maxLength: 300,
-                  hintText: 'Adicione suas notas aqui...',
-                ),
-                SizedBox(height: 24),
-                RoundButton(text: "distribuir gastos")
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ),
+      ])),
+    );
   }
 }
 

@@ -11,7 +11,7 @@ class Event implements JSONSerializable {
   String _name;
   DateTime? _startDate;
   DateTime? _endDate;
-  double? _valorTotal;
+  double? _totalAmount;
   List<String>? _profilePictures;
   EventTheme _theme;
 
@@ -23,14 +23,14 @@ class Event implements JSONSerializable {
     required String name,
     DateTime? startDate,
     DateTime? endDate,
-    double? valorTotal,
+    double? totalAmount,
     List<String>? profilePictures,
     EventTheme? theme,
   })  : _id = id,
         _name = name,
         _startDate = startDate,
         _endDate = endDate,
-        _valorTotal = valorTotal,
+        _totalAmount = totalAmount,
         _profilePictures = profilePictures,
         _theme = theme ?? EventTheme.random();
 
@@ -51,9 +51,9 @@ class Event implements JSONSerializable {
     _endDate = value;
   }
 
-  double? get valorTotal => _valorTotal;
-  set valorTotal(double? value) {
-    _valorTotal = value;
+  double? get totalAmount => _totalAmount;
+  set totalAmount(double? value) {
+    _totalAmount = value;
   }
 
   List<String>? get profilePictures => _profilePictures;
@@ -85,7 +85,7 @@ class Event implements JSONSerializable {
           : null,
       endDate:
           json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
-      valorTotal: double.parse(json["valor_total"]),
+      totalAmount: double.parse(json["valor_total"]),
       profilePictures: json["fotos_de_perfil"] != null
           ? json["fotos_de_perfil"].toString().split(', ')
           : [],

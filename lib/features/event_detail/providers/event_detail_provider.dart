@@ -17,8 +17,8 @@ class EventDetailProvider extends ChangeNotifier {
 
   FToast fToast = FToast();
 
-  EventDetailProvider(EventListProvider eventListProvider, int id) {
-    this.eventListProvider = eventListProvider;
+  EventDetailProvider(int id) {
+    this.eventListProvider = EventListProvider.shared;
     this.id = id;
     get();
   }
@@ -28,7 +28,7 @@ class EventDetailProvider extends ChangeNotifier {
     this.event.name = event.name;
     this.event.startDate = event.startDate;
     this.event.endDate = event.endDate;
-    this.event.valorTotal = event.valorTotal;
+    this.event.totalAmount = event.totalAmount;
     this.event.theme = event.theme;
     notifyListeners();
 
@@ -76,5 +76,9 @@ class EventDetailProvider extends ChangeNotifier {
     setUsers(await eventRepository.getUsers(event));
 
     notifyListeners();
+  }
+
+  item(id) {
+    return event.items?.firstWhere((element) => element.id == id);
   }
 }

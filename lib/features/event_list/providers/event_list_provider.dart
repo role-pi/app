@@ -34,7 +34,6 @@ class EventListProvider extends ChangeNotifier {
 
   get() async {
     set(await eventRepository.getEvents());
-    print("GET");
   }
 
   delete(Event event, BuildContext context) async {

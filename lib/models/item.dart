@@ -12,7 +12,7 @@ class Item implements JSONSerializable {
   late String _descricao;
   late DateTime _data;
   late int _eventId;
-  List<Transaction> transacoes = [];
+  List<Transaction> _transacoes = [];
 
   Item({
     required int id,
@@ -65,8 +65,9 @@ class Item implements JSONSerializable {
     _eventId = value;
   }
 
-  void addTransacao(Transaction transacao) {
-    transacoes.add(transacao);
+  List<Transaction> get transacoes => _transacoes;
+  set transacoes(List<Transaction> value) {
+    _transacoes = value;
   }
 
   @override
@@ -76,7 +77,7 @@ class Item implements JSONSerializable {
       tipo: ItemCategory.fromValue(json["tipo"]),
       descricao: json["descricao"],
       data: DateTime.now().add(Duration(hours: -Random().nextInt(24 * 5))),
-      valor: 0,
+      valor: double.parse(json["valor_total"]),
       eventId: 0);
 
   @override

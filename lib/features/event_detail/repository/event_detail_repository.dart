@@ -27,8 +27,8 @@ class EventDetailRepository {
 
   Future<List<Item>> getItems(Event event) async {
     try {
-      var response =
-          await API().request(endpoint: "insumo/${event.id}", method: "GET");
+      var response = await API()
+          .request(endpoint: "evento/${event.id}/insumos", method: "GET");
 
       return itemsFromJSON(response.response);
     } catch (e) {

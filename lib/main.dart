@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/screens/event_detail_screen.dart';
 import 'package:role/features/event_list/screens/event_list_screen.dart';
+import 'package:role/features/item_detail/screens/item_detail_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/features/user_login/screens/user_login_screen.dart';
 
@@ -47,6 +48,15 @@ class RoleApp extends StatelessWidget {
             );
           } else {
             page = EventListScreen();
+          }
+
+          final uri = Uri.parse(settings.name!);
+          if (uri.pathSegments.length == 4 &&
+              uri.pathSegments[0] == 'evento' &&
+              uri.pathSegments[2] == 'insumo') {
+            final insumoId = int.tryParse(uri.pathSegments[3]) ?? 0;
+            final eventId = int.tryParse(uri.pathSegments[1]) ?? 0;
+            page = ItemDetailScreen(id: insumoId, eventId);
           }
 
           return CupertinoPageRoute(

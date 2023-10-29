@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
-import 'package:role/features/item_detail/screens/item_detail_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/container_text.dart';
@@ -48,10 +47,10 @@ class EventDetailItemRow extends StatelessWidget {
         padding: EdgeInsets.only(left: 16, right: 8, bottom: 16),
         child: ElasticButton(
           onTap: () {
-            Navigator.of(context).push(CupertinoPageRoute(
-                builder: (context) => ItemsDetail(
-                      item: item,
-                    )));
+            Navigator.pushNamed(
+              context,
+              "/evento/${provider.event.id}/insumo/${item.id}",
+            );
           },
           child: Row(children: [
             Stack(
@@ -134,7 +133,7 @@ class EventDetailItemRow extends StatelessWidget {
             ),
             SizedBox(width: 12),
             Spacer(),
-            ContainerText(text: "R\$ 60"),
+            ContainerText(text: "R\$ ${item.valor}"),
           ]),
         ),
       ),
