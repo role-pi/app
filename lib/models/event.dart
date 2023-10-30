@@ -166,12 +166,18 @@ class Event implements JSONSerializable {
           : 'Começa em $time';
     }
 
-    if (participantes == 0 || participantes == 1) {
-      return 'Um convidado';
-    } else if (participantes == 2) {
-      return '1 convidado';
+    return usersString;
+  }
+
+  String get usersString {
+    int amount = users?.length ?? profilePictures?.length ?? 0;
+
+    if (amount == 0) {
+      return 'Nenhum participante';
+    } else if (amount == 1) {
+      return '1 participante';
     } else {
-      return '${participantes - 1} convidados';
+      return '$amount participantes';
     }
   }
 

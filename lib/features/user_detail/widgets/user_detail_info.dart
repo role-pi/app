@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/shared/widgets/elastic_button.dart';

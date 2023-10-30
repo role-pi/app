@@ -20,7 +20,7 @@ class EmtpyListIndicator extends StatelessWidget {
                     color: CupertinoDynamicColor.resolve(
                         CupertinoColors.systemGrey5, context),
                     width: 4),
-                borderRadius: BorderRadius.circular(18)),
+                borderRadius: BorderRadius.circular(16.0)),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 48),
               child: Text(

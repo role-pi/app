@@ -121,7 +121,7 @@ class EventDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get minExtent => 330.0;
+  double get minExtent => 300.0;
 
   @override
   double get maxExtent => 330.0;
@@ -136,7 +136,7 @@ class _EventDetailHeaderClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
-    final cornerRadius = 12.0; // Adjust this value for the corner radius
+    final cornerRadius = 16.0;
 
     path.moveTo(0, 0);
     path.lineTo(size.width, 0);

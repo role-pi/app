@@ -32,6 +32,7 @@ class UserDetailProvider extends ChangeNotifier {
 
     emailController =
         TextEditingController(text: UserLoginProvider.shared.user?.email);
+    emailController.addListener(textChanged);
 
     fToast = FToast();
   }

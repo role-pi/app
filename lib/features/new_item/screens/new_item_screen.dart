@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/new_item/providers/new_item_provider.dart';
-import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/item_category_picker_modal.dart';
@@ -27,7 +26,7 @@ class NewItemScreen extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: newItemProvider,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.fromLTRB(24.0, 0, 24.0, 32.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

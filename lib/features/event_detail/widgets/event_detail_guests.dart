@@ -18,16 +18,18 @@ class EventDetailGuests extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const padding = 24.0;
+
     return Container(
       decoration: BoxDecoration(
         color: CupertinoColors.systemGrey6.resolveFrom(context),
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(16.0),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
+            padding: const EdgeInsets.fromLTRB(padding, padding, padding, 0.0),
             child: Text(
               title,
               style: TextStyle(
@@ -50,9 +52,9 @@ class EventDetailGuests extends StatelessWidget {
                     children: [
                       RemoteProfilePicture(
                         url: convidados[index].profilePhoto,
-                        size: 72,
+                        size: 64,
                       ),
-                      SizedBox(height: 6),
+                      SizedBox(height: 8),
                       AutoSizeText(
                         convidados[index].displayName,
                         style: TextStyle(

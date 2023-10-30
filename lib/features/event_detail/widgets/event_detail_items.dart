@@ -18,7 +18,10 @@ class EventDetailItems extends StatelessWidget {
       itemCount: items.length == 0 ? 1 : items.length,
       itemBuilder: (context, index) {
         if (items.length == 0) {
-          return EmtpyListIndicator(text: "não há insumos");
+          return Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: EmtpyListIndicator(text: "não há insumos"),
+          );
         }
 
         bool isSameDate = true;

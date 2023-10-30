@@ -22,6 +22,7 @@ class NewEventProvider extends ChangeNotifier {
 
   bool get showing => _showing;
   set showing(bool showing) {
+    event = Event(id: 0, name: "");
     _showing = showing;
     notifyListeners();
   }

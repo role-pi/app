@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:role/features/event_edit/providers/event_edit_provider.dart';
+import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
 
@@ -12,28 +15,34 @@ class EventEditGuests extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FormItemGroupTitle(title: "5 CONVIDADOS"),
+        Consumer<EventEditProvider>(builder: (context, value, child) {
+          return FormItemGroupTitle(
+              title: value.event.usersString.toUpperCase());
+        }),
         SizedBox(height: 12),
         Container(
           decoration: BoxDecoration(
-            color: CupertinoColors.systemGrey6,
+            color: CupertinoColors.systemGrey6.resolveFrom(context),
             borderRadius: BorderRadius.circular(12.0),
           ),
           child: Expanded(
             child: Column(
               children: [
-                ListView.builder(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text('Participante $index'),
-                    );
-                  },
-                ),
+                Consumer<EventEditProvider>(builder: (context, value, child) {
+                  return ListView.builder(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: value.event.users?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      User user = value.event.users![index];
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text('${user.displayName}'),
+                      );
+                    },
+                  );
+                }),
                 CupertinoButton(
                   child: Row(
                     children: [
@@ -53,19 +62,14 @@ class EventEditGuests extends StatelessWidget {
                               CupertinoColors.label, context),
                         ),
                       ),
-                      SizedBox(width: 40),
-                      Icon(
-                        CupertinoIcons.bars,
-                        color: CupertinoDynamicColor.resolve(
-                            CupertinoColors.label, context),
-                      ),
                     ],
                   ),
                   onPressed: () {
                     ModalPopup(
                       context: context,
-                      title: "adicionar participante:",
+                      title: "adicionar participante",
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
                             children: [
