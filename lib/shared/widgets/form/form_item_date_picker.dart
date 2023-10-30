@@ -70,33 +70,42 @@ class _DatePickerButton extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(12.0),
           alignment: Alignment.center,
-          child: Row(
-            children: [
-              if (dateTime != null)
-                GestureDetector(
-                  onTap: () {
-                    onDateTimeChanged(null);
-                  },
-                  child: Icon(
-                    CupertinoIcons.xmark_circle_fill,
-                    color: CupertinoColors.secondaryLabel.resolveFrom(context),
+          child: SizedBox(
+            height: 22,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (dateTime != null)
+                  GestureDetector(
+                    onTap: () {
+                      onDateTimeChanged(null);
+                    },
+                    child: Icon(CupertinoIcons.xmark_circle_fill,
+                        color:
+                            CupertinoColors.tertiaryLabel.resolveFrom(context),
+                        size: 18.0),
+                  ),
+                SizedBox(width: 4),
+                Expanded(
+                  child: AutoSizeText(
+                    dateTime == null
+                        ? "__ /__ /__ __:__"
+                        : '${dateTime!.day}/${dateTime!.month} ${dateTime!.hour}:${dateTime!.minute}',
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: dateTime == null ? 0.5 : -1,
+                      color: (dateTime == null
+                              ? CupertinoColors.tertiaryLabel
+                              : CupertinoColors.secondaryLabel)
+                          .resolveFrom(context),
+                    ),
                   ),
                 ),
-              Expanded(
-                child: AutoSizeText(
-                  dateTime == null
-                      ? ""
-                      : '${dateTime!.day}/${dateTime!.month} ${dateTime!.hour}:${dateTime!.minute}',
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: -1.0,
-                    color: CupertinoColors.secondaryLabel.resolveFrom(context),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
