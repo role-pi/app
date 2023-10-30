@@ -34,18 +34,19 @@ class UserFirstLoginScreen extends StatelessWidget {
                 text: TextSpan(
                   text: "tudo pronto! ",
                   style: TextStyle(
-                    color: CupertinoColors.label,
+                    color: CupertinoColors.label.resolveFrom(context),
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                     letterSpacing: -1.6,
                     height: 1.1,
                   ),
-                  children: const <TextSpan>[
+                  children: <TextSpan>[
                     TextSpan(
                         text:
                             "por último, gostaria de adicionar um nome e foto de perfil?",
-                        style:
-                            TextStyle(color: CupertinoColors.secondaryLabel)),
+                        style: TextStyle(
+                            color: CupertinoColors.secondaryLabel
+                                .resolveFrom(context))),
                   ],
                 ),
               ),
@@ -75,8 +76,6 @@ class UserFirstLoginScreen extends StatelessWidget {
                   UserLoginProvider.shared.setState(LoginState.loggedIn);
                   provider.updateUser(context);
                 },
-                rectangleColor: Colors.black,
-                textColor: Colors.white,
               ),
             ],
           ),
