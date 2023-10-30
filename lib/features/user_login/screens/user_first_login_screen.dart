@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';

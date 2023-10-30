@@ -24,9 +24,9 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
             child: Center(
                 child: CupertinoActivityIndicator(
               radius: 20,
-              color: CupertinoColors.black,
+              color: CupertinoColors.label.resolveFrom(context),
             )),
-            backgroundColor: CupertinoColors.white,
+            backgroundColor: CupertinoColors.systemBackground,
           ));
     } else {
       return CupertinoTheme(

@@ -8,7 +8,7 @@ class UserLoginProvider extends ChangeNotifier {
   LoginState _state = LoginState.loggedOut;
   LoginState get state => _state;
 
-  String? _token = "";
+  String? _token = null;
   String? get token => _token;
 
   User? _user;
@@ -27,7 +27,15 @@ class UserLoginProvider extends ChangeNotifier {
   final storage = new FlutterSecureStorage();
 
   UserLoginProvider() {
-    storage.read(key: "token").then((value) => {_token = value});
+    readToken();
+  }
+
+  readToken() async {
+    if (token == null) {
+      _token = await storage.read(key: "token");
+    }
+
+    return token;
   }
 
   void setState(state) {

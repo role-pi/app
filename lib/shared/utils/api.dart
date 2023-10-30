@@ -6,8 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:role/shared/utils/constants.dart';
 
 class API {
-  static String get token => UserLoginProvider.shared.token ?? "";
-
   Future<ApiResponse> request({
     required String endpoint,
     required String method,
@@ -22,6 +20,7 @@ class API {
       body = json.encode(body);
 
       if (auth) {
+        String token = await UserLoginProvider.shared.readToken();
         headers.addAll({"Authorization": "JWT ${token}"});
       }
 
@@ -73,6 +72,7 @@ class API {
       var request = http.MultipartRequest('POST', Uri.parse(url));
 
       if (auth) {
+        String token = await UserLoginProvider.shared.readToken();
         request.headers.addAll({"Authorization": "JWT ${token}"});
       }
 

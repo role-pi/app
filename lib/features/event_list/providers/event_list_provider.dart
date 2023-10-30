@@ -36,6 +36,7 @@ class EventListProvider extends ChangeNotifier {
 
   get() async {
     set(await eventRepository.getEvents());
+    notifyListeners();
   }
 
   Future<bool> showDeletionDialog(BuildContext context) async {
