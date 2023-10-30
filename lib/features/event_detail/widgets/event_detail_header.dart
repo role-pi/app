@@ -121,10 +121,10 @@ class EventDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get minExtent => 300.0;
+  double get minExtent => event.dateDescription.isEmpty ? 300.0 : 330.0;
 
   @override
-  double get maxExtent => 330.0;
+  double get maxExtent => event.dateDescription.isEmpty ? 330.0 : 360.0;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {

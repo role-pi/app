@@ -17,26 +17,34 @@ class RemoteProfilePicture extends StatelessWidget {
       child: SizedBox(
         width: size,
         height: size,
-        child: Image.network(
-          url ?? "",
-          fit: BoxFit.fill,
-          width: size,
-          height: size,
-          colorBlendMode: colorBlendMode,
-          errorBuilder: (context, error, stackTrace) {
-            return DefaultUserIcon(
-              size: size,
+        child: Builder(builder: (context) {
+          if (url?.isNotEmpty == true) {
+            return Image.network(
+              url ?? "",
+              fit: BoxFit.fill,
+              width: size,
+              height: size,
+              colorBlendMode: colorBlendMode,
+              errorBuilder: (context, error, stackTrace) {
+                return DefaultUserIcon(
+                  size: size,
+                );
+              },
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                }
+                return DefaultUserIcon(
+                  size: size,
+                );
+              },
             );
-          },
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) {
-              return child;
-            }
-            return DefaultUserIcon(
-              size: size,
-            );
-          },
-        ),
+          }
+
+          return DefaultUserIcon(
+            size: size,
+          );
+        }),
       ),
     );
   }

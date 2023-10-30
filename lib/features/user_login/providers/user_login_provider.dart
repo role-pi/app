@@ -30,7 +30,7 @@ class UserLoginProvider extends ChangeNotifier {
     readToken();
   }
 
-  readToken() async {
+  Future<String?> readToken() async {
     if (token == null) {
       _token = await storage.read(key: "token");
     }

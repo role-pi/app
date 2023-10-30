@@ -20,8 +20,8 @@ class API {
       body = json.encode(body);
 
       if (auth) {
-        String token = await UserLoginProvider.shared.readToken();
-        headers.addAll({"Authorization": "JWT ${token}"});
+        String? token = await UserLoginProvider.shared.readToken();
+        if (token != null) headers.addAll({"Authorization": "JWT ${token}"});
       }
 
       String url = '${api}${endpoint}';
@@ -72,8 +72,9 @@ class API {
       var request = http.MultipartRequest('POST', Uri.parse(url));
 
       if (auth) {
-        String token = await UserLoginProvider.shared.readToken();
-        request.headers.addAll({"Authorization": "JWT ${token}"});
+        String? token = await UserLoginProvider.shared.readToken();
+        if (token != null)
+          request.headers.addAll({"Authorization": "JWT ${token}"});
       }
 
       var fileStream = http.ByteStream(file.openRead());
