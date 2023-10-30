@@ -47,19 +47,24 @@ class _DatePickerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ElasticButton(
-        onTap: () => ModalPopup(
-          context: context,
-          padding: EdgeInsets.only(top: 48),
-          title: title,
-          child: SizedBox(
-            height: 200,
-            child: CupertinoDatePicker(
-              initialDateTime: dateTime,
-              use24hFormat: true,
-              onDateTimeChanged: onDateTimeChanged,
-            ),
-          ),
-        ).show(),
+        onTap: () {
+          ModalPopup(
+              context: context,
+              padding: EdgeInsets.only(top: 48),
+              title: title,
+              child: SizedBox(
+                height: 200,
+                child: CupertinoDatePicker(
+                  initialDateTime: dateTime,
+                  use24hFormat: true,
+                  onDateTimeChanged: onDateTimeChanged,
+                ),
+              )).show();
+
+          if (dateTime == null) {
+            onDateTimeChanged(DateTime.now());
+          }
+        },
         child: Container(
           decoration: BoxDecoration(
             color: CupertinoDynamicColor.resolve(
@@ -90,7 +95,7 @@ class _DatePickerButton extends StatelessWidget {
                   child: AutoSizeText(
                     dateTime == null
                         ? "__ /__ /__ __:__"
-                        : '${dateTime!.day}/${dateTime!.month} ${dateTime!.hour}:${dateTime!.minute}',
+                        : '${dateTime!.day}/${dateTime!.month} ${dateTime!.hour.toString().padLeft(2, '0')}:${dateTime!.minute.toString().padLeft(2, '0')}',
                     textAlign: TextAlign.center,
                     maxLines: 1,
                     style: TextStyle(
