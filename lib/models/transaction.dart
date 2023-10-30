@@ -6,7 +6,7 @@ class Transaction implements JSONSerializable {
   double _valor;
   DateTime _data;
   String _userName;
-  String _userProfilePicture;
+  String? _userProfilePicture;
   int _userId;
   int _itemId;
 
@@ -15,7 +15,7 @@ class Transaction implements JSONSerializable {
     required double valor,
     required DateTime data,
     required String userName,
-    required String userProfilePicture,
+    required String? userProfilePicture,
     required int userId,
     required int itemId,
   })  : _id = id,
@@ -38,8 +38,8 @@ class Transaction implements JSONSerializable {
   String get userName => _userName;
   set userName(String value) => _userName = value;
 
-  String get userProfilePicture => _userProfilePicture;
-  set userProfilePicture(String value) => _userProfilePicture = value;
+  String? get userProfilePicture => _userProfilePicture;
+  set userProfilePicture(String? value) => _userProfilePicture = value;
 
   int get userId => _userId;
   set userId(int value) => _userId = value;

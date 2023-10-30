@@ -21,9 +21,12 @@ class ItemDetailScreen extends StatelessWidget {
       value: provider,
       child: CupertinoPageScaffold(
           child: CustomScrollView(slivers: [
-        CupertinoSliverRefreshControl(onRefresh: () async {
-          await provider.get();
-        }),
+        SliverPadding(
+          padding: EdgeInsets.only(top: 54.0),
+          sliver: CupertinoSliverRefreshControl(onRefresh: () async {
+            await provider.get();
+          }),
+        ),
         SliverToBoxAdapter(
           child: Column(
             children: [
@@ -32,6 +35,7 @@ class ItemDetailScreen extends StatelessWidget {
                   return CustomNavigationBar(
                     leadingText: "voltar",
                     trailingText: "salvar",
+                    topPadding: 0,
                     onPressedLeading: () {
                       Navigator.of(context).pop();
                     },
@@ -104,13 +108,13 @@ class ItemDetailScreen extends StatelessWidget {
                                           ItemCategoryPickerModalPopup(
                                                   context: context,
                                                   onSelected: (category) {
-                                                    value.tipo = category;
+                                                    value.category = category;
                                                   },
-                                                  category: value.tipo)
+                                                  category: value.category)
                                               .show();
                                         },
                                         child: Text(
-                                          value.tipo.emoji,
+                                          value.category.emoji,
                                           style: TextStyle(
                                             fontSize: 72,
                                           ),
@@ -142,7 +146,11 @@ class ItemDetailScreen extends StatelessWidget {
                       title: 'Notas',
                     ),
                     SizedBox(height: 24),
-                    RoundButton(text: "distribuir gastos"),
+                    RoundButton(
+                      text: "distribuir gastos",
+                      rectangleColor: CupertinoColors.tertiarySystemBackground,
+                      textColor: CupertinoColors.label,
+                    ),
                     SizedBox(height: 12),
                     RoundButton(
                       text: "excluir insumo",

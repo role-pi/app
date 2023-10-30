@@ -14,9 +14,9 @@ class ItemDetailProvider extends ChangeNotifier {
 
   late TextEditingController nameController, notesController;
 
-  late ItemCategory _tipo;
-  late String _nome;
-  late String _descricao;
+  late ItemCategory _category;
+  late String _name;
+  late String _notes;
 
   bool _changed = false;
 
@@ -28,13 +28,13 @@ class ItemDetailProvider extends ChangeNotifier {
     this.id = id;
     this.eventDetailProvider = EventDetailProvider(eventId);
 
-    _tipo = item.category;
-    _nome = item.name;
-    _descricao = item.notes;
+    _category = item.category;
+    _name = item.name;
+    _notes = item.notes;
 
-    nameController = TextEditingController(text: nome);
+    nameController = TextEditingController(text: name);
     nameController.addListener(textChanged);
-    notesController = TextEditingController(text: descricao);
+    notesController = TextEditingController(text: notes);
     notesController.addListener(textChanged);
 
     get();
@@ -55,29 +55,29 @@ class ItemDetailProvider extends ChangeNotifier {
     EventListProvider.shared.notifyListeners();
   }
 
-  ItemCategory get tipo => _tipo;
-  set tipo(ItemCategory value) {
-    _tipo = value;
+  ItemCategory get category => _category;
+  set category(ItemCategory value) {
+    _category = value;
     checkChanged();
     notifyListeners();
   }
 
-  String get nome => _nome;
-  set nome(String value) {
-    _nome = value;
+  String get name => _name;
+  set name(String value) {
+    _name = value;
     checkChanged();
     notifyListeners();
   }
 
-  String get descricao => _descricao;
-  set descricao(String value) {
-    _descricao = value;
+  String get notes => _notes;
+  set notes(String value) {
+    _notes = value;
     checkChanged();
     notifyListeners();
   }
 
   List<Transaction> get transactions => item.transactions;
-  set transacoes(List<Transaction> value) {
+  set transactions(List<Transaction> value) {
     item.transactions = value;
     notifyListeners();
   }
@@ -89,7 +89,7 @@ class ItemDetailProvider extends ChangeNotifier {
   }
 
   checkChanged() {
-    if (item.name != nome || item.notes != descricao || item.category != tipo) {
+    if (item.name != name || item.notes != notes || item.category != category) {
       _changed = true;
     } else {
       _changed = false;
@@ -97,8 +97,8 @@ class ItemDetailProvider extends ChangeNotifier {
   }
 
   textChanged() {
-    nome = nameController.text;
-    descricao = notesController.text;
+    name = nameController.text;
+    notes = notesController.text;
     checkChanged();
   }
 
@@ -112,9 +112,9 @@ class ItemDetailProvider extends ChangeNotifier {
   put(BuildContext context) async {
     _changed = false;
 
-    item.name = nome;
-    item.notes = descricao;
-    item.category = tipo;
+    item.name = name;
+    item.notes = notes;
+    item.category = category;
     int? result = await itemRepository.putItem(item);
 
     fToast.init(context);
@@ -144,6 +144,6 @@ class ItemDetailProvider extends ChangeNotifier {
 
   get() async {
     item = await itemRepository.getItem(item);
-    transacoes = await itemRepository.getTransactions(item);
+    transactions = await itemRepository.getTransactions(item);
   }
 }

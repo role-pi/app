@@ -43,7 +43,6 @@ class ItemDetailRepository {
     try {
       var response = await API()
           .request(endpoint: "insumo/${item.id}/transacoes", method: "GET");
-
       return transactionsFromJSON(response.response);
     } catch (e) {
       if (e is ApiError) {
