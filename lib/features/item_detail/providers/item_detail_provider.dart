@@ -12,7 +12,7 @@ class ItemDetailProvider extends ChangeNotifier {
   late int id;
   late EventDetailProvider eventDetailProvider;
 
-  late TextEditingController nameController, descricaoController;
+  late TextEditingController nameController, notesController;
 
   late ItemCategory _tipo;
   late String _nome;
@@ -34,8 +34,8 @@ class ItemDetailProvider extends ChangeNotifier {
 
     nameController = TextEditingController(text: nome);
     nameController.addListener(textChanged);
-    descricaoController = TextEditingController(text: descricao);
-    descricaoController.addListener(textChanged);
+    notesController = TextEditingController(text: descricao);
+    notesController.addListener(textChanged);
 
     get();
   }
@@ -98,7 +98,7 @@ class ItemDetailProvider extends ChangeNotifier {
 
   textChanged() {
     nome = nameController.text;
-    descricao = descricaoController.text;
+    descricao = notesController.text;
     checkChanged();
   }
 

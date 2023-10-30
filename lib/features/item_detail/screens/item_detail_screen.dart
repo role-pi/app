@@ -137,7 +137,7 @@ class ItemDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 24),
                     LimitedTextField(
-                      controller: provider.descricaoController,
+                      controller: provider.notesController,
                       maxLength: 300,
                       title: 'Notas',
                     ),

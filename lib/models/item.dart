@@ -73,7 +73,7 @@ class Item implements JSONSerializable {
       id: json["id_insumo"],
       name: json["nome"],
       category: ItemCategory.fromValue(json["tipo"]),
-      notes: json["descricao"],
+      notes: json["notas"],
       date: DateTime.parse(json["data"]),
       amount: double.parse(json["valor_total"]),
       eventId: 0);
@@ -83,7 +83,7 @@ class Item implements JSONSerializable {
         "idInsumo": id,
         "tipo": category.value,
         "nome": name,
-        "descricao": notes,
+        "notas": notes,
         "valor": amount,
         "idEvento": eventId,
       };
