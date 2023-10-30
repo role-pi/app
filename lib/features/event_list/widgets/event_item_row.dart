@@ -15,6 +15,8 @@ class EventItemRow extends StatelessWidget {
   final Event event;
   final Function()? onTap;
 
+  EventListProvider get provider => EventListProvider.shared;
+
   @override
   Widget build(BuildContext context) {
     return ElasticButton(
@@ -31,8 +33,11 @@ class EventItemRow extends StatelessWidget {
             key: UniqueKey(),
             direction: DismissDirection.endToStart,
             background: DismissibleExclusionBackground(),
+            confirmDismiss: (direction) {
+              return provider.showDeletionDialog(context);
+            },
             onDismissed: (direction) {
-              EventListProvider.shared.delete(event, context);
+              provider.delete(event, context);
             },
             child: GradientWidget(
               color1: CupertinoDynamicColor.resolve(event.color1, context),

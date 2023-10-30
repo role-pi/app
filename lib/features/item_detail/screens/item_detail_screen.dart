@@ -10,19 +10,19 @@ import 'package:role/shared/widgets/round_button.dart';
 
 class ItemDetailScreen extends StatelessWidget {
   ItemDetailScreen(eventId, {required this.id})
-      : itemDetailProvider = ItemDetailProvider(id, eventId);
+      : provider = ItemDetailProvider(id, eventId);
 
   final int id;
-  final ItemDetailProvider itemDetailProvider;
+  final ItemDetailProvider provider;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-      value: itemDetailProvider,
+      value: provider,
       child: CupertinoPageScaffold(
           child: CustomScrollView(slivers: [
         CupertinoSliverRefreshControl(onRefresh: () async {
-          await itemDetailProvider.get();
+          await provider.get();
         }),
         SliverToBoxAdapter(
           child: Column(
@@ -72,10 +72,8 @@ class ItemDetailScreen extends StatelessWidget {
                                             maxLines: null,
                                             expands: true,
                                             maxLength: 45,
-                                            controller: itemDetailProvider
-                                                .nameController,
-                                            placeholder:
-                                                itemDetailProvider.item.nome,
+                                            controller: provider.nameController,
+                                            placeholder: provider.item.nome,
                                             style: TextStyle(
                                                 fontSize: 32,
                                                 fontWeight: FontWeight.bold,
@@ -139,12 +137,18 @@ class ItemDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 24),
                     LimitedTextField(
-                      controller: itemDetailProvider.descricaoController,
+                      controller: provider.descricaoController,
                       maxLength: 300,
                       title: 'Notas',
                     ),
                     SizedBox(height: 24),
-                    RoundButton(text: "distribuir gastos")
+                    RoundButton(text: "distribuir gastos"),
+                    RoundButton(
+                      text: "excluir insumo",
+                      rectangleColor: CupertinoColors.systemRed,
+                      textColor: CupertinoColors.white,
+                      onPressed: () => provider.delete(context),
+                    )
                   ],
                 ),
               ),

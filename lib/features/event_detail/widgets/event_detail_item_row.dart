@@ -49,7 +49,7 @@ class EventDetailItemRow extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(
               context,
-              "/evento/${provider.event.id}/insumo/${item.id}",
+              "/event/${provider.event.id}/item/${item.id}",
             );
           },
           child: Row(children: [

@@ -10,6 +10,7 @@ class EventEditProvider extends ChangeNotifier {
   late EventDetailProvider eventDetailProvider;
   Event get event => eventDetailProvider.event;
 
+  EventListProvider get eventListProvider => EventListProvider.shared;
   EventEditRepository eventRepository = EventEditRepository();
 
   late TextEditingController nameController;
@@ -54,8 +55,10 @@ class EventEditProvider extends ChangeNotifier {
     eventDetailProvider.get();
   }
 
-  delete(BuildContext context) {
-    EventListProvider.shared.delete(event, context);
+  delete(BuildContext context) async {
+    if (await eventListProvider.showDeletionDialog(context)) {
+      await eventListProvider.delete(event, context);
+    }
   }
 
   _textChanged() {

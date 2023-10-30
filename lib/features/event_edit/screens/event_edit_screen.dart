@@ -50,32 +50,7 @@ class EventEditScreen extends StatelessWidget {
                       EventEditGuests(),
                       SizedBox(height: 12),
                       RoundButton(
-                        onPressed: () async {
-                          showCupertinoDialog<void>(
-                            context: context,
-                            builder: (BuildContext context) =>
-                                CupertinoAlertDialog(
-                              title: const Text("tem certeza?"),
-                              content: const Text(
-                                  "essa ação não poderá ser desfeita"),
-                              actions: <CupertinoDialogAction>[
-                                CupertinoDialogAction(
-                                  child: const Text("cancelar"),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                                CupertinoDialogAction(
-                                  child: const Text("excluir evento"),
-                                  isDestructiveAction: true,
-                                  onPressed: () {
-                                    eventEditProvider.delete(context);
-                                  },
-                                )
-                              ],
-                            ),
-                          );
-                        },
+                        onPressed: () => eventEditProvider.delete(context),
                         textColor: CupertinoColors.white,
                         rectangleColor: CupertinoColors.systemRed,
                         text: 'excluir evento',

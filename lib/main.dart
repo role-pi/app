@@ -52,8 +52,8 @@ class RoleApp extends StatelessWidget {
 
           final uri = Uri.parse(settings.name!);
           if (uri.pathSegments.length == 4 &&
-              uri.pathSegments[0] == 'evento' &&
-              uri.pathSegments[2] == 'insumo') {
+              uri.pathSegments[0] == 'event' &&
+              uri.pathSegments[2] == 'item') {
             final insumoId = int.tryParse(uri.pathSegments[3]) ?? 0;
             final eventId = int.tryParse(uri.pathSegments[1]) ?? 0;
             page = ItemDetailScreen(id: insumoId, eventId);

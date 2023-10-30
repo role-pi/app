@@ -102,6 +102,11 @@ class ItemDetailProvider extends ChangeNotifier {
     checkChanged();
   }
 
+  delete(BuildContext context) {
+    eventDetailProvider.deleteItem(item, context);
+    Navigator.of(context).pop();
+  }
+
   put(BuildContext context) async {
     _changed = false;
 
