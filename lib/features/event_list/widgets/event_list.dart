@@ -50,7 +50,7 @@ class EventList extends StatelessWidget {
                               horizontal: 28.0, vertical: 4.0),
                           child: EmtpyListIndicator(
                             text:
-                                "crie um evento com o botão de estrela logo abaixo",
+                                "crie um evento com o botão de estrela abaixo",
                           ));
                     } else {
                       Event event = usersViewModel.events[index - 1];

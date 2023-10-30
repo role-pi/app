@@ -33,12 +33,10 @@ class EventItemRow extends StatelessWidget {
             key: UniqueKey(),
             direction: DismissDirection.endToStart,
             background: DismissibleExclusionBackground(),
-            confirmDismiss: (direction) {
-              return provider.showDeletionDialog(context);
-            },
-            onDismissed: (direction) {
-              provider.delete(event, context);
-            },
+            confirmDismiss: (direction) async =>
+                await provider.showDeletionDialog(context),
+            onDismissed: (direction) async =>
+                await provider.delete(event, context),
             child: GradientWidget(
               color1: CupertinoDynamicColor.resolve(event.color1, context),
               color2: CupertinoDynamicColor.resolve(event.color2, context),

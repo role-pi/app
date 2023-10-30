@@ -58,6 +58,7 @@ class EventListProvider extends ChangeNotifier {
               child: const Text("excluir evento"),
               isDestructiveAction: true,
               onPressed: () {
+                Navigator.pop(context);
                 completer.complete(true);
               })
         ],

@@ -31,9 +31,9 @@ class NewItemProvider extends ChangeNotifier {
     item = Item(
         id: 0,
         amount: null,
-        category: ItemCategory.other,
-        name: " ",
-        notes: "Descrição de teste",
+        category: ItemCategory.ticket,
+        name: "",
+        notes: " ",
         date: DateTime.now(),
         eventId: event.id);
 

@@ -47,8 +47,8 @@ class EventDetailRepository {
       var response =
           await API().request(endpoint: "insumo/${item.id}", method: "DELETE");
 
-      print(response.response);
-      return true;
+      print(json.decode(response.response));
+      return json.decode(response.response)["affectedRows"] > 0;
     } catch (e) {
       if (e is ApiError) {
         print('Error Code: ${e.code}, Message: ${e.message}');

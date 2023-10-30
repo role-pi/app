@@ -61,8 +61,7 @@ class ItemDetailRepository {
       var response = await API()
           .request(endpoint: "transacao/${transaction.id}", method: "DELETE");
 
-      print(response.response);
-      return true;
+      return json.decode(response.response)["affectedRows"] > 0;
     } catch (e) {
       if (e is ApiError) {
         print('Error Code: ${e.code}, Message: ${e.message}');

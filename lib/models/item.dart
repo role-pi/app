@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:intl/intl.dart';
 import 'package:role/models/transaction.dart';
 import 'package:role/shared/utils/serializable.dart';
@@ -76,7 +74,7 @@ class Item implements JSONSerializable {
       name: json["nome"],
       category: ItemCategory.fromValue(json["tipo"]),
       notes: json["descricao"],
-      date: DateTime.now().add(Duration(hours: -Random().nextInt(24 * 5))),
+      date: DateTime.parse(json["data"]),
       amount: double.parse(json["valor_total"]),
       eventId: 0);
 
@@ -89,6 +87,24 @@ class Item implements JSONSerializable {
         "valor": amount,
         "idEvento": eventId,
       };
+
+  String get dateDescription {
+    DateTime actualDate = date.add(const Duration(hours: -3));
+    final delta = DateTime.now().difference(actualDate);
+
+    if (!delta.isNegative) {
+      if (delta.inSeconds < 60) {
+        return "há alguns segundos";
+      } else if (delta.inMinutes < 60) {
+        return "há ${delta.inMinutes} minutos";
+      } else if (DateTime.now().day == date.day) {
+        return "há ${delta.inHours} horas";
+      }
+    }
+
+    final formatter = DateFormat("HH:mm");
+    return "às ${formatter.format(date)}";
+  }
 
   String get dayDescription {
     if (date.day == DateTime.now().day) {
