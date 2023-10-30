@@ -33,7 +33,7 @@ class EventEditInfo extends StatelessWidget {
           FormItemDatePicker(
             title: "data de início",
             initialValue: provider.event.startDate,
-            onSaved: provider.setDataInicio,
+            onSaved: (date) => provider.startDate = date,
           ),
           SizedBox(width: 6),
           Icon(CupertinoIcons.arrow_right,
@@ -43,7 +43,7 @@ class EventEditInfo extends StatelessWidget {
           FormItemDatePicker(
             title: "data de fim",
             initialValue: provider.event.endDate,
-            onSaved: provider.setDataFim,
+            onSaved: (date) => provider.endDate = date,
           ),
         ]),
         SizedBox(height: 12),

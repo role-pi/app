@@ -14,8 +14,8 @@ class EventEditProvider extends ChangeNotifier {
   EventEditRepository eventRepository = EventEditRepository();
 
   late String _name;
-  late DateTime _startDate;
-  late DateTime _endDate;
+  late DateTime? _startDate;
+  late DateTime? _endDate;
 
   late TextEditingController nameController;
   late bool changed = false;
@@ -24,13 +24,22 @@ class EventEditProvider extends ChangeNotifier {
 
   EventEditProvider(EventDetailProvider eventDetailProvider) {
     this.eventDetailProvider = eventDetailProvider;
+
+    _name = event.name;
+    _startDate = event.startDate;
+    _endDate = event.endDate;
+
     nameController = TextEditingController(text: event.name);
     nameController.addListener(_textChanged);
     fToast = FToast();
   }
 
-  updateData(BuildContext context) async {
+  put(BuildContext context) async {
     changed = false;
+
+    event.name = name;
+    event.startDate = startDate;
+    event.endDate = endDate;
 
     int? result = await eventRepository.putEvent(event);
 
@@ -59,6 +68,27 @@ class EventEditProvider extends ChangeNotifier {
     eventDetailProvider.get();
   }
 
+  String get name => _name;
+  set name(String value) {
+    _name = value;
+    checkChanged();
+    notifyListeners();
+  }
+
+  DateTime? get startDate => _startDate;
+  set startDate(DateTime? value) {
+    _startDate = value;
+    checkChanged();
+    notifyListeners();
+  }
+
+  DateTime? get endDate => _endDate;
+  set endDate(DateTime? value) {
+    _endDate = value;
+    checkChanged();
+    notifyListeners();
+  }
+
   delete(BuildContext context) async {
     if (await eventListProvider.showDeletionDialog(context)) {
       await eventListProvider.delete(event, context);
@@ -66,24 +96,17 @@ class EventEditProvider extends ChangeNotifier {
   }
 
   _textChanged() {
-    event.name = nameController.text;
-    changed = true;
+    name = nameController.text;
+  }
+
+  checkChanged() {
+    if (event.name != name ||
+        event.startDate != startDate ||
+        event.endDate != endDate) {
+      changed = true;
+    } else {
+      changed = false;
+    }
     notifyListeners();
-  }
-
-  setDataInicio(DateTime? d) {
-    if (d != null) {
-      event.startDate = d;
-      changed = true;
-      notifyListeners();
-    }
-  }
-
-  setDataFim(DateTime? d) {
-    if (d != null) {
-      event.endDate = d;
-      changed = true;
-      notifyListeners();
-    }
   }
 }

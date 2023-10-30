@@ -32,7 +32,7 @@ class EventEditScreen extends StatelessWidget {
                     onPressedTrailing: provider.changed
                         ? () {
                             if (_formKey.currentState!.validate()) {
-                              provider.updateData(context);
+                              provider.put(context);
                             }
                           }
                         : null,
