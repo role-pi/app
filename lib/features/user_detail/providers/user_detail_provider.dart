@@ -53,6 +53,46 @@ class UserDetailProvider extends ChangeNotifier {
     }
   }
 
+  void showImageSelectionPopup(BuildContext context) {
+    TextStyle style = TextStyle(
+        letterSpacing: -0.9,
+        color: CupertinoColors.label.resolveFrom(context),
+        fontWeight: FontWeight.bold);
+
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) {
+        return CupertinoActionSheet(
+          cancelButton: CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              "cancelar",
+              style: style.copyWith(color: CupertinoColors.systemRed),
+            ),
+          ),
+          actions: [
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.pop(context);
+                pickImage(ImageSource.gallery, context);
+              },
+              child: Text("escolher da biblioteca", style: style),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.pop(context);
+                pickImage(ImageSource.camera, context);
+              },
+              child: Text("tirar foto", style: style),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future updateUser(BuildContext context) async {
     UserLoginProvider.shared.user!.name = nameController.text;
     UserLoginProvider.shared.user!.email = emailController.text;

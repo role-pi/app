@@ -64,6 +64,7 @@ class UserLoginProvider extends ChangeNotifier {
 
       if (existing != null) {
         setState(LoginState.verify);
+        codeController.clear();
       } else {
         setState(LoginState.signIn);
       }
@@ -82,7 +83,12 @@ class UserLoginProvider extends ChangeNotifier {
 
         _user = user;
 
-        setState(LoginState.loggingIn);
+        if (user.displayName.isNotEmpty &&
+            user.profilePhoto?.isNotEmpty == true) {
+          setState(LoginState.loggingIn);
+        } else {
+          setState(LoginState.showFirstLogin);
+        }
         callback();
       } else {
         codeController.clear();
@@ -109,4 +115,5 @@ enum LoginState {
   signIn,
   verify,
   loggedIn,
+  showFirstLogin,
 }

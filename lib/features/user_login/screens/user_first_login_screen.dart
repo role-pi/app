@@ -1,82 +1,87 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:role/features/user_login/widgets/verification_widget.dart';
+import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
-import 'package:role/features/user_login/widgets/signup_widget.dart';
+import 'package:role/shared/widgets/blur_overlay.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
-class UserFirstLoginScreen extends StatefulWidget {
-  @override
-  State<UserFirstLoginScreen> createState() => _UserLoginScreenState();
-}
-
-class _UserLoginScreenState extends State<UserFirstLoginScreen> {
-  String? email;
-  var controller= TextEditingController();
+class UserFirstLoginScreen extends StatelessWidget {
+  UserDetailProvider get provider => UserDetailProvider.shared;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      
-      children: [
-        Container(
-          color: CupertinoColors.white,
-        ),
-        Center(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center, 
+    return Consumer<UserLoginProvider>(
+      builder: (context, value, child) {
+        return BlurOverlay(
+            showing: value.state == LoginState.showFirstLogin,
+            onDismiss: () {
+              value.state == LoginState.loggedIn;
+            },
+            child: child!);
+      },
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(42.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: "tudo pronto! ",
+                  style: TextStyle(
+                    color: CupertinoColors.label,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    letterSpacing: -1.6,
+                    height: 1.1,
+                  ),
+                  children: const <TextSpan>[
+                    TextSpan(
+                        text:
+                            "por último, gostaria de adicionar um nome e foto de perfil?",
+                        style:
+                            TextStyle(color: CupertinoColors.secondaryLabel)),
+                  ],
+                ),
+              ),
+              SizedBox(height: 32),
+              Row(
                 children: [
-                  Text(
-                    "Tudo Pronto!",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: -1.5,
-                    ),
+                  Consumer<UserLoginProvider>(builder: (context, value, child) {
+                    return ElasticButton(
+                      onTap: () => provider.showImageSelectionPopup(context),
+                      child:
+                          RemoteProfilePicture(url: value.user?.profilePhoto),
+                    );
+                  }),
+                  SizedBox(
+                    width: 12,
                   ),
-                    SizedBox(
-                        height: 16,
-                    ),
-                  Text(
-                    textAlign: TextAlign.center,
-                    'Por último, gostaria de adicionar um nome e foto de perfil?',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Color.fromARGB(255, 98, 98, 100).withOpacity(0.8)
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    RemoteProfilePicture(url: ""),
-                    SizedBox(
-                      width:20,
-                    ),
-                    Expanded(child: FormItemTextField(controller: controller, title: "Nome"))
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                RoundButton(
-                        text: "Finalizado",
-                        onPressed: () {},
-                        rectangleColor: Colors.black,
-                        textColor: Colors.white,
-                      ),
-                  ],
-                      ),
-            ),
-            
-        ) 
-      ]
+                  Expanded(
+                    child: FormItemTextField(
+                        controller: provider.nameController, title: "nome"),
+                  )
+                ],
+              ),
+              SizedBox(height: 32),
+              RoundButton(
+                text: "finalizar",
+                onPressed: () {
+                  UserLoginProvider.shared.setState(LoginState.loggedIn);
+                  provider.updateUser(context);
+                },
+                rectangleColor: Colors.black,
+                textColor: Colors.white,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

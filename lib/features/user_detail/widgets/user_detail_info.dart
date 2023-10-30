@@ -22,7 +22,7 @@ class UserDetailInfo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(0),
           child: ElasticButton(
-            onTap: () => showPopup(context),
+            onTap: () => provider.showImageSelectionPopup(context),
             child: SizedBox(
               child: Stack(
                 clipBehavior: Clip.none,
@@ -88,46 +88,6 @@ class UserDetailInfo extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  void showPopup(BuildContext context) {
-    TextStyle style = TextStyle(
-        letterSpacing: -0.9,
-        color: CupertinoColors.label.resolveFrom(context),
-        fontWeight: FontWeight.bold);
-
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) {
-        return CupertinoActionSheet(
-          cancelButton: CupertinoActionSheetAction(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              "cancelar",
-              style: style.copyWith(color: CupertinoColors.systemRed),
-            ),
-          ),
-          actions: [
-            CupertinoActionSheetAction(
-              onPressed: () {
-                Navigator.pop(context);
-                provider.pickImage(ImageSource.gallery, context);
-              },
-              child: Text("escolher da biblioteca", style: style),
-            ),
-            CupertinoActionSheetAction(
-              onPressed: () {
-                Navigator.pop(context);
-                provider.pickImage(ImageSource.camera, context);
-              },
-              child: Text("tirar foto", style: style),
-            ),
-          ],
-        );
-      },
     );
   }
 }
