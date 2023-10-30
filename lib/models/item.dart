@@ -6,28 +6,28 @@ import 'package:role/shared/utils/serializable.dart';
 
 class Item implements JSONSerializable {
   late int _id;
-  late double? _valor;
-  late ItemCategory _tipo;
-  late String _nome;
-  late String _descricao;
-  late DateTime _data;
+  late double? _amount;
+  late ItemCategory _category;
+  late String _name;
+  late String _notes;
+  late DateTime _date;
   late int _eventId;
-  List<Transaction> _transacoes = [];
+  List<Transaction> _transactions = [];
 
   Item({
     required int id,
-    required double? valor,
-    required ItemCategory tipo,
-    required String nome,
-    required String descricao,
-    required DateTime data,
+    required double? amount,
+    required ItemCategory category,
+    required String name,
+    required String notes,
+    required DateTime date,
     required int eventId,
   })  : _id = id,
-        _valor = valor,
-        _tipo = tipo,
-        _nome = nome,
-        _descricao = descricao,
-        _data = data,
+        _amount = amount,
+        _category = category,
+        _name = name,
+        _notes = notes,
+        _date = date,
         _eventId = eventId;
 
   int get id => _id;
@@ -35,29 +35,29 @@ class Item implements JSONSerializable {
     _id = value;
   }
 
-  double? get valor => _valor;
-  set valor(double? value) {
-    _valor = value;
+  double? get amount => _amount;
+  set amount(double? value) {
+    _amount = value;
   }
 
-  ItemCategory get tipo => _tipo;
-  set tipo(ItemCategory value) {
-    _tipo = value;
+  ItemCategory get category => _category;
+  set category(ItemCategory value) {
+    _category = value;
   }
 
-  String get nome => _nome;
-  set nome(String value) {
-    _nome = value;
+  String get name => _name;
+  set name(String value) {
+    _name = value;
   }
 
-  String get descricao => _descricao;
-  set descricao(String value) {
-    _descricao = value;
+  String get notes => _notes;
+  set notes(String value) {
+    _notes = value;
   }
 
-  DateTime get data => _data;
-  set data(DateTime value) {
-    _data = value;
+  DateTime get date => _date;
+  set date(DateTime value) {
+    _date = value;
   }
 
   int get eventId => _eventId;
@@ -65,39 +65,39 @@ class Item implements JSONSerializable {
     _eventId = value;
   }
 
-  List<Transaction> get transacoes => _transacoes;
-  set transacoes(List<Transaction> value) {
-    _transacoes = value;
+  List<Transaction> get transactions => _transactions;
+  set transactions(List<Transaction> value) {
+    _transactions = value;
   }
 
   @override
   factory Item.fromJson(Map<String, dynamic> json) => Item(
       id: json["id_insumo"],
-      nome: json["nome"],
-      tipo: ItemCategory.fromValue(json["tipo"]),
-      descricao: json["descricao"],
-      data: DateTime.now().add(Duration(hours: -Random().nextInt(24 * 5))),
-      valor: double.parse(json["valor_total"]),
+      name: json["nome"],
+      category: ItemCategory.fromValue(json["tipo"]),
+      notes: json["descricao"],
+      date: DateTime.now().add(Duration(hours: -Random().nextInt(24 * 5))),
+      amount: double.parse(json["valor_total"]),
       eventId: 0);
 
   @override
   Map<String, dynamic> toJson() => {
         "idInsumo": id,
-        "tipo": tipo.value,
-        "nome": nome,
-        "descricao": descricao,
-        "valor": valor,
+        "tipo": category.value,
+        "nome": name,
+        "descricao": notes,
+        "valor": amount,
         "idEvento": eventId,
       };
 
   String get dayDescription {
-    if (data.day == DateTime.now().day) {
+    if (date.day == DateTime.now().day) {
       return "hoje";
-    } else if (data.day == DateTime.now().add(Duration(days: -1)).day) {
+    } else if (date.day == DateTime.now().add(Duration(days: -1)).day) {
       return "ontem";
     } else {
       final formatador = DateFormat("dd 'de' MMMM", 'pt_BR');
-      return formatador.format(data);
+      return formatador.format(date);
     }
   }
 }

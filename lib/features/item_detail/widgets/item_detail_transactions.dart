@@ -39,9 +39,9 @@ class ItemDetailTransactions extends StatelessWidget {
               padding: EdgeInsets.zero,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: value.item.transacoes.length,
+              itemCount: value.item.transactions.length,
               itemBuilder: (context, index) {
-                Transaction transaction = value.item.transacoes[index];
+                Transaction transaction = value.item.transactions[index];
                 return ItemDetailTransactionRow(transaction: transaction);
               },
             );

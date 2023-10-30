@@ -30,11 +30,11 @@ class NewItemProvider extends ChangeNotifier {
 
     item = Item(
         id: 0,
-        valor: null,
-        tipo: ItemCategory.other,
-        nome: " ",
-        descricao: "Descrição de teste",
-        data: DateTime.now(),
+        amount: null,
+        category: ItemCategory.other,
+        name: " ",
+        notes: "Descrição de teste",
+        date: DateTime.now(),
         eventId: event.id);
 
     fToast = FToast();
@@ -87,23 +87,23 @@ class NewItemProvider extends ChangeNotifier {
   }
 
   set category(ItemCategory category) {
-    item.tipo = category;
+    item.category = category;
     notifyListeners();
   }
 
   _nameChanged() {
-    item.nome = nameController.text;
+    item.name = nameController.text;
     updateChanged();
   }
 
   _valueChanged() {
     double? value = double.tryParse(valueController.text);
-    item.valor = value;
+    item.amount = value;
     updateChanged();
     notifyListeners();
   }
 
   updateChanged() {
-    changed = !item.nome.isEmpty && item.valor != null;
+    changed = !item.name.isEmpty && item.amount != null;
   }
 }

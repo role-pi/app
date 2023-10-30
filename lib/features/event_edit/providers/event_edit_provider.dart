@@ -13,6 +13,10 @@ class EventEditProvider extends ChangeNotifier {
   EventListProvider get eventListProvider => EventListProvider.shared;
   EventEditRepository eventRepository = EventEditRepository();
 
+  late String _name;
+  late DateTime _startDate;
+  late DateTime _endDate;
+
   late TextEditingController nameController;
   late bool changed = false;
 

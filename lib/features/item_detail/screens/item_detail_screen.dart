@@ -73,7 +73,7 @@ class ItemDetailScreen extends StatelessWidget {
                                             expands: true,
                                             maxLength: 45,
                                             controller: provider.nameController,
-                                            placeholder: provider.item.nome,
+                                            placeholder: provider.item.name,
                                             style: TextStyle(
                                                 fontSize: 32,
                                                 fontWeight: FontWeight.bold,

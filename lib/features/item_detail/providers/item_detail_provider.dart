@@ -28,9 +28,9 @@ class ItemDetailProvider extends ChangeNotifier {
     this.id = id;
     this.eventDetailProvider = EventDetailProvider(eventId);
 
-    _tipo = item.tipo;
-    _nome = item.nome;
-    _descricao = item.descricao;
+    _tipo = item.category;
+    _nome = item.name;
+    _descricao = item.notes;
 
     nameController = TextEditingController(text: nome);
     nameController.addListener(textChanged);
@@ -45,11 +45,11 @@ class ItemDetailProvider extends ChangeNotifier {
   Item get item => eventDetailProvider.item(id);
   set item(Item? value) {
     if (value == null) return;
-    this.item.nome = value.nome;
-    this.item.valor = value.valor;
-    this.item.tipo = value.tipo;
-    this.item.descricao = value.descricao;
-    this.item.data = value.data;
+    this.item.name = value.name;
+    this.item.amount = value.amount;
+    this.item.category = value.category;
+    this.item.notes = value.notes;
+    this.item.date = value.date;
 
     notifyListeners();
     EventListProvider.shared.notifyListeners();
@@ -76,9 +76,9 @@ class ItemDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Transaction> get transactions => item.transacoes;
+  List<Transaction> get transactions => item.transactions;
   set transacoes(List<Transaction> value) {
-    item.transacoes = value;
+    item.transactions = value;
     notifyListeners();
   }
 
@@ -89,7 +89,7 @@ class ItemDetailProvider extends ChangeNotifier {
   }
 
   checkChanged() {
-    if (item.nome != nome || item.descricao != descricao || item.tipo != tipo) {
+    if (item.name != nome || item.notes != descricao || item.category != tipo) {
       _changed = true;
     } else {
       _changed = false;
@@ -110,9 +110,9 @@ class ItemDetailProvider extends ChangeNotifier {
   put(BuildContext context) async {
     _changed = false;
 
-    item.nome = nome;
-    item.descricao = descricao;
-    item.tipo = tipo;
+    item.name = nome;
+    item.notes = descricao;
+    item.category = tipo;
     int? result = await itemRepository.putItem(item);
 
     fToast.init(context);

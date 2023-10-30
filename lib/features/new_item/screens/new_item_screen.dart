@@ -51,7 +51,7 @@ class NewItemScreen extends StatelessWidget {
                             onSelected: (caegory) {
                               newItemProvider.category = caegory;
                             },
-                            category: newItemProvider.item.tipo)
+                            category: newItemProvider.item.category)
                         .show();
                   },
                   child: Container(
@@ -64,7 +64,7 @@ class NewItemScreen extends StatelessWidget {
                     child: Consumer<NewItemProvider>(
                       builder: (context, value, child) {
                         return Text(
-                          value.item.tipo.emoji,
+                          value.item.category.emoji,
                           style: TextStyle(fontSize: 24),
                         );
                       },

@@ -78,7 +78,7 @@ class EventDetailItemRow extends StatelessWidget {
                             bottom: 9,
                             right: 8,
                             child: Text(
-                              item.tipo.emoji,
+                              item.category.emoji,
                               style: TextStyle(
                                 fontSize: 26,
                               ),
@@ -112,7 +112,7 @@ class EventDetailItemRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.nome,
+                  item.name,
                   style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.bold,
@@ -133,7 +133,7 @@ class EventDetailItemRow extends StatelessWidget {
             ),
             SizedBox(width: 12),
             Spacer(),
-            ContainerText(text: "R\$ ${item.valor}"),
+            ContainerText(text: "R\$ ${item.amount}"),
           ]),
         ),
       ),

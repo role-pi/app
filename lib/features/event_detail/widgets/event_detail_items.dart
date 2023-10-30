@@ -25,13 +25,13 @@ class EventDetailItems extends StatelessWidget {
         }
 
         bool isSameDate = true;
-        final DateTime date = items[index].data;
+        final DateTime date = items[index].date;
         final item = items[index];
 
         if (index == 0) {
           isSameDate = false;
         } else {
-          final DateTime prevDate = items[index - 1].data;
+          final DateTime prevDate = items[index - 1].date;
           isSameDate = DateUtils.isSameDay(date, prevDate);
         }
 
