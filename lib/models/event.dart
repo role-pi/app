@@ -116,7 +116,6 @@ class Event implements JSONSerializable {
       descricao: "Factory Antônio da Veiga");
 
   String get shortDescription {
-    int participantes = profilePictures != null ? profilePictures!.length : 0;
     final now = DateTime.now();
     Duration? difference;
 

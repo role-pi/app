@@ -27,14 +27,22 @@ class ItemDetailScreen extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             children: [
-              CustomNavigationBar(
-                leadingText: "voltar",
-                trailingText: "salvar",
-                onPressedLeading: () {
-                  Navigator.of(context).pop();
+              Consumer<ItemDetailProvider>(
+                builder: (context, value, child) {
+                  return CustomNavigationBar(
+                    leadingText: "voltar",
+                    trailingText: "salvar",
+                    onPressedLeading: () {
+                      Navigator.of(context).pop();
+                    },
+                    onPressedTrailing: value.changed
+                        ? () {
+                            value.put(context);
+                          }
+                        : null,
+                    accentColor: CupertinoColors.activeBlue,
+                  );
                 },
-                onPressedTrailing: () {},
-                accentColor: CupertinoColors.activeBlue,
               ),
               Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -91,24 +99,26 @@ class ItemDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(width: 12),
-                                  ElasticButton(
-                                    onTap: () {
-                                      ItemCategoryPickerModalPopup(
-                                              context: context,
-                                              onSelected: (caegory) {
-                                                // newItemProvider.category =
-                                                //     caegory;
-                                              },
-                                              category:
-                                                  itemDetailProvider.item.tipo)
-                                          .show();
+                                  Consumer<ItemDetailProvider>(
+                                    builder: (context, value, child) {
+                                      return ElasticButton(
+                                        onTap: () {
+                                          ItemCategoryPickerModalPopup(
+                                                  context: context,
+                                                  onSelected: (category) {
+                                                    value.tipo = category;
+                                                  },
+                                                  category: value.tipo)
+                                              .show();
+                                        },
+                                        child: Text(
+                                          value.tipo.emoji,
+                                          style: TextStyle(
+                                            fontSize: 72,
+                                          ),
+                                        ),
+                                      );
                                     },
-                                    child: Text(
-                                      itemDetailProvider.item.tipo.emoji,
-                                      style: TextStyle(
-                                        fontSize: 72,
-                                      ),
-                                    ),
                                   ),
                                 ],
                               ),
@@ -129,6 +139,7 @@ class ItemDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 24),
                     LimitedTextField(
+                      controller: itemDetailProvider.descricaoController,
                       maxLength: 300,
                       title: 'Notas',
                     ),

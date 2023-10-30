@@ -6,48 +6,137 @@ import 'package:role/features/item_detail/repository/item_detail_repository.dart
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
 import 'package:role/models/transaction.dart';
+import 'package:role/shared/widgets/custom_toast.dart';
 
 class ItemDetailProvider extends ChangeNotifier {
   late int id;
   late EventDetailProvider eventDetailProvider;
 
-  Item get item => eventDetailProvider.item(id);
-  Event get event => eventDetailProvider.event;
+  late TextEditingController nameController, descricaoController;
 
-  late TextEditingController nameController;
+  late ItemCategory _tipo;
+  late String _nome;
+  late String _descricao;
+
+  bool _changed = false;
 
   ItemDetailRepository itemRepository = ItemDetailRepository();
 
   FToast fToast = FToast();
 
   ItemDetailProvider(int id, int eventId) {
-    this.eventDetailProvider = EventDetailProvider(eventId);
-    this.nameController =
-        TextEditingController(text: eventDetailProvider.event.name);
     this.id = id;
+    this.eventDetailProvider = EventDetailProvider(eventId);
+
+    _tipo = item.tipo;
+    _nome = item.nome;
+    _descricao = item.descricao;
+
+    nameController = TextEditingController(text: nome);
+    nameController.addListener(textChanged);
+    descricaoController = TextEditingController(text: descricao);
+    descricaoController.addListener(textChanged);
+
     get();
   }
 
-  updateItem(Item? item) {
-    if (item == null) return;
-    this.item.nome = item.nome;
-    this.item.valor = item.valor;
-    this.item.tipo = item.tipo;
-    this.item.descricao = item.descricao;
-    this.item.data = item.data;
+  Event get event => eventDetailProvider.event;
+
+  Item get item => eventDetailProvider.item(id);
+  set item(Item? value) {
+    if (value == null) return;
+    this.item.nome = value.nome;
+    this.item.valor = value.valor;
+    this.item.tipo = value.tipo;
+    this.item.descricao = value.descricao;
+    this.item.data = value.data;
 
     notifyListeners();
     EventListProvider.shared.notifyListeners();
   }
 
-  setTransactions(List<Transaction> transactions) {
-    item.transacoes = transactions;
+  ItemCategory get tipo => _tipo;
+  set tipo(ItemCategory value) {
+    _tipo = value;
+    checkChanged();
+    notifyListeners();
+  }
+
+  String get nome => _nome;
+  set nome(String value) {
+    _nome = value;
+    checkChanged();
+    notifyListeners();
+  }
+
+  String get descricao => _descricao;
+  set descricao(String value) {
+    _descricao = value;
+    checkChanged();
+    notifyListeners();
+  }
+
+  List<Transaction> get transactions => item.transacoes;
+  set transacoes(List<Transaction> value) {
+    item.transacoes = value;
+    notifyListeners();
+  }
+
+  bool get changed => _changed;
+  set changed(bool value) {
+    _changed = value;
+    notifyListeners();
+  }
+
+  checkChanged() {
+    if (item.nome != nome || item.descricao != descricao || item.tipo != tipo) {
+      _changed = true;
+    } else {
+      _changed = false;
+    }
+  }
+
+  textChanged() {
+    nome = nameController.text;
+    descricao = descricaoController.text;
+    checkChanged();
+  }
+
+  put(BuildContext context) async {
+    _changed = false;
+
+    item.nome = nome;
+    item.descricao = descricao;
+    item.tipo = tipo;
+    int? result = await itemRepository.putItem(item);
+
+    fToast.init(context);
+    Widget toast;
+    if (result != null) {
+      toast = CustomToast(
+          title: "item salvo",
+          icon: CupertinoIcons.checkmark,
+          color: event.color1);
+    } else {
+      toast = CustomToast(
+          title: "erro ao salvar item",
+          icon: CupertinoIcons.xmark,
+          color: CupertinoColors.systemRed);
+    }
+
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: Duration(seconds: 3),
+    );
+
+    FocusScope.of(context).unfocus();
+    notifyListeners();
+    eventDetailProvider.get();
   }
 
   get() async {
-    updateItem(await itemRepository.getItem(item));
-    setTransactions(await itemRepository.getTransactions(item));
-
-    notifyListeners();
+    item = await itemRepository.getItem(item);
+    transacoes = await itemRepository.getTransactions(item);
   }
 }

@@ -2,20 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 
 class LimitedTextField extends StatefulWidget {
+  final TextEditingController controller;
   final int maxLength;
   final String title;
-  final BoxDecoration containerDecoration;
-  final double containerHeight;
 
   LimitedTextField({
+    required this.controller,
     required this.maxLength,
     required this.title,
-    this.containerDecoration = const BoxDecoration(
-      color: CupertinoColors.systemGrey6,
-      borderRadius: BorderRadius.all(
-          Radius.circular(10.0)), // Adiciona bordas arredondadas
-    ),
-    this.containerHeight = 200.0,
   });
 
   @override
@@ -23,13 +17,11 @@ class LimitedTextField extends StatefulWidget {
 }
 
 class _LimitedTextFieldState extends State<LimitedTextField> {
-  final TextEditingController _controller = TextEditingController();
-
   int remainingCharacters = 0;
 
   @override
   Widget build(BuildContext context) {
-    remainingCharacters = _controller.text.length;
+    remainingCharacters = widget.controller.text.length;
 
     return Column(
       children: [
@@ -39,7 +31,7 @@ class _LimitedTextFieldState extends State<LimitedTextField> {
         ),
         SizedBox(height: 8),
         CupertinoTextField(
-          controller: _controller,
+          controller: widget.controller,
           maxLines: null,
           maxLength: widget.maxLength,
           minLines: 5,
@@ -60,7 +52,7 @@ class _LimitedTextFieldState extends State<LimitedTextField> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    widget.controller.dispose();
     super.dispose();
   }
 }

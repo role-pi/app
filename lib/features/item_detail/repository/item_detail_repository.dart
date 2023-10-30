@@ -22,6 +22,23 @@ class ItemDetailRepository {
     return null;
   }
 
+  Future<int?> putItem(Item item) async {
+    try {
+      var response = await API()
+          .request(endpoint: "insumo", method: "PUT", body: item.toJson());
+      Map decoded = json.decode(response.response);
+      return decoded["affectedRows"];
+    } catch (e) {
+      if (e is ApiError) {
+        print('Error Code: ${e.code}, Message: ${e.message}');
+      } else {
+        print('Unknown error occurred: $e');
+      }
+    }
+
+    return null;
+  }
+
   Future<List<Transaction>> getTransactions(Item item) async {
     try {
       var response = await API()

@@ -57,7 +57,7 @@ class NewEventProvider extends ChangeNotifier {
           arguments: response,
         );
       }
-      FocusManager.instance.primaryFocus?.unfocus();
+      FocusScope.of(context).unfocus();
     }
 
     loading = false;
