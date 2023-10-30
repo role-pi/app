@@ -21,8 +21,8 @@ class FormItemDatePicker extends FormField<DateTime> {
               title: title,
               dateTime: state.value,
               onDateTimeChanged: (newDateTime) {
-                state.save();
                 state.didChange(newDateTime);
+                state.save();
               },
             );
           },
@@ -71,7 +71,7 @@ class _DatePickerButton extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           alignment: Alignment.center,
           child: SizedBox(
-            height: 22,
+            height: 28,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
