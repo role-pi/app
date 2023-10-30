@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:role/shared/widgets/form/form_item_group_title.dart';
 
 class LimitedTextField extends StatefulWidget {
   final int maxLength;
-  final String hintText;
+  final String title;
   final BoxDecoration containerDecoration;
   final double containerHeight;
 
   LimitedTextField({
     required this.maxLength,
-    required this.hintText,
+    required this.title,
     this.containerDecoration = const BoxDecoration(
       color: CupertinoColors.systemGrey6,
       borderRadius: BorderRadius.all(
@@ -28,35 +29,32 @@ class _LimitedTextFieldState extends State<LimitedTextField> {
 
   @override
   Widget build(BuildContext context) {
-    remainingCharacters = widget.maxLength - _controller.text.length;
+    remainingCharacters = _controller.text.length;
 
-    return Container(
-      decoration: widget.containerDecoration,
-      height: 90,
-      padding: EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          CupertinoTextField(
-            controller: _controller,
-            maxLines: null,
-            maxLength: widget.maxLength,
-            placeholder: widget.hintText,
-            onChanged: (text) {
-              setState(() {
-                remainingCharacters = widget.maxLength - text.length;
-              });
-            },
-          ),
-          SizedBox(height: 8.0),
-          Text(
-            '$remainingCharacters /300',
-            style: TextStyle(
-              color: CupertinoColors.systemGrey,
-              fontSize: 14,
-            ),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        FormItemGroupTitle(
+          title: widget.title,
+          accessoryText: '$remainingCharacters/300',
+        ),
+        SizedBox(height: 8),
+        CupertinoTextField(
+          controller: _controller,
+          maxLines: null,
+          maxLength: widget.maxLength,
+          minLines: 5,
+          padding: EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+              color: CupertinoDynamicColor.resolve(
+                  CupertinoColors.systemGrey6, context),
+              borderRadius: BorderRadius.circular(12.0 / 20.0 * 20)),
+          onChanged: (text) {
+            setState(() {
+              remainingCharacters = widget.maxLength - text.length;
+            });
+          },
+        ),
+      ],
     );
   }
 

@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 class FormItemGroupTitle extends StatelessWidget {
-  const FormItemGroupTitle({required this.title});
+  const FormItemGroupTitle({required this.title, this.accessoryText = ""});
 
   final String title;
+  final String accessoryText;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class FormItemGroupTitle extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            title,
+            title.toUpperCase(),
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -21,7 +22,14 @@ class FormItemGroupTitle extends StatelessWidget {
                   CupertinoColors.systemGrey2, context),
             ),
           ),
-          Spacer()
+          Spacer(),
+          Text(
+            accessoryText,
+            style: TextStyle(
+              color: CupertinoColors.systemGrey,
+              fontSize: 16,
+            ),
+          ),
         ],
       ),
     );

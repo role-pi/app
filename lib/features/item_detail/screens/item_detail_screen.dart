@@ -3,8 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:role/features/item_detail/providers/item_detail_provider.dart';
 import 'package:role/features/item_detail/widgets/item_detail_transactions.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
-import 'package:role/shared/widgets/form/form_item_group_title.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_limited_textfield.dart';
+import 'package:role/shared/widgets/item_category_picker_modal.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class ItemDetailScreen extends StatelessWidget {
@@ -53,34 +54,60 @@ class ItemDetailScreen extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        itemDetailProvider.item.nome,
-                                        style: TextStyle(
-                                            fontSize: 32,
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: -1.2),
-                                      ),
-                                      Text(
-                                        "adicionado por você",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
-                                          letterSpacing: -1.1,
-                                          color: CupertinoColors.secondaryLabel
-                                              .resolveFrom(context),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CupertinoTextField(
+                                            minLines: null,
+                                            maxLines: null,
+                                            expands: true,
+                                            maxLength: 45,
+                                            controller: itemDetailProvider
+                                                .nameController,
+                                            placeholder:
+                                                itemDetailProvider.item.nome,
+                                            style: TextStyle(
+                                                fontSize: 32,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: -1.2,
+                                                height: 1.2),
+                                            decoration: BoxDecoration(),
+                                            padding: EdgeInsets.zero),
+                                        SizedBox(height: 12),
+                                        Text(
+                                          "adicionado por você",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: -1.1,
+                                            color: CupertinoColors
+                                                .secondaryLabel
+                                                .resolveFrom(context),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                  Spacer(),
-                                  Text(
-                                    itemDetailProvider.item.tipo.emoji,
-                                    style: TextStyle(
-                                      fontSize: 72,
+                                  SizedBox(width: 12),
+                                  ElasticButton(
+                                    onTap: () {
+                                      ItemCategoryPickerModalPopup(
+                                              context: context,
+                                              onSelected: (caegory) {
+                                                // newItemProvider.category =
+                                                //     caegory;
+                                              },
+                                              category:
+                                                  itemDetailProvider.item.tipo)
+                                          .show();
+                                    },
+                                    child: Text(
+                                      itemDetailProvider.item.tipo.emoji,
+                                      style: TextStyle(
+                                        fontSize: 72,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -101,11 +128,9 @@ class ItemDetailScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 24),
-                    FormItemGroupTitle(title: "NOTAS"),
-                    SizedBox(height: 12),
                     LimitedTextField(
                       maxLength: 300,
-                      hintText: 'Adicione suas notas aqui...',
+                      title: 'Notas',
                     ),
                     SizedBox(height: 24),
                     RoundButton(text: "distribuir gastos")

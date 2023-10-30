@@ -5,6 +5,7 @@ import 'package:role/features/new_item/providers/new_item_provider.dart';
 import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
+import 'package:role/shared/widgets/item_category_picker_modal.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
@@ -46,32 +47,13 @@ class NewItemScreen extends StatelessWidget {
                 SizedBox(width: 12),
                 ElasticButton(
                   onTap: () {
-                    ModalPopup(
-                        context: context,
-                        title: "categoria",
-                        padding: EdgeInsets.only(top: 32),
-                        child: SizedBox(
-                          height: 200,
-                          child: CupertinoPicker(
-                            scrollController: FixedExtentScrollController(
-                                initialItem: newItemProvider.item.tipo.index),
-                            itemExtent: 40,
-                            onSelectedItemChanged: (int index) {
-                              newItemProvider.category =
-                                  ItemCategory.values[index];
+                    ItemCategoryPickerModalPopup(
+                            context: context,
+                            onSelected: (caegory) {
+                              newItemProvider.category = caegory;
                             },
-                            children: List<Widget>.generate(
-                                ItemCategory.values.length, (index) {
-                              ItemCategory category =
-                                  ItemCategory.values[index];
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 4.0),
-                                child:
-                                    Text(category.emoji + " " + category.name),
-                              );
-                            }),
-                          ),
-                        )).show();
+                            category: newItemProvider.item.tipo)
+                        .show();
                   },
                   child: Container(
                     decoration: BoxDecoration(

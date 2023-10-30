@@ -14,12 +14,16 @@ class ItemDetailProvider extends ChangeNotifier {
   Item get item => eventDetailProvider.item(id);
   Event get event => eventDetailProvider.event;
 
+  late TextEditingController nameController;
+
   ItemDetailRepository itemRepository = ItemDetailRepository();
 
   FToast fToast = FToast();
 
   ItemDetailProvider(int id, int eventId) {
     this.eventDetailProvider = EventDetailProvider(eventId);
+    this.nameController =
+        TextEditingController(text: eventDetailProvider.event.name);
     this.id = id;
     get();
   }
