@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class QrCodeWidget extends StatelessWidget {
   final String chavePix;
@@ -13,10 +14,13 @@ class QrCodeWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        QrImage(
-          data: chavePix,
-          version: QrVersions.auto,
-          size: 200,
+        CustomPaint(
+          size: Size(200, 200), 
+          painter: QrPainter(
+            data: chavePix,
+            version: QrVersions.auto,
+            gapless: false,
+          ),
         ),
         Text(
           "Chave Pix: $chavePix",
@@ -27,7 +31,13 @@ class QrCodeWidget extends StatelessWidget {
           color: Colors.black,
           onPressed: () {
             Clipboard.setData(ClipboardData(text: chavePix));
-            // Adicione feedback ao usuário, por exemplo, um snackbar
+           FToast fToast = FToast();
+            fToast.init(context);
+            fToast.showToast(
+              child: Text("Chave copiada"),
+              gravity: ToastGravity.BOTTOM,
+              toastDuration: Duration(seconds: 2),
+            );
           },
         ),
       ],
