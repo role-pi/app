@@ -14,7 +14,7 @@ class PixPaymentScreen extends StatelessWidget {
         child: BlurOverlay(
           showing: true, 
           onDismiss: () {
-            Navigator.of(context).pop();
+            
           },
           child: Container(
             width: 150, 
@@ -28,7 +28,8 @@ class PixPaymentScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              QrCodeWidget("1116d532-b72b-4c9b-bd52-2f1c2112cdda"),
+              
+            QrCodeWidget("1116d532-b72b-4c9b-bd52-2f1c2112cdda"),
               ]
             ),
           ),

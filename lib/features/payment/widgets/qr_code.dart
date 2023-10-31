@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:role/shared/widgets/custom_toast.dart';
+import 'package:role/shared/widgets/round_button.dart';
 
 class QrCodeWidget extends StatelessWidget {
   final String chavePix;
@@ -15,7 +16,7 @@ class QrCodeWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomPaint(
-          size: Size(200, 200), 
+          size: Size(100, 100),
           painter: QrPainter(
             data: chavePix,
             version: QrVersions.auto,
@@ -26,15 +27,20 @@ class QrCodeWidget extends StatelessWidget {
           "Chave Pix: $chavePix",
           style: TextStyle(fontSize: 16),
         ),
-        CupertinoButton(
-          child: Text("Copiar"),
-          color: Colors.black,
+        RoundButton(
+          text: "Copiar",
           onPressed: () {
             Clipboard.setData(ClipboardData(text: chavePix));
-           FToast fToast = FToast();
+            final toast = CustomToast(
+              title: "Chave copiada com sucesso",
+              icon: CupertinoIcons.check_mark,
+              color: CupertinoColors.systemGreen,
+            );
+
+            FToast fToast = FToast();
             fToast.init(context);
             fToast.showToast(
-              child: Text("Chave copiada"),
+              child: toast,
               gravity: ToastGravity.BOTTOM,
               toastDuration: Duration(seconds: 2),
             );
