@@ -5,6 +5,6 @@ class UsageReportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: CupertinoColors.white)
+    return Container(color: CupertinoColors.white);
   }
 }

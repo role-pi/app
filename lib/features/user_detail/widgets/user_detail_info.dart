@@ -62,6 +62,7 @@ class UserDetailInfo extends StatelessWidget {
         SizedBox(width: 16),
         Expanded(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Consumer<UserDetailProvider>(
                 builder: (context, value, child) {
@@ -74,15 +75,28 @@ class UserDetailInfo extends StatelessWidget {
                   );
                 },
               ),
-              Consumer<UserDetailProvider>(builder: (context, value, child) {
-                return FormItemTextField(
-                    controller: provider.emailController,
-                    title: "email",
-                    padding: EdgeInsets.all(4.0),
-                    enabled: !value.loading,
-                    textSize: 16.0,
-                    backgroundColor: CupertinoColors.systemBackground);
-              })
+              // Consumer<UserDetailProvider>(builder: (context, value, child) {
+              //   return FormItemTextField(
+              //       controller: provider.emailController,
+              //       title: "email",
+              //       padding: EdgeInsets.all(4.0),
+              //       enabled: !value.loading,
+              //       textSize: 16.0,
+              //       backgroundColor: CupertinoColors.systemBackground);
+              // })
+              SizedBox(height: 4),
+              Padding(
+                padding: const EdgeInsets.only(left: 4),
+                child: Text(
+                  UserLoginProvider.shared.user?.email ?? "",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: -1,
+                      color:
+                          CupertinoColors.secondaryLabel.resolveFrom(context),
+                      fontSize: 17),
+                ),
+              )
             ],
           ),
         ),

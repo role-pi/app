@@ -90,10 +90,6 @@ class UserRepository {
       final response = await API()
           .uploadFile(file: image, field: "profile", endpoint: "usuario/image");
       return jsonDecode(response.response)["url"];
-      // Map decoded = json.decode(response.response);
-      // if (decoded.containsKey("success")) {
-      //   return decoded["success"];
-      // }
     } catch (e) {
       if (e is ApiError) {
         print('Error Code: ${e.code}, Message: ${e.message}');
