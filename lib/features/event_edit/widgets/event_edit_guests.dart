@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
+import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/models/user.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
+import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventEditGuests extends StatelessWidget {
   const EventEditGuests({
@@ -37,7 +40,31 @@ class EventEditGuests extends StatelessWidget {
                     User user = value.event.users![index];
                     return Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Text('${user.displayName}'),
+                      child: Row(
+                        children: [
+                          Consumer<UserLoginProvider>(
+                              builder: (context, provider, child) {
+                            return RemoteProfilePicture(
+                                url: provider.user?.profilePhoto,
+                                size: 32);
+                          }),
+                          SizedBox(width: 8),
+                          Text('${user.displayName}'),
+                          Spacer(),
+                          ElasticButton(
+                            onTap: (){},
+                            child: ButtonBar(
+                              children: [
+                                Icon(
+                                  CupertinoIcons.ellipsis, 
+                                      color: CupertinoDynamicColor.resolve(
+                                    CupertinoColors.label, context),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     );
                   },
                 );
