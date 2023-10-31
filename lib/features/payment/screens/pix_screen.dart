@@ -11,12 +11,7 @@ class PixPaymentScreen extends StatelessWidget {
         middle: Text("Pagamento Pix"),
       ),
       child: Center(
-        child: BlurOverlay(
-          showing: true, 
-          onDismiss: () {
-            
-          },
-          child: Container(
+        child: Container(
             width: 150, 
             height: 300, 
             color: Colors.white,
@@ -33,7 +28,6 @@ class PixPaymentScreen extends StatelessWidget {
               ]
             ),
           ),
-        ),
       ),
     );
   }
