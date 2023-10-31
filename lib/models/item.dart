@@ -89,7 +89,7 @@ class Item implements JSONSerializable {
       };
 
   String get dateDescription {
-    DateTime actualDate = date.add(const Duration(hours: -3));
+    DateTime actualDate = date.add(const Duration(hours: 0));
     final delta = DateTime.now().difference(actualDate);
 
     if (!delta.isNegative) {
