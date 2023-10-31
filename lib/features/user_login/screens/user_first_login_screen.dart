@@ -18,7 +18,7 @@ class UserFirstLoginScreen extends StatelessWidget {
         return BlurOverlay(
             showing: value.state == LoginState.showFirstLogin,
             onDismiss: () {
-              value.state == LoginState.loggedIn;
+              value.setState(LoginState.loggedIn);
             },
             child: child!);
       },

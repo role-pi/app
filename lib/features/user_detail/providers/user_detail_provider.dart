@@ -96,7 +96,7 @@ class UserDetailProvider extends ChangeNotifier {
 
   Future updateUser(BuildContext context) async {
     UserLoginProvider.shared.user!.name = nameController.text;
-    UserLoginProvider.shared.user!.email = emailController.text;
+    // UserLoginProvider.shared.user!.email = emailController.text;
     FocusScope.of(context).unfocus();
 
     _loading = true;
