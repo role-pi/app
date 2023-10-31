@@ -79,14 +79,40 @@ class UserDetailProvider extends ChangeNotifier {
                 Navigator.pop(context);
                 pickImage(ImageSource.gallery, context);
               },
-              child: Text("escolher da biblioteca", style: style),
+              child: Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                      Icon(
+                      CupertinoIcons.photo,
+                     color: CupertinoDynamicColor.resolve(
+                         CupertinoColors.label, context),
+                      ),
+                      SizedBox(width: 8),
+                     Text("escolher da biblioteca" ,style: style),
+                    ],
+                  ),
+              ),
             ),
             CupertinoActionSheetAction(
               onPressed: () {
                 Navigator.pop(context);
                 pickImage(ImageSource.camera, context);
               },
-              child: Text("tirar foto", style: style),
+              child: Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                      Icon(
+                      CupertinoIcons.camera,
+                     color: CupertinoDynamicColor.resolve(
+                         CupertinoColors.label, context),
+                      ),
+                      SizedBox(width: 8),
+                     Text("tirar foto" ,style: style),
+                    ],
+                  ),
+              ),
             ),
           ],
         );

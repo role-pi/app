@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:role/features/event_edit/repository/event_edit_repository.dart';
@@ -108,5 +110,35 @@ class EventEditProvider extends ChangeNotifier {
       changed = false;
     }
     notifyListeners();
+  }
+
+  Future<bool> showDeletionDialog(BuildContext context) async {
+    final completer = Completer<bool>();
+
+    showCupertinoDialog<void>(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: const Text("tem certeza?"),
+        content: const Text("essa ação não poderá ser desfeita"),
+        actions: <CupertinoDialogAction>[
+          CupertinoDialogAction(
+            child: const Text("cancelar"),
+            onPressed: () {
+              Navigator.pop(context);
+              completer.complete(false);
+            },
+          ),
+          CupertinoDialogAction(
+              child: const Text("remover participante"),
+              isDestructiveAction: true,
+              onPressed: () {
+                Navigator.pop(context);
+                completer.complete(true);
+              })
+        ],
+      ),
+    );
+
+    return completer.future;
   }
 }
