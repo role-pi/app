@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/item_detail/providers/item_detail_provider.dart';
 import 'package:role/features/item_detail/widgets/item_detail_transaction_row.dart';
-import 'package:role/features/new_transaction/screens/new_transaction_screen.dart';
 import 'package:role/models/transaction.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
@@ -25,9 +24,7 @@ class ItemDetailTransactions extends StatelessWidget {
             ),
             Spacer(),
             ElasticButton(
-              onTap: () {
-                NewTransactionScreen().show(context);
-              },
+              onTap: () {},
               child: Icon(Icons.add,
                   color: CupertinoColors.label.resolveFrom(context), size: 28),
             )

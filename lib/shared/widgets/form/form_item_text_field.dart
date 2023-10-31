@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class FormItemTextField extends StatelessWidget {
   const FormItemTextField(
-      {this.controller,
+      {required this.controller,
       required this.title,
       this.padding = const EdgeInsets.all(8.0),
       this.textSize = 20,
@@ -11,7 +11,7 @@ class FormItemTextField extends StatelessWidget {
       this.validator,
       this.enabled = true});
 
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final String title;
   final EdgeInsets padding;
   final double textSize;
