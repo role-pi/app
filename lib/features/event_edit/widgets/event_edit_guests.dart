@@ -16,6 +16,9 @@ class EventEditGuests extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EventEditProvider provider =
+        Provider.of<EventEditProvider>(context, listen: false);
+
     return Column(
       children: [
         Consumer<EventEditProvider>(builder: (context, value, child) {
@@ -52,11 +55,15 @@ class EventEditGuests extends StatelessWidget {
                           Text('${user.displayName}'),
                           Spacer(),
                           ElasticButton(
-                            onTap: (){},
+                            onTap: () async {
+                              if (await provider.showDeletionDialog(context)) {
+
+                              }
+                            },
                             child: ButtonBar(
                               children: [
                                 Icon(
-                                  CupertinoIcons.ellipsis, 
+                                  CupertinoIcons.delete_simple, 
                                       color: CupertinoDynamicColor.resolve(
                                     CupertinoColors.label, context),
                                 ),
@@ -94,67 +101,18 @@ class EventEditGuests extends StatelessWidget {
                   ModalPopup(
                     context: context,
                     title: "adicionar participante",
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: CupertinoColors.extraLightBackgroundGray
-                                    .withOpacity(0.8),
-                              ),
-                              child: Icon(
-                                CupertinoIcons.envelope,
-                                color: CupertinoDynamicColor.resolve(
-                                    CupertinoColors.label, context),
-                              ),
-                            ),
-                            Text(" Convidar por e-mail"),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: CupertinoColors.extraLightBackgroundGray
-                                    .withOpacity(0.8),
-                              ),
-                              child: Icon(
-                                CupertinoIcons.qrcode,
-                                color: CupertinoDynamicColor.resolve(
-                                    CupertinoColors.label, context),
-                              ),
-                            ),
-                            Text("QR CODE"),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: CupertinoColors.extraLightBackgroundGray
-                                    .withOpacity(0.8),
-                              ),
-                              child: Icon(
-                                CupertinoIcons.square_arrow_up,
-                                color: CupertinoDynamicColor.resolve(
-                                    CupertinoColors.label, context),
-                              ),
-                            ),
-                            Text("Encaminhar"),
-                          ],
-                        )
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20.0, 10, 20.0, 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                           EventAddGuestRow(title: "e-mail", icon: CupertinoIcons.envelope, enabled: true,),
+                           SizedBox(height: 8),
+                           EventAddGuestRow(title: "QR code", icon: CupertinoIcons.qrcode, enabled: false,),
+                           SizedBox(height: 8),
+                           EventAddGuestRow(title: "encaminhar", icon: CupertinoIcons.share, enabled: false,),
+                        ],
+                      ),
                     ),
                   ).show();
                 },
@@ -163,6 +121,54 @@ class EventEditGuests extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class EventAddGuestRow extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final bool enabled;
+
+  const EventAddGuestRow({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.enabled,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: enabled ? 1 : 0.5,
+      child: ElasticButton(
+           child: 
+             Row(
+               children: [
+                 Container(
+                   width: 50,
+                   height: 50,
+                   decoration: BoxDecoration(
+                     borderRadius: BorderRadius.circular(8),
+                     color: CupertinoColors.extraLightBackgroundGray
+                         .withOpacity(0.8),
+                   ),
+                   child: Icon(
+                     icon,
+                     color: CupertinoDynamicColor.resolve(
+                         CupertinoColors.label, context),
+                   ),
+                 ),
+             SizedBox(width: 8),
+             Text(title,
+             style:
+              TextStyle(
+               color: CupertinoDynamicColor.resolve(
+                CupertinoColors.label, context), fontWeight: FontWeight.w500),), 
+               ],
+             ),
+             onTap: (){},
+      ),
     );
   }
 }
