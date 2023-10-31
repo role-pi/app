@@ -27,7 +27,8 @@ dependencies:
   auto_size_text: ^3.0.0
   fluttertoast: ^8.2.2
   image_cropper: ^5.0.0
-  
+  qr_flutter: ^4.0.1
+
 
 dev_dependencies:
   flutter_test:
