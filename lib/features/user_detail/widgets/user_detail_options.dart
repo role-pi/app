@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:role/features/usage_report/screens/usage_report_screen.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class UserDetailOptions extends StatelessWidget {
@@ -11,7 +13,12 @@ class UserDetailOptions extends StatelessWidget {
     return Column(
       children: [
         RoundButton(
-          onPressed: () {},
+          onPressed: () {
+            showCupertinoModalBottomSheet(
+              context: context,
+              builder: (context) => UsageReportScreen(),
+            );
+          },
           rectangleColor: CupertinoColors.systemGrey5,
           textColor: CupertinoColors.label,
           text: 'relatório de uso',
