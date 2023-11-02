@@ -148,7 +148,7 @@ class ItemDetailScreen extends StatelessWidget {
                     SizedBox(height: 24),
                     RoundButton(
                       text: "distribuir gastos",
-                      rectangleColor: CupertinoColors.tertiarySystemBackground,
+                      rectangleColor: CupertinoColors.systemGrey6 ,
                       textColor: CupertinoColors.label,
                     ),
                     SizedBox(height: 12),

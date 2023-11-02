@@ -9,6 +9,7 @@ import 'package:role/features/event_detail/widgets/event_detail_items.dart';
 import 'package:role/features/event_detail/widgets/event_detail_map.dart';
 import 'package:role/features/new_item/screens/new_item_screen.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
+import 'package:role/shared/widgets/round_button.dart';
 
 class EventDetailScreen extends StatelessWidget {
   EventDetailScreen({required this.id})
@@ -115,6 +116,11 @@ class EventDetailScreen extends StatelessWidget {
                         }
                         return Container();
                       },
+                    ),
+                    RoundButton(
+                      text: "distribuir gastos",
+                      rectangleColor: CupertinoColors.systemGrey6 ,
+                      textColor: CupertinoColors.label,
                     ),
                   ],
                 ),
