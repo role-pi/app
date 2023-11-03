@@ -41,8 +41,8 @@ class User implements JSONSerializable {
 
   @override
   Map<String, dynamic> toJson() => {
-        "idUsuario": id,
-        "nome": name ?? "",
+        "userId": id,
+        "name": name ?? "",
         "email": email,
         "profilePhoto": profilePhoto,
       };

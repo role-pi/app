@@ -31,7 +31,7 @@ class EventListHeader extends StatelessWidget {
         ),
         Spacer(),
         ElasticButton(
-          onTap: () => {
+          onPressed: () => {
             showCupertinoModalBottomSheet(
               context: context,
               builder: (context) => UserDetailScreen(),

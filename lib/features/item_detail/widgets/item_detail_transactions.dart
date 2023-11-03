@@ -25,7 +25,7 @@ class ItemDetailTransactions extends StatelessWidget {
             ),
             Spacer(),
             ElasticButton(
-              onTap: () {
+              onPressed: () {
                 NewTransactionScreen().show(context);
               },
               child: Icon(Icons.add,

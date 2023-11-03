@@ -35,7 +35,7 @@ class EventDetailItemRow extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(left: 16, right: 4),
           child: ElasticButton(
-            onTap: () {
+            onPressed: () {
               Navigator.pushNamed(
                 context,
                 "/event/${provider.event.id}/item/${item.id}",

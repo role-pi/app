@@ -67,7 +67,7 @@ class _CircleButtonState extends State<CircleButton> {
             ),
           ),
         ),
-        onTap: widget.onTap,
+        onPressed: widget.onTap,
       ),
     );
   }

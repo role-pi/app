@@ -7,6 +7,7 @@ class CustomNavigationBar extends StatelessWidget {
   final Color color;
   final Color? accentColor;
   final double topPadding;
+  final double textSize;
 
   const CustomNavigationBar(
       {super.key,
@@ -18,7 +19,8 @@ class CustomNavigationBar extends StatelessWidget {
       this.onPressedTrailing,
       this.color = CupertinoColors.label,
       this.accentColor,
-      this.topPadding = 54.0});
+      this.topPadding = 54.0,
+      this.textSize = 28.0});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class CustomNavigationBar extends StatelessWidget {
                   ? Icon(
                       leadingIcon,
                       color: color,
-                      size: 30,
+                      size: textSize * 30 / 28,
                     )
                   : SizedBox(),
               Padding(
@@ -46,10 +48,10 @@ class CustomNavigationBar extends StatelessWidget {
                 child: Text(
                   leadingText ?? "",
                   style: TextStyle(
-                      fontSize: 28,
+                      fontSize: textSize,
                       fontWeight: FontWeight.bold,
                       color: color,
-                      letterSpacing: -1.8),
+                      letterSpacing: -textSize * 1.8 / 28),
                 ),
               ),
             ]),
@@ -63,7 +65,7 @@ class CustomNavigationBar extends StatelessWidget {
                   ? Icon(
                       trailingIcon,
                       color: accentColor,
-                      size: 30,
+                      size: textSize * 30 / 28,
                     )
                   : SizedBox(),
               Padding(
@@ -71,10 +73,10 @@ class CustomNavigationBar extends StatelessWidget {
                 child: Text(
                   trailingText ?? "",
                   style: TextStyle(
-                      fontSize: 28,
+                      fontSize: textSize,
                       fontWeight: FontWeight.bold,
                       color: accentColor,
-                      letterSpacing: -1.8),
+                      letterSpacing: -textSize * 1.8 / 28),
                 ),
               ),
             ]),

@@ -9,7 +9,7 @@ class NewItemRepository {
   Future<int?> postItem(Item item) async {
     try {
       var response = await API()
-          .request(endpoint: "insumo", method: "POST", body: item.toJson());
+          .request(endpoint: "item", method: "POST", body: item.toJson());
 
       List decoded = json.decode(response.response);
       return decoded[0]["insertId"];

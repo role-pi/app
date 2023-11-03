@@ -80,12 +80,12 @@ class Item implements JSONSerializable {
 
   @override
   Map<String, dynamic> toJson() => {
-        "idInsumo": id,
-        "tipo": category.value,
-        "nome": name,
-        "notas": notes,
-        "valor": amount,
-        "idEvento": eventId,
+        "itemId": id,
+        "category": category.value,
+        "name": name,
+        "notes": notes,
+        "amount": amount,
+        "eventId": eventId,
       };
 
   String get dateDescription {

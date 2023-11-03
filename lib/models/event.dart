@@ -96,13 +96,13 @@ class Event implements JSONSerializable {
   Map<String, dynamic> toJson() {
     DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
     return {
-      "idEvento": id,
-      "nome": name,
-      "dataInicio": startDate != null ? formatter.format(startDate!) : "",
-      "dataFim": endDate != null ? formatter.format(endDate!) : "",
+      "eventId": id,
+      "name": name,
+      "startDate": startDate != null ? formatter.format(startDate!) : "",
+      "endDate": endDate != null ? formatter.format(endDate!) : "",
       "emoji": theme.emoji,
-      "cor1": theme.color1.toHex(),
-      "cor2": theme.color2.toHex(),
+      "color1": theme.color1.toHex(),
+      "color2": theme.color2.toHex(),
     };
   }
 

@@ -8,7 +8,7 @@ class ItemDetailRepository {
   Future<Item?> getItem(Item item) async {
     try {
       var response =
-          await API().request(endpoint: "insumo/${item.id}", method: "GET");
+          await API().request(endpoint: "item/${item.id}", method: "GET");
 
       return Item.fromJson(json.decode(response.response));
     } catch (e) {
@@ -25,7 +25,7 @@ class ItemDetailRepository {
   Future<int?> putItem(Item item) async {
     try {
       var response = await API()
-          .request(endpoint: "insumo", method: "PUT", body: item.toJson());
+          .request(endpoint: "item", method: "PUT", body: item.toJson());
       Map decoded = json.decode(response.response);
       return decoded["affectedRows"];
     } catch (e) {
@@ -42,7 +42,7 @@ class ItemDetailRepository {
   Future<List<Transaction>> getTransactions(Item item) async {
     try {
       var response = await API()
-          .request(endpoint: "insumo/${item.id}/transacoes", method: "GET");
+          .request(endpoint: "item/${item.id}/transactions", method: "GET");
       return transactionsFromJSON(response.response);
     } catch (e) {
       if (e is ApiError) {
@@ -58,7 +58,7 @@ class ItemDetailRepository {
   Future<bool> deleteTransaction(Transaction transaction) async {
     try {
       var response = await API()
-          .request(endpoint: "transacao/${transaction.id}", method: "DELETE");
+          .request(endpoint: "transaction/${transaction.id}", method: "DELETE");
 
       return json.decode(response.response)["affectedRows"] > 0;
     } catch (e) {

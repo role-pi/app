@@ -104,7 +104,7 @@ class ItemDetailScreen extends StatelessWidget {
                                   Consumer<ItemDetailProvider>(
                                     builder: (context, value, child) {
                                       return ElasticButton(
-                                        onTap: () {
+                                        onPressed: () {
                                           ItemCategoryPickerModalPopup(
                                                   context: context,
                                                   onSelected: (category) {
@@ -148,7 +148,7 @@ class ItemDetailScreen extends StatelessWidget {
                     SizedBox(height: 24),
                     RoundButton(
                       text: "distribuir gastos",
-                      rectangleColor: CupertinoColors.systemGrey6 ,
+                      rectangleColor: CupertinoColors.systemGrey6,
                       textColor: CupertinoColors.label,
                     ),
                     SizedBox(height: 12),

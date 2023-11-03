@@ -20,7 +20,7 @@ class EventItemRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElasticButton(
-      onTap: () {
+      onPressed: () {
         Navigator.pushNamed(
           context,
           "/event",

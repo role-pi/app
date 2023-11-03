@@ -60,7 +60,7 @@ class EventDetailScreen extends StatelessWidget {
                           endereco: eventDetailProvider.event.endereco,
                         ),
                       ),
-                      onTap: () {
+                      onPressed: () {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
@@ -86,7 +86,7 @@ class EventDetailScreen extends StatelessWidget {
                           ),
                         ),
                         ElasticButton(
-                          onTap: () {
+                          onPressed: () {
                             NewItemScreen(eventDetailProvider).show(context);
                           },
                           child: Container(
@@ -119,7 +119,7 @@ class EventDetailScreen extends StatelessWidget {
                     ),
                     RoundButton(
                       text: "distribuir gastos",
-                      rectangleColor: CupertinoColors.systemGrey6 ,
+                      rectangleColor: CupertinoColors.systemGrey6,
                       textColor: CupertinoColors.label,
                     ),
                   ],

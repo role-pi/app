@@ -9,7 +9,7 @@ import 'package:role/models/event.dart';
 class EventListRepository {
   Future<List<Event>> getEvents() async {
     try {
-      var response = await API().request(endpoint: "evento", method: "GET");
+      var response = await API().request(endpoint: "event", method: "GET");
       return eventsFromJSON(response.response);
     } catch (e) {
       if (e is ApiError) {
@@ -25,7 +25,7 @@ class EventListRepository {
   Future<bool> deleteEvent(Event event) async {
     try {
       var response =
-          await API().request(endpoint: "evento/${event.id}", method: "DELETE");
+          await API().request(endpoint: "event/${event.id}", method: "DELETE");
 
       return json.decode(response.response)["affectedRows"] > 0;
     } catch (e) {
@@ -42,7 +42,7 @@ class EventListRepository {
   Future<int?> addEvent(Event event) async {
     try {
       var response =
-          await API().request(endpoint: "evento", method: "POST", body: {
+          await API().request(endpoint: "event", method: "POST", body: {
         "nome": event.name,
         "emoji": event.theme.emoji,
         "cor1": event.theme.color1.toHex(),

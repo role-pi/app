@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 
 class ElasticButton extends StatefulWidget {
   final Widget child;
-  final Function? onTap;
+  final Function? onPressed;
 
-  ElasticButton({required this.child, required this.onTap});
+  ElasticButton({required this.child, required this.onPressed});
 
   @override
   _ElasticButtonState createState() => _ElasticButtonState();
@@ -34,14 +34,14 @@ class _ElasticButtonState extends State<ElasticButton> {
         });
       },
       onTap: () {
-        if (widget.onTap != null) {
-          widget.onTap!();
+        if (widget.onPressed != null) {
+          widget.onPressed!();
         }
       },
       child: AnimatedScale(
           duration: Duration(milliseconds: 300),
           curve: Curves.easeOutQuart,
-          scale: isPressed && widget.onTap != null ? 0.925 : 1.0,
+          scale: isPressed && widget.onPressed != null ? 0.925 : 1.0,
           child: widget.child),
     );
   }

@@ -54,7 +54,8 @@ class UserFirstLoginScreen extends StatelessWidget {
                 children: [
                   Consumer<UserLoginProvider>(builder: (context, value, child) {
                     return ElasticButton(
-                      onTap: () => provider.showImageSelectionPopup(context),
+                      onPressed: () =>
+                          provider.showImageSelectionPopup(context),
                       child:
                           RemoteProfilePicture(url: value.user?.profilePhoto),
                     );

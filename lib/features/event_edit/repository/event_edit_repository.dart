@@ -8,7 +8,7 @@ class EventEditRepository {
   Future<int?> putEvent(Event event) async {
     try {
       var response = await API()
-          .request(endpoint: "evento", method: "PUT", body: event.toJson());
+          .request(endpoint: "event", method: "PUT", body: event.toJson());
 
       Map decoded = json.decode(response.response);
       return decoded["affectedRows"];

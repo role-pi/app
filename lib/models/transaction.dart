@@ -61,10 +61,10 @@ class Transaction implements JSONSerializable {
   Map<String, dynamic> toJson() {
     DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
     return {
-      "idTransacao": id,
-      "data": formatter.format(data),
-      "valor": valor,
-      "idInsumo": itemId
+      "transactionId": id,
+      "date": formatter.format(data),
+      "amount": valor,
+      "itemId": itemId
     };
   }
 }

@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:role/models/user.dart';
-
 import 'package:role/shared/utils/api.dart';
 import 'package:role/shared/utils/api_status.dart';
 

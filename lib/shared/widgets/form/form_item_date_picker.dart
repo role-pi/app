@@ -47,7 +47,7 @@ class _DatePickerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ElasticButton(
-        onTap: () {
+        onPressed: () {
           ModalPopup(
               context: context,
               padding: EdgeInsets.only(top: 48),

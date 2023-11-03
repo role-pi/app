@@ -21,7 +21,7 @@ class API {
 
       if (auth) {
         String? token = await UserLoginProvider.shared.readToken();
-        if (token != null) headers.addAll({"Authorization": "JWT ${token}"});
+        if (token != null) headers.addAll({"Authorization": "Bearer ${token}"});
       }
 
       String url = '${api}${endpoint}';
@@ -74,7 +74,7 @@ class API {
       if (auth) {
         String? token = await UserLoginProvider.shared.readToken();
         if (token != null)
-          request.headers.addAll({"Authorization": "JWT ${token}"});
+          request.headers.addAll({"Authorization": "Bearer ${token}"});
       }
 
       var fileStream = http.ByteStream(file.openRead());

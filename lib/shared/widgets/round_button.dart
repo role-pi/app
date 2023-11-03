@@ -42,6 +42,6 @@ class RoundButton extends StatelessWidget {
             ),
           ),
         ),
-        onTap: onPressed);
+        onPressed: onPressed);
   }
 }

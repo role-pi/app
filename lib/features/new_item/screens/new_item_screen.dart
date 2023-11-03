@@ -45,7 +45,7 @@ class NewItemScreen extends StatelessWidget {
                 ),
                 SizedBox(width: 12),
                 ElasticButton(
-                  onTap: () {
+                  onPressed: () {
                     ItemCategoryPickerModalPopup(
                             context: context,
                             onSelected: (caegory) {

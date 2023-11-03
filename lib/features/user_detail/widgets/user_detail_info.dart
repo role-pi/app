@@ -21,7 +21,7 @@ class UserDetailInfo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(0),
           child: ElasticButton(
-            onTap: () => provider.showImageSelectionPopup(context),
+            onPressed: () => provider.showImageSelectionPopup(context),
             child: SizedBox(
               child: Stack(
                 clipBehavior: Clip.none,

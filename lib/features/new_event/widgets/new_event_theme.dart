@@ -165,7 +165,7 @@ class ThemeGridItem extends StatelessWidget {
       bool selected = provider.event.theme.emoji == theme.emoji;
 
       return ElasticButton(
-        onTap: () {
+        onPressed: () {
           provider.setTheme(theme);
         },
         child: Container(

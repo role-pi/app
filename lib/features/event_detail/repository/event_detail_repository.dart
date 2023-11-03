@@ -11,7 +11,7 @@ class EventDetailRepository {
   Future<Event?> getEvent(Event event) async {
     try {
       var response =
-          await API().request(endpoint: "evento/${event.id}", method: "GET");
+          await API().request(endpoint: "event/${event.id}", method: "GET");
 
       return Event.fromJson(json.decode(response.response));
     } catch (e) {
@@ -28,7 +28,7 @@ class EventDetailRepository {
   Future<List<Item>> getItems(Event event) async {
     try {
       var response = await API()
-          .request(endpoint: "evento/${event.id}/insumos", method: "GET");
+          .request(endpoint: "event/${event.id}/items", method: "GET");
 
       return itemsFromJSON(response.response);
     } catch (e) {
@@ -45,7 +45,7 @@ class EventDetailRepository {
   Future<bool> deleteItem(Item item) async {
     try {
       var response =
-          await API().request(endpoint: "insumo/${item.id}", method: "DELETE");
+          await API().request(endpoint: "item/${item.id}", method: "DELETE");
 
       print(json.decode(response.response));
       return json.decode(response.response)["affectedRows"] > 0;
@@ -63,7 +63,7 @@ class EventDetailRepository {
   Future<List<User>> getUsers(Event event) async {
     try {
       var response =
-          await API().request(endpoint: "usuario/${event.id}", method: "GET");
+          await API().request(endpoint: "user/${event.id}", method: "GET");
 
       return usersFromJSON(response.response);
     } catch (e) {
