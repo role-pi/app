@@ -6,6 +6,7 @@ import 'package:role/features/event_detail/screens/event_detail_screen.dart';
 import 'package:role/features/event_list/screens/event_list_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/features/user_login/screens/user_login_screen.dart';
+import 'package:role/features/usage_report/screens/usage_report_screen.dart';
 
 void main() {
   initializeDateFormatting('pt');
@@ -20,6 +21,12 @@ void main() {
 class RoleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: UserLoginProvider.shared)
+      ], child: CupertinoApp(builder: (context, child) {
+      return UsageReportScreen();
+    },));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: UserLoginProvider.shared)
