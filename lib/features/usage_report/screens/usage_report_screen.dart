@@ -18,15 +18,15 @@ Widget build(BuildContext context) {
             decoration: BoxDecoration(color: CupertinoColors.black),
             padding: EdgeInsets.symmetric(vertical: 70, horizontal: 20),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
                       Row(
-                    children: [
+                      children: [
                 
                       Text("Relatório de Uso", style: TextStyle(color: CupertinoColors.white, fontSize: 30)),
-                      Spacer(),
-                    ],),
+                      ],),
+
                       Spacer(),
                       Consumer<UserLoginProvider>(builder: (context, provider, child) {
                         return RemoteProfilePicture(
@@ -36,7 +36,7 @@ Widget build(BuildContext context) {
                   }),
                   Row(
                     children: [
-                      Text("Dadinho porra", style: TextStyle(color: CupertinoColors.white, fontSize: 30))
+                      Text(UserLoginProvider.shared.user?.displayName ?? "Usuário", style: TextStyle(color: CupertinoColors.white, fontSize: 30))
                     ],
                   )
                 ],
