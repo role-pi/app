@@ -41,9 +41,9 @@ class UserDetailScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       UserDetailInfo(),
-                      SizedBox(height: 12),
+                      SizedBox(height: 8),
                       Divider(),
-                      SizedBox(height: 12),
+                      SizedBox(height: 8),
                       UserDetailOptions(),
                       Spacer(),
                       UserDetailExtras(),

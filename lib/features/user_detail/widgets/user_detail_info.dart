@@ -59,7 +59,7 @@ class UserDetailInfo extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 16),
+        SizedBox(width: 13),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

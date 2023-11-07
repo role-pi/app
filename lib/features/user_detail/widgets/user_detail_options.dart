@@ -5,32 +5,40 @@ import 'package:role/shared/widgets/round_button.dart';
 
 class UserDetailOptions extends StatelessWidget {
   const UserDetailOptions({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        RoundButton(
-          onPressed: () {
-            showCupertinoModalBottomSheet(
-              context: context,
-              builder: (context) => UsageReportScreen(),
-            );
-          },
-          rectangleColor: CupertinoColors.systemGrey5,
-          textColor: CupertinoColors.label,
-          text: 'relatório de uso',
-          alignment: Alignment.centerLeft,
-        ),
-        SizedBox(height: 12),
-        RoundButton(
-          onPressed: () => showPopup(context),
-          rectangleColor: CupertinoColors.systemRed,
-          textColor: CupertinoColors.white,
-          text: 'excluir conta',
-          alignment: Alignment.centerLeft,
+      children: <Widget>[
+        Container(
+          height: 280,
+          width: double.infinity,
+          child: Column(
+            children: <Widget>[
+              RoundButton(
+                onPressed: () {
+                  showCupertinoModalBottomSheet(
+                    context: context,
+                    builder: (context) => UsageReportScreen(),
+                  );
+                },
+                rectangleColor: CupertinoColors.systemGrey5,
+                textColor: CupertinoColors.label.resolveFrom(context),
+                text: 'relatório de uso',
+                alignment: Alignment.centerLeft,
+              ),
+              SizedBox(height: 12),
+              RoundButton(
+                onPressed: () => showPopup(context),
+                rectangleColor: CupertinoColors.systemRed,
+                textColor: CupertinoColors.label.resolveFrom(context),
+                text: 'excluir conta',
+                alignment: Alignment.centerLeft,
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -38,9 +46,10 @@ class UserDetailOptions extends StatelessWidget {
 
   void showPopup(BuildContext context) {
     TextStyle style = TextStyle(
-        letterSpacing: -0.9,
-        color: CupertinoColors.label.resolveFrom(context),
-        fontWeight: FontWeight.bold);
+      letterSpacing: -0.9,
+      color: CupertinoColors.label.resolveFrom(context),
+      fontWeight: FontWeight.bold,
+    );
 
     showCupertinoDialog<void>(
       context: context,
@@ -49,11 +58,12 @@ class UserDetailOptions extends StatelessWidget {
         content: const Text("a exclusão de conta é uma ação irreversível"),
         actions: <CupertinoDialogAction>[
           CupertinoDialogAction(
-              child: const Text("voltar"),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              textStyle: style),
+            child: const Text("voltar"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            textStyle: style,
+          ),
           CupertinoDialogAction(
             child: const Text("excluir conta"),
             isDestructiveAction: true,
