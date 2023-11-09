@@ -78,4 +78,4 @@ O aplicativo será compilado e instalado no emulador ou dispositivo Android cone
 
 ### Autores
 
-Esse projeto foi desenvolvido por Ana Clara Castellain, Caio Fábio Gregio, João Gabriel Pozzobon dos Santos, Maiar Junches Seemann e Rafael Wolff Luiz
+Esse projeto foi desenvolvido por Ana Clara Castellain, Caio Fábio Gregio, João Gabriel Pozzobon dos Santos, Maiara Junches Seemann e Rafael Wolff Luiz
