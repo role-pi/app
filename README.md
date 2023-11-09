@@ -75,3 +75,5 @@ Siga os passos abaixo para executar o projeto em sua máquina local:
    ```
 
 O aplicativo será compilado e instalado no emulador ou dispositivo Android conectado. Aguarde alguns instantes para que o aplicativo seja totalmente carregado. Ao salvar qualquer arquivo de código-fonte, a interface atualizará automaticamente com um hot reload.
+
+### Autores
