@@ -77,5 +77,5 @@ Siga os passos abaixo para executar o projeto em sua máquina local:
 O aplicativo será compilado e instalado no emulador ou dispositivo Android conectado. Aguarde alguns instantes para que o aplicativo seja totalmente carregado. Ao salvar qualquer arquivo de código-fonte, a interface atualizará automaticamente com um hot reload.
 
 ### Autores
-```
+
 Esse projeto foi desenvolvido por Ana Clara Castellain, Caio Fábio Gregio, João Gabriel Pozzobon dos Santos, Maiar Junches Seemann e Rafael Wolff Luiz
