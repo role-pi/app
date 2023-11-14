@@ -10,14 +10,14 @@ class QrCodeWidget extends StatelessWidget {
   final String chavePix;
 
   QrCodeWidget(this.chavePix);
-   PixFlutter pixFlutter = PixFlutter(
-                  payload: Payload(
-                      pixKey: 'gregiorogerio@yahoo.com.br',
-                      description: 'DESCRIÇÃO_DA_COMPRA',
-                      merchantName: 'MERCHANT_NAME',
-                      merchantCity: 'CITY_NAME',
-                      txid: 'TXID', // Até 25 caracteres para o QR Code estático
-                      amount: '0.1'));
+  PixFlutter pixFlutter = PixFlutter(
+      payload: Payload(
+          pixKey: 'gregiorogerio@yahoo.com.br',
+          description: 'DESCRIÇÃO_DA_COMPRA',
+          merchantName: 'MERCHANT_NAME',
+          merchantCity: 'CITY_NAME',
+          txid: 'TXID', // Até 25 caracteres para o QR Code estático
+          amount: '0.1'));
 
   @override
   Widget build(BuildContext context) {
@@ -32,34 +32,33 @@ class QrCodeWidget extends StatelessWidget {
           RoundButton(
             text: "Copiar",
             onPressed: () {
-             
-         
-             
-              // Clipboard.setData(ClipboardData(text: chavePix));
-              // final toast = CustomToast(
-              //   title: "Chave copiada com sucesso",
-              //   icon: CupertinoIcons.check_mark,
-              //   color: CupertinoColors.systemGreen,
-              // );
+               Clipboard.setData(ClipboardData(text: chavePix));
+               final toast = CustomToast(
+                 title: "Chave copiada com sucesso",
+                icon: CupertinoIcons.check_mark,
+                 color: CupertinoColors.systemGreen,
+               );
 
-              // FToast fToast = FToast();
-              // fToast.init(context);
-              // fToast.showToast(
-              //   child: toast,
-              //   gravity: ToastGravity.BOTTOM,
-              //   toastDuration: Duration(seconds: 2),
-              // );
+               FToast fToast = FToast();
+               fToast.init(context);
+               fToast.showToast(
+                 child: toast,
+                 gravity: ToastGravity.BOTTOM,
+                 toastDuration: Duration(seconds: 2),
+               );
             },
           ),
-          SizedBox(height: 20,),
-           CustomPaint(
-                size: Size(100, 100),
-                painter: QrPainter(
-                  data: pixFlutter.getQRCode(),
-                  version: QrVersions.auto,
-                  gapless: false,
-                ),
-              ),
+          SizedBox(
+            height: 20,
+          ),
+          CustomPaint(
+            size: Size(100, 100),
+            painter: QrPainter(
+              data: pixFlutter.getQRCode(),
+              version: QrVersions.auto,
+              gapless: false,
+            ),
+          ),
         ],
       ),
     );
