@@ -43,10 +43,10 @@ class EventListRepository {
     try {
       var response =
           await API().request(endpoint: "event", method: "POST", body: {
-        "nome": event.name,
+        "name": event.name,
         "emoji": event.theme.emoji,
-        "cor1": event.theme.color1.toHex(),
-        "cor2": event.theme.color2.toHex(),
+        "colorr1": event.theme.color1.toHex(),
+        "colorr2": event.theme.color2.toHex(),
       });
 
       Map decoded = json.decode(response.response);
