@@ -1,7 +1,4 @@
 import 'dart:convert';
-
-import 'package:role/models/event_theme.dart';
-
 import 'package:role/shared/utils/api.dart';
 import 'package:role/shared/utils/api_status.dart';
 import 'package:role/models/event.dart';
@@ -42,12 +39,7 @@ class EventListRepository {
   Future<int?> addEvent(Event event) async {
     try {
       var response =
-          await API().request(endpoint: "event", method: "POST", body: {
-        "name": event.name,
-        "emoji": event.theme.emoji,
-        "colorr1": event.theme.color1.toHex(),
-        "colorr2": event.theme.color2.toHex(),
-      });
+          await API().request(endpoint: "event", method: "POST", body: event.toJson());
 
       Map decoded = json.decode(response.response);
       return decoded["insertId"];
