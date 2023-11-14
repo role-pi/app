@@ -11,13 +11,21 @@ Este repositório contém o código-fonte do aplicativo rolê, desenvolvido em F
 
 # Telas
 
+</br> 
+
 | Tela de cadastro | Tela de confirmação | Tela de início | 
 | :---: | :---: | :---: |
 | <img alt="Tela de cadastro" height=500 src="https://github.com/role-pi/app/assets/111303609/92848dac-e955-45ff-b046-abcb6bfc9f32"> | <img alt="Tela de confirmação" height=500 src="https://github.com/role-pi/app/assets/111303609/2bcd426d-8c46-4cce-a5ef-8dbe4314da7d"> | <img alt="Tela de início" height=500 src="https://github.com/role-pi/app/assets/111303609/5afb6e32-f4d9-4e2e-9e6f-08bcaaf55de7"> |
 
+</br>
+</br> 
+
 | Tela de detalhes do evento | Tela de edição do evento |
 | :---: | :---: |
 | <img alt="Tela de detalhes do evento" height=500 src="https://github.com/role-pi/app/assets/111303609/741458e9-1ee1-48cf-a4c1-0c852dd08491"> <img alt="Tela de detalhes do evento" height=500 src="https://github.com/role-pi/app/assets/111303609/ef9addf6-2271-4139-aa3f-971b4ee215f7"> | <img alt="Tela de edição do evento" height=500 src="https://github.com/role-pi/app/assets/111303609/5e9543bb-a9e4-4595-a298-b52c5ca2a0a2"> |
+
+</br> 
+</br> 
 
 | Tela de edição do usuário | Tela de edição de insumo | 
 | :---: | :---: |
