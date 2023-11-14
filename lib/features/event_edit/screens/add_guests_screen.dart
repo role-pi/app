@@ -22,7 +22,7 @@ class AddGuestsScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             children: [
-              FormItemTextField(title: "busque por um nome ou email"),
+              FormItemTextField(title: "busque por nome ou email"),
             ],
           ),
         ),

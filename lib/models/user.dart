@@ -6,16 +6,19 @@ class User implements JSONSerializable {
   String? _name;
   String _email;
   String? _profilePhoto;
+  String? _pixKey;
 
-  User({
-    required int id,
-    String? name,
-    required String email,
-    String? profilePhoto,
-  })  : _id = id,
+  User(
+      {required int id,
+      String? name,
+      required String email,
+      String? profilePhoto,
+      String? pixKey})
+      : _id = id,
         _name = name,
         _email = email,
-        _profilePhoto = profilePhoto;
+        _profilePhoto = profilePhoto,
+        _pixKey = pixKey;
 
   int get id => _id;
   set id(int value) {
@@ -37,6 +40,11 @@ class User implements JSONSerializable {
     _profilePhoto = value;
   }
 
+  String? get pixKey => _pixKey;
+  set pixKey(String? value) {
+    _pixKey = value;
+  }
+
   String get displayName => _name ?? _email.split("@").firstOrNull ?? _email;
 
   @override
@@ -44,6 +52,7 @@ class User implements JSONSerializable {
         "userId": id,
         "name": name ?? "",
         "email": email,
+        "pixKey": pixKey,
         "profilePhoto": profilePhoto,
       };
 
@@ -52,6 +61,7 @@ class User implements JSONSerializable {
         id: json["id_usuario"],
         name: json["nome"],
         email: json["email"],
+        pixKey: json["pixKey"],
         profilePhoto: json["foto_de_perfil_url"],
       );
 }
