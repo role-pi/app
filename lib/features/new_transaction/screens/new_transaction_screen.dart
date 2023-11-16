@@ -26,7 +26,8 @@ class NewTransactionScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ElasticButton(
-            onPressed: () {},
+            onPressed: () {
+            },
             child: Container(
               decoration: BoxDecoration(
                 color: CupertinoColors.systemGrey6.resolveFrom(context),
