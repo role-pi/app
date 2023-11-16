@@ -1,38 +1,45 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/features/event_edit/repository/event_edit_repository.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
+import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class AddGuestsProvider extends ChangeNotifier {
-  late EventDetailProvider eventDetailProvider;
-  Event get event => eventDetailProvider.event;
+  late EventEditProvider eventEditProvider;
+  Event get event => eventEditProvider.event;
 
-  EventListProvider get eventListProvider => EventListProvider.shared;
   EventEditRepository eventRepository = EventEditRepository();
 
   late TextEditingController searchController;
   late bool changed = false;
 
+  List<UserSearchResult> users = [];
+
+  List<User> addUsers = [];
+  List<User> removeUsers = [];
+
   late FToast fToast;
 
-  EventEditProvider(EventDetailProvider eventDetailProvider) {
-    this.eventDetailProvider = eventDetailProvider;
+  AddGuestsProvider(EventEditProvider eventEditProvider) {
+    this.eventEditProvider = eventEditProvider;
 
-    searchController = TextEditingController(text: event.name);
+    searchController = TextEditingController();
+    searchController.addListener(_textChanged);
     fToast = FToast();
+    get();
+  }
+
+  get() async {
+    users = await eventRepository.searchUsers(event, searchController.text);
+    notifyListeners();
   }
 
   put(BuildContext context) async {
     changed = false;
-
-    event.name = name;
-    event.startDate = startDate;
-    event.endDate = endDate;
 
     int? result = await eventRepository.putEvent(event);
 
@@ -57,9 +64,23 @@ class AddGuestsProvider extends ChangeNotifier {
     );
 
     notifyListeners();
-
-    eventDetailProvider.get();
   }
 
-  _textChanged() {}
+  _textChanged() async {
+    get();
+  }
+}
+
+class UserSearchResult {
+  late User user;
+  late bool selected;
+
+  UserSearchResult({required this.user, required this.selected});
+
+  @override
+  factory UserSearchResult.fromJson(Map<String, dynamic> json) =>
+      UserSearchResult(
+        user: User.fromJson(json),
+        selected: json["participante"] == 1,
+      );
 }
