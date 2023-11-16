@@ -6,6 +6,7 @@ import 'package:role/features/event_edit/repository/event_edit_repository.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
+import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class EventEditProvider extends ChangeNotifier {
@@ -34,6 +35,11 @@ class EventEditProvider extends ChangeNotifier {
     nameController = TextEditingController(text: event.name);
     nameController.addListener(_textChanged);
     fToast = FToast();
+  }
+
+  get() async {
+    await eventDetailProvider.get();
+    notifyListeners();
   }
 
   put(BuildContext context) async {
@@ -140,5 +146,32 @@ class EventEditProvider extends ChangeNotifier {
     );
 
     return completer.future;
+  }
+
+  removeUser(BuildContext context, User user) async {
+    (int, int)? result = await eventRepository.putUsers(event, [], [user]);
+
+    fToast.init(context);
+    Widget toast;
+    if (result != null) {
+      toast = CustomToast(
+          title: "usuário removido",
+          icon: CupertinoIcons.checkmark,
+          color: event.color1);
+
+      await get();
+      notifyListeners();
+    } else {
+      toast = CustomToast(
+          title: "erro ao atualizar usuários",
+          icon: CupertinoIcons.xmark,
+          color: CupertinoColors.systemRed);
+    }
+
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: Duration(seconds: 3),
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/features/event_edit/screens/add_guests_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
+import 'package:role/models/event.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
@@ -67,18 +68,16 @@ class EventEditGuests extends StatelessWidget {
                                 ElasticButton(
                                   onPressed: () async {
                                     if (await provider
-                                        .showDeletionDialog(context)) {}
+                                        .showDeletionDialog(context)) {
+                                      provider.removeUser(context, user);
+                                    }
                                   },
-                                  child: ButtonBar(
-                                    children: [
-                                      Icon(
-                                        CupertinoIcons.delete_simple,
-                                        size: 22,
-                                        color: CupertinoDynamicColor.resolve(
-                                            CupertinoColors.secondaryLabel,
-                                            context),
-                                      ),
-                                    ],
+                                  child: Icon(
+                                    CupertinoIcons.delete_simple,
+                                    size: 22,
+                                    color: CupertinoDynamicColor.resolve(
+                                        CupertinoColors.secondaryLabel,
+                                        context),
                                   ),
                                 )
                               ],
@@ -121,38 +120,7 @@ class EventEditGuests extends StatelessWidget {
                         ModalPopup(
                           context: context,
                           title: "adicionar participante",
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                                32.0, 0.0, 32.0, 32.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                EventAddGuestRow(
-                                  title: "e-mail",
-                                  description:
-                                      "Convide um usuário pelo seu e-mail ou nome",
-                                  icon: CupertinoIcons.envelope,
-                                  enabled: true,
-                                ),
-                                SizedBox(height: 24),
-                                EventAddGuestRow(
-                                  title: "QR code",
-                                  description:
-                                      "Convide um usuário por meio de um QR code de evento",
-                                  icon: CupertinoIcons.qrcode,
-                                  enabled: false,
-                                ),
-                                SizedBox(height: 24),
-                                EventAddGuestRow(
-                                  title: "encaminhar",
-                                  description:
-                                      "Convide um usuário por meio de um link de ingresso",
-                                  icon: CupertinoIcons.share,
-                                  enabled: false,
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: EventEditGuestsOptions(provider: provider),
                         ).show();
                       },
                     ),
@@ -167,10 +135,55 @@ class EventEditGuests extends StatelessWidget {
   }
 }
 
+class EventEditGuestsOptions extends StatelessWidget {
+  final EventEditProvider provider;
+
+  const EventEditGuestsOptions({
+    super.key,
+    required this.provider,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 32.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          EventAddGuestRow(
+            title: "e-mail",
+            description: "Convide um usuário pelo seu e-mail ou nome",
+            icon: CupertinoIcons.envelope,
+            provider: provider,
+            enabled: true,
+          ),
+          SizedBox(height: 24),
+          EventAddGuestRow(
+            title: "QR code",
+            description: "Convide um usuário por meio de um QR code de evento",
+            icon: CupertinoIcons.qrcode,
+            provider: provider,
+            enabled: false,
+          ),
+          SizedBox(height: 24),
+          EventAddGuestRow(
+            title: "encaminhar",
+            description: "Convide um usuário por meio de um link de ingresso",
+            icon: CupertinoIcons.share,
+            provider: provider,
+            enabled: false,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class EventAddGuestRow extends StatelessWidget {
   final String title;
   final String description;
   final IconData icon;
+  final EventEditProvider provider;
   final bool enabled;
 
   const EventAddGuestRow({
@@ -178,6 +191,7 @@ class EventAddGuestRow extends StatelessWidget {
     required this.title,
     required this.description,
     required this.icon,
+    required this.provider,
     required this.enabled,
   });
 
@@ -231,14 +245,16 @@ class EventAddGuestRow extends StatelessWidget {
             ),
           ],
         ),
-        onPressed: () {
-          Navigator.of(context).pop();
-          showCupertinoModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return AddGuestsScreen();
-              });
-        },
+        onPressed: enabled
+            ? () {
+                Navigator.of(context).pop();
+                showCupertinoModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return AddGuestsScreen(provider);
+                    });
+              }
+            : null,
       ),
     );
   }

@@ -45,8 +45,6 @@ class API {
           throw ApiError(code: -1, message: 'Unsupported HTTP method: $method');
       }
 
-      print(response.statusCode);
-
       if (success == response.statusCode) {
         return ApiResponse(code: response.statusCode, response: response.body);
       }

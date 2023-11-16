@@ -21,7 +21,7 @@ class UserDetailProvider extends ChangeNotifier {
 
   UserRepository userRepository = UserRepository();
 
-  late TextEditingController nameController, emailController;
+  late TextEditingController nameController, emailController, pixKeyController;
 
   late FToast fToast;
 
@@ -33,6 +33,10 @@ class UserDetailProvider extends ChangeNotifier {
     emailController =
         TextEditingController(text: UserLoginProvider.shared.user?.email);
     emailController.addListener(textChanged);
+
+    pixKeyController =
+        TextEditingController(text: UserLoginProvider.shared.user?.pixKey);
+    pixKeyController.addListener(textChanged);
 
     fToast = FToast();
   }
@@ -83,15 +87,15 @@ class UserDetailProvider extends ChangeNotifier {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                      Icon(
+                    Icon(
                       CupertinoIcons.photo,
-                     color: CupertinoDynamicColor.resolve(
-                         CupertinoColors.label, context),
-                      ),
-                      SizedBox(width: 8),
-                     Text("escolher da biblioteca" ,style: style),
-                    ],
-                  ),
+                      color: CupertinoDynamicColor.resolve(
+                          CupertinoColors.label, context),
+                    ),
+                    SizedBox(width: 8),
+                    Text("escolher da biblioteca", style: style),
+                  ],
+                ),
               ),
             ),
             CupertinoActionSheetAction(
@@ -103,15 +107,15 @@ class UserDetailProvider extends ChangeNotifier {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                      Icon(
+                    Icon(
                       CupertinoIcons.camera,
-                     color: CupertinoDynamicColor.resolve(
-                         CupertinoColors.label, context),
-                      ),
-                      SizedBox(width: 8),
-                     Text("tirar foto" ,style: style),
-                    ],
-                  ),
+                      color: CupertinoDynamicColor.resolve(
+                          CupertinoColors.label, context),
+                    ),
+                    SizedBox(width: 8),
+                    Text("tirar foto", style: style),
+                  ],
+                ),
               ),
             ),
           ],
