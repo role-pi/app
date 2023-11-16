@@ -45,7 +45,9 @@ class User implements JSONSerializable {
     _pixKey = value;
   }
 
-  String get displayName => _name ?? _email.split("@").firstOrNull ?? _email;
+  String get displayName => _name?.isNotEmpty == true
+      ? name!
+      : (_email.split("@").firstOrNull ?? _email);
 
   @override
   Map<String, dynamic> toJson() => {

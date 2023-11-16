@@ -38,21 +38,41 @@ class AddGuestsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  toggle(int index) {
+    users[index].selected = !users[index].selected;
+
+    if (users[index].selected) {
+      removeUsers.remove(users[index].user);
+      addUsers.add(users[index].user);
+    } else {
+      addUsers.remove(users[index].user);
+      removeUsers.add(users[index].user);
+    }
+
+    changed = addUsers.isNotEmpty || removeUsers.isNotEmpty;
+    notifyListeners();
+  }
+
   put(BuildContext context) async {
     changed = false;
 
-    int? result = await eventRepository.putEvent(event);
+    (int, int)? result =
+        await eventRepository.putUsers(event, addUsers, removeUsers);
 
     fToast.init(context);
     Widget toast;
     if (result != null) {
       toast = CustomToast(
-          title: "evento salvo",
+          title: "usuários atualizados",
           icon: CupertinoIcons.checkmark,
           color: event.color1);
+
+      Navigator.of(context).pop();
+      await eventEditProvider.get();
+      notifyListeners();
     } else {
       toast = CustomToast(
-          title: "erro ao salvar evento",
+          title: "erro ao atualizar usuários",
           icon: CupertinoIcons.xmark,
           color: CupertinoColors.systemRed);
     }
@@ -62,8 +82,6 @@ class AddGuestsProvider extends ChangeNotifier {
       gravity: ToastGravity.BOTTOM,
       toastDuration: Duration(seconds: 3),
     );
-
-    notifyListeners();
   }
 
   _textChanged() async {

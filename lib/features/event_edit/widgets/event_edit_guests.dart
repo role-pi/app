@@ -69,18 +69,16 @@ class EventEditGuests extends StatelessWidget {
                                 ElasticButton(
                                   onPressed: () async {
                                     if (await provider
-                                        .showDeletionDialog(context)) {}
+                                        .showDeletionDialog(context)) {
+                                      provider.removeUser(context, user);
+                                    }
                                   },
-                                  child: ButtonBar(
-                                    children: [
-                                      Icon(
-                                        CupertinoIcons.delete_simple,
-                                        size: 22,
-                                        color: CupertinoDynamicColor.resolve(
-                                            CupertinoColors.secondaryLabel,
-                                            context),
-                                      ),
-                                    ],
+                                  child: Icon(
+                                    CupertinoIcons.delete_simple,
+                                    size: 22,
+                                    color: CupertinoDynamicColor.resolve(
+                                        CupertinoColors.secondaryLabel,
+                                        context),
                                   ),
                                 )
                               ],
@@ -248,14 +246,16 @@ class EventAddGuestRow extends StatelessWidget {
             ),
           ],
         ),
-        onPressed: () {
-          Navigator.of(context).pop();
-          showCupertinoModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return AddGuestsScreen(provider);
-              });
-        },
+        onPressed: enabled
+            ? () {
+                Navigator.of(context).pop();
+                showCupertinoModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return AddGuestsScreen(provider);
+                    });
+              }
+            : null,
       ),
     );
   }

@@ -43,6 +43,32 @@ class EventEditRepository {
     return List.empty();
   }
 
+  Future<(int, int)?> putUsers(
+      Event event, List<User> addUsers, List<User> removeUsers) async {
+    try {
+      var response = await API().request(
+          endpoint: "event/" + event.id.toString() + "/users",
+          method: "PUT",
+          body: {
+            "addUsers": addUsers.map((e) => e.id).toList(),
+            "removeUsers": removeUsers.map((e) => e.id).toList(),
+          });
+
+      var decoded = json.decode(response.response);
+      print(decoded);
+
+      return (decoded[0] as int, decoded[1] as int);
+    } catch (e) {
+      if (e is ApiError) {
+        print('Error Code: ${e.code}, Message: ${e.message}');
+      } else {
+        print('Unknown error occurred: $e');
+      }
+    }
+
+    return null;
+  }
+
   List<UserSearchResult> userSearchResultsFromJSON(String str) =>
       List<UserSearchResult>.from(
           json.decode(str).map((x) => UserSearchResult.fromJson(x)));
