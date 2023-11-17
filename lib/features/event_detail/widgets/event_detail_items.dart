@@ -19,7 +19,7 @@ class EventDetailItems extends StatelessWidget {
       itemBuilder: (context, index) {
         if (items.length == 0) {
           return Padding(
-            padding: const EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.symmetric(vertical: 16),
             child: EmtpyListIndicator(text: "não há insumos"),
           );
         }

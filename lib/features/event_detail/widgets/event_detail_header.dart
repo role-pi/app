@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -9,12 +11,11 @@ import 'package:role/shared/widgets/gradient_effect.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 
 class EventDetailHeader extends StatelessWidget {
-  const EventDetailHeader({
-    super.key,
-    required this.event,
-  });
+  const EventDetailHeader(
+      {super.key, required this.event, required this.shrinkOffset});
 
   final Event event;
+  final double shrinkOffset;
 
   @override
   Widget build(BuildContext context) {
@@ -45,63 +46,71 @@ class EventDetailHeader extends StatelessWidget {
                       }));
                     })),
             Spacer(),
-            Padding(
-                padding: EdgeInsets.fromLTRB(32, 0, 32, 32),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Row(
-                          crossAxisAlignment:
-                              provider.event.dateDescription.isEmpty
-                                  ? CrossAxisAlignment.center
-                                  : CrossAxisAlignment.end,
-                          children: [
-                            Consumer<EventDetailProvider>(
-                              builder: (context, provider, child) {
-                                return Expanded(
-                                  child: AutoSizeText(
-                                    provider.event.name,
-                                    style: TextStyle(
-                                        fontSize: 52,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: -2.4,
-                                        height: 1.0),
-                                    maxLines: 2,
-                                    wrapWords: false,
+            shrinkOffset > 30
+                ? SizedBox()
+                : Transform.scale(
+                    scale: max(1 - shrinkOffset / 300.0, 0.0),
+                    child: Opacity(
+                      opacity: max(1 - shrinkOffset / 30.0, 0),
+                      child: Padding(
+                          padding: EdgeInsets.fromLTRB(32, 0, 32, 32),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        provider.event.dateDescription.isEmpty
+                                            ? CrossAxisAlignment.center
+                                            : CrossAxisAlignment.end,
+                                    children: [
+                                      Consumer<EventDetailProvider>(
+                                        builder: (context, provider, child) {
+                                          return Expanded(
+                                            child: AutoSizeText(
+                                              provider.event.name,
+                                              style: TextStyle(
+                                                  fontSize: 52,
+                                                  fontWeight: FontWeight.bold,
+                                                  letterSpacing: -2.4,
+                                                  height: 1.0),
+                                              maxLines: 2,
+                                              wrapWords: false,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      SizedBox(width: 28),
+                                      event.emoji.isNotEmpty
+                                          ? SizedBox(
+                                              width: 72,
+                                              child: Text(
+                                                event.emoji,
+                                                style: TextStyle(
+                                                    fontSize: 72,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            )
+                                          : SizedBox(),
+                                    ],
                                   ),
-                                );
-                              },
-                            ),
-                            SizedBox(width: 28),
-                            event.emoji.isNotEmpty
-                                ? SizedBox(
-                                    // fit: BoxFit.fitWidth,
-                                    width: 72,
-                                    child: Text(
-                                      event.emoji,
-                                      style: TextStyle(
-                                          fontSize: 72,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  )
-                                : SizedBox(),
-                          ],
-                        ),
-                      ),
-                      Consumer<EventDetailProvider>(
-                        builder: (context, provider, child) {
-                          if (provider.event.dateDescription.isEmpty)
-                            return SizedBox();
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 12),
-                            child: ContainerText(
-                                text: provider.event.dateDescription),
-                          );
-                        },
-                      ),
-                    ]))
+                                ),
+                                Consumer<EventDetailProvider>(
+                                  builder: (context, provider, child) {
+                                    if (provider.event.dateDescription.isEmpty)
+                                      return SizedBox();
+                                    return Padding(
+                                      padding: const EdgeInsets.only(top: 12),
+                                      child: ContainerText(
+                                          text: provider.event.dateDescription),
+                                    );
+                                  },
+                                ),
+                              ])),
+                    ),
+                  ),
           ],
         ),
       ))),
@@ -117,11 +126,11 @@ class EventDetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return EventDetailHeader(event: event);
+    return EventDetailHeader(event: event, shrinkOffset: shrinkOffset);
   }
 
   @override
-  double get minExtent => event.dateDescription.isEmpty ? 300.0 : 330.0;
+  double get minExtent => 150.0;
 
   @override
   double get maxExtent => event.dateDescription.isEmpty ? 330.0 : 360.0;

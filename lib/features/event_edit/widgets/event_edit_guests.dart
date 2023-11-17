@@ -54,12 +54,8 @@ class EventEditGuests extends StatelessWidget {
                           return Column(children: [
                             Row(
                               children: [
-                                Consumer<UserLoginProvider>(
-                                    builder: (context, provider, child) {
-                                  return RemoteProfilePicture(
-                                      url: provider.user?.profilePhoto,
-                                      size: 36);
-                                }),
+                                RemoteProfilePicture(
+                                    url: user.profilePhoto, size: 36),
                                 SizedBox(width: 8),
                                 Text('${user.displayName}',
                                     style: TextStyle(

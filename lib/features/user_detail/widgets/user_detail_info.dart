@@ -110,8 +110,16 @@ class UserDetailInfo extends StatelessWidget {
             );
           },
         ),
-        Text(
-            "Você pode informar uma chave Pix para receber pagamentos ao dividir os gastos de um evento. \n\n A chave pode ser CPF, e-mail, telefone ou aleatória, e a validação ocorrerá somente no aplicativo do banco no momento do pagamento."),
+        SizedBox(height: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+            "Você pode informar uma chave Pix para receber pagamentos ao dividir os gastos de um evento. \n\nA chave pode ser CPF, e-mail, telefone ou aleatória, e a validação ocorrerá somente no aplicativo do banco no momento do pagamento.",
+            style: TextStyle(
+                fontSize: 13,
+                color: CupertinoColors.secondaryLabel.resolveFrom(context)),
+          ),
+        ),
       ],
     );
   }

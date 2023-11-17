@@ -10,6 +10,7 @@ import 'package:role/features/event_detail/widgets/event_detail_map.dart';
 import 'package:role/features/new_item/screens/new_item_screen.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/round_button.dart';
+import 'package:snap_scroll_physics/snap_scroll_physics.dart';
 
 class EventDetailScreen extends StatelessWidget {
   EventDetailScreen({required this.id})
@@ -24,9 +25,17 @@ class EventDetailScreen extends StatelessWidget {
       value: eventDetailProvider,
       child: CupertinoPageScaffold(
         child: CustomScrollView(
+          physics: SnapScrollPhysics(snaps: [
+            Snap(200, distance: 50),
+            Snap(200, leadingDistance: 50),
+            Snap(200, trailingDistance: 50),
+            Snap(200, trailingDistance: 50),
+            Snap.avoidZone(0, 200),
+            Snap.avoidZone(0, 200, delimiter: 50),
+          ]),
           slivers: [
             SliverPersistentHeader(
-              pinned: false,
+              pinned: true,
               delegate:
                   EventDetailHeaderDelegate(event: eventDetailProvider.event),
             ),
