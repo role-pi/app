@@ -3,7 +3,7 @@ import 'package:role/shared/utils/serializable.dart';
 
 class Transaction implements JSONSerializable {
   int _id;
-  double _valor;
+  double? _valor;
   DateTime _data;
   String _userName;
   String? _userProfilePicture;
@@ -12,7 +12,7 @@ class Transaction implements JSONSerializable {
 
   Transaction({
     required int id,
-    required double valor,
+    required double? valor,
     required DateTime data,
     required String userName,
     required String? userProfilePicture,
@@ -29,8 +29,8 @@ class Transaction implements JSONSerializable {
   int get id => _id;
   set id(int value) => _id = value;
 
-  double get valor => _valor;
-  set valor(double value) => _valor = value;
+  double? get valor => _valor;
+  set valor(double? value) => _valor = value;
 
   DateTime get data => _data;
   set data(DateTime value) => _data = value;

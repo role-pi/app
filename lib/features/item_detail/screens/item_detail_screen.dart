@@ -134,7 +134,7 @@ class ItemDetailScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     color: CupertinoColors.systemGrey5
                                         .resolveFrom(context)),
-                                child: ItemDetailTransactions()),
+                                child: ItemDetailTransactions(provider)),
                           ),
                         ],
                       ),

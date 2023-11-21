@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:role/features/item_detail/providers/item_detail_provider.dart';
+import 'package:role/features/new_transaction/providers/new_transaction_provider.dart';
+import 'package:role/features/new_transaction/screens/new_transaction_select_user_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
@@ -8,7 +11,11 @@ import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class NewTransactionScreen extends StatelessWidget {
-  NewTransactionScreen() {}
+  NewTransactionScreen(ItemDetailProvider itemDetailProvider) {
+    this.provider = NewTransactionProvider(itemDetailProvider);
+  }
+
+  late final NewTransactionProvider provider;
 
   void show(BuildContext context) {
     ModalPopup(
@@ -27,6 +34,12 @@ class NewTransactionScreen extends StatelessWidget {
         children: [
           ElasticButton(
             onPressed: () {
+              NewTransactionSelectUserModalPopup(
+                      context: context,
+                      onSelected: (user) {},
+                      user: UserLoginProvider.shared.user!,
+                      users: provider.event.users!)
+                  .show();
             },
             child: Container(
               decoration: BoxDecoration(
@@ -41,6 +54,7 @@ class NewTransactionScreen extends StatelessWidget {
                     return RemoteProfilePicture(
                         url: provider.user?.profilePhoto, size: 58);
                   }),
+                  SizedBox(width: 12),
                   Text(
                     "João",
                     style: TextStyle(
