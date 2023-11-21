@@ -48,7 +48,10 @@ class ItemDetailTransactions extends StatelessWidget {
               itemCount: value.item.transactions.length,
               itemBuilder: (context, index) {
                 Transaction transaction = value.item.transactions[index];
-                return ItemDetailTransactionRow(transaction: transaction);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: ItemDetailTransactionRow(transaction: transaction),
+                );
               },
             );
           },

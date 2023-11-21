@@ -11,8 +11,8 @@ class NewTransactionRepository {
       var response = await API().request(
           endpoint: "transaction", method: "POST", body: transaction.toJson());
 
-      List decoded = json.decode(response.response);
-      return decoded[0]["insertId"];
+      Map decoded = json.decode(response.response);
+      return decoded["insertId"];
     } catch (e) {
       if (e is ApiError) {
         print('Error Code: ${e.code}, Message: ${e.message}');

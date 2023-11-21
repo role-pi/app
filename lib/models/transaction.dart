@@ -51,6 +51,7 @@ class Transaction implements JSONSerializable {
       "transactionId": id,
       "date": formatter.format(data),
       "amount": valor,
+      "newUserId": user.id,
       "itemId": itemId
     };
   }
