@@ -18,8 +18,6 @@ class EventList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     EventListProvider usersViewModel = context.watch<EventListProvider>();
-    Color backgroundColor = CupertinoDynamicColor.resolve(
-        CupertinoColors.systemBackground, context);
 
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -68,24 +66,38 @@ class EventList extends StatelessWidget {
             )
           ]),
         ),
-        IgnorePointer(
-          child: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.center,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                backgroundColor.withOpacity(0),
-                backgroundColor.withOpacity(0),
-                backgroundColor.withOpacity(0.2),
-                backgroundColor.withOpacity(0.9)
-              ]))),
-        ),
+        FadedBackgroundWidget(),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 48),
           child: CircleButton(onTap: onTap),
         ),
       ],
+    );
+  }
+}
+
+class FadedBackgroundWidget extends StatelessWidget {
+  const FadedBackgroundWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = CupertinoDynamicColor.resolve(
+        CupertinoColors.systemBackground, context);
+
+    return IgnorePointer(
+      child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.center,
+                  end: Alignment.bottomCenter,
+                  colors: [
+            backgroundColor.withOpacity(0),
+            backgroundColor.withOpacity(0),
+            backgroundColor.withOpacity(0.2),
+            backgroundColor.withOpacity(0.9)
+          ]))),
     );
   }
 }

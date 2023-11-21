@@ -3,6 +3,7 @@ import 'package:role/shared/widgets/elastic_button.dart';
 
 class RoundButton extends StatelessWidget {
   final String text;
+  final IconData? icon;
   final Color textColor;
   final Color rectangleColor;
   final Alignment alignment;
@@ -11,6 +12,7 @@ class RoundButton extends StatelessWidget {
 
   RoundButton({
     required this.text,
+    this.icon,
     this.textColor = CupertinoColors.systemBackground,
     this.rectangleColor = CupertinoColors.label,
     this.alignment = Alignment.center,
@@ -31,14 +33,22 @@ class RoundButton extends StatelessWidget {
                   onPressed != null ? BlendMode.srcIn : BlendMode.luminosity),
           child: Align(
             alignment: alignment,
-            child: Text(
-              text,
-              style: TextStyle(
-                color: CupertinoDynamicColor.resolve(textColor, context),
-                fontSize: 23,
-                letterSpacing: -1.5,
-                fontWeight: FontWeight.bold,
-              ),
+            child: Row(
+              children: [
+                Spacer(),
+                Icon(icon, size: 23, color: CupertinoColors.systemBackground.resolveFrom(context)),
+                SizedBox(width: 8),
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: CupertinoDynamicColor.resolve(textColor, context),
+                    fontSize: 23,
+                    letterSpacing: -1.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Spacer(),
+              ],
             ),
           ),
         ),
