@@ -32,7 +32,7 @@ Widget build(BuildContext context) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("no total você participou de", style: TextStyle(color: const Color.fromARGB(255, 110, 109, 109), fontSize: 25),),
+                        Text("No total você participou de", style: TextStyle(color: const Color.fromARGB(255, 110, 109, 109), fontSize: 25),),
                         SizedBox(height: 8),
                         Text("12 eventos", style: TextStyle(color: Colors.black, fontSize: 50, fontWeight: FontWeight.bold)),
                         SizedBox(height: 8),
@@ -40,7 +40,7 @@ Widget build(BuildContext context) {
                         SizedBox(height: 8),
                         Text("R\$ 560,43", style: TextStyle(color: Colors.black, fontSize: 50, fontWeight: FontWeight.bold)),
                         SizedBox(height: 8),
-                        Text("R\$ 46,96 em média", style: TextStyle(color: const Color.fromARGB(255, 110, 109, 109), fontSize: 25),),
+                        Text("R\$ 46,96 em média", style: TextStyle(color: Color.fromARGB(255, 12, 11, 11), fontSize: 25),),
                         SizedBox(height: 8),
                         Text("O seu Insumo mais recorrente é", style: TextStyle(color: const Color.fromARGB(255, 110, 109, 109), fontSize: 25),),
                       ],
@@ -60,7 +60,7 @@ Widget build(BuildContext context) {
                 },
                 rectangleColor: CupertinoColors.black,
                 textColor: CupertinoColors.white,
-                text: "salvar",
+                text: "Salvar",
               ),
                         ),
             ),
@@ -104,6 +104,7 @@ class UsageReportHeaderDelegate extends SliverPersistentHeaderDelegate {
                       ],
                     ),
                     SizedBox(height: 15,),
+                  
                     ContainerText(text: "Membro desde 2020")
                   ],
                 ),
