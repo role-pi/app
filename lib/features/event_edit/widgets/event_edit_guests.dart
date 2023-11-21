@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/features/event_edit/screens/add_guests_screen.dart';
-import 'package:role/features/user_login/providers/user_login_provider.dart';
-import 'package:role/models/event.dart';
 import 'package:role/models/user.dart';
+import 'package:role/shared/widgets/dismissible_exclusion_background.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
@@ -39,9 +39,7 @@ class EventEditGuests extends StatelessWidget {
               padding: const EdgeInsets.all(0.0),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Consumer<EventEditProvider>(
+                  Consumer<EventEditProvider>(
                         builder: (context, value, child) {
                       return ListView.builder(
                         padding: EdgeInsets.zero,
@@ -51,41 +49,49 @@ class EventEditGuests extends StatelessWidget {
                         itemBuilder: (context, index) {
                           User user = value.event.users![index];
                           return Column(children: [
-                            Row(
-                              children: [
-                                RemoteProfilePicture(
-                                    url: user.profilePhoto, size: 36),
-                                SizedBox(width: 8),
-                                Text('${user.displayName}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: -0.5)),
-                                Spacer(),
-                                ElasticButton(
-                                  onPressed: () async {
-                                    if (await provider
-                                        .showDeletionDialog(context)) {
-                                      provider.removeUser(context, user);
-                                    }
-                                  },
-                                  child: Icon(
-                                    CupertinoIcons.delete_simple,
-                                    size: 22,
-                                    color: CupertinoDynamicColor.resolve(
-                                        CupertinoColors.secondaryLabel,
-                                        context),
-                                  ),
-                                )
-                              ],
+                            Dismissible(
+                                key: UniqueKey(),
+                                direction: DismissDirection.endToStart,
+                                background: DismissibleExclusionBackground(size: 22, cornerRadius: 0,),
+                                confirmDismiss: (direction) async =>
+                                    await provider.showDeletionDialog(context),
+                                onDismissed: (direction) async =>
+                                    await provider.removeUser(context, user),
+                                                  child: Padding(
+                                                    padding: EdgeInsets.fromLTRB(16, index == 0 ? 16 : 8, 16, index+1 == value.event.users?.length ? 16 : 8),
+                                                    child: Row(
+                                            children: [
+                                              RemoteProfilePicture(
+                                                  url: user.profilePhoto, size: 36),
+                                              SizedBox(width: 8),
+                                              Text('${user.displayName}',
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w600,
+                                                      letterSpacing: -0.5)),
+                                              Spacer(),
+                                              ElasticButton(
+                                                onPressed: () async {
+                                                  if (await provider
+                                                      .showDeletionDialog(context)) {
+                                                    provider.removeUser(context, user);
+                                                  }
+                                                },
+                                                child: Icon(
+                                                  CupertinoIcons.delete_simple,
+                                                  size: 22,
+                                                  color: CupertinoDynamicColor.resolve(
+                                                      CupertinoColors.secondaryLabel,
+                                                      context),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                                  ),
                             ),
-                            SizedBox(
-                                height: index == value.event.users!.length - 1
-                                    ? 0
-                                    : 16),
                           ]);
                         },
                       );
-                    }),
+                    }
                   ),
                   Container(
                     color: provider.event.color1.withOpacity(0.1),

@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 
 class DismissibleExclusionBackground extends StatelessWidget {
   final double size;
+  final double cornerRadius;
 
-  const DismissibleExclusionBackground({super.key, this.size = 48});
+  const DismissibleExclusionBackground({super.key, this.size = 48, this.cornerRadius = 16});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class DismissibleExclusionBackground extends StatelessWidget {
         Container(
             decoration: BoxDecoration(
                 color: CupertinoColors.destructiveRed,
-                borderRadius: BorderRadius.circular(16))),
+                borderRadius: BorderRadius.circular(cornerRadius))),
         Padding(
           padding: const EdgeInsets.only(right: 16.0),
           child: Icon(
