@@ -6,6 +6,7 @@ import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
+import 'package:share_plus/share_plus.dart';
 
 class UsageReportScreen extends StatelessWidget {
   const UsageReportScreen({Key? key}) : super(key: key);
@@ -56,11 +57,12 @@ Widget build(BuildContext context) {
               
               height: 60,
               child: RoundButton(
-                onPressed: () async {
+                onPressed: ()  {
+                   Share.share('Compartilhar');
                 },
                 rectangleColor: CupertinoColors.black,
                 textColor: CupertinoColors.white,
-                text: "Salvar",
+                text: "Salvar e Compartilhar",
               ),
                         ),
             ),
