@@ -16,7 +16,6 @@ class NewTransactionProvider extends ChangeNotifier {
 
   NewTransactionRepository repository = NewTransactionRepository();
 
-  late User user;
   late TextEditingController valueController;
   late bool _changed = false;
   late bool _loading = false;
@@ -31,20 +30,10 @@ class NewTransactionProvider extends ChangeNotifier {
     valueController = TextEditingController();
     valueController.addListener(_valueChanged);
 
-    transaction = Transaction(
-        id: 0,
-        valor: 0,
-        userId: 0,
-        userName: "",
-        userProfilePicture: null,
-        itemId: item.id,
-        data: DateTime.now());
-
     User? user = UserLoginProvider.shared.user;
     if (user != null) {
-      transaction.userId = user.id;
-      transaction.userName = user.displayName;
-      transaction.userProfilePicture = user.profilePhoto;
+      transaction = Transaction(
+          id: 0, valor: 0, user: user, data: DateTime.now(), itemId: item.id);
     }
 
     fToast = FToast();
@@ -101,6 +90,11 @@ class NewTransactionProvider extends ChangeNotifier {
     double? value = double.tryParse(valueController.text);
     transaction.valor = value;
     updateChanged();
+    notifyListeners();
+  }
+
+  selectUser(User user) {
+    transaction.user = user;
     notifyListeners();
   }
 
