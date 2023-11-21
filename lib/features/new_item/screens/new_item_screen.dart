@@ -10,10 +10,10 @@ import 'package:role/shared/widgets/round_button.dart';
 
 class NewItemScreen extends StatelessWidget {
   NewItemScreen(EventDetailProvider eventDetailProvider) {
-    this.newItemProvider = NewItemProvider(eventDetailProvider);
+    this.provider = NewItemProvider(eventDetailProvider);
   }
 
-  late final NewItemProvider newItemProvider;
+  late final NewItemProvider provider;
 
   void show(BuildContext context) {
     ModalPopup(
@@ -24,7 +24,7 @@ class NewItemScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-      value: newItemProvider,
+      value: provider,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24.0, 0, 24.0, 32.0),
         child: Column(
@@ -36,7 +36,7 @@ class NewItemScreen extends StatelessWidget {
                   child: Consumer<NewItemProvider>(
                     builder: (context, value, child) {
                       return FormItemTextField(
-                        controller: newItemProvider.nameController,
+                        controller: provider.nameController,
                         title: "nome",
                         enabled: !value.loading,
                       );
@@ -49,9 +49,9 @@ class NewItemScreen extends StatelessWidget {
                     ItemCategoryPickerModalPopup(
                             context: context,
                             onSelected: (caegory) {
-                              newItemProvider.category = caegory;
+                              provider.category = caegory;
                             },
-                            category: newItemProvider.item.category)
+                            category: provider.item.category)
                         .show();
                   },
                   child: Container(
@@ -77,7 +77,7 @@ class NewItemScreen extends StatelessWidget {
             Consumer<NewItemProvider>(
               builder: (context, value, child) {
                 return FormItemTextField(
-                  controller: newItemProvider.valueController,
+                  controller: provider.valueController,
                   title: "valor",
                   enabled: !value.loading,
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -91,10 +91,10 @@ class NewItemScreen extends StatelessWidget {
                   text: "adicionar",
                   onPressed: value.changed
                       ? () {
-                          newItemProvider.addItem(context);
+                          provider.addItem(context);
                         }
                       : null,
-                  rectangleColor: newItemProvider.event.color2,
+                  rectangleColor: provider.event.color2,
                   textColor: CupertinoColors.white,
                 );
               },

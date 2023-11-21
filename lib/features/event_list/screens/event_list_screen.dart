@@ -16,7 +16,7 @@ class _EventListScreenState extends State<EventListScreen> {
 
   Duration duration = Duration(milliseconds: 200);
   Curve curve = Curves.easeInOutQuad;
-
+// mudar ListWheelScrollView
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

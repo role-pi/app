@@ -20,7 +20,7 @@ class UserDetailExtras extends StatelessWidget {
           textColor: CupertinoColors.systemRed,
           text: 'log out',
         ),
-        SizedBox(height: 24),
+        SizedBox(height: 6),
         Text(
           "desenvolvido no ifsc gaspar",
           style: TextStyle(

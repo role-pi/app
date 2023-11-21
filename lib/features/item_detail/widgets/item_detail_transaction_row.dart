@@ -18,12 +18,12 @@ class ItemDetailTransactionRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         RemoteProfilePicture(
-          url: transaction.userProfilePicture,
+          url: transaction.user.profilePhoto,
           size: 42,
         ),
         SizedBox(width: 12),
         Expanded(
-          child: AutoSizeText(transaction.userName,
+          child: AutoSizeText(transaction.user.displayName,
               maxLines: 1,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
@@ -34,7 +34,7 @@ class ItemDetailTransactionRow extends StatelessWidget {
         SizedBox(width: 12),
         ContainerText(
           text:
-              "R\$ ${transaction.valor.toStringAsFixed(2).replaceAll(".", ",")}",
+              "R\$ ${(transaction.valor ?? 0).toStringAsFixed(2).replaceAll(".", ",")}",
           size: 18,
         )
       ],

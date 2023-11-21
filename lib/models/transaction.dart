@@ -1,48 +1,37 @@
 import 'package:intl/intl.dart';
+import 'package:role/models/user.dart';
 import 'package:role/shared/utils/serializable.dart';
 
 class Transaction implements JSONSerializable {
   int _id;
-  double _valor;
+  double? _valor;
   DateTime _data;
-  String _userName;
-  String? _userProfilePicture;
-  int _userId;
+  User _user;
   int _itemId;
 
   Transaction({
     required int id,
-    required double valor,
+    required double? valor,
     required DateTime data,
-    required String userName,
-    required String? userProfilePicture,
-    required int userId,
+    required User user,
     required int itemId,
   })  : _id = id,
         _valor = valor,
         _data = data,
-        _userName = userName,
-        _userProfilePicture = userProfilePicture,
-        _userId = userId,
+        _user = user,
         _itemId = itemId;
 
   int get id => _id;
   set id(int value) => _id = value;
 
-  double get valor => _valor;
-  set valor(double value) => _valor = value;
+  double? get valor => _valor;
+  set valor(double? value) => _valor = value;
 
   DateTime get data => _data;
   set data(DateTime value) => _data = value;
 
-  String get userName => _userName;
-  set userName(String value) => _userName = value;
-
-  String? get userProfilePicture => _userProfilePicture;
-  set userProfilePicture(String? value) => _userProfilePicture = value;
-
-  int get userId => _userId;
-  set userId(int value) => _userId = value;
+  User get user => _user;
+  set user(User value) => _user = value;
 
   int get itemId => _itemId;
   set itemId(int value) => _itemId = value;
@@ -52,9 +41,7 @@ class Transaction implements JSONSerializable {
       id: json["id_transacao"],
       valor: double.parse(json["valor"]),
       data: DateTime.parse(json["data"]),
-      userName: json["nome"],
-      userProfilePicture: json["foto_de_perfil_url"],
-      userId: json["id_usuario"],
+      user: User.fromJson(json),
       itemId: json["insumos_id_insumo"]);
 
   @override

@@ -8,7 +8,10 @@ import 'package:role/models/transaction.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
 class ItemDetailTransactions extends StatelessWidget {
-  ItemDetailTransactions({Key? key}) : super(key: key);
+  ItemDetailTransactions(ItemDetailProvider itemDetailProvider)
+      : provider = itemDetailProvider;
+
+  late final ItemDetailProvider provider;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class ItemDetailTransactions extends StatelessWidget {
             Spacer(),
             ElasticButton(
               onPressed: () {
-                NewTransactionScreen().show(context);
+                NewTransactionScreen(provider).show(context);
               },
               child: Icon(Icons.add,
                   color: CupertinoColors.label.resolveFrom(context), size: 28),

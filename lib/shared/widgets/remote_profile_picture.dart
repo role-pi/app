@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:role/shared/widgets/default_user_icon.dart';
 
@@ -19,25 +20,18 @@ class RemoteProfilePicture extends StatelessWidget {
         height: size,
         child: Builder(builder: (context) {
           if (url?.isNotEmpty == true) {
-            return Image.network(
-              url ?? "",
+            return CachedNetworkImage(
+              imageUrl: url ?? "",
               fit: BoxFit.fill,
               width: size,
               height: size,
               colorBlendMode: colorBlendMode,
-              errorBuilder: (context, error, stackTrace) {
-                return DefaultUserIcon(
-                  size: size,
-                );
-              },
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) {
-                  return child;
-                }
-                return DefaultUserIcon(
-                  size: size,
-                );
-              },
+              placeholder: (context, url) => DefaultUserIcon(
+                size: size,
+              ),
+              errorWidget: (context, url, error) => DefaultUserIcon(
+                size: size,
+              ),
             );
           }
 
