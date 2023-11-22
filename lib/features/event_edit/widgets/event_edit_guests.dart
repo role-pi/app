@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/features/event_edit/screens/add_guests_screen.dart';

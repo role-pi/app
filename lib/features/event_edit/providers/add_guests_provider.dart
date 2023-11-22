@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pinput/pinput.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/features/event_edit/repository/event_edit_repository.dart';
-import 'package:role/features/event_detail/providers/event_detail_provider.dart';
-import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
