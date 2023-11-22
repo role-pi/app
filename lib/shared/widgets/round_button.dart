@@ -36,7 +36,12 @@ class RoundButton extends StatelessWidget {
             child: Row(
               children: [
                 Spacer(),
-                Icon(icon, size: 23, color: CupertinoColors.systemBackground.resolveFrom(context)),
+                icon != null
+                    ? Icon(icon,
+                        size: 23,
+                        color: CupertinoColors.systemBackground
+                            .resolveFrom(context))
+                    : SizedBox(),
                 SizedBox(width: 8),
                 Text(
                   text,

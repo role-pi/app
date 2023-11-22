@@ -110,7 +110,7 @@ class UsageReportHeaderDelegate extends SliverPersistentHeaderDelegate {
         children: [
           Row(
             children: [
-              Text("Relatório de Uso",
+              Text("relatório de uso",
                   style: TextStyle(color: CupertinoColors.white, fontSize: 30)),
             ],
           ),

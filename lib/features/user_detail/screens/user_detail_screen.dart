@@ -15,43 +15,47 @@ class UserDetailScreen extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: userDetailProvider,
       child: CupertinoPageScaffold(
-        child: Center(
-          child: Column(
-            children: [
-              Consumer<UserDetailProvider>(
-                builder: (context, value, child) {
-                  return CustomNavigationBar(
-                    leadingIcon: null,
-                    leadingText: "opções de conta",
-                    trailingText: "salvar",
-                    accentColor: CupertinoColors.activeBlue,
-                    onPressedTrailing: value.changed && !value.loading
-                        ? () {
-                            userDetailProvider.updateUser(context);
-                          }
-                        : null,
-                    topPadding: 0,
-                  );
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height - 250,
-                  child: Column(
-                    children: [
-                      UserDetailInfo(),
-                      SizedBox(height: 8),
-                      Divider(),
-                      SizedBox(height: 8),
-                      UserDetailOptions(),
-                      Spacer(),
-                      UserDetailExtras(),
-                    ],
+        child: SingleChildScrollView(
+          child: Expanded(
+            child: Column(
+              children: [
+                Consumer<UserDetailProvider>(
+                  builder: (context, value, child) {
+                    return CustomNavigationBar(
+                      leadingIcon: null,
+                      leadingText: "opções de conta",
+                      trailingText: "salvar",
+                      accentColor: CupertinoColors.activeBlue,
+                      onPressedTrailing: value.changed && !value.loading
+                          ? () {
+                              userDetailProvider.updateUser(context);
+                            }
+                          : null,
+                      topPadding: 0,
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(
+                      children: [
+                        UserDetailInfo(),
+                        SizedBox(height: 8),
+                        Divider(),
+                        SizedBox(height: 8),
+                        UserDetailOptions(),
+                        SizedBox(height: 8),
+                        Divider(),
+                        SizedBox(height: 8),
+                        UserDetailExtras(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

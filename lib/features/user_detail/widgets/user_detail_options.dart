@@ -33,7 +33,7 @@ class UserDetailOptions extends StatelessWidget {
               RoundButton(
                 onPressed: () => showPopup(context),
                 rectangleColor: CupertinoColors.systemRed,
-                textColor: CupertinoColors.label.resolveFrom(context),
+                textColor: CupertinoColors.white,
                 text: 'excluir conta',
                 alignment: Alignment.centerLeft,
               ),
