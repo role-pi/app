@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:role/features/edit_transaction/screens/edit_transaction_screen.dart';
 import 'package:role/features/item_detail/providers/item_detail_provider.dart';
 import 'package:role/features/item_detail/widgets/item_detail_transaction_row.dart';
 import 'package:role/features/new_transaction/screens/new_transaction_screen.dart';
@@ -48,9 +49,14 @@ class ItemDetailTransactions extends StatelessWidget {
               itemCount: value.item.transactions.length,
               itemBuilder: (context, index) {
                 Transaction transaction = value.item.transactions[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ItemDetailTransactionRow(transaction: transaction),
+                return ElasticButton(
+                  onPressed: () {
+                    EditTransactionScreen(provider, transaction).show(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: ItemDetailTransactionRow(transaction: transaction),
+                  ),
                 );
               },
             );

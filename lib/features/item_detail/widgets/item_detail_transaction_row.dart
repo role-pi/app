@@ -34,7 +34,7 @@ class ItemDetailTransactionRow extends StatelessWidget {
         SizedBox(width: 12),
         ContainerText(
           text:
-              "R\$ ${(transaction.valor ?? 0).toStringAsFixed(2).replaceAll(".", ",")}",
+              "R\$ ${(transaction.amount ?? 0).toStringAsFixed(2).replaceAll(".", ",")}",
           size: 18,
         )
       ],

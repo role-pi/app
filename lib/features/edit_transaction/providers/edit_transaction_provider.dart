@@ -1,20 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:role/features/edit_transaction/repository/edit_transaction_repository.dart';
 import 'package:role/features/item_detail/providers/item_detail_provider.dart';
-import 'package:role/features/new_transaction/repository/new_transaction_repository.dart';
-import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
 import 'package:role/models/transaction.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
-class NewTransactionProvider extends ChangeNotifier {
+class EditTransactionProvider extends ChangeNotifier {
   late ItemDetailProvider itemDetailProvider;
   Item get item => itemDetailProvider.item;
   Event get event => itemDetailProvider.event;
 
-  NewTransactionRepository repository = NewTransactionRepository();
+  EditTransactionRepository repository = EditTransactionRepository();
 
   late TextEditingController valueController;
   late bool _changed = false;
@@ -24,39 +23,37 @@ class NewTransactionProvider extends ChangeNotifier {
 
   late FToast fToast;
 
-  NewTransactionProvider(ItemDetailProvider itemDetailProvider) {
+  EditTransactionProvider(
+      ItemDetailProvider itemDetailProvider, Transaction transaction) {
     this.itemDetailProvider = itemDetailProvider;
 
-    valueController = TextEditingController();
+    valueController =
+        TextEditingController(text: transaction.amount.toString());
     valueController.addListener(_valueChanged);
 
-    User? user = UserLoginProvider.shared.user;
-    if (user != null) {
-      transaction = Transaction(
-          id: 0, amount: 0, user: user, date: DateTime.now(), itemId: item.id);
-    }
+    this.transaction = transaction;
 
     fToast = FToast();
   }
 
-  addTransaction(BuildContext context) async {
+  updateTransaction(BuildContext context) async {
     changed = false;
     loading = true;
 
-    int? result = await repository.postTransaction(transaction);
+    int? result = await repository.putTransaction(transaction);
 
     fToast.init(context);
     Widget toast;
 
     if (result != null) {
       toast = CustomToast(
-          title: "transação adicionada com id $result",
+          title: "transação atualizada",
           icon: CupertinoIcons.checkmark,
           color: event.color1);
       Navigator.of(context).pop();
     } else {
       toast = CustomToast(
-          title: "erro ao adicionar transação",
+          title: "erro ao atualizar transação",
           icon: CupertinoIcons.xmark,
           color: CupertinoColors.systemRed);
       loading = false;
@@ -91,6 +88,14 @@ class NewTransactionProvider extends ChangeNotifier {
     transaction.amount = value;
     updateChanged();
     notifyListeners();
+  }
+
+  dateChanged(DateTime? date) {
+    if (date != null) {
+      transaction.date = date;
+      updateChanged();
+      notifyListeners();
+    }
   }
 
   selectUser(User user) {

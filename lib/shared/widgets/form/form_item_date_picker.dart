@@ -6,7 +6,8 @@ import 'package:role/shared/widgets/modal_popup.dart';
 class FormItemDatePicker extends FormField<DateTime> {
   FormItemDatePicker({
     Key? key,
-    title,
+    required String title,
+    bool nullable = true,
     required DateTime? initialValue,
     FormFieldSetter<DateTime>? onSaved,
     FormFieldValidator<DateTime>? validator,
@@ -19,6 +20,7 @@ class FormItemDatePicker extends FormField<DateTime> {
           builder: (FormFieldState<DateTime> state) {
             return _DatePickerButton(
               title: title,
+              nullable: nullable,
               dateTime: state.value,
               onDateTimeChanged: (newDateTime) {
                 state.didChange(newDateTime);
@@ -35,11 +37,13 @@ class FormItemDatePicker extends FormField<DateTime> {
 class _DatePickerButton extends StatelessWidget {
   const _DatePickerButton({
     required this.title,
+    required this.nullable,
     required this.dateTime,
     required this.onDateTimeChanged,
   });
 
   final String title;
+  final bool nullable;
   final DateTime? dateTime;
   final Function(DateTime?) onDateTimeChanged;
 
@@ -80,7 +84,7 @@ class _DatePickerButton extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                if (dateTime != null)
+                if (dateTime != null && nullable)
                   GestureDetector(
                     onTap: () {
                       onDateTimeChanged(null);

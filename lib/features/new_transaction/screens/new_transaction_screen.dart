@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/item_detail/providers/item_detail_provider.dart';
 import 'package:role/features/new_transaction/providers/new_transaction_provider.dart';
-import 'package:role/features/new_transaction/screens/new_transaction_select_user_screen.dart';
+import 'package:role/shared/widgets/select_user_modal.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
-import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class NewTransactionScreen extends StatelessWidget {
@@ -36,40 +35,15 @@ class NewTransactionScreen extends StatelessWidget {
           children: [
             Consumer<NewTransactionProvider>(builder: (context, value, child) {
               return ElasticButton(
-                onPressed: () {
-                  NewTransactionSelectUserModalPopup(
-                          context: context,
-                          onSelected: provider.selectUser,
-                          user: UserLoginProvider.shared.user!,
-                          users: provider.event.users!)
-                      .show();
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: CupertinoColors.systemGrey6.resolveFrom(context),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 11.0, horizontal: 13),
-                  child: Row(
-                    children: [
-                      Consumer<UserLoginProvider>(
-                          builder: (context, provider, child) {
-                        return RemoteProfilePicture(
-                            url: value.transaction.user.profilePhoto, size: 58);
-                      }),
-                      SizedBox(width: 12),
-                      Text(
-                        value.transaction.user.displayName,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: -1.5,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
+                  onPressed: () {
+                    SelectUserModalPopup(
+                            context: context,
+                            onSelected: provider.selectUser,
+                            user: UserLoginProvider.shared.user!,
+                            users: provider.event.users!)
+                        .show();
+                  },
+                  child: SelectUserPreviewButton(user: value.transaction.user));
             }),
             SizedBox(height: 12),
             FormItemTextField(
