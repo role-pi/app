@@ -5,7 +5,7 @@ import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
-
+import 'package:role/shared/widgets/round_button.dart';
 import '../../user_login/providers/user_login_provider.dart';
 
 class UserDetailInfo extends StatelessWidget {
@@ -99,17 +99,28 @@ class UserDetailInfo extends StatelessWidget {
         SizedBox(height: 12),
         Divider(),
         SizedBox(height: 12),
-        Consumer<UserDetailProvider>(
-          builder: (context, value, child) {
-            return FormItemTextField(
-              controller: provider.pixKeyController,
-              title: "chave pix",
-              padding: EdgeInsets.all(4.0),
-              enabled: !value.loading,
-              textSize: 16.0,
-            );
-          },
+
+        Row(
+          children: [
+            RoundButton(
+              onPressed: () {},
+              children: [
+                Consumer<UserDetailProvider>(
+                  builder: (context, value, child) {
+                    return FormItemTextField(
+                      controller: provider.pixKeyController,
+                      title: "chave pix",
+                      padding: EdgeInsets.all(4.0),
+                      enabled: !value.loading,
+                      textSize: 16.0,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
+        
         SizedBox(height: 12),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
