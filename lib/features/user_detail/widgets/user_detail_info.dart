@@ -103,7 +103,7 @@ class UserDetailInfo extends StatelessWidget {
 
        RoundButton(
           onPressed: () async {
-            NewPixKeyScreen(userDetailProvider).show(context);
+            NewPixKeyScreen().show(context);
           }, 
           rectangleColor: CupertinoColors.systemGrey6,
           textColor: CupertinoColors.label,

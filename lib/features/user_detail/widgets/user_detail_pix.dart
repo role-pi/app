@@ -5,10 +5,8 @@ import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
 
 class NewPixKeyScreen extends StatelessWidget{
-  NewPixKeyScreen(UserDetailProvider userDetailProvider){
-    this.provider = pixKeyController(userDetailProvider);
+  NewPixKeyScreen(){
   }
-  late final pixKeyController provider;
 
   void show(BuildContext context) {
     ModalPopup(
@@ -18,9 +16,10 @@ class NewPixKeyScreen extends StatelessWidget{
   
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: provider,
-      child: Padding(padding: const EdgeInsets.fromLTRB(24.0, 0, 24.0, 32.0),
+    UserDetailProvider provider = 
+        Provider.of<UserDetailProvider>(context, listen: false);
+
+    return Padding(padding: const EdgeInsets.fromLTRB(24.0, 0, 24.0, 32.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -50,7 +49,6 @@ class NewPixKeyScreen extends StatelessWidget{
           ),
         ],
       ),
-      ),
-    );
+      );
   }
 }
