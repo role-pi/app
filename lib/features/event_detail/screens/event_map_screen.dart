@@ -1,29 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'package:role/features/event_detail/widgets/event_detail_map.dart';
-import 'package:role/models/location.dart';
-import 'package:role/shared/widgets/custom_navigation_bar.dart';
+import 'package:map_location_picker/map_location_picker.dart';
 
 class EventMapScreen extends StatelessWidget {
   final Color color;
-  final Location endereco;
 
-  EventMapScreen({required this.color, required this.endereco});
+  EventMapScreen({required this.color});
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      child: Column(
-        children: [
-          CustomNavigationBar(
-              leadingText: "voltar",
-              trailingIcon: CupertinoIcons.pencil,
-              onPressedLeading: () {
-                Navigator.of(context).pop();
-              },
-              onPressedTrailing: () {}),
-          Expanded(child: EventStyledMap(color: color, endereco: endereco)),
-        ],
-      ),
-    );
+        child: MapLocationPicker(
+      apiKey: "AIzaSyDlL4sUMUqmLeFOvQiqs3JtQ7kppZtha14",
+      onNext: (GeocodingResult? result) {},
+    ));
   }
 }

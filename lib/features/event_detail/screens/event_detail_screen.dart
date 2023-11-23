@@ -75,7 +75,6 @@ class EventDetailScreen extends StatelessWidget {
                           CupertinoPageRoute(
                             builder: (context) => EventMapScreen(
                               color: eventDetailProvider.event.color2,
-                              endereco: eventDetailProvider.event.endereco,
                             ),
                           ),
                         );
