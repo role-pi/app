@@ -2,17 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
+import 'package:role/features/user_detail/widgets/user_detail_pix.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
-import 'package:role/shared/widgets/modal_popup.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
 import '../../user_login/providers/user_login_provider.dart';
+
 class UserDetailInfo extends StatelessWidget {
   UserDetailProvider get provider => UserDetailProvider.shared;
   const UserDetailInfo({
-    super.key,
+    super.key, required this.userDetailProvider,
   });
+  final UserDetailProvider userDetailProvider;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -97,38 +100,15 @@ class UserDetailInfo extends StatelessWidget {
         SizedBox(height: 12),
         Divider(),
         SizedBox(height: 12),
-       
-        Consumer<UserDetailProvider>(
-          builder: (context, value, child) {
-            return FormItemTextField(
-              controller: provider.pixKeyController,
-              title: "chave pix",
-              padding: EdgeInsets.all(4.0),
-              enabled: !value.loading,
-              textSize: 16.0,
-            );
-          },
-        ),
-        RoundButton( 
-          text: "chave pix", onPressed: (
-            ModalPopup(
-            ),
-          )  {
 
-          },
-        ),
-        Text(
-            "Você pode informar uma chave Pix para receber pagamentos ao dividir os gastos de um evento. \n\n A chave pode ser CPF, e-mail, telefone ou aleatória, e a validação ocorrerá somente no aplicativo do banco no momento do pagamento."),
-        SizedBox(height: 12),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(
-            "Você pode informar uma chave Pix para receber pagamentos ao dividir os gastos de um evento. \n\nA chave pode ser CPF, e-mail, telefone ou aleatória, e a validação ocorrerá somente no aplicativo do banco no momento do pagamento.",
-            style: TextStyle(
-                fontSize: 13,
-                color: CupertinoColors.secondaryLabel.resolveFrom(context)),
-          ),
-        ),
+       RoundButton(
+          onPressed: () async {
+            NewPixKeyScreen(userDetailProvider).show(context);
+          }, 
+          rectangleColor: CupertinoColors.systemGrey6,
+          textColor: CupertinoColors.label,
+          text: 'chave pix',
+        ), 
       ],
     );
   }
