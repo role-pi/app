@@ -12,3 +12,6 @@ const userInvalidResponse = 100;
 const noInternet = 101;
 const invalidFormat = 102;
 const unknownError = 103;
+
+// Google Maps API
+const apiKey = "AIzaSyDRphIYLhzVvBg0FVeKTpbGU33JfwBGuFE";

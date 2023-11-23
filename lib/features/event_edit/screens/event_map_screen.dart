@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:map_location_picker/map_location_picker.dart'
     as location_picker;
+import 'package:role/features/event_edit/providers/event_edit_provider.dart';
 import 'package:role/models/location.dart';
+import 'package:role/shared/utils/constants.dart';
 
 class EventMapScreen extends StatelessWidget {
-  final Color color;
-  final Location location;
+  late final EventEditProvider provider;
 
-  EventMapScreen({required this.color, required this.location});
+  EventMapScreen(EventEditProvider eventEditProvider) {
+    this.provider = eventEditProvider;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +19,19 @@ class EventMapScreen extends StatelessWidget {
       searchHintText: "pesquise um local...",
       hideMapTypeButton: true,
       hideLocationButton: true,
-      currentLatLng: location.latLng,
+      currentLatLng: provider.event.location.latLng,
       topCardMargin: EdgeInsets.all(16),
       bottomCardIcon: Icon(CupertinoIcons.checkmark, size: 28),
       bottomCardMargin: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
       bottomCardTooltip: "confirmar local",
-      apiKey: "AIzaSyDRphIYLhzVvBg0FVeKTpbGU33JfwBGuFE",
+      apiKey: apiKey,
       onNext: (location_picker.GeocodingResult? result) {
-        Navigator.pop(
-            context,
-            Location(
-              latitude: result!.geometry.location.lat,
-              longitude: result.geometry.location.lng,
-              descricao: result.formattedAddress ?? "",
-            ));
+        provider.event.location = Location(
+          latitude: result!.geometry.location.lat,
+          longitude: result.geometry.location.lng,
+          descricao: result.formattedAddress ?? "",
+        );
+        Navigator.pop(context);
       },
     ));
   }

@@ -6,6 +6,7 @@ import 'package:role/features/event_detail/repository/event_detail_repository.da
 import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
+import 'package:role/models/location.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
@@ -15,7 +16,7 @@ class EventDetailProvider extends ChangeNotifier {
 
   Event get event => eventListProvider.event(id);
 
-  EventDetailRepository eventRepository = EventDetailRepository();
+  EventDetailRepository repository = EventDetailRepository();
 
   FToast fToast = FToast();
 
@@ -68,7 +69,7 @@ class EventDetailProvider extends ChangeNotifier {
   }
 
   deleteItem(Item item, BuildContext context) async {
-    bool result = await eventRepository.deleteItem(item);
+    bool result = await repository.deleteItem(item);
 
     fToast.init(context);
     Widget toast;
@@ -102,10 +103,14 @@ class EventDetailProvider extends ChangeNotifier {
     event.users = users;
   }
 
+  updateLocation(Location location) {
+    event.location = location;
+  }
+
   get() async {
-    updateEvent(await eventRepository.getEvent(event));
-    setItems(await eventRepository.getItems(event));
-    setUsers(await eventRepository.getUsers(event));
+    updateEvent(await repository.getEvent(event));
+    setItems(await repository.getItems(event));
+    setUsers(await repository.getUsers(event));
 
     notifyListeners();
   }

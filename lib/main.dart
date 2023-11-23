@@ -44,7 +44,7 @@ class RoleApp extends StatelessWidget {
 
           if (settings.name == "/event") {
             page = EventDetailScreen(
-              id: settings.arguments as int,
+              settings.arguments as int,
             );
           } else {
             page = EventListScreen();

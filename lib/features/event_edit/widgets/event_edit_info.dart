@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/widgets/event_detail_map.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
+import 'package:role/features/event_edit/screens/event_map_screen.dart';
+import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_date_picker.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
@@ -49,9 +52,16 @@ class EventEditInfo extends StatelessWidget {
         SizedBox(height: 12),
         SizedBox(
             height: 250,
-            child: EventDetailMap(
-                color: provider.event.color1,
-                location: provider.event.location)),
+            child: ElasticButton(
+              onPressed: () {
+                showCupertinoModalBottomSheet(
+                    context: context,
+                    builder: (context) => EventMapScreen(provider));
+              },
+              child: EventDetailMap(
+                  color: provider.event.color1,
+                  location: provider.event.location),
+            )),
       ],
     );
   }

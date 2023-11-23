@@ -36,15 +36,17 @@ class EventDetailMap extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(
                     children: [
-                      Text(location.descricao,
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: -0.6,
-                              color: CupertinoDynamicColor.resolve(
-                                      CupertinoColors.label, context)
-                                  .withAlpha(200))),
-                      Spacer(),
+                      Expanded(
+                        child: Text(location.descricao,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: -0.6,
+                                color: CupertinoDynamicColor.resolve(
+                                        CupertinoColors.label, context)
+                                    .withAlpha(200))),
+                      ),
                       Icon(CupertinoIcons.chevron_right,
                           size: 24,
                           color: CupertinoDynamicColor.resolve(
