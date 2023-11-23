@@ -51,7 +51,7 @@ class EventEditInfo extends StatelessWidget {
             height: 250,
             child: EventDetailMap(
                 color: provider.event.color1,
-                endereco: provider.event.endereco)),
+                location: provider.event.location)),
       ],
     );
   }

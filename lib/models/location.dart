@@ -1,4 +1,4 @@
-import 'package:latlong2/latlong.dart';
+import 'package:map_location_picker/map_location_picker.dart';
 
 class Location {
   double _latitude;
@@ -14,7 +14,7 @@ class Location {
   String get descricao => _descricao;
   set descricao(String value) => _descricao = value;
 
-  LatLng get coordenadas => LatLng(latitude.toDouble(), longitude.toDouble());
+  LatLng get latLng => LatLng(latitude.toDouble(), longitude.toDouble());
 
   Location({
     required double latitude,

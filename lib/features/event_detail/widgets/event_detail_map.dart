@@ -1,14 +1,15 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:role/models/location.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class EventDetailMap extends StatelessWidget {
   final Color color;
-  final Location endereco;
+  final Location location;
 
-  EventDetailMap({required this.color, required this.endereco});
+  EventDetailMap({required this.color, required this.location});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,7 @@ class EventDetailMap extends StatelessWidget {
         children: [
           EventStyledMap(
             color: color,
-            endereco: endereco,
-            interactiveFlags: 0,
+            location: location,
           ),
           Container(
             height: 48,
@@ -36,7 +36,7 @@ class EventDetailMap extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(
                     children: [
-                      Text(endereco.descricao,
+                      Text(location.descricao,
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -63,76 +63,132 @@ class EventDetailMap extends StatelessWidget {
 }
 
 class EventStyledMap extends StatelessWidget {
-  const EventStyledMap(
-      {super.key,
-      required this.color,
-      required this.endereco,
-      this.interactiveFlags = InteractiveFlag.all & ~InteractiveFlag.rotate});
+  EventStyledMap({super.key, required this.color, required this.location});
 
   final Color color;
-  final Location endereco;
-  final int interactiveFlags;
+  final Location location;
+
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
+
+  String get mapStyle => """
+    [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#c9c9c9"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  }
+]
+  """;
+
+  String get darkMapStyle => """
+    [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#333333"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#2c2c2c"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#1a1a1a"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "all",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#333333"
+      }
+    ]
+  },
+  {
+    "featureType": "all",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  }
+]
+  """;
+
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(-26.900851, -49.004592),
+    zoom: 16,
+  );
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Container(
-        decoration: BoxDecoration(
-          color: color,
-        ),
-      ),
-      Opacity(
-        opacity: 0.97,
-        child: FlutterMap(
-          options: MapOptions(
-            center: endereco.coordenadas,
-            zoom: 15.0,
-            interactiveFlags: interactiveFlags,
-          ),
-          nonRotatedChildren: [],
-          children: [
-            TileLayer(
-              urlTemplate:
-                  'https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png',
-              userAgentPackageName: 'com.joogps.role',
-              // retinaMode: true,
-            ),
-            MarkerLayer(
-              markers: [
-                Marker(
-                  point: endereco.coordenadas,
-                  width: 64,
-                  height: 64,
-                  builder: (context) => Icon(
-                    CupertinoIcons.circle_fill,
-                    color: CupertinoColors.black,
-                    size: 64,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-      IgnorePointer(
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: CupertinoDynamicColor.resolve(
-                    CupertinoColors.label, context),
-                backgroundBlendMode: BlendMode.exclusion,
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: color,
-                backgroundBlendMode: BlendMode.softLight,
-              ),
-            ),
-          ],
-        ),
-      ),
-    ]);
+    String style = MediaQuery.of(context).platformBrightness == Brightness.dark
+        ? darkMapStyle
+        : mapStyle;
+
+    return GoogleMap(
+      mapType: MapType.normal,
+      initialCameraPosition: _kGooglePlex,
+      scrollGesturesEnabled: false,
+      myLocationButtonEnabled: false,
+      onMapCreated: (GoogleMapController controller) {
+        _controller.complete(controller);
+        controller.setMapStyle(style);
+      },
+    );
   }
 }

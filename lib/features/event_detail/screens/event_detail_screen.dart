@@ -66,18 +66,24 @@ class EventDetailScreen extends StatelessWidget {
                         height: 210,
                         child: EventDetailMap(
                           color: eventDetailProvider.event.color2,
-                          endereco: eventDetailProvider.event.endereco,
+                          location: eventDetailProvider.event.location,
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.push(
+                      onPressed: () async {
+                        final result = await Navigator.push(
                           context,
                           CupertinoPageRoute(
                             builder: (context) => EventMapScreen(
                               color: eventDetailProvider.event.color2,
+                              location: eventDetailProvider.event.location,
                             ),
                           ),
                         );
+
+                        if (result != null) {
+                          eventDetailProvider.event.location = result;
+                          // await eventDetailProvider.update();
+                        }
                       },
                     ),
                     SizedBox(height: 32),
