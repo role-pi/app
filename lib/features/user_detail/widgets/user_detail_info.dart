@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/features/user_detail/widgets/user_detail_pix.dart';
+import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
-import '../../user_login/providers/user_login_provider.dart';
 
 class UserDetailInfo extends StatelessWidget {
-  UserDetailProvider get provider => UserDetailProvider.shared;
-  const UserDetailInfo({
-    super.key, required this.userDetailProvider,
-  });
   final UserDetailProvider userDetailProvider;
+
+  const UserDetailInfo({
+    Key? key,
+    required this.userDetailProvider,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +26,18 @@ class UserDetailInfo extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(0),
               child: ElasticButton(
-                onPressed: () => provider.showImageSelectionPopup(context),
+                onPressed: () =>
+                    userDetailProvider.showImageSelectionPopup(context),
                 child: SizedBox(
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
                       Consumer<UserLoginProvider>(
-                          builder: (context, provider, child) {
-                        return RemoteProfilePicture(
-                            url: provider.user?.profilePhoto, size: 72);
-                      }),
+                        builder: (context, provider, child) {
+                          return RemoteProfilePicture(
+                              url: provider.user?.profilePhoto, size: 72);
+                        },
+                      ),
                       Positioned(
                         bottom: -6,
                         right: -6,
@@ -46,10 +49,12 @@ class UserDetailInfo extends StatelessWidget {
                                 color: CupertinoColors.systemGrey5
                                     .resolveFrom(context),
                                 shape: CircleBorder(
-                                    side: BorderSide(
-                                        width: 3,
-                                        color: CupertinoColors.systemBackground
-                                            .resolveFrom(context)))),
+                                  side: BorderSide(
+                                    width: 3,
+                                    color: CupertinoColors.systemBackground
+                                        .resolveFrom(context),
+                                  ),
+                                )),
                             child: Icon(
                               CupertinoIcons.pencil,
                               size: 22.0,
@@ -71,7 +76,7 @@ class UserDetailInfo extends StatelessWidget {
                   Consumer<UserDetailProvider>(
                     builder: (context, value, child) {
                       return FormItemTextField(
-                        controller: provider.nameController,
+                        controller: userDetailProvider.nameController,
                         title: "nome",
                         padding: EdgeInsets.all(4.0),
                         enabled: !value.loading,
@@ -85,11 +90,12 @@ class UserDetailInfo extends StatelessWidget {
                     child: Text(
                       UserLoginProvider.shared.user?.email ?? "",
                       style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: -1,
-                          color: CupertinoColors.secondaryLabel
-                              .resolveFrom(context),
-                          fontSize: 17),
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -1,
+                        color: CupertinoColors.secondaryLabel
+                            .resolveFrom(context),
+                        fontSize: 17,
+                      ),
                     ),
                   )
                 ],
@@ -101,14 +107,14 @@ class UserDetailInfo extends StatelessWidget {
         Divider(),
         SizedBox(height: 12),
 
-       RoundButton(
+        RoundButton(
           onPressed: () async {
             NewPixKeyScreen().show(context);
-          }, 
+          },
           rectangleColor: CupertinoColors.systemGrey6,
           textColor: CupertinoColors.label,
           text: 'chave pix',
-        ), 
+        ),
       ],
     );
   }
