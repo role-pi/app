@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
-import 'package:role/features/user_detail/widgets/user_detail_pix.dart';
+import 'package:role/features/user_detail/screens/user_detail_pix_key_modal.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
@@ -102,20 +102,17 @@ class UserDetailInfo extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 12),
-        Divider(),
-        SizedBox(height: 12),
+        SizedBox(height: 24),
         FormItemGroupTitle(title: "chave pix"),
         RoundButton(
           onPressed: () async {
-            NewPixKeyScreen(
+            UserDetailPixKeyModal(
               provider: provider,
             ).show(context);
           },
-          icon: CupertinoIcons.money_dollar,
           rectangleColor: CupertinoColors.systemGrey6,
           textColor: CupertinoColors.secondaryLabel,
-          text: UserLoginProvider.shared.user?.pixKey ?? "adicionar",
+          text: UserLoginProvider.shared.user?.pixKey ?? "",
         ),
       ],
     );

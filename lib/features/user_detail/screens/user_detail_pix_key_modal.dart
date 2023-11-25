@@ -4,10 +4,10 @@ import 'package:role/shared/widgets/form/form_item_text_field.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
-class NewPixKeyScreen extends StatelessWidget {
+class UserDetailPixKeyModal extends StatelessWidget {
   late final UserDetailProvider provider;
 
-  NewPixKeyScreen({required this.provider}) {}
+  UserDetailPixKeyModal({required this.provider}) {}
 
   void show(BuildContext context) {
     ModalPopup(context: context, title: "chave pix", child: build(context))
@@ -32,7 +32,7 @@ class NewPixKeyScreen extends StatelessWidget {
               ),
               SizedBox(width: 12),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Você pode informar uma chave Pix para receber pagamentos ao dividir os gastos de um evento. \n\nA chave pode ser CPF, e-mail, telefone ou aleatória, e a validação ocorrerá somente no aplicativo do banco no momento do pagamento.",
                   style: TextStyle(
@@ -43,10 +43,10 @@ class NewPixKeyScreen extends StatelessWidget {
               ),
               RoundButton(
                 onPressed: () async {
-                  provider.updateUser(context);
+                  provider.updatePixKey(context);
                 },
-                rectangleColor: CupertinoColors.systemGrey6,
-                textColor: CupertinoColors.secondaryLabel,
+                rectangleColor: CupertinoColors.activeBlue,
+                textColor: CupertinoColors.white,
                 text: "salvar",
               ),
             ],

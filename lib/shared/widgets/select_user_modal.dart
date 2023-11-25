@@ -1,7 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';

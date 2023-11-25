@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
@@ -43,8 +44,9 @@ class RoundButton extends StatelessWidget {
                             CupertinoDynamicColor.resolve(textColor, context))
                     : SizedBox(),
                 SizedBox(width: 8),
-                Text(
+                AutoSizeText(
                   text,
+                  maxLines: 1,
                   style: TextStyle(
                     color: CupertinoDynamicColor.resolve(textColor, context),
                     fontSize: 23,

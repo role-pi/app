@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:role/models/location.dart';
 import 'package:role/models/event_theme.dart';
@@ -39,7 +40,7 @@ class Event implements JSONSerializable {
             Location(
                 latitude: -26.905926949896116,
                 longitude: -49.07710147997988,
-                descricao: "Factory Antônio da Veiga");
+                descricao: "IFSC Campus gaspar");
 
   int get id => _id;
 
@@ -89,20 +90,35 @@ class Event implements JSONSerializable {
   }
 
   @override
-  factory Event.fromJson(Map<String, dynamic> json) => Event(
-      id: json["id_evento"],
-      name: json["nome"],
-      startDate: json["data_inicio"] != null
-          ? DateTime.parse(json["data_inicio"])
-          : null,
-      endDate:
-          json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
-      totalAmount: double.parse(json["valor_total"]),
-      profilePictures: json["fotos_de_perfil"] != null
-          ? json["fotos_de_perfil"].toString().split(', ')
-          : [],
-      theme: EventTheme.fromHex(
-          emoji: json["emoji"], hex1: json["cor_1"], hex2: json["cor_2"]));
+  factory Event.fromJson(Map<String, dynamic> json) {
+    Location? location;
+
+    if (json.containsKey("location")) {
+      var locationJson = json["location"];
+      if (locationJson != null) {
+        location = Location(
+            latitude: locationJson["x"],
+            longitude: locationJson["y"],
+            descricao: json["location_description"]);
+      }
+    }
+
+    return Event(
+        id: json["id_evento"],
+        name: json["nome"],
+        startDate: json["data_inicio"] != null
+            ? DateTime.parse(json["data_inicio"])
+            : null,
+        endDate:
+            json["data_fim"] != null ? DateTime.parse(json["data_fim"]) : null,
+        totalAmount: double.parse(json["valor_total"]),
+        profilePictures: json["fotos_de_perfil"] != null
+            ? json["fotos_de_perfil"].toString().split(', ')
+            : [],
+        theme: EventTheme.fromHex(
+            emoji: json["emoji"], hex1: json["cor_1"], hex2: json["cor_2"]),
+        location: location);
+  }
 
   @override
   Map<String, dynamic> toJson() {
@@ -115,6 +131,9 @@ class Event implements JSONSerializable {
       "emoji": theme.emoji,
       "color1": theme.color1.toHex(),
       "color2": theme.color2.toHex(),
+      "location_lat": location.latitude,
+      "location_lng": location.longitude,
+      "location_description": location.descricao
     };
   }
 

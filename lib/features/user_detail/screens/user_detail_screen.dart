@@ -14,28 +14,28 @@ class UserDetailScreen extends StatelessWidget {
       value: UserDetailProvider.shared,
       child: CupertinoPageScaffold(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                Consumer<UserDetailProvider>(
-                  builder: (context, value, child) {
-                    return CustomNavigationBar(
-                      leadingIcon: null,
-                      leadingText: "opções de conta",
-                      trailingText: "salvar",
-                      accentColor: CupertinoColors.activeBlue,
-                      onPressedTrailing: value.changed && !value.loading
-                          ? () {
-                              value.updateUser(context);
-                            }
-                          : null,
-                      topPadding: 0,
-                    );
-                  },
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+              Consumer<UserDetailProvider>(
+                builder: (context, value, child) {
+                  return CustomNavigationBar(
+                    leadingIcon: null,
+                    leadingText: "opções de conta",
+                    trailingText: "salvar",
+                    accentColor: CupertinoColors.activeBlue,
+                    onPressedTrailing: value.changed && !value.loading
+                        ? () {
+                            value.updateUser(context);
+                          }
+                        : null,
+                    topPadding: 0,
+                  );
+                },
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
                   child: Column(
                     children: [
                       UserDetailInfo(),
@@ -50,8 +50,8 @@ class UserDetailScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -187,7 +187,20 @@ class UserDetailProvider extends ChangeNotifier {
     );
   }
 
-  delete(Event event, BuildContext context) async {}
+  Future updatePixKey(BuildContext context) async {
+    UserLoginProvider.shared.user!.pixKey = pixKeyController.text;
+    FocusScope.of(context).unfocus();
+
+    Navigator.pop(context);
+
+    _loading = true;
+    notifyListeners();
+
+    await updateUser(context);
+
+    _loading = false;
+    notifyListeners();
+  }
 
   textChanged() {
     if (nameController.text != UserLoginProvider.shared.user?.name) {
