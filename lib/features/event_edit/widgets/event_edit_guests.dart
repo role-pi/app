@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_edit/providers/event_edit_provider.dart';
-import 'package:role/features/event_edit/screens/add_guests_screen.dart';
+import 'package:role/features/event_edit/screens/event_add_guests_screen.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/dismissible_exclusion_background.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
@@ -38,60 +38,67 @@ class EventEditGuests extends StatelessWidget {
               padding: const EdgeInsets.all(0.0),
               child: Column(
                 children: [
-                  Consumer<EventEditProvider>(
-                        builder: (context, value, child) {
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: value.event.users?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          User user = value.event.users![index];
-                          return Column(children: [
-                            Dismissible(
-                                key: UniqueKey(),
-                                direction: DismissDirection.endToStart,
-                                background: DismissibleExclusionBackground(size: 22, cornerRadius: 0,),
-                                confirmDismiss: (direction) async =>
-                                    await provider.showDeletionDialog(context),
-                                onDismissed: (direction) async =>
-                                    await provider.removeUser(context, user),
-                                                  child: Padding(
-                                                    padding: EdgeInsets.fromLTRB(16, index == 0 ? 16 : 8, 16, index+1 == value.event.users?.length ? 16 : 8),
-                                                    child: Row(
-                                            children: [
-                                              RemoteProfilePicture(
-                                                  url: user.profilePhoto, size: 36),
-                                              SizedBox(width: 8),
-                                              Text('${user.displayName}',
-                                                  style: TextStyle(
-                                                      fontWeight: FontWeight.w600,
-                                                      letterSpacing: -0.5)),
-                                              Spacer(),
-                                              ElasticButton(
-                                                onPressed: () async {
-                                                  if (await provider
-                                                      .showDeletionDialog(context)) {
-                                                    provider.removeUser(context, user);
-                                                  }
-                                                },
-                                                child: Icon(
-                                                  CupertinoIcons.delete_simple,
-                                                  size: 22,
-                                                  color: CupertinoDynamicColor.resolve(
-                                                      CupertinoColors.secondaryLabel,
-                                                      context),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                                  ),
+                  Consumer<EventEditProvider>(builder: (context, value, child) {
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: value.event.users?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        User user = value.event.users![index];
+                        return Column(children: [
+                          Dismissible(
+                            key: UniqueKey(),
+                            direction: DismissDirection.endToStart,
+                            background: DismissibleExclusionBackground(
+                              size: 22,
+                              cornerRadius: 0,
                             ),
-                          ]);
-                        },
-                      );
-                    }
-                  ),
+                            confirmDismiss: (direction) async =>
+                                await provider.showDeletionDialog(context),
+                            onDismissed: (direction) async =>
+                                await provider.removeUser(context, user),
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                  16,
+                                  index == 0 ? 16 : 8,
+                                  16,
+                                  index + 1 == value.event.users?.length
+                                      ? 16
+                                      : 8),
+                              child: Row(
+                                children: [
+                                  RemoteProfilePicture(
+                                      url: user.profilePhoto, size: 36),
+                                  SizedBox(width: 8),
+                                  Text('${user.displayName}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          letterSpacing: -0.5)),
+                                  Spacer(),
+                                  ElasticButton(
+                                    onPressed: () async {
+                                      if (await provider
+                                          .showDeletionDialog(context)) {
+                                        provider.removeUser(context, user);
+                                      }
+                                    },
+                                    child: Icon(
+                                      CupertinoIcons.delete_simple,
+                                      size: 22,
+                                      color: CupertinoDynamicColor.resolve(
+                                          CupertinoColors.secondaryLabel,
+                                          context),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ]);
+                      },
+                    );
+                  }),
                   Container(
                     color: provider.event.color1.withOpacity(0.1),
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -252,7 +259,7 @@ class EventAddGuestRow extends StatelessWidget {
                 showCupertinoModalBottomSheet(
                     context: context,
                     builder: (context) {
-                      return AddGuestsScreen(provider);
+                      return EventAddGuestsScreen(provider);
                     });
               }
             : null,

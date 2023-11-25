@@ -14,25 +14,32 @@ class Event implements JSONSerializable {
   double? _totalAmount;
   List<String>? _profilePictures;
   EventTheme _theme;
+  Location _location;
 
   late List<Item>? _items = null;
   late List<User>? _users = null;
 
-  Event({
-    required int id,
-    required String name,
-    DateTime? startDate,
-    DateTime? endDate,
-    double? totalAmount,
-    List<String>? profilePictures,
-    EventTheme? theme,
-  })  : _id = id,
+  Event(
+      {required int id,
+      required String name,
+      DateTime? startDate,
+      DateTime? endDate,
+      double? totalAmount,
+      List<String>? profilePictures,
+      EventTheme? theme,
+      Location? location})
+      : _id = id,
         _name = name,
         _startDate = startDate,
         _endDate = endDate,
         _totalAmount = totalAmount,
         _profilePictures = profilePictures,
-        _theme = theme ?? EventTheme.random();
+        _theme = theme ?? EventTheme.random(),
+        _location = location ??
+            Location(
+                latitude: -26.905926949896116,
+                longitude: -49.07710147997988,
+                descricao: "Factory Antônio da Veiga");
 
   int get id => _id;
 
@@ -76,6 +83,11 @@ class Event implements JSONSerializable {
     _users = value;
   }
 
+  Location get location => _location;
+  set location(Location value) {
+    _location = value;
+  }
+
   @override
   factory Event.fromJson(Map<String, dynamic> json) => Event(
       id: json["id_evento"],
@@ -109,11 +121,6 @@ class Event implements JSONSerializable {
   String get emoji => theme.emoji;
   Color get color1 => theme.color1;
   Color get color2 => theme.color2;
-
-  Location get endereco => Location(
-      latitude: -26.905926949896116,
-      longitude: -49.07710147997988,
-      descricao: "Factory Antônio da Veiga");
 
   String get shortDescription {
     final now = DateTime.now();

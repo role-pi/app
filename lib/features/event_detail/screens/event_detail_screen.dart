@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
-import 'package:role/features/event_detail/screens/event_map_screen.dart';
+import 'package:role/features/event_edit/providers/event_edit_provider.dart';
+import 'package:role/features/event_edit/screens/event_map_screen.dart';
 import 'package:role/features/event_detail/widgets/event_detail_guests.dart';
 import 'package:role/features/event_detail/widgets/event_detail_header.dart';
 import 'package:role/features/event_detail/widgets/event_detail_items.dart';
@@ -13,16 +14,14 @@ import 'package:role/shared/widgets/round_button.dart';
 import 'package:snap_scroll_physics/snap_scroll_physics.dart';
 
 class EventDetailScreen extends StatelessWidget {
-  EventDetailScreen({required this.id})
-      : eventDetailProvider = EventDetailProvider(id);
+  EventDetailScreen(id) : provider = EventDetailProvider(id);
 
-  final int id;
-  final EventDetailProvider eventDetailProvider;
+  final EventDetailProvider provider;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-      value: eventDetailProvider,
+      value: provider,
       child: CupertinoPageScaffold(
         child: CustomScrollView(
           physics: SnapScrollPhysics(snaps: [
@@ -36,13 +35,12 @@ class EventDetailScreen extends StatelessWidget {
           slivers: [
             SliverPersistentHeader(
               pinned: true,
-              delegate:
-                  EventDetailHeaderDelegate(event: eventDetailProvider.event),
+              delegate: EventDetailHeaderDelegate(event: provider.event),
             ),
             SliverPadding(
               padding: EdgeInsets.all(16),
               sliver: CupertinoSliverRefreshControl(onRefresh: () async {
-                await eventDetailProvider.get();
+                await provider.get();
               }),
             ),
             SliverToBoxAdapter(
@@ -65,18 +63,16 @@ class EventDetailScreen extends StatelessWidget {
                       child: SizedBox(
                         height: 210,
                         child: EventDetailMap(
-                          color: eventDetailProvider.event.color2,
-                          endereco: eventDetailProvider.event.endereco,
+                          color: provider.event.color2,
+                          location: provider.event.location,
                         ),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => EventMapScreen(
-                              color: eventDetailProvider.event.color2,
-                              endereco: eventDetailProvider.event.endereco,
-                            ),
+                            builder: (context) =>
+                                EventMapScreen(EventEditProvider(provider)),
                           ),
                         );
                       },
@@ -96,7 +92,7 @@ class EventDetailScreen extends StatelessWidget {
                         ),
                         ElasticButton(
                           onPressed: () {
-                            NewItemScreen(eventDetailProvider).show(context);
+                            NewItemScreen(provider).show(context);
                           },
                           child: Container(
                             width: 45,

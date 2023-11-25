@@ -6,8 +6,8 @@ import 'package:role/features/event_edit/widgets/add_guest_search_result_item.da
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/form/form_item_text_field.dart';
 
-class AddGuestsScreen extends StatelessWidget {
-  AddGuestsScreen(EventEditProvider eventEditProvider) {
+class EventAddGuestsScreen extends StatelessWidget {
+  EventAddGuestsScreen(EventEditProvider eventEditProvider) {
     this.addGuestsPrvider = AddGuestsProvider(eventEditProvider);
   }
 
