@@ -38,12 +38,7 @@ class UserDetailScreen extends StatelessWidget {
                   height: MediaQuery.of(context).size.height,
                   child: Column(
                     children: [
-                      UserDetailInfo(
-                        userDetailProvider: Provider.of<UserDetailProvider>(
-                          context,
-                          listen: false,
-                        ),
-                      ),
+                      UserDetailInfo(),
                       SizedBox(height: 8),
                       Divider(),
                       SizedBox(height: 8),

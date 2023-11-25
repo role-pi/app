@@ -39,8 +39,8 @@ class RoundButton extends StatelessWidget {
                 icon != null
                     ? Icon(icon,
                         size: 23,
-                        color: CupertinoColors.systemBackground
-                            .resolveFrom(context))
+                        color:
+                            CupertinoDynamicColor.resolve(textColor, context))
                     : SizedBox(),
                 SizedBox(width: 8),
                 Text(
