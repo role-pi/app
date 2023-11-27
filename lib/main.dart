@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/screens/event_detail_screen.dart';
 import 'package:role/features/event_list/screens/event_list_screen.dart';
 import 'package:role/features/item_detail/screens/item_detail_screen.dart';
+import 'package:role/features/payment/screens/distribute_costs_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/features/user_login/screens/user_login_screen.dart';
 
@@ -37,7 +38,8 @@ class RoleApp extends StatelessWidget {
         initialRoute: "/onboarding",
         routes: {
           "/": (p0) => EventListScreen(),
-          "/onboarding": (p0) => UserLoginScreen()
+          "/onboarding": (p0) => UserLoginScreen(),
+          "/payment": (p0) => DIstributeCostsScreen(),
         },
         onGenerateRoute: (settings) {
           late Widget page;

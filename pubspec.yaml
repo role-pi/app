@@ -32,7 +32,8 @@ dependencies:
   share_plus: ^7.2.1
   map_location_picker: ^1.2.8+3
   google_maps_flutter: ^2.5.0
-  
+  qr_flutter: ^4.0.1
+  pix_flutter: ^2.2.0
 
 dev_dependencies:
   flutter_test:
