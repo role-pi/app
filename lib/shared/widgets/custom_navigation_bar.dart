@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class CustomNavigationBar extends StatelessWidget {
-  final String? leadingText, trailingText;
+  final String? leadingText, trailingText, title;
   final IconData? leadingIcon, trailingIcon;
   final Function()? onPressedLeading, onPressedTrailing;
   final Color color;
@@ -15,6 +15,7 @@ class CustomNavigationBar extends StatelessWidget {
       this.leadingIcon = CupertinoIcons.chevron_back,
       this.trailingText,
       this.trailingIcon,
+      this.title,
       this.onPressedLeading,
       this.onPressedTrailing,
       this.color = CupertinoColors.label,
@@ -31,57 +32,76 @@ class CustomNavigationBar extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 28.0 + topPadding),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: Row(children: [
-              leadingIcon != null
-                  ? Icon(
-                      leadingIcon,
-                      color: color,
-                      size: textSize * 30 / 28,
-                    )
-                  : SizedBox(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5.0),
-                child: Text(
-                  leadingText ?? "",
-                  style: TextStyle(
-                      fontSize: textSize,
-                      fontWeight: FontWeight.bold,
-                      color: color,
-                      letterSpacing: -textSize * 1.8 / 28),
-                ),
+          Row(
+            children: [
+              CupertinoButton(
+                padding: EdgeInsets.zero,
+                child: Row(children: [
+                  leadingIcon != null
+                      ? Icon(
+                          leadingIcon,
+                          color: color,
+                          size: textSize * 30 / 28,
+                        )
+                      : SizedBox(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: Text(
+                      leadingText ?? "",
+                      style: TextStyle(
+                          fontSize: textSize,
+                          fontWeight: FontWeight.bold,
+                          color: color,
+                          letterSpacing: -textSize * 1.8 / 28),
+                    ),
+                  ),
+                ]),
+                onPressed: onPressedLeading,
               ),
-            ]),
-            onPressed: onPressedLeading,
-          ),
-          Spacer(),
-          CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: Row(children: [
-              trailingIcon != null
-                  ? Icon(
-                      trailingIcon,
-                      color: accentColor,
-                      size: textSize * 30 / 28,
-                    )
-                  : SizedBox(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5.0),
-                child: Text(
-                  trailingText ?? "",
-                  style: TextStyle(
-                      fontSize: textSize,
-                      fontWeight: FontWeight.bold,
-                      color: accentColor,
-                      letterSpacing: -textSize * 1.8 / 28),
-                ),
+              Spacer(),
+              CupertinoButton(
+                padding: EdgeInsets.zero,
+                child: Row(children: [
+                  trailingIcon != null
+                      ? Icon(
+                          trailingIcon,
+                          color: accentColor,
+                          size: textSize * 30 / 28,
+                        )
+                      : SizedBox(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: Text(
+                      trailingText ?? "",
+                      style: TextStyle(
+                          fontSize: textSize,
+                          fontWeight: FontWeight.bold,
+                          color: accentColor,
+                          letterSpacing: -textSize * 1.8 / 28),
+                    ),
+                  ),
+                ]),
+                onPressed: onPressedTrailing,
               ),
-            ]),
-            onPressed: onPressedTrailing,
+            ],
           ),
+          SizedBox(height: 8),
+          title != null
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    title!,
+                    style: TextStyle(
+                        fontSize: textSize * 1.3,
+                        fontWeight: FontWeight.bold,
+                        height: textSize * 1.1 / 28,
+                        letterSpacing: -textSize * 1.8 / 28),
+                  ),
+                )
+              : SizedBox(),
         ],
       ),
     );

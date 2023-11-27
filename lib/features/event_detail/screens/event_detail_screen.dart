@@ -126,6 +126,7 @@ class EventDetailScreen extends StatelessWidget {
                       text: "distribuir gastos",
                       rectangleColor: CupertinoColors.systemGrey6,
                       textColor: CupertinoColors.label,
+                      onPressed: () => provider.splitCosts(context),
                     ),
                   ],
                 ),

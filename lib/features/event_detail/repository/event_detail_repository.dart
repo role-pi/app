@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:role/features/split_costs/providers/split_costs_provider.dart';
 import 'package:role/models/item.dart';
 import 'package:role/models/user.dart';
 
@@ -76,6 +77,30 @@ class EventDetailRepository {
 
     return [];
   }
+
+  Future<List<SplitCostTransaction>> getSplitCosts(
+      Event event, String itemIds, String userIds) async {
+    try {
+      var response = await API().request(
+          endpoint:
+              "event/${event.id}/split?item_ids=${itemIds}&user_ids=${userIds}",
+          method: "GET");
+
+      return splitCostsTransactionsFromJSON(response.response);
+    } catch (e) {
+      if (e is ApiError) {
+        print('Error Code: ${e.code}, Message: ${e.message}');
+      } else {
+        print('Unknown error occurred: $e');
+      }
+    }
+
+    return [];
+  }
+
+  List<SplitCostTransaction> splitCostsTransactionsFromJSON(String str) =>
+      List<SplitCostTransaction>.from(
+          json.decode(str).map((x) => SplitCostTransaction.fromJson(x)));
 
   List<Item> itemsFromJSON(String str) =>
       List<Item>.from(json.decode(str).map((x) => Item.fromJson(x)));

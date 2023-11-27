@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:role/features/event_detail/repository/event_detail_repository.dart';
 import 'package:role/features/event_list/providers/event_list_provider.dart';
+import 'package:role/features/split_costs/providers/split_costs_provider.dart';
+import 'package:role/features/split_costs/screens/split_costs_screen.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
 import 'package:role/models/location.dart';
@@ -105,6 +107,23 @@ class EventDetailProvider extends ChangeNotifier {
 
   updateLocation(Location location) {
     event.location = location;
+  }
+
+  splitCosts(BuildContext context) async {
+    if (event.items != null && event.users != null) {
+      String itemIds = event.items!.map((e) => e.id).join(",");
+      String userIds = event.users!.map((e) => e.id).join(",");
+
+      List<SplitCostTransaction> transactions =
+          await repository.getSplitCosts(event, itemIds, userIds);
+
+      Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => SplitCostsScreen(transactions),
+        ),
+      );
+    }
   }
 
   get() async {
