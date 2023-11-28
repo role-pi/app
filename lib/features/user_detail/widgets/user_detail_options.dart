@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:provider/provider.dart';
+import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/usage_report/screens/usage_report_screen.dart';
+import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/shared/widgets/round_button.dart';
 
 class UserDetailOptions extends StatelessWidget {
@@ -10,6 +13,9 @@ class UserDetailOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserDetailProvider provider =
+        Provider.of<UserDetailProvider>(context, listen: false);
+
     return Column(
       children: <Widget>[
         Container(
@@ -19,6 +25,7 @@ class UserDetailOptions extends StatelessWidget {
             children: <Widget>[
               RoundButton(
                 onPressed: () {
+                  provider.showReport(context);
                   showCupertinoModalBottomSheet(
                     context: context,
                     builder: (context) => UsageReportScreen(),

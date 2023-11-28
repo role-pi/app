@@ -26,11 +26,11 @@ class EventMapScreen extends StatelessWidget {
       bottomCardTooltip: "confirmar local",
       apiKey: apiKey,
       onNext: (location_picker.GeocodingResult? result) {
-        provider.event.location = Location(
+        provider.updateLocation(Location(
           latitude: result!.geometry.location.lat,
           longitude: result.geometry.location.lng,
           descricao: result.formattedAddress ?? "",
-        );
+        ));
         Navigator.pop(context);
       },
     ));

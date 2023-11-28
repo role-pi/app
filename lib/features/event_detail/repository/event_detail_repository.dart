@@ -85,7 +85,6 @@ class EventDetailRepository {
           endpoint:
               "event/${event.id}/split?item_ids=${itemIds}&user_ids=${userIds}",
           method: "GET");
-
       return splitCostsTransactionsFromJSON(response.response);
     } catch (e) {
       if (e is ApiError) {

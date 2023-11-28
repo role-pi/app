@@ -136,7 +136,7 @@ class UsageReportHeaderDelegate extends SliverPersistentHeaderDelegate {
                   ],
                 ),
                 SizedBox(height: 8),
-                ContainerText(text: "Membro desde 2020")
+                ContainerText(text: "membro desde 2023")
               ],
             ),
           ),

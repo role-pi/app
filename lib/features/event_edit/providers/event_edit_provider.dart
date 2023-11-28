@@ -5,6 +5,7 @@ import 'package:role/features/event_edit/repository/event_edit_repository.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
+import 'package:role/models/location.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
@@ -115,6 +116,12 @@ class EventEditProvider extends ChangeNotifier {
       changed = false;
     }
     notifyListeners();
+  }
+
+  updateLocation(Location location) {
+    event.location = location;
+    notifyListeners();
+    eventDetailProvider.notifyListeners();
   }
 
   Future<bool> showDeletionDialog(BuildContext context) async {

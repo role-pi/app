@@ -105,10 +105,6 @@ class EventDetailProvider extends ChangeNotifier {
     event.users = users;
   }
 
-  updateLocation(Location location) {
-    event.location = location;
-  }
-
   splitCosts(BuildContext context) async {
     if (event.items != null && event.users != null) {
       String itemIds = event.items!.map((e) => e.id).join(",");

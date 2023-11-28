@@ -63,7 +63,7 @@ class User implements JSONSerializable {
         id: json["id_usuario"],
         name: json["nome"],
         email: json["email"],
-        pixKey: json["pixKey"],
+        pixKey: json["chave_pix"],
         profilePhoto: json["foto_de_perfil_url"],
       );
 }

@@ -171,10 +171,10 @@ class EventStyledMap extends StatelessWidget {
 ]
   """;
 
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(-26.900851, -49.004592),
-    zoom: 16,
-  );
+  CameraPosition get _kGooglePlex => CameraPosition(
+        target: location.latLng,
+        zoom: 16,
+      );
 
   @override
   Widget build(BuildContext context) {

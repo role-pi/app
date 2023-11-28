@@ -84,6 +84,25 @@ class UserRepository {
     return null;
   }
 
+  Future<bool?> getUsageReport() async {
+    try {
+      final response =
+          await API().request(endpoint: "user/report", method: "GET");
+
+      Map decoded = json.decode(response.response);
+      print(decoded);
+      return true;
+    } catch (e) {
+      if (e is ApiError) {
+        print('Error Code: ${e.code}, Message: ${e.message}');
+      } else {
+        print('Unknown error occurred: $e');
+      }
+    }
+
+    return null;
+  }
+
   Future<String?> uploadImage(File image) async {
     try {
       final response = await API()

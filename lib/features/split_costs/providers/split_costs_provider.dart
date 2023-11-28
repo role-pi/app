@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pix_flutter/pix_flutter.dart';
 import 'package:role/features/split_costs/screens/qr_code_modal.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
@@ -18,7 +17,7 @@ class SplitCostsProvider extends ChangeNotifier {
   void showPixScreen(
       BuildContext context, SplitCostTransaction transaction) async {
     if (transaction.toUser.pixKey != null) {
-      QRCodeModalPopup(transaction).show(context);
+      QRCodeModalPopup(transaction, this).show(context);
     }
   }
 
@@ -56,6 +55,6 @@ class SplitCostTransaction {
       SplitCostTransaction(
         fromUser: User.fromJson(json['from']),
         toUser: User.fromJson(json['to']),
-        amount: json['amount'],
+        amount: double.tryParse(json["amount"].toString())!,
       );
 }

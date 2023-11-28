@@ -59,21 +59,25 @@ class EventDetailScreen extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: 24),
-                    ElasticButton(
-                      child: SizedBox(
-                        height: 210,
-                        child: EventDetailMap(
-                          color: provider.event.color2,
-                          location: provider.event.location,
-                        ),
-                      ),
-                      onPressed: () async {
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) =>
-                                EventMapScreen(EventEditProvider(provider)),
+                    Consumer<EventDetailProvider>(
+                      builder: (context, provider, child) {
+                        return ElasticButton(
+                          child: SizedBox(
+                            height: 210,
+                            child: EventDetailMap(
+                              color: provider.event.color2,
+                              location: provider.event.location,
+                            ),
                           ),
+                          onPressed: () async {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) =>
+                                    EventMapScreen(EventEditProvider(provider)),
+                              ),
+                            );
+                          },
                         );
                       },
                     ),

@@ -2,14 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/split_costs/providers/split_costs_provider.dart';
-import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/shared/utils/utils.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class SplitCostsScreen extends StatelessWidget {
-  late SplitCostsProvider provider;
+  late final SplitCostsProvider provider;
 
   SplitCostsScreen(List<SplitCostTransaction> transactions) {
     this.provider = SplitCostsProvider(transactions);

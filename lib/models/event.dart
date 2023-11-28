@@ -40,7 +40,7 @@ class Event implements JSONSerializable {
             Location(
                 latitude: -26.905926949896116,
                 longitude: -49.07710147997988,
-                descricao: "IFSC Campus gaspar");
+                descricao: "IFSC Campus Gaspar");
 
   int get id => _id;
 

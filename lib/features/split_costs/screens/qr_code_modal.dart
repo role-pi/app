@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:role/features/split_costs/providers/split_costs_provider.dart';
-import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
 import 'package:role/shared/widgets/modal_popup.dart';
@@ -9,9 +8,10 @@ import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:pix_flutter/pix_flutter.dart';
 
 class QRCodeModalPopup extends StatelessWidget {
-  final SplitCostTransaction transaction;
+  late final SplitCostTransaction transaction;
+  late final SplitCostsProvider provider;
 
-  QRCodeModalPopup(this.transaction);
+  QRCodeModalPopup(this.transaction, this.provider);
 
   PixFlutter get qrPixKey => PixFlutter(
       payload: Payload(
@@ -31,8 +31,6 @@ class QRCodeModalPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SplitCostsProvider provider = SplitCostsProvider([]);
-
     const double padding = 22.0;
     const double qrCodePadding = 84.0;
 

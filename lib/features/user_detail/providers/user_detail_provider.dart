@@ -202,6 +202,10 @@ class UserDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void showReport(BuildContext context) async {
+    await userRepository.getUsageReport();
+  }
+
   textChanged() {
     if (nameController.text != UserLoginProvider.shared.user?.name) {
       _changed = true;
