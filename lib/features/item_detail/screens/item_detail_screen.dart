@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/item_detail/providers/item_detail_provider.dart';
 import 'package:role/features/item_detail/widgets/item_detail_transactions.dart';
-import 'package:role/features/payment/screens/pix_screen.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_limited_textfield.dart';
@@ -148,13 +147,12 @@ class ItemDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 24),
                     RoundButton(
-                      text: "distribuir gastos",
-                      rectangleColor: CupertinoColors.systemGrey6,
-                      textColor: CupertinoColors.label,
-                      onPressed: (){
-                       Navigator.pushNamed(context, "/payment");
-                      }
-                    ),
+                        text: "distribuir gastos",
+                        rectangleColor: CupertinoColors.systemGrey6,
+                        textColor: CupertinoColors.label,
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/payment");
+                        }),
                     SizedBox(height: 12),
                     RoundButton(
                       text: "excluir insumo",

@@ -17,7 +17,7 @@ class SplitCostsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-      value: UserDetailProvider.shared,
+      value: provider,
       child: CupertinoPageScaffold(
         child: SingleChildScrollView(
           child: Column(
@@ -86,14 +86,18 @@ class SplitCostsScreen extends StatelessWidget {
                                           letterSpacing: -1.2),
                                     ),
                                     Spacer(),
-                                    ElasticButton(
-                                      onPressed: () => provider.showPixScreen(
-                                          context, transaction),
-                                      child: Icon(CupertinoIcons.qrcode,
-                                          size: 32,
-                                          color: CupertinoColors.secondaryLabel
-                                              .resolveFrom(context)),
-                                    ),
+                                    transaction.toUser.pixKey != null
+                                        ? ElasticButton(
+                                            onPressed: () =>
+                                                provider.showPixScreen(
+                                                    context, transaction),
+                                            child: Icon(CupertinoIcons.qrcode,
+                                                size: 32,
+                                                color: CupertinoColors
+                                                    .secondaryLabel
+                                                    .resolveFrom(context)),
+                                          )
+                                        : SizedBox(),
                                   ],
                                 ))
                           ],
