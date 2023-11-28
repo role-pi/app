@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/models/event.dart';
+import 'package:role/shared/utils/utils.dart';
 import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/dismissible_exclusion_background.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
@@ -61,7 +62,7 @@ class EventItemRow extends StatelessWidget {
                               : SizedBox(height: 60),
                           Spacer(),
                           ContainerText(
-                              text: "R\$ " + event.totalAmount.toString(),
+                              text: formatCurrency(event.totalAmount),
                               padding: EdgeInsets.symmetric(
                                   horizontal: 18, vertical: 6),
                               size: 21),

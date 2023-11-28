@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/split_costs/providers/split_costs_provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
+import 'package:role/shared/utils/utils.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
@@ -79,7 +80,7 @@ class SplitCostsScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "R\$ " + transaction.amount.toString(),
+                                      formatCurrency(transaction.amount),
                                       style: TextStyle(
                                           fontSize: 24,
                                           fontWeight: FontWeight.w600,

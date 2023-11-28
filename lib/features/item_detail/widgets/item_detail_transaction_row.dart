@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:role/models/transaction.dart';
+import 'package:role/shared/utils/utils.dart';
 import 'package:role/shared/widgets/container_text.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
@@ -33,8 +34,7 @@ class ItemDetailTransactionRow extends StatelessWidget {
         ),
         SizedBox(width: 12),
         ContainerText(
-          text:
-              "R\$ ${(transaction.amount ?? 0).toStringAsFixed(2).replaceAll(".", ",")}",
+          text: formatCurrency(transaction.amount),
           size: 18,
         )
       ],

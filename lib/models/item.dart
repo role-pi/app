@@ -66,6 +66,8 @@ class Item implements JSONSerializable {
   List<Transaction> get transactions => _transactions;
   set transactions(List<Transaction> value) {
     _transactions = value;
+    amount = value.fold(
+        0, (previousValue, element) => previousValue! + element.amount!);
   }
 
   @override

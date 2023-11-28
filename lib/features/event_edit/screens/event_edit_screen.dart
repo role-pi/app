@@ -55,6 +55,7 @@ class EventEditScreen extends StatelessWidget {
                         rectangleColor: CupertinoColors.systemRed,
                         text: 'excluir evento',
                       ),
+                      SizedBox(height: 48),
                     ],
                   ),
                 ),

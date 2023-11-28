@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:role/features/event_detail/providers/event_detail_provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/models/item.dart';
+import 'package:role/shared/utils/utils.dart';
 import 'package:role/shared/widgets/container_text.dart';
+import 'package:role/shared/widgets/default_user_icon.dart';
 import 'package:role/shared/widgets/dismissible_exclusion_background.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
@@ -84,12 +86,9 @@ class EventDetailItemRow extends StatelessWidget {
                                   ),
                                   borderRadius: BorderRadius.circular(32),
                                 ),
-                                child: Consumer<UserLoginProvider>(
-                                    builder: (context, provider, child) {
-                                  return RemoteProfilePicture(
-                                      url: provider.user?.profilePhoto,
-                                      size: 32);
-                                })),
+                                child: DefaultUserIcon(
+                                  size: 32,
+                                )),
                           ),
                         ],
                       ),
@@ -105,6 +104,8 @@ class EventDetailItemRow extends StatelessWidget {
                     AutoSizeText(
                       item.name,
                       maxLines: 1,
+                      minFontSize: 16,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 23,
                         fontWeight: FontWeight.bold,
@@ -127,7 +128,7 @@ class EventDetailItemRow extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 12),
-              ContainerText(text: "R\$ ${item.amount}"),
+              ContainerText(text: formatCurrency(item.amount)),
             ]),
           ),
         ),
