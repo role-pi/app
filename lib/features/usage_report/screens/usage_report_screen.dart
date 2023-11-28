@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:role/features/event_list/widgets/event_list.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/container_text.dart';
+import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 import 'package:role/shared/widgets/round_button.dart';
 import 'package:share_plus/share_plus.dart';
@@ -104,36 +105,41 @@ class UsageReportHeaderDelegate extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       decoration: BoxDecoration(color: CupertinoColors.black),
-      padding: EdgeInsets.fromLTRB(30, 100, 30, 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text("relatório de uso",
-                  style: TextStyle(color: CupertinoColors.white, fontSize: 30)),
-            ],
+          CustomNavigationBar(
+            color: CupertinoColors.white,
+            title: "relatório de uso",
+            topPadding: 12,
           ),
           Spacer(),
-          Consumer<UserLoginProvider>(builder: (context, provider, child) {
-            return RemoteProfilePicture(
-              url: provider.user?.profilePhoto,
-              size: 100,
-            );
-          }),
-          SizedBox(
-            height: 15,
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Consumer<UserLoginProvider>(
+                    builder: (context, provider, child) {
+                  return RemoteProfilePicture(
+                    url: provider.user?.profilePhoto,
+                    size: 80,
+                  );
+                }),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Text(
+                        UserLoginProvider.shared.user?.displayName ?? "Usuário",
+                        style: TextStyle(
+                            color: CupertinoColors.white, fontSize: 30))
+                  ],
+                ),
+                SizedBox(height: 8),
+                ContainerText(text: "Membro desde 2020")
+              ],
+            ),
           ),
-          Row(
-            children: [
-              Text(UserLoginProvider.shared.user?.displayName ?? "Usuário",
-                  style: TextStyle(color: CupertinoColors.white, fontSize: 30))
-            ],
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          ContainerText(text: "Membro desde 2020")
         ],
       ),
     );

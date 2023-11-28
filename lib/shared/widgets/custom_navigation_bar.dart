@@ -95,6 +95,7 @@ class CustomNavigationBar extends StatelessWidget {
                   child: Text(
                     title!,
                     style: TextStyle(
+                        color: color,
                         fontSize: textSize * 1.3,
                         fontWeight: FontWeight.bold,
                         height: textSize * 1.1 / 28,
