@@ -58,9 +58,11 @@ class EventEditInfo extends StatelessWidget {
                     context: context,
                     builder: (context) => EventMapScreen(provider));
               },
-              child: EventDetailMap(
-                  color: provider.event.color1,
-                  location: provider.event.location),
+              child: provider.event.location != null
+                  ? EventDetailMap(
+                      color: provider.event.color1,
+                      location: provider.event.location!)
+                  : Text("Set location"),
             )),
       ],
     );

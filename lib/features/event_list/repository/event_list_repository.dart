@@ -36,10 +36,12 @@ class EventListRepository {
     return false;
   }
 
-  Future<int?> addEvent(Event event) async {
+  Future<int?> postEvent(Event event) async {
     try {
       var response = await API()
           .request(endpoint: "event", method: "POST", body: event.toJson());
+
+      print(event.toJson());
 
       Map decoded = json.decode(response.response);
       return decoded["insertId"];

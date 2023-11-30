@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/item_detail/providers/item_detail_provider.dart';
 import 'package:role/features/item_detail/widgets/item_detail_transactions.dart';
-import 'package:role/shared/utils/utils.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_limited_textfield.dart';
@@ -135,45 +133,13 @@ class ItemDetailScreen extends StatelessWidget {
                           ClipPath(
                             clipper: TicketClipper(invert: true),
                             child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 24.0, vertical: 16.0),
-                                decoration: BoxDecoration(
-                                    color: CupertinoColors.systemGrey5
-                                        .resolveFrom(context)),
-                                child: Column(
-                                  children: [
-                                    ItemDetailTransactions(provider),
-                                    SizedBox(height: 8),
-                                    Divider(),
-                                    SizedBox(height: 8),
-                                    Row(
-                                      children: [
-                                        Text("Total".toUpperCase(),
-                                            style: TextStyle(
-                                                color: CupertinoColors
-                                                    .secondaryLabel
-                                                    .resolveFrom(context),
-                                                fontWeight: FontWeight.w600,
-                                                letterSpacing: -1.0,
-                                                fontSize: 16.0)),
-                                        Spacer(),
-                                        Consumer<ItemDetailProvider>(
-                                          builder: (context, value, child) {
-                                            return Text(
-                                                formatCurrency(value
-                                                    .item.amount),
-                                                style: TextStyle(
-                                                    color: CupertinoColors
-                                                        .secondaryLabel,
-                                                    fontWeight: FontWeight.w600,
-                                                    letterSpacing: -1.0,
-                                                    fontSize: 16.0));
-                                          },
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                )),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 24.0, vertical: 16.0),
+                              decoration: BoxDecoration(
+                                  color: CupertinoColors.systemGrey5
+                                      .resolveFrom(context)),
+                              child: ItemDetailTransactions(provider),
+                            ),
                           ),
                         ],
                       ),

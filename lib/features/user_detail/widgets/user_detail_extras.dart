@@ -12,6 +12,14 @@ class UserDetailExtras extends StatelessWidget {
     return Column(
       children: [
         RoundButton(
+          onPressed: () => showPopup(context),
+          rectangleColor: CupertinoColors.systemRed,
+          textColor: CupertinoColors.white,
+          text: 'excluir conta',
+          alignment: Alignment.centerLeft,
+        ),
+        SizedBox(height: 12),
+        RoundButton(
           onPressed: () async {
             UserLoginProvider.shared.logout();
             Navigator.pushNamed(context, "/onboarding");
@@ -20,7 +28,7 @@ class UserDetailExtras extends StatelessWidget {
           textColor: CupertinoColors.systemRed,
           text: 'log out',
         ),
-        SizedBox(height: 6),
+        SizedBox(height: 12),
         Text(
           "desenvolvido no ifsc gaspar",
           style: TextStyle(
@@ -37,6 +45,39 @@ class UserDetailExtras extends StatelessWidget {
               fontWeight: FontWeight.bold),
         )
       ],
+    );
+  }
+
+  void showPopup(BuildContext context) {
+    TextStyle style = TextStyle(
+      letterSpacing: -0.9,
+      color: CupertinoColors.label.resolveFrom(context),
+      fontWeight: FontWeight.bold,
+    );
+
+    showCupertinoDialog<void>(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: const Text("tem certeza?"),
+        content: const Text("a exclusão de conta é uma ação irreversível"),
+        actions: <CupertinoDialogAction>[
+          CupertinoDialogAction(
+            child: const Text("voltar"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            textStyle: style,
+          ),
+          CupertinoDialogAction(
+            child: const Text("excluir conta"),
+            isDestructiveAction: true,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            textStyle: style.copyWith(color: CupertinoColors.destructiveRed),
+          )
+        ],
+      ),
     );
   }
 }

@@ -22,8 +22,8 @@ class EventListHeader extends StatelessWidget {
             Container(
               child: Image.asset(
                   MediaQuery.of(context).platformBrightness == Brightness.dark
-                      ? 'assets/Invertida.png'
-                      : 'assets/Logo.png',
+                      ? "assets/Invertida.png"
+                      : "assets/Logo.png",
                   height: 46),
               alignment: Alignment.centerLeft,
             ),

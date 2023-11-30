@@ -72,7 +72,8 @@ class UserRepository {
       final response = await API()
           .request(endpoint: "user", method: "PUT", body: user.toJson());
 
-      return json.decode(response.response);
+      Map decoded = json.decode(response.response);
+      return decoded["affectedRows"];
     } catch (e) {
       if (e is ApiError) {
         print('Error Code: ${e.code}, Message: ${e.message}');
@@ -84,14 +85,13 @@ class UserRepository {
     return null;
   }
 
-  Future<bool?> getUsageReport() async {
+  Future<Map?> getUsageReport() async {
     try {
       final response =
           await API().request(endpoint: "user/report", method: "GET");
 
       Map decoded = json.decode(response.response);
-      print(decoded);
-      return true;
+      return decoded;
     } catch (e) {
       if (e is ApiError) {
         print('Error Code: ${e.code}, Message: ${e.message}');

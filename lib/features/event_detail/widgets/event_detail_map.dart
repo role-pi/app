@@ -64,6 +64,49 @@ class EventDetailMap extends StatelessWidget {
   }
 }
 
+class EventMapPlaceholder extends StatelessWidget {
+  final Color color;
+
+  EventMapPlaceholder({required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          height: 64,
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.2),
+          ),
+          child: ClipRect(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text("adicionar local",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: -0.6,
+                            color: CupertinoDynamicColor.resolve(
+                                    CupertinoColors.label, context)
+                                .withAlpha(200))),
+                  ),
+                  Icon(CupertinoIcons.chevron_right,
+                      size: 24,
+                      color: CupertinoDynamicColor.resolve(
+                              CupertinoColors.label, context)
+                          .withAlpha(200))
+                ],
+              ),
+            ),
+          ),
+        ));
+  }
+}
+
 class EventStyledMap extends StatelessWidget {
   EventStyledMap({super.key, required this.color, required this.location});
 
@@ -181,6 +224,8 @@ class EventStyledMap extends StatelessWidget {
     String style = MediaQuery.of(context).platformBrightness == Brightness.dark
         ? darkMapStyle
         : mapStyle;
+
+    print(location.latLng);
 
     return GoogleMap(
       mapType: MapType.normal,

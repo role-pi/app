@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
@@ -10,6 +11,10 @@ import 'package:role/shared/widgets/round_button.dart';
 
 class UserFirstLoginScreen extends StatelessWidget {
   UserDetailProvider get provider => UserDetailProvider.shared;
+
+  UserFirstLoginScreen() {
+    provider.nameController.setText("");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,7 @@ class UserFirstLoginScreen extends StatelessWidget {
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: "tudo pronto! ",
+                  text: "tudo pronto!",
                   style: TextStyle(
                     color: CupertinoColors.label.resolveFrom(context),
                     fontWeight: FontWeight.bold,

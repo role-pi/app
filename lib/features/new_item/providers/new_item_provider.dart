@@ -49,8 +49,9 @@ class NewItemProvider extends ChangeNotifier {
     fToast.init(context);
     Widget toast;
     if (result != null) {
+      item.id = result;
       toast = CustomToast(
-          title: "insumo adicionado com id $result",
+          title: "insumo adicionado",
           icon: CupertinoIcons.checkmark,
           color: event.color1);
       Navigator.of(context).pop();

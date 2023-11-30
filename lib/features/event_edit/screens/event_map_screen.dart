@@ -19,18 +19,20 @@ class EventMapScreen extends StatelessWidget {
       searchHintText: "pesquise um local...",
       hideMapTypeButton: true,
       hideLocationButton: true,
-      currentLatLng: provider.event.location.latLng,
+      currentLatLng: provider.event.location?.latLng,
       topCardMargin: EdgeInsets.all(16),
       bottomCardIcon: Icon(CupertinoIcons.checkmark, size: 28),
       bottomCardMargin: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
       bottomCardTooltip: "confirmar local",
       apiKey: apiKey,
       onNext: (location_picker.GeocodingResult? result) {
-        provider.updateLocation(Location(
-          latitude: result!.geometry.location.lat,
-          longitude: result.geometry.location.lng,
-          descricao: result.formattedAddress ?? "",
-        ));
+        provider.updateLocation(
+            context,
+            Location(
+              latitude: result!.geometry.location.lat,
+              longitude: result.geometry.location.lng,
+              descricao: result.formattedAddress ?? "",
+            ));
         Navigator.pop(context);
       },
     ));

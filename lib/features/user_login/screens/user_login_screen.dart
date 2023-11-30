@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/features/user_login/widgets/verification_widget.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/features/user_login/widgets/signup_widget.dart';
@@ -15,7 +16,10 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<UserLoginProvider>(context);
-    provider.tryAuthentication(() => Navigator.pushNamed(context, "/"));
+    provider.tryAuthentication(() {
+      EventListProvider.shared.get();
+      Navigator.pushNamed(context, "/");
+    });
 
     if (provider.state == LoginState.loggedOut) {
       return WillPopScope(
@@ -70,6 +74,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                               child: VerificationWidget(
                                 onTap: (code) async {
                                   await provider.verify(email, code, () {
+                                    EventListProvider.shared.get();
                                     Navigator.pushNamed(context, "/");
                                   });
                                 },

@@ -6,6 +6,7 @@ import 'package:role/features/item_detail/providers/item_detail_provider.dart';
 import 'package:role/features/item_detail/widgets/item_detail_transaction_row.dart';
 import 'package:role/features/new_transaction/screens/new_transaction_screen.dart';
 import 'package:role/models/transaction.dart';
+import 'package:role/shared/utils/utils.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 
 class ItemDetailTransactions extends StatelessWidget {
@@ -61,6 +62,30 @@ class ItemDetailTransactions extends StatelessWidget {
               },
             );
           },
+        ),
+        SizedBox(height: 8),
+        Divider(),
+        SizedBox(height: 8),
+        Row(
+          children: [
+            Text("Total".toUpperCase(),
+                style: TextStyle(
+                    color: CupertinoColors.secondaryLabel.resolveFrom(context),
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -1.0,
+                    fontSize: 16.0)),
+            Spacer(),
+            Consumer<ItemDetailProvider>(
+              builder: (context, value, child) {
+                return Text(formatCurrency(value.item.amount),
+                    style: TextStyle(
+                        color: CupertinoColors.secondaryLabel,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -1.0,
+                        fontSize: 16.0));
+              },
+            )
+          ],
         )
       ],
     );

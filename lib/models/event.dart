@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:role/models/location.dart';
 import 'package:role/models/event_theme.dart';
@@ -15,7 +14,7 @@ class Event implements JSONSerializable {
   double? _totalAmount;
   List<String>? _profilePictures;
   EventTheme _theme;
-  Location _location;
+  Location? _location;
 
   late List<Item>? _items = null;
   late List<User>? _users = null;
@@ -36,11 +35,7 @@ class Event implements JSONSerializable {
         _totalAmount = totalAmount,
         _profilePictures = profilePictures,
         _theme = theme ?? EventTheme.random(),
-        _location = location ??
-            Location(
-                latitude: -26.905926949896116,
-                longitude: -49.07710147997988,
-                descricao: "IFSC Campus Gaspar");
+        _location = location;
 
   int get id => _id;
 
@@ -84,8 +79,8 @@ class Event implements JSONSerializable {
     _users = value;
   }
 
-  Location get location => _location;
-  set location(Location value) {
+  Location? get location => _location;
+  set location(Location? value) {
     _location = value;
   }
 
@@ -131,9 +126,9 @@ class Event implements JSONSerializable {
       "emoji": theme.emoji,
       "color1": theme.color1.toHex(),
       "color2": theme.color2.toHex(),
-      "location_lat": location.latitude,
-      "location_lng": location.longitude,
-      "location_description": location.descricao
+      "location_lat": location?.latitude,
+      "location_lng": location?.longitude,
+      "location_description": location?.descricao
     };
   }
 

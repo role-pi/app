@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/features/user_detail/widgets/user_detail_info.dart';
-import 'package:role/features/user_detail/widgets/user_detail_options.dart';
 import 'package:role/features/user_detail/widgets/user_detail_extras.dart';
 import 'package:role/shared/widgets/custom_navigation_bar.dart';
 
@@ -41,11 +40,7 @@ class UserDetailScreen extends StatelessWidget {
                       UserDetailInfo(),
                       SizedBox(height: 8),
                       Divider(),
-                      SizedBox(height: 8),
-                      UserDetailOptions(),
-                      SizedBox(height: 8),
-                      Divider(),
-                      SizedBox(height: 8),
+                      SizedBox(height: 148),
                       UserDetailExtras(),
                     ],
                   ),

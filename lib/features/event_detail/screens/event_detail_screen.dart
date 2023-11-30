@@ -62,13 +62,15 @@ class EventDetailScreen extends StatelessWidget {
                     Consumer<EventDetailProvider>(
                       builder: (context, provider, child) {
                         return ElasticButton(
-                          child: SizedBox(
-                            height: 210,
-                            child: EventDetailMap(
-                              color: provider.event.color2,
-                              location: provider.event.location,
-                            ),
-                          ),
+                          child: provider.event.location != null
+                              ? SizedBox(
+                                  height: 210,
+                                  child: EventDetailMap(
+                                    color: provider.event.color2,
+                                    location: provider.event.location!,
+                                  ))
+                              : EventMapPlaceholder(
+                                  color: provider.event.color2),
                           onPressed: () async {
                             Navigator.push(
                               context,

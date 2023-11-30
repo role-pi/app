@@ -49,8 +49,9 @@ class NewTransactionProvider extends ChangeNotifier {
     Widget toast;
 
     if (result != null) {
+      transaction.id = result;
       toast = CustomToast(
-          title: "transação adicionada com id $result",
+          title: "transação adicionada",
           icon: CupertinoIcons.checkmark,
           color: event.color1);
       Navigator.of(context).pop();

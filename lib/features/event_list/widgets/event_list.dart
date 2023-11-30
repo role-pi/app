@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:role/features/new_event/providers/new_event_provider.dart';
 import 'package:role/models/event.dart';
 import 'package:role/features/event_list/providers/event_list_provider.dart';
 import 'package:role/features/event_list/widgets/event_item_row.dart';
@@ -10,10 +11,7 @@ import 'package:role/shared/widgets/empty_list_indicator.dart';
 class EventList extends StatelessWidget {
   const EventList({
     super.key,
-    required this.onTap,
   });
-
-  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,37 +27,33 @@ class EventList extends StatelessWidget {
               await usersViewModel.get();
             }),
             SliverPadding(
+                padding: EdgeInsets.fromLTRB(36, 44, 38, 16),
+                sliver: SliverToBoxAdapter(
+                  child: EventListHeader(),
+                )),
+            SliverPadding(
               padding: EdgeInsets.only(bottom: 138.0, top: 8.0),
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
                     childCount: (usersViewModel.events.length == 0
-                            ? 1
-                            : usersViewModel.events.length) +
-                        1, (context, index) {
-                  if (index == 0) {
+                        ? 1
+                        : usersViewModel.events.length), (context, index) {
+                  if (usersViewModel.events.length == 0) {
                     return Padding(
-                      padding: const EdgeInsets.fromLTRB(36, 36, 38, 16),
-                      child: EventListHeader(),
-                    );
-                  } else {
-                    if (usersViewModel.events.length == 0) {
-                      return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 28.0, vertical: 4.0),
-                          child: EmtpyListIndicator(
-                            text:
-                                "crie um evento com o botão de estrela abaixo",
-                          ));
-                    } else {
-                      Event event = usersViewModel.events[index - 1];
-                      return Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 28.0, vertical: 6.0),
-                        child: EventItemRow(
-                          event: event,
-                        ),
-                      );
-                    }
+                            horizontal: 28.0, vertical: 4.0),
+                        child: EmtpyListIndicator(
+                          text: "crie um evento com o botão de estrela abaixo",
+                        ));
+                  } else {
+                    Event event = usersViewModel.events[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 28.0, vertical: 6.0),
+                      child: EventItemRow(
+                        event: event,
+                      ),
+                    );
                   }
                 }),
               ),
@@ -69,7 +63,9 @@ class EventList extends StatelessWidget {
         FadedBackgroundWidget(),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 48),
-          child: CircleButton(onTap: onTap),
+          child: CircleButton(onTap: () {
+            NewEventProvider.shared.showing = true;
+          }),
         ),
       ],
     );

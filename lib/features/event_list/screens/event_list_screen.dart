@@ -12,11 +12,9 @@ class EventListScreen extends StatefulWidget {
 }
 
 class _EventListScreenState extends State<EventListScreen> {
-  // bool showNewEvent = false;
-
   Duration duration = Duration(milliseconds: 200);
   Curve curve = Curves.easeInOutQuad;
-// mudar ListWheelScrollView
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -30,9 +28,7 @@ class _EventListScreenState extends State<EventListScreen> {
           child: Center(
             child: Stack(
               children: [
-                EventList(
-                  onTap: () => {NewEventProvider.shared.showing = true},
-                ),
+                EventList(),
                 NewEventScreen(),
                 UserFirstLoginScreen(),
               ],

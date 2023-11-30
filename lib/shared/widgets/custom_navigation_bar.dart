@@ -99,7 +99,7 @@ class CustomNavigationBar extends StatelessWidget {
                         fontSize: textSize * 1.3,
                         fontWeight: FontWeight.bold,
                         height: textSize * 1.1 / 28,
-                        letterSpacing: -textSize * 1.8 / 28),
+                        letterSpacing: -textSize * 2 / 28),
                   ),
                 )
               : SizedBox(),

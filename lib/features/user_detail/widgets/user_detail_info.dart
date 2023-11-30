@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/features/user_detail/screens/user_detail_pix_key_modal.dart';
+import 'package:role/features/user_detail/widgets/wrapped_button.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/shared/widgets/elastic_button.dart';
 import 'package:role/shared/widgets/form/form_item_group_title.dart';
@@ -83,7 +83,7 @@ class UserDetailInfo extends StatelessWidget {
                       );
                     },
                   ),
-                  SizedBox(height: 4),
+                  SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.only(left: 4),
                     child: Text(
@@ -112,8 +112,17 @@ class UserDetailInfo extends StatelessWidget {
           },
           rectangleColor: CupertinoColors.systemGrey6,
           textColor: CupertinoColors.secondaryLabel,
-          text: UserLoginProvider.shared.user?.pixKey ?? "",
+          icon: UserLoginProvider.shared.user?.pixKey != null
+              ? CupertinoIcons.pencil
+              : CupertinoIcons.plus,
+          text: UserLoginProvider.shared.user?.pixKey ?? "adicionar",
         ),
+        SizedBox(height: 12),
+        ElasticButton(
+            onPressed: () {
+              provider.showReport(context);
+            },
+            child: WrappedButton()),
       ],
     );
   }

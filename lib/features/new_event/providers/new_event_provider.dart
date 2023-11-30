@@ -39,7 +39,7 @@ class NewEventProvider extends ChangeNotifier {
 
   create(BuildContext context) async {
     loading = true;
-    int? response = await eventRepository.addEvent(event);
+    int? response = await eventRepository.postEvent(event);
 
     if (response != null) {
       showing = false;

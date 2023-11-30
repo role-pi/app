@@ -1,13 +1,14 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:role/features/user_detail/screens/usage_report_screen.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
 import 'package:role/features/user_login/repository/user_repository.dart';
-import 'package:role/models/event.dart';
+import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 
 class UserDetailProvider extends ChangeNotifier {
@@ -203,7 +204,26 @@ class UserDetailProvider extends ChangeNotifier {
   }
 
   void showReport(BuildContext context) async {
-    await userRepository.getUsageReport();
+    var result = await userRepository.getUsageReport();
+
+    if (result != null) {
+      print(result);
+      int totalEvents = result["eventos"][0]["eventos"];
+      double totalSpent = double.tryParse(result["total"][0]["total"]) ?? 0;
+      double averageSpent = totalEvents / totalSpent;
+      ItemCategory category =
+          ItemCategory.fromValue(result["insumos"][0]["categoria"]);
+
+      showCupertinoModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return UsageReportScreen(
+                totalEvents: totalEvents,
+                totalSpent: totalSpent,
+                averageSpent: averageSpent,
+                category: category);
+          });
+    }
   }
 
   textChanged() {

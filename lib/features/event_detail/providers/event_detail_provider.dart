@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:role/features/event_detail/repository/event_detail_repository.dart';
@@ -8,7 +7,6 @@ import 'package:role/features/split_costs/providers/split_costs_provider.dart';
 import 'package:role/features/split_costs/screens/split_costs_screen.dart';
 import 'package:role/models/event.dart';
 import 'package:role/models/item.dart';
-import 'package:role/models/location.dart';
 import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/custom_toast.dart';
 

@@ -55,7 +55,6 @@ class EventEditRepository {
           });
 
       var decoded = json.decode(response.response);
-      print(decoded);
 
       return (decoded[0] as int, decoded[1] as int);
     } catch (e) {
