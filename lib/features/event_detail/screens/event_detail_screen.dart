@@ -53,7 +53,7 @@ class EventDetailScreen extends StatelessWidget {
                         provider.event.users == null)
                       return Center(
                           child: CupertinoActivityIndicator(
-                        radius: 20,
+                        radius: 16,
                         color: CupertinoColors.label.resolveFrom(context),
                       ));
                     return Column(
