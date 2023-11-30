@@ -2,7 +2,7 @@
 
 //String api = 'http://localhost:3000/';
 
- String api = 'https://api-6hcvm.ondigitalocean.app/';
+String api = 'https://api-6hcvm.ondigitalocean.app/';
 
 // Success
 const success = 200;

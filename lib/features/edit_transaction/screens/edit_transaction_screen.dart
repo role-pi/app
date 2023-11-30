@@ -71,7 +71,7 @@ class EditTransactionScreen extends StatelessWidget {
             RoundButton(
               text: "atualizar",
               onPressed: () {
-                provider.updateTransaction(context);
+                provider.update(context);
               },
               textColor: CupertinoColors.white,
             ),

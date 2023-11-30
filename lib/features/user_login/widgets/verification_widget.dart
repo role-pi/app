@@ -26,9 +26,10 @@ class _VerificationWidgetState extends State<VerificationWidget> {
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Spacer(),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -111,7 +112,6 @@ class _VerificationWidgetState extends State<VerificationWidget> {
                     fontSize: 20,
                     letterSpacing: -1.1)),
           ),
-          Spacer()
         ],
       ),
     );

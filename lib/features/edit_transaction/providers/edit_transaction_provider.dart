@@ -36,7 +36,7 @@ class EditTransactionProvider extends ChangeNotifier {
     fToast = FToast();
   }
 
-  updateTransaction(BuildContext context) async {
+  update(BuildContext context) async {
     changed = false;
     loading = true;
 
