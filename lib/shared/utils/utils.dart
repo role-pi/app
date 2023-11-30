@@ -1,4 +1,9 @@
+import 'package:intl/intl.dart';
+
 String formatCurrency(double? amount) {
   if (amount == null) return "R\$ 0,00";
-  return "R\$ ${(amount).toStringAsFixed(2).replaceAll(".", ",")}";
+
+  final currencyFormatter =
+      NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+  return currencyFormatter.format(amount);
 }

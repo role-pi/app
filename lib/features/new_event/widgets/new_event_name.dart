@@ -12,11 +12,9 @@ class NewEventName extends StatefulWidget {
 class _NewEventNameState extends State<NewEventName> {
   final _formKey = GlobalKey<FormState>();
 
-  final _nameController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    NewEventProvider _newEventProvider =
+    NewEventProvider provider =
         Provider.of<NewEventProvider>(context, listen: false);
 
     return Form(
@@ -38,26 +36,16 @@ class _NewEventNameState extends State<NewEventName> {
           ),
           SizedBox(height: 24.0),
           BigFormTextField(
-            controller: _nameController,
+            controller: provider.nameController,
             color: CupertinoColors.label.resolveFrom(context).withOpacity(0.6),
-            onChanged: (value) {
-              // setState(() {
-              //   enabled = !value?.isEmpty ?? false;
-              // });
-            },
-            onFieldSubmitted: (_) {
-              // onSubmit();
-            },
+            onFieldSubmitted: (_) => provider.setName(context),
           ),
           SizedBox(height: 24.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: RoundButton(
               text: "continuar",
-              onPressed: () {
-                _newEventProvider.setName(_nameController.text);
-                _nameController.clear();
-              },
+              onPressed: () => provider.setName(context),
               // onPressed: onSubmit,
             ),
           ),

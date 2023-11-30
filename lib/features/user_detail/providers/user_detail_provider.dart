@@ -210,7 +210,7 @@ class UserDetailProvider extends ChangeNotifier {
       print(result);
       int totalEvents = result["eventos"][0]["eventos"];
       double totalSpent = double.tryParse(result["total"][0]["total"]) ?? 0;
-      double averageSpent = totalEvents / totalSpent;
+      double averageSpent = totalSpent / totalEvents;
       ItemCategory category =
           ItemCategory.fromValue(result["insumos"][0]["categoria"]);
 

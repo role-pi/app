@@ -45,23 +45,22 @@ class EventDetailScreen extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 24.0, right: 24.0, top: 8.0, bottom: 64.0),
-                child: Column(
-                  children: [
-                    Consumer<EventDetailProvider>(
+                  padding: const EdgeInsets.only(
+                      left: 24.0, right: 24.0, top: 8.0, bottom: 64.0),
+                  child: Consumer<EventDetailProvider>(
                       builder: (context, provider, child) {
-                        if (provider.event.users != null) {
-                          return EventDetailGuests(
-                              convidados: provider.event.users!);
-                        }
-                        return Container();
-                      },
-                    ),
-                    SizedBox(height: 24),
-                    Consumer<EventDetailProvider>(
-                      builder: (context, provider, child) {
-                        return ElasticButton(
+                    if (provider.event.users == null ||
+                        provider.event.users == null)
+                      return Center(
+                          child: CupertinoActivityIndicator(
+                        radius: 20,
+                        color: CupertinoColors.label.resolveFrom(context),
+                      ));
+                    return Column(
+                      children: [
+                        EventDetailGuests(convidados: provider.event.users!),
+                        SizedBox(height: 24),
+                        ElasticButton(
                           child: provider.event.location != null
                               ? SizedBox(
                                   height: 210,
@@ -80,63 +79,54 @@ class EventDetailScreen extends StatelessWidget {
                               ),
                             );
                           },
-                        );
-                      },
-                    ),
-                    SizedBox(height: 32),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Insumos",
-                          style: TextStyle(
-                            fontSize: 27,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: -1.5,
-                          ),
                         ),
-                        ElasticButton(
-                          onPressed: () {
-                            NewItemScreen(provider).show(context);
-                          },
-                          child: Container(
-                            width: 45,
-                            height: 45,
-                            decoration: BoxDecoration(
-                              color: CupertinoDynamicColor.resolve(
-                                  CupertinoColors.systemGrey6, context),
-                              borderRadius: BorderRadius.circular(8),
+                        SizedBox(height: 32),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Insumos",
+                              style: TextStyle(
+                                fontSize: 27,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: -1.5,
+                              ),
                             ),
-                            child: Icon(
-                              Icons.add,
-                              color: CupertinoDynamicColor.resolve(
-                                  CupertinoColors.label, context),
-                              size: 30,
+                            ElasticButton(
+                              onPressed: () {
+                                NewItemScreen(provider).show(context);
+                              },
+                              child: Container(
+                                width: 45,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  color: CupertinoDynamicColor.resolve(
+                                      CupertinoColors.systemGrey6, context),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  color: CupertinoDynamicColor.resolve(
+                                      CupertinoColors.label, context),
+                                  size: 30,
+                                ),
+                              ),
                             ),
-                          ),
+                            // EventDetailInputs(),
+                          ],
                         ),
-                        // EventDetailInputs(),
+                        SizedBox(height: 4),
+                        EventDetailItems(items: provider.event.items!),
+                        RoundButton(
+                          text: "distribuir gastos",
+                          rectangleColor: CupertinoColors.systemGrey6,
+                          textColor: CupertinoColors.label,
+                          onPressed: () => provider.splitCosts(context),
+                        ),
                       ],
-                    ),
-                    SizedBox(height: 4),
-                    Consumer<EventDetailProvider>(
-                      builder: (context, provider, child) {
-                        if (provider.event.items != null) {
-                          return EventDetailItems(items: provider.event.items!);
-                        }
-                        return Container();
-                      },
-                    ),
-                    RoundButton(
-                      text: "distribuir gastos",
-                      rectangleColor: CupertinoColors.systemGrey6,
-                      textColor: CupertinoColors.label,
-                      onPressed: () => provider.splitCosts(context),
-                    ),
-                  ],
-                ),
-              ),
+                    );
+                  })),
             ),
           ],
         ),

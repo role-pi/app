@@ -49,15 +49,17 @@ class EventEditGuests extends StatelessWidget {
                         return Column(children: [
                           Dismissible(
                             key: UniqueKey(),
-                            direction: DismissDirection.endToStart,
+                            direction: value.event.users?.length != 1
+                                ? DismissDirection.endToStart
+                                : DismissDirection.none,
                             background: DismissibleExclusionBackground(
                               size: 22,
                               cornerRadius: 0,
                             ),
                             confirmDismiss: (direction) async =>
-                                await provider.showDeletionDialog(context),
+                                await value.showDeletionDialog(context),
                             onDismissed: (direction) async =>
-                                await provider.removeUser(context, user),
+                                await value.removeUser(context, user),
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(
                                   16,
@@ -76,21 +78,25 @@ class EventEditGuests extends StatelessWidget {
                                           fontWeight: FontWeight.w600,
                                           letterSpacing: -0.5)),
                                   Spacer(),
-                                  ElasticButton(
-                                    onPressed: () async {
-                                      if (await provider
-                                          .showDeletionDialog(context)) {
-                                        provider.removeUser(context, user);
-                                      }
-                                    },
-                                    child: Icon(
-                                      CupertinoIcons.delete_simple,
-                                      size: 22,
-                                      color: CupertinoDynamicColor.resolve(
-                                          CupertinoColors.secondaryLabel,
-                                          context),
-                                    ),
-                                  )
+                                  value.event.users?.length != 1
+                                      ? ElasticButton(
+                                          onPressed: () async {
+                                            if (await value
+                                                .showDeletionDialog(context)) {
+                                              value.removeUser(context, user);
+                                            }
+                                          },
+                                          child: Icon(
+                                            CupertinoIcons.delete_simple,
+                                            size: 22,
+                                            color:
+                                                CupertinoDynamicColor.resolve(
+                                                    CupertinoColors
+                                                        .secondaryLabel,
+                                                    context),
+                                          ),
+                                        )
+                                      : SizedBox()
                                 ],
                               ),
                             ),

@@ -115,14 +115,23 @@ class QRCodeModalPopup extends StatelessWidget {
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.all(32.0),
-                        child: CustomPaint(
-                          size: Size(qrCodeSize, qrCodeSize),
-                          painter: QrPainter(
-                            data: qrPixKey.getQRCode(),
-                            version: QrVersions.auto,
-                            gapless: false,
-                          ),
-                        ),
+                        child: Builder(builder: (context) {
+                          return CustomPaint(
+                            size: Size(qrCodeSize, qrCodeSize),
+                            painter: QrPainter(
+                                data: qrPixKey.getQRCode(),
+                                version: QrVersions.auto,
+                                gapless: false,
+                                eyeStyle: QrEyeStyle(
+                                    eyeShape: QrEyeShape.square,
+                                    color: CupertinoColors.label
+                                        .resolveFrom(context)),
+                                dataModuleStyle: QrDataModuleStyle(
+                                    dataModuleShape: QrDataModuleShape.square,
+                                    color: CupertinoColors.label
+                                        .resolveFrom(context))),
+                          );
+                        }),
                       ),
                     ),
                   ),

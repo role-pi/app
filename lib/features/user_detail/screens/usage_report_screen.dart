@@ -38,7 +38,7 @@ class UsageReportScreen extends StatelessWidget {
         letterSpacing: -2);
 
     return CupertinoPageScaffold(
-      backgroundColor: CupertinoColors.white,
+      backgroundColor: CupertinoColors.systemBackground.resolveFrom(context),
       child: Center(
         child: Stack(
           alignment: Alignment.bottomCenter,
@@ -59,6 +59,7 @@ class UsageReportScreen extends StatelessWidget {
                             "no total você participou de",
                             style: labelStyle,
                           ),
+                          SizedBox(height: 4),
                           Text(
                               "$totalEvents evento${totalEvents == 1 ? "" : "s"}",
                               style: valueStyle),
@@ -67,10 +68,11 @@ class UsageReportScreen extends StatelessWidget {
                             "os seus gastos totais foram",
                             style: labelStyle,
                           ),
+                          SizedBox(height: 4),
                           Text(formatCurrency(totalSpent), style: valueStyle),
                           SizedBox(height: 4),
                           Text(
-                            "${formatCurrency(totalSpent)} em média",
+                            "${formatCurrency(averageSpent)} em média",
                             style: labelStyle,
                           ),
                           SizedBox(height: 24),
@@ -78,6 +80,7 @@ class UsageReportScreen extends StatelessWidget {
                             "a sua categoria de insumo mais recorrente é",
                             style: labelStyle,
                           ),
+                          SizedBox(height: 4),
                           Text(category.emoji + " " + category.name,
                               style: valueStyle),
                           SizedBox(height: 200),

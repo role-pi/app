@@ -98,9 +98,9 @@ class Item implements JSONSerializable {
       if (delta.inSeconds < 60) {
         return "há alguns segundos";
       } else if (delta.inMinutes < 60) {
-        return "há ${delta.inMinutes} minutos";
+        return "há ${delta.inMinutes} minuto${delta.inMinutes == 1 ? "" : "s"}";
       } else if (DateTime.now().day == date.day) {
-        return "há ${delta.inHours} horas";
+        return "há ${delta.inHours} hora${delta.inHours == 1 ? "" : "s"}";
       }
     }
 

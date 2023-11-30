@@ -110,7 +110,7 @@ class UserDetailInfo extends StatelessWidget {
               provider: provider,
             ).show(context);
           },
-          rectangleColor: CupertinoColors.systemGrey6,
+          rectangleColor: CupertinoColors.systemGrey5,
           textColor: CupertinoColors.secondaryLabel,
           icon: UserLoginProvider.shared.user?.pixKey != null
               ? CupertinoIcons.pencil
