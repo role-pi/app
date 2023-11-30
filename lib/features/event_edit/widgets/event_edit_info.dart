@@ -50,20 +50,20 @@ class EventEditInfo extends StatelessWidget {
           ),
         ]),
         SizedBox(height: 12),
-        SizedBox(
-            height: 250,
-            child: ElasticButton(
-              onPressed: () {
-                showCupertinoModalBottomSheet(
-                    context: context,
-                    builder: (context) => EventMapScreen(provider));
-              },
-              child: provider.event.location != null
-                  ? EventDetailMap(
+        ElasticButton(
+          onPressed: () {
+            showCupertinoModalBottomSheet(
+                context: context,
+                builder: (context) => EventMapScreen(provider));
+          },
+          child: provider.event.location != null
+              ? SizedBox(
+                  height: 250,
+                  child: EventDetailMap(
                       color: provider.event.color1,
-                      location: provider.event.location!)
-                  : Text("Set location"),
-            )),
+                      location: provider.event.location!))
+              : EventMapPlaceholder(color: provider.event.color1),
+        ),
       ],
     );
   }

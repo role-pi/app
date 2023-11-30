@@ -5,7 +5,7 @@ import 'package:role/models/item.dart';
 import 'package:role/shared/widgets/empty_list_indicator.dart';
 
 class EventDetailItems extends StatelessWidget {
-  final List<Item> items;
+  final List<Item>? items;
 
   EventDetailItems({Key? key, required this.items}) : super(key: key);
 
@@ -15,45 +15,45 @@ class EventDetailItems extends StatelessWidget {
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      itemCount: items.length == 0 ? 1 : items.length,
+      itemCount: items?.length == 0 ? 1 : items?.length,
       itemBuilder: (context, index) {
-        if (items.length == 0) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: EmtpyListIndicator(text: "não há insumos"),
-          );
+        if (items != null && items?.length != 0) {
+          bool isSameDate = true;
+          final DateTime date = items![index].date;
+          final item = items![index];
+
+          if (index == 0) {
+            isSameDate = false;
+          } else {
+            final DateTime prevDate = items![index - 1].date;
+            isSameDate = DateUtils.isSameDay(date, prevDate);
+          }
+
+          if (index == 0 || !(isSameDate)) {
+            return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 16),
+                  Text(
+                    item.dayDescription.toUpperCase(),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: -0.8,
+                        color: CupertinoColors.secondaryLabel
+                            .resolveFrom(context)),
+                  ),
+                  SizedBox(height: 12),
+                  EventDetailItemRow(item: item)
+                ]);
+          } else {
+            return EventDetailItemRow(item: item);
+          }
         }
 
-        bool isSameDate = true;
-        final DateTime date = items[index].date;
-        final item = items[index];
-
-        if (index == 0) {
-          isSameDate = false;
-        } else {
-          final DateTime prevDate = items[index - 1].date;
-          isSameDate = DateUtils.isSameDay(date, prevDate);
-        }
-
-        if (index == 0 || !(isSameDate)) {
-          return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 16),
-                Text(
-                  item.dayDescription.toUpperCase(),
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: -0.8,
-                      color:
-                          CupertinoColors.secondaryLabel.resolveFrom(context)),
-                ),
-                SizedBox(height: 12),
-                EventDetailItemRow(item: item)
-              ]);
-        } else {
-          return EventDetailItemRow(item: item);
-        }
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: EmtpyListIndicator(text: "não há insumos"),
+        );
       },
     );
   }

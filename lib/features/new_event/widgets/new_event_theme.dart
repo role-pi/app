@@ -64,69 +64,69 @@ class SquareGrid extends StatelessWidget {
 
   final List<EventTheme> defaultThemes = [
     EventTheme(
-        emoji: '🎄',
-        color1: Color.fromRGBO(208, 2, 13, 1),
-        color2: Color.fromRGBO(219, 86, 93, 1)),
-    EventTheme(
-        emoji: '🎉',
-        color1: Color.fromRGBO(143, 34, 50, 1),
-        color2: Color.fromRGBO(209, 137, 147, 1)),
+        emoji: '🥩',
+        color1: Color.fromRGBO(129, 80, 11, 1),
+        color2: Color.fromRGBO(230, 163, 132, 1)),
     EventTheme(
         emoji: '🍿',
-        color1: Color.fromRGBO(248, 124, 0, 1),
-        color2: Color.fromRGBO(255, 194, 128, 1)),
+        color1: Color.fromRGBO(248, 153, 0, 1),
+        color2: Color.fromRGBO(255, 206, 128, 1)),
     EventTheme(
-        emoji: '🏕️',
-        color1: Color.fromRGBO(175, 126, 95, 1),
-        color2: Color.fromRGBO(94, 43, 11, 1)),
+        emoji: '🎁',
+        color1: Color.fromRGBO(255, 4, 58, 1),
+        color2: Color.fromRGBO(177, 107, 136, 1)),
     EventTheme(
         emoji: '🎡',
-        color1: Color.fromRGBO(255, 230, 0, 1),
-        color2: Color.fromRGBO(243, 239, 183, 1)),
-    EventTheme(
-        emoji: '🏟️',
-        color1: Color.fromRGBO(240, 220, 162, 1),
-        color2: Color.fromRGBO(255, 191, 0, 1)),
-    EventTheme(
-        emoji: '🎮',
-        color1: Color.fromRGBO(22, 68, 1, 1),
-        color2: Color.fromRGBO(132, 241, 150, 1)),
-    EventTheme(
-        emoji: '🎆',
-        color1: Color.fromRGBO(25, 204, 2, 1),
-        color2: Color.fromRGBO(113, 179, 129, 1)),
-    EventTheme(
-        emoji: '🌱',
-        color1: Color.fromRGBO(0, 119, 255, 1),
-        color2: Color.fromRGBO(119, 178, 255, 1)),
-    EventTheme(
-        emoji: '🥩',
-        color1: Color.fromRGBO(132, 171, 230, 1),
-        color2: Color.fromRGBO(11, 19, 129, 1)),
-    EventTheme(
-        emoji: '🏖️',
-        color1: Color.fromRGBO(0, 136, 255, 1),
-        color2: Color.fromRGBO(152, 215, 236, 1)),
-    EventTheme(
-        emoji: '✨',
-        color1: Color.fromRGBO(108, 40, 235, 1),
-        color2: Color.fromRGBO(159, 124, 219, 1)),
-    EventTheme(
-        emoji: '🪩',
-        color1: Color.fromRGBO(121, 16, 190, 1),
-        color2: Color.fromRGBO(180, 132, 219, 1)),
+        color1: Color.fromRGBO(123, 0, 255, 1),
+        color2: Color.fromRGBO(241, 183, 243, 1)),
     EventTheme(
         emoji: '🎃',
         color1: Color.fromRGBO(185, 120, 223, 1),
         color2: Color.fromRGBO(114, 9, 119, 1)),
     EventTheme(
-        emoji: '🎂',
-        color1: Color.fromRGBO(255, 1, 166, 1),
-        color2: Color.fromRGBO(248, 160, 185, 1)),
+        emoji: '🏕️',
+        color1: Color.fromRGBO(39, 94, 11, 1),
+        color2: Color.fromRGBO(168, 175, 95, 1)),
     EventTheme(
-        emoji: '🎁',
-        color1: Color.fromRGBO(177, 107, 136, 1),
-        color2: Color.fromRGBO(255, 4, 58, 1)),
+        emoji: '🎉',
+        color1: Color.fromRGBO(143, 59, 34, 1),
+        color2: Color.fromRGBO(209, 179, 137, 1)),
+    EventTheme(
+        emoji: '✨',
+        color1: Color.fromRGBO(121, 172, 172, 1),
+        color2: Color.fromRGBO(61, 75, 83, 1)),
+    EventTheme(
+        emoji: '🏟️',
+        color1: Color.fromRGBO(255, 191, 0, 1),
+        color2: Color.fromRGBO(240, 220, 162, 1)),
+    EventTheme(
+        emoji: '🎄',
+        color1: Color.fromRGBO(208, 2, 13, 1),
+        color2: Color.fromRGBO(219, 86, 86, 1)),
+    EventTheme(
+        emoji: '🌱',
+        color1: Color.fromRGBO(71, 105, 51, 1),
+        color2: Color.fromRGBO(46, 74, 44, 1)),
+    EventTheme(
+        emoji: '🏖️',
+        color1: Color.fromRGBO(11, 175, 148, 1),
+        color2: Color.fromRGBO(152, 222, 236, 1)),
+    EventTheme(
+        emoji: '🎮',
+        color1: Color.fromRGBO(52, 60, 47, 1),
+        color2: Color.fromRGBO(10, 12, 10, 1)),
+    EventTheme(
+        emoji: '🎂',
+        color1: Color.fromRGBO(129, 54, 103, 1),
+        color2: Color.fromRGBO(102, 76, 83, 1)),
+    EventTheme(
+        emoji: '🎆',
+        color1: Color.fromRGBO(204, 2, 154, 1),
+        color2: Color.fromRGBO(179, 113, 149, 1)),
+    EventTheme(
+        emoji: '🪩',
+        color1: Color.fromRGBO(16, 71, 190, 1),
+        color2: Color.fromRGBO(139, 132, 219, 1)),
   ];
 
   @override

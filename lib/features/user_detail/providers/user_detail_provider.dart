@@ -208,11 +208,19 @@ class UserDetailProvider extends ChangeNotifier {
 
     if (result != null) {
       print(result);
-      int totalEvents = result["eventos"][0]["eventos"];
-      double totalSpent = double.tryParse(result["total"][0]["total"]) ?? 0;
-      double averageSpent = totalSpent / totalEvents;
-      ItemCategory category =
-          ItemCategory.fromValue(result["insumos"][0]["categoria"]);
+      int totalEvents = result["eventos"].isNotEmpty
+          ? result["eventos"][0]["eventos"] ?? 0
+          : 0;
+
+      double totalSpent = result["total"].isNotEmpty
+          ? double.tryParse(result["total"][0]["total"]) ?? 0
+          : 0;
+
+      double averageSpent = totalEvents != 0 ? totalSpent / totalEvents : 0;
+
+      ItemCategory category = result["insumos"].isNotEmpty
+          ? ItemCategory.fromValue(result["insumos"][0]["categoria"])
+          : ItemCategory.other;
 
       showCupertinoModalBottomSheet(
           context: context,

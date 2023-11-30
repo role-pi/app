@@ -58,7 +58,7 @@ class EventDetailScreen extends StatelessWidget {
                       ));
                     return Column(
                       children: [
-                        EventDetailGuests(convidados: provider.event.users!),
+                        EventDetailGuests(convidados: provider.event.users),
                         SizedBox(height: 24),
                         ElasticButton(
                           child: provider.event.location != null
@@ -117,7 +117,7 @@ class EventDetailScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 4),
-                        EventDetailItems(items: provider.event.items!),
+                        EventDetailItems(items: provider.event.items),
                         RoundButton(
                           text: "distribuir gastos",
                           rectangleColor: CupertinoColors.systemGrey6,

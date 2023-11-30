@@ -35,7 +35,6 @@ class EventListProvider extends ChangeNotifier {
   }
 
   get() async {
-    set([]);
     set(await eventRepository.getEvents());
     notifyListeners();
   }

@@ -4,15 +4,17 @@ import 'package:role/models/user.dart';
 import 'package:role/shared/widgets/remote_profile_picture.dart';
 
 class EventDetailGuests extends StatelessWidget {
-  final List<User> convidados;
+  final List<User>? convidados;
 
   EventDetailGuests({Key? key, required this.convidados}) : super(key: key);
 
   String get title {
-    if (convidados.length == 1) {
+    if (convidados == null) {
+      return "Sem convidados";
+    } else if (convidados?.length == 1) {
       return "1 convidado";
     } else {
-      return "${convidados.length} convidados";
+      return "${convidados?.length ?? 0} convidados";
     }
   }
 
@@ -44,27 +46,31 @@ class EventDetailGuests extends StatelessWidget {
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               scrollDirection: Axis.horizontal,
-              itemCount: convidados.length,
+              itemCount: convidados?.length,
               itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      RemoteProfilePicture(
-                        url: convidados[index].profilePhoto,
-                        size: 64,
-                      ),
-                      SizedBox(height: 8),
-                      AutoSizeText(
-                        convidados[index].displayName,
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: CupertinoColors.systemGrey,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                );
+                if (convidados != null) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        RemoteProfilePicture(
+                          url: convidados![index].profilePhoto,
+                          size: 64,
+                        ),
+                        SizedBox(height: 8),
+                        AutoSizeText(
+                          convidados![index].displayName,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: CupertinoColors.systemGrey,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
+                return Container();
               },
             ),
           ),
