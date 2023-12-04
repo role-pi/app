@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:role/features/user_detail/providers/user_detail_provider.dart';
 import 'package:role/features/user_login/providers/user_login_provider.dart';
@@ -11,10 +10,6 @@ import 'package:role/shared/widgets/round_button.dart';
 
 class UserFirstLoginScreen extends StatelessWidget {
   UserDetailProvider get provider => UserDetailProvider.shared;
-
-  UserFirstLoginScreen() {
-    provider.nameController.setText("");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +42,7 @@ class UserFirstLoginScreen extends StatelessWidget {
                   children: <TextSpan>[
                     TextSpan(
                         text:
-                            "por último, gostaria de adicionar um nome e foto de perfil?",
+                            " por último, gostaria de adicionar um nome e foto de perfil?",
                         style: TextStyle(
                             color: CupertinoColors.secondaryLabel
                                 .resolveFrom(context))),

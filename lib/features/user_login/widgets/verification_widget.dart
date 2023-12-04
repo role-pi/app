@@ -44,7 +44,7 @@ class _VerificationWidgetState extends State<VerificationWidget> {
               children: const <TextSpan>[
                 TextSpan(
                     text:
-                        "agora só precisamos do codigo de verificação que enviamos para você",
+                        "agora só precisamos do código de verificação que enviamos para você",
                     style: TextStyle(color: CupertinoColors.systemGrey)),
               ],
             ),

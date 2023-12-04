@@ -48,7 +48,6 @@ class EventDetailRepository {
       var response =
           await API().request(endpoint: "item/${item.id}", method: "DELETE");
 
-      print(json.decode(response.response));
       return json.decode(response.response)["affectedRows"] > 0;
     } catch (e) {
       if (e is ApiError) {

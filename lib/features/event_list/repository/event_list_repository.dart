@@ -41,8 +41,6 @@ class EventListRepository {
       var response = await API()
           .request(endpoint: "event", method: "POST", body: event.toJson());
 
-      print(event.toJson());
-
       Map decoded = json.decode(response.response);
       return decoded["insertId"];
     } catch (e) {

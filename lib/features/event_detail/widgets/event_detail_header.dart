@@ -46,9 +46,12 @@ class EventDetailHeader extends StatelessWidget {
                       }));
                     })),
             Spacer(),
-            shrinkOffset > 30
-                ? SizedBox()
-                : Transform.scale(
+            IgnorePointer(
+              child: Builder(builder: (context) {
+                if (shrinkOffset > 30) {
+                  return SizedBox();
+                } else {
+                  return Transform.scale(
                     scale: max(1 - shrinkOffset / 300.0, 0.0),
                     child: Opacity(
                       opacity: max(1 - shrinkOffset / 30.0, 0),
@@ -110,7 +113,10 @@ class EventDetailHeader extends StatelessWidget {
                                 ),
                               ])),
                     ),
-                  ),
+                  );
+                }
+              }),
+            ),
           ],
         ),
       ))),

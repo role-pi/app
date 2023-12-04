@@ -98,7 +98,6 @@ class EventListProvider extends ChangeNotifier {
   }
 
   Event event(id) {
-    print(id);
     var event = _events.firstWhere((element) => element.id == id);
     return event;
   }

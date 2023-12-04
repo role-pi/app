@@ -225,8 +225,6 @@ class EventStyledMap extends StatelessWidget {
         ? darkMapStyle
         : mapStyle;
 
-    print(location.latLng);
-
     return GoogleMap(
       mapType: MapType.normal,
       initialCameraPosition: _kGooglePlex,

@@ -207,7 +207,6 @@ class UserDetailProvider extends ChangeNotifier {
     var result = await userRepository.getUsageReport();
 
     if (result != null) {
-      print(result);
       int totalEvents = result["eventos"].isNotEmpty
           ? result["eventos"][0]["eventos"] ?? 0
           : 0;
