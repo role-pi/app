@@ -9,7 +9,19 @@
 
 Este repositório contém o código-fonte do aplicativo rolê, desenvolvido em Flutter. O rolê é um aplicativo que permite aos usuários organizarem eventos sociais e fazerem controle de gastos de forma prática, intuitiva e eficiente.
 
-# Telas
+</br>
+
+# 📌 Diagramas 
+[Repositório de Diagramas](https://github.com/role-pi/diagramas)
+
+</br>
+
+# 🌐 API 
+[Repositório API](https://github.com/role-pi/api)
+
+</br>
+
+# 📱 Telas
 
 </br> 
 
@@ -54,6 +66,16 @@ Este repositório contém o código-fonte do aplicativo rolê, desenvolvido em F
 | :---: | :---: |
 | <img alt="Tela rolê wrapped" height=500 src="https://github.com/role-pi/app/assets/111303609/938111bb-627f-4dcd-ad8b-1c8f170a33d4"> | <img alt="Tela de chave pix" height=500 src="https://github.com/role-pi/app/assets/111303609/0c2bfd73-c448-4de7-9691-b12fb57e2239"> | 
 
-### Autores
+</br>
+
+# 💽 Vídeo do sistema
+[Vídeo no youtube](https://youtu.be/FHsDa_L2rrQ)
+
+</br>
+
+## 🧑🏻‍💻 Desenvolvedores
+
+</br>
+
 | [<img src="https://github.com/role-pi/app/assets/111303609/8a4144b5-2adf-4d68-86d7-ef77ae74d935" width=115><br><sub>Ana Clara Castellain</sub>](https://github.com/fr0styb33) | [<img src="https://github.com/role-pi/app/assets/111303609/a845a3a3-bb94-4cb9-99c5-3ee7dff8f216" width=115><br><sub>Caio Fabio Gregio</sub>](https://github.com/caio-chzz) | [<img src="https://github.com/role-pi/app/assets/111303609/a94ebfdd-92e1-47d8-8847-2fe3b8144f70" width=115><br><sub>João Gabriel Pozzobon dos Santos</sub>](https://github.com/joogps) |[<img src="https://github.com/role-pi/app/assets/111303609/3aa031b6-def6-4471-8d27-cfcd59bb4cdb" width=115><br><sub>Maiara Junches Seemann</sub>](https://github.com/mahseemann) | [<img src="https://github.com/role-pi/app/assets/111303609/cf643562-c51a-423a-a4f5-f710adf29552" width=115><br><sub>Rafael Wolff Luiz</sub>](https://github.com/RafaelWolffLuiz) |
 | :---: | :---: | :---: | :---: | :---: |
