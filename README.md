@@ -94,6 +94,12 @@ Este repositório contém o código-fonte do aplicativo rolê, desenvolvido em F
 
 </br>
 
+# ⚙️ Instruções para compilar
+
+[Readme instructions](https://github.com/role-pi/app/blob/main/INSTRUCTIONS.md)
+
+</br>
+
 ## 🧑🏻‍💻 Desenvolvedores
 
 </br>
