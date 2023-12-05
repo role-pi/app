@@ -13,23 +13,46 @@ Este repositório contém o código-fonte do aplicativo rolê, desenvolvido em F
 
 </br> 
 
-| Tela de cadastro | Tela de confirmação | Tela de início | 
+| Tela de login | Tela de confirmação | Tela de cadastro  | 
 | :---: | :---: | :---: |
-| <img alt="Tela de cadastro" height=500 src="https://github.com/role-pi/app/assets/111303609/92848dac-e955-45ff-b046-abcb6bfc9f32"> | <img alt="Tela de confirmação" height=500 src="https://github.com/role-pi/app/assets/111303609/2bcd426d-8c46-4cce-a5ef-8dbe4314da7d"> | <img alt="Tela de início" height=500 src="https://github.com/role-pi/app/assets/111303609/5afb6e32-f4d9-4e2e-9e6f-08bcaaf55de7"> |
+| <img alt="Tela de cadastro" height=500 src="https://github.com/role-pi/app/assets/111303609/49bcb0b7-3373-464f-8bc6-f36d9216ba58"> | <img alt="Tela de confirmação" height=500 src="https://github.com/role-pi/app/assets/111303609/1e45bf4b-32ca-44f3-bdd2-4258891bd7c0"> | <img alt="Tela de cadastro" height=500 src="https://github.com/role-pi/app/assets/111303609/34104ea3-aa3e-4d2f-b85a-be837cff8bae"> |
 
 </br>
 
-| Tela de detalhes do evento | Tela de edição do evento |
+| Tela de início | Tela de criação de evento|
 | :---: | :---: |
-| <img alt="Tela de detalhes do evento" height=500 src="https://github.com/role-pi/app/assets/111303609/741458e9-1ee1-48cf-a4c1-0c852dd08491"> <img alt="Tela de detalhes do evento" height=500 src="https://github.com/role-pi/app/assets/111303609/ef9addf6-2271-4139-aa3f-971b4ee215f7"> | <img alt="Tela de edição do evento" height=500 src="https://github.com/role-pi/app/assets/111303609/5e9543bb-a9e4-4595-a298-b52c5ca2a0a2"> |
+| <img alt="Tela de início" height=500 src="https://github.com/role-pi/app/assets/111303609/56a61451-1be7-4026-aab8-2946ae000fbf"> | <img alt="Tela de criação de evento" height=500 src="https://github.com/role-pi/app/assets/111303609/0e56dd9b-09db-4de6-8033-1118a67cc75a"> <img alt="Tela de criação de evento" height=500 src="https://github.com/role-pi/app/assets/111303609/24bff8d1-1166-4925-b610-a1495d486030"> | 
 
 </br> 
 
-| Tela de edição do usuário | Tela de edição de insumo | 
+| Tela de detalhe de evento | Tela de edição de evento | 
 | :---: | :---: |
-| <img alt="Tela de edição do usuário" height=500 src="https://github.com/role-pi/app/assets/111303609/9f9de8f9-05e3-407f-9519-239129d24a7c"> | <img alt="Tela de edição de insumo" height=500 src="https://github.com/role-pi/app/assets/111303609/b0e68478-fe25-4e2a-8b8a-7f2e2cb314cb">
+| <img alt="Tela de detalhe de evento" height=500 src="https://github.com/role-pi/app/assets/111303609/46786ce3-58d5-4776-adbf-da8b94815a96"> <img alt="Tela de detalhe de evento" height=500 src="https://github.com/role-pi/app/assets/111303609/53b57adc-c24c-458a-af09-26b1395074d4"> | <img alt="Tela de edição de evento" height=500 src="https://github.com/role-pi/app/assets/111303609/f8ad17c6-d44e-4e94-8297-224187cb59a2"> |
 
 </br> 
+
+
+| Tela de adição de participante |  Tela de adição de insumo  | 
+| :---: | :---: |
+| <img alt="Tela de adição de participante" height=500 src="https://github.com/role-pi/app/assets/111303609/8ba8fde5-15b2-4ad1-b694-9b1a58698580"> <img alt="Tela de adição de participante" height=500 src="https://github.com/role-pi/app/assets/111303609/1eb4d110-1aa9-4553-aa6b-944f484f2955"> | <img alt="Tela de adição de insumo" height=500 src="https://github.com/role-pi/app/assets/111303609/14059472-947a-45cf-8723-8fe39196a12f"> |
+
+</br>
+
+| Tela de edição de insumo |  Tela de edição e adição de transação  | 
+| :---: | :---: |
+| <img alt="Tela de edição de insumo" height=500 src="https://github.com/role-pi/app/assets/111303609/342d152c-79d8-4eb6-8488-77147119b745"> | <img alt="Tela de edição de transação" height=500 src="https://github.com/role-pi/app/assets/111303609/48d047ff-d416-4631-a716-90100021318b"> <img alt="Tela de adição de transação" height=500 src="https://github.com/role-pi/app/assets/111303609/7f009699-05e9-46ab-9ab8-719985f41fb3"> |
+
+</br>
+
+| Tela de distribuição de gastos |  Tela de pagamento com pix  | Tela de edição do usuário |
+| :---: | :---: | :---: |
+| <img alt="Tela de distribuição de gastos " height=500 src="https://github.com/role-pi/app/assets/111303609/957ec416-35a6-4014-adcb-dcf4ff60c3b5"> | <img alt="Tela de pagamento com pix" height=500 src="https://github.com/role-pi/app/assets/111303609/d618e0ee-2e4a-473f-b649-348f1a14da77"> | <img alt="Tela de edição do usuário" height=500 src="https://github.com/role-pi/app/assets/111303609/b1deb007-b8bf-4ca3-972b-a7ef9227c9e4"> |
+
+</br>
+
+| Tela rolê wrapped |  Tela de chave pix  | 
+| :---: | :---: |
+| <img alt="Tela rolê wrapped" height=500 src="https://github.com/role-pi/app/assets/111303609/938111bb-627f-4dcd-ad8b-1c8f170a33d4"> | <img alt="Tela de chave pix" height=500 src="https://github.com/role-pi/app/assets/111303609/0c2bfd73-c448-4de7-9691-b12fb57e2239"> | 
 
 ### Autores
 
