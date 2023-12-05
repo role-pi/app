@@ -55,5 +55,6 @@ Este repositório contém o código-fonte do aplicativo rolê, desenvolvido em F
 | <img alt="Tela rolê wrapped" height=500 src="https://github.com/role-pi/app/assets/111303609/938111bb-627f-4dcd-ad8b-1c8f170a33d4"> | <img alt="Tela de chave pix" height=500 src="https://github.com/role-pi/app/assets/111303609/0c2bfd73-c448-4de7-9691-b12fb57e2239"> | 
 
 ### Autores
-
-Esse projeto foi desenvolvido por Ana Clara Castellain, Caio Fábio Gregio, João Gabriel Pozzobon dos Santos, Maiara Junches Seemann e Rafael Wolff Luiz
+[<img src="https://github.com/role-pi/app/assets/111303609/8a4144b5-2adf-4d68-86d7-ef77ae74d935" width=115><br><sub>Ana Clara Castellain</sub>](https://github.com/fr0ostyb33)
+| [<img src="https://github.com/role-pi/app/assets/111303609/8a4144b5-2adf-4d68-86d7-ef77ae74d935" width=115><br><sub>Ana Clara Castellain</sub>](https://github.com/fr0ostyb33) | 
+| :---: | :---: | :---: | :---: | :---: |
