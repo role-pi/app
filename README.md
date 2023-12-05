@@ -11,6 +11,27 @@ Este repositório contém o código-fonte do aplicativo rolê, desenvolvido em F
 
 </br>
 
+# 🔗 Tecnologias utilizadas
+
+- IDE: Visual Studio Code
+- Controle de versão: Git
+- Hospedagem de código-fonte: GitHub
+  
+- Front-end:
+    - Linguagem: Dart
+    - Framework: Flutter
+    - Plataformas: 
+      - IOS SDK
+      - Android SDK
+        
+- Back-end:
+  - Hospedagem: DigitalOcean
+  - Plataforma: Node JS
+    - Framework: Express JS
+  - Banco de dados: MySQL
+
+</br>
+
 # 📌 Diagramas 
 [Repositório de Diagramas](https://github.com/role-pi/diagramas)
 
